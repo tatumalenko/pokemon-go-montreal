@@ -5,6 +5,7 @@ const fs = require("fs");
 
 // Internal.
 const Raid = require("./persian/Raid.js");
+const RaidCollection = require("./persian/RaidCollection.js");
 const RaidsRepository = require("./persian/RaidsRepository.js");
 
 console.log("Starting bot...\n");
@@ -67,12 +68,21 @@ client.on("message", async(message) => {
         console.log("===================================");
     }
 
-    // TEST DATA!
-    var current_raids = raidRepository.GetAllRaids().then((obj) => {
-        //message.channel.send(obj.GetDescription());
-        //console.log(obj);
-    });
-    
+
+    if (isTesting) {
+        if (message.content == "!all") {
+            raidRepository.GetAllRaids().then(async(raids) => {
+                var raidCollection = new RaidCollection(raids);
+                var messageText = raidCollection.GetDescription();
+
+                var embed = {embed:{title:"All the raids!",description:messageText}};
+                message.channel.send(embed);
+            }).catch(function(e) {
+                console.log("-> Error getting raids from the repository.");
+                console.log(e);
+            });
+        }
+    }
 
     // User commands management.
     if (message.content.startsWith(configs.command_prefix)) {

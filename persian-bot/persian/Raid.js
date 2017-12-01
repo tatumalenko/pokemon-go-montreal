@@ -1,5 +1,10 @@
 class Raid {
     constructor(text) {
+        // When the object is rebuilt by Mongo, it calls the constructor with the generic object as parameter.
+        if (typeof text !== "string") {
+            this._mapObject(text);
+            return;
+        }
         // Get basic information from the first line of the raid.
         var firstLineRegex = /\*\*(.*)\*\* - Level: (\d)( - CP: (.*))?/;
         var firstLineMatches = firstLineRegex.exec(text);
@@ -59,6 +64,17 @@ class Raid {
         date.setHours(hours, parseInt(matches[2]), parseInt(matches[3]));
         return date;
     };
+
+    _mapObject(object) {
+        this.pokemon = object.pokemon;
+        this.level = object.level;
+        this.startTime = object.startTime;
+        this.endTime = object.endTime;
+        this.address = object.address;
+        this.mapUrl = object.mapUrl;
+        this.googleMapUrl = object.googleMapUrl;
+        this.originId = object.originId;
+    }
 }
 
 module.exports = Raid;

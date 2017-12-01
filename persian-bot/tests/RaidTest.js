@@ -6,8 +6,8 @@ const Raid = require("../persian/Raid.js");
 var testCases = [
     `**Egg** - Level: 5
     
-    **Start**: 06:04:39PM
-    **End**: 06:49:39PM
+    **Start**: 11:04:39AM
+    **End**: 01:49:39PM
     
     **Address**: 6300-6398 Avenue de Darlington
     **Map**: <https://montrealpokemap.com/gym.html#45.508669,-73.628521>

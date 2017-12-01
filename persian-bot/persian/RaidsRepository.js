@@ -15,6 +15,7 @@ class RaidsRepository {
         var collectionName = this.raidsCollection;
         MongoClient.connect(this.connectionString, function (err, db) {
             var collection = db.collection(collectionName);
+            // TODO: Fix wrong date in database.
             collection.insertOne(raid, function (err, r) {
                 if (err) {
                     console.log("Error:" + err);
@@ -28,18 +29,17 @@ class RaidsRepository {
         var raids = [];
 
         var collectionName = this.raidsCollection;
-        var result = await MongoClient.connect(this.connectionString, async(err, db) => {
+        var result = await MongoClient.connect(this.connectionString).then(async(db) => {
             var collection = db.collection(collectionName);
             
-            raids = await collection.find().toArray();
-            console.log(raids);
+            var raidObjects = await collection.find().toArray();
+            await raidObjects.forEach(raidObject => {
+                raids.push(new Raid(raidObject));
+            });
             db.close();
-            return raids;
-        }).toArray();
+        });
 
-        console.log("Done finding raids.");
-
-        return result;
+        return raids;
     }
 
     /**
