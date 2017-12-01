@@ -11,13 +11,13 @@ const Discord = require('discord.js');
 const auth = require('./auth.json');
 
 // Import botutils module
-const bu = require('./assets/modules/botutils');
+const bu = require('../assets/modules/dbutils');
 
 // Import database utility functions module
-const db = require('./assets/modules/dbutils');
+const db = require('../assets/modules/dbutils');
 
 // Import localization dictionary module json object
-const dict = require('./assets/modules/dictionary').dict();
+const dict = require('../assets/modules/dictionary').dict();
 
 /**---------------------------------------------------------------------------------------------
  * CREATE IMPORTANT CONSTANTS TO BE REUSED ON NEARLY EVERY EVENT

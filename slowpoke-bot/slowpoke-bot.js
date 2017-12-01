@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const pd = require('./assets/modules/pokedex');
 const auth = require('./auth.json');
-const db = require('../pikachu-bot/assets/modules/dbutils');
+const db = require('../assets/modules/dbutils');
 
 const validCmds = ['pd', 'dex', 'slowpoke', 'sp'];
 
