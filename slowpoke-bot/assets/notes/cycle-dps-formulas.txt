@@ -1,0 +1,7 @@
+const WeaveDamagePer100s = Math.floor(100000/AvgWeaveCycleLengthMs,1)*(ChargePwr*(1+ChargeSTAB*0.2)*(1+(CritDamageBonus*CritPercent/100)))
++ Math.ceiling(Math.floor(100000/AvgWeaveCycleLengthMs,1)*if(ErgCost=100,Math.ceiling(ErgCost/ErgGain,1),ErgCost/ErgGain),1)*(FastPwr*(1+(FastSTAB*0.2)))
++ Math.floor((100000-(Math.floor(100000/AvgWeaveCycleLengthMs,1)*(ChargeSpeedMs+ChargeDelayMs)
++ Math.ceiling(Math.floor(100000/AvgWeaveCycleLengthMs,1)*if(ErgCost=100,Math.ceiling(ErgCost/ErgGain,1),ErgCost/ErgGain),1)*FastSpeedMs))/FastSpeedMs,1)*(FastPwr*(1+(FastSTAB*0.2)))
+
+const AvgWeaveCycleLengthMs = if(ErgCost=100,Math.ceiling(ErgCost/ErgGain,1),ErgCost/ErgGain)*FastSpeedMs+(ChargeSpeedMs+ChargeDelayMs)
+

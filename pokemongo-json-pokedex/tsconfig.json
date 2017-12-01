@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		// remove skipLibCheck after https://github.com/DefinitelyTyped/DefinitelyTyped/issues/14324 fixed
+		"skipLibCheck": true,
+		"module": "commonjs",
+		"target": "es5",
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"baseUrl": ".",
+		"paths": {
+			"@core": ["src/core"],
+			"@core/*": ["src/core/*"],
+			"@components/*": ["src/components/*"],
+			"@util": ["src/util"],
+			"@util/*": ["src/util/*"],
+			"@settings/app": ["src/app.settings"],
+			"@settings/package": ["package.json"],
+			"@data/*": ["src/data/*"]
+		}
+	}
+}

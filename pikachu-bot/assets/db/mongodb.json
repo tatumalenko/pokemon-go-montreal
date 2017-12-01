@@ -1,0 +1,3150 @@
+/* 1 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a0e"),
+    "id": "357692188991160320",
+    "username": "Hawco",
+    "filters": [{
+            "pokemon": "ampharos",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "bayleef",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blastoise",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chansey",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charizard",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "croconaw",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dratini",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "feraligatr",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "flaaffy",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 100,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "lapras",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mareep",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "meganium",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "muk",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "quilava",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "scyther",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "togetic",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "typhlosion",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "venusaur",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "st-henri-little-burgundy-griffintown",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 2 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a1c"),
+    "id": "243580664648040449",
+    "username": "Peanut",
+    "filters": [{
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "dollard-des-ormeaux",
+                "pierrefonds-roxboro",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "dollard-des-ormeaux",
+                "pierrefonds-roxboro",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "flaaffy",
+            "neighbourhood": [
+                "dollard-des-ormeaux",
+                "pierrefonds-roxboro",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "dollard-des-ormeaux",
+                "pierrefonds-roxboro",
+                "ville-marie"
+            ],
+            "iv": 100,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "dollard-des-ormeaux",
+                "pierrefonds-roxboro",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "dollard-des-ormeaux",
+                "pierrefonds-roxboro",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 3 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a3c"),
+    "id": "359788875264294932",
+    "username": "MonoMousse",
+    "filters": [{
+            "pokemon": "corsola",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dratini",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "heracross",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "kangaskhan",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mr. mime",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "natu",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "sableye",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "xatu",
+            "neighbourhood": [
+                "anjou-tetreaultville",
+                "hochelaga-maisonneuve",
+                "longue-pointe",
+                "mtl-nord",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie",
+                "cote-des-neiges-westmount"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 4 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a3d"),
+    "id": "315547364687478785",
+    "username": "2ez4u",
+    "filters": [{
+            "pokemon": "ampharos",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blastoise",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charizard",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "feraligatr",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "flaaffy",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 25,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 30,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "machamp",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "meganium",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "typhlosion",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "venusaur",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 5 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a46"),
+    "id": "328253411587784705",
+    "username": "mrpianobot",
+    "filters": [{
+            "pokemon": "ampharos",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chansey",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charizard",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmander",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmeleon",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dratini",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "flaaffy",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "gyarados",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "lapras",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mareep",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "porygon",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "scyther",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "togetic",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 6 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a6b"),
+    "id": "165542964867760129",
+    "username": "emman31",
+    "filters": [{
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chansey",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dratini",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 100,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "southshore",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 90,
+            "level": 25,
+            "cp": 0
+        }
+    ]
+}
+
+/* 7 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580a81"),
+    "id": "364887150778646529",
+    "username": "themaster",
+    "filters": [{
+            "pokemon": "blastoise",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charizard",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmander",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "cyndaquil",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "golem",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "machamp",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "rhyhorn",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "typhlosion",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 8 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580aa0"),
+    "id": "352610991718006787",
+    "username": "feedmecarrots",
+    "filters": [{
+            "pokemon": "arcanine",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blastoise",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chansey",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "flareon",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "forretress",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "heracross",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 100,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "jolteon",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "lapras",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mewtwo",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "miltank",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pidgeot",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "togetic",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "vaporeon",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "plateau",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 25,
+            "cp": 0
+        }
+    ]
+}
+
+/* 9 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580ab6"),
+    "id": "350677679957213190",
+    "username": "tj",
+    "filters": [{
+            "pokemon": "bagon",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "beldum",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "celebi",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chansey",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 30,
+            "cp": 0
+        },
+        {
+            "pokemon": "metagross",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "metang",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mew",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "salamence",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "shelgon",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 10 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580ac4"),
+    "id": "292343694466744335",
+    "username": "R3D",
+    "filters": [{
+            "pokemon": "abra",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blissey",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chansey",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charizard",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmander",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmeleon",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 2500
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dratini",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "farfetch'd",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "ho-oh",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 100,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "machamp",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "machop",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "magikarp",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "gyarados",
+            "neighbourhood": [
+                "pointe-st-charles",
+                "ville-marie",
+                "southshore"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 11 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580ac5"),
+    "id": "326592508551495683",
+    "username": "Vlad57950",
+    "filters": [{
+            "pokemon": "ampharos",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "arbok",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "bayleef",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "blastoise",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "bulbasaur",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charizard",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmander",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "charmeleon",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "chikorita",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "croconaw",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "cyndaquil",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dodrio",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "doduo",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "donphan",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonair",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dragonite",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "dratini",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "duskull",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "ekans",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "feraligatr",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "flaaffy",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "girafarig",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "gyarados",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "hoppip",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "ivysaur",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "jumpluff",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "lapras",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "larvitar",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "lickitung",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "magikarp",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mankey",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mareep",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "meganium",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "phanpy",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pikachu",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "primeape",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "pupitar",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "quilava",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "sableye",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "sandshrew",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "shuppet",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "skiploom",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "squirtle",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "sunkern",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tangela",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tauros",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "totodile",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "typhlosion",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "venusaur",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "wartortle",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "outremont",
+                "plateau",
+                "rosemont-petite-patrie",
+                "ville-marie"
+            ],
+            "iv": 90,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 12 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580ae2"),
+    "id": "338655360934084609",
+    "username": "LarryG",
+    "filters": [{
+            "pokemon": "all",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 100,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "all",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 90,
+            "level": 30,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "ahuntsic-cartierville",
+                "anjou-tetreaultville",
+                "baie-durfe",
+                "beaconsfield",
+                "cote-des-neiges-westmount",
+                "cote-st-paul-ville-emard",
+                "dollard-des-ormeaux",
+                "dorval",
+                "hochelaga-maisonneuve",
+                "ile-bizard",
+                "kirkland",
+                "lachine",
+                "lasalle",
+                "longue-pointe",
+                "laval",
+                "mont-royal",
+                "mtl-est-pointe-aux-trembles",
+                "mtl-nord",
+                "mtl-ouest-cote-st-luc-ndg",
+                "outremont",
+                "pierrefonds-roxboro",
+                "plateau",
+                "pointe-claire",
+                "pointe-st-charles",
+                "rosemont-petite-patrie",
+                "riviere-des-prairies",
+                "st-anne-de-bellevue",
+                "st-henri-little-burgundy-griffintown",
+                "st-laurent",
+                "st-leonard",
+                "senneville",
+                "verdun",
+                "ville-marie",
+                "villeray-st-michel-parc-extension"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}
+
+/* 13 */
+{
+    "_id": ObjectId("5a1b97fd2001cf180b580af6"),
+    "id": "380478678691348485",
+    "username": "diablo5369",
+    "filters": [{
+            "pokemon": "lapras",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "lugia",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "snorlax",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tauros",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "togepi",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "tyranitar",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "unown",
+            "neighbourhood": "all",
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        },
+        {
+            "pokemon": "mewtwo",
+            "neighbourhood": [
+                "hochelaga-maisonneuve",
+                "ville-marie"
+            ],
+            "iv": 0,
+            "level": 0,
+            "cp": 0
+        }
+    ]
+}

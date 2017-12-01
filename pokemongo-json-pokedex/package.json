@@ -1,0 +1,59 @@
+{
+  "name": "pokemongo-json-pokedex",
+  "version": "2.1.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "prestart": "npm run lint",
+    "start": "ts-node -r tsconfig-paths/register src/app.ts",
+    "prestart:build": "npm run build",
+    "start:build": "node -r tsconfig-paths/register src/app.js",
+    "poststart:build": "npm run clean",
+    "clean": "rimraf {src,test}/**/*.{map,js}",
+    "build": "tsc",
+    "docs": "node_modules/.bin/typedoc --out docs",
+    "lint": "tslint src/**/*.ts test/**/*.ts",
+    "fetch-game-master": "node bin/get-latest-game-master.js",
+    "test": "node_modules/.bin/mocha --compilers ts:ts-node/register,ts:tsconfig-paths/register test/*.ts src/**/*.spec.ts",
+    "precommit": "npm test && npm run lint",
+    "prepush": "npm run precommit && npm run start:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PokemonGOAPI/pokemongo-json-pokedex.git"
+  },
+  "keywords": [
+    "pokemongo"
+  ],
+  "author": "Livio Brunner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PokemonGOAPI/pokemongo-json-pokedex/issues"
+  },
+  "homepage": "https://github.com/PokemonGOAPI/pokemongo-json-pokedex#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chalk": "^2.1.0",
+    "es6-shim": "^0.35.3",
+    "lodash": "^4.17.4",
+    "mocha": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/chalk": "^0.4.31",
+    "@types/es6-shim": "^0.31.32",
+    "@types/lodash": "^4.14.58",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^8.0.26",
+    "husky": "^0.14.3",
+    "rimraf": "^2.6.1",
+    "ts-node": "^3.0.2",
+    "tsconfig-paths": "^2.1.2",
+    "tslint": "^5.1.0",
+    "typedoc": "^0.8.0",
+    "typescript": "^2.5.2"
+  },
+  "engines": {
+    "npm": "~4.4.4"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "professor-willow-bot",
+  "version": "1.0.0",
+  "description": "A Pokemon GO Helper Bot for Pokemon GO Montreal!",
+  "main": "professor-willow-bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tatum Alenko",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.2.1"
+  }
+}
