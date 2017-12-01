@@ -2,6 +2,7 @@
 A bot complementing Meowth
 
 Invitation link: https://discordapp.com/oauth2/authorize?client_id=380904764151562247&scope=bot
+test bot link: https://discordapp.com/oauth2/authorize?client_id=386297131947786240&scope=bot
 
 `!raid-lists`
 > Show a list of all raids available in a particular neighborhood.
