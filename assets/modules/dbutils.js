@@ -300,8 +300,8 @@ function getTranslation(pokemonName) {
     const englishNames = getPokemons();
     const frenchNames = getPokemons('french');
 
-    if (frenchNames.contains(pokemonName))
-        return englishNames[frenchNames.indexOf(pokemonName.toLowerCase())];
+    if (frenchNames.map(e => clean(e)).contains(pokemonName))
+        return englishNames[frenchNames.map(e => clean(e)).indexOf(pokemonName.toLowerCase())];
     else if (englishNames.contains(pokemonName))
         return frenchNames[englishNames.indexOf(pokemonName.toLowerCase())];
     else
@@ -325,7 +325,7 @@ function getEnglishName(name) {
     name = clean(name);
 
     const englishPokemonNames = getPokemons();
-    const frenchPokemonNames = getPokemons('french');
+    const frenchPokemonNames = getPokemons('french').map(e => clean(e));
     const neighbourhoodNames = getNeighbourhoods();
 
     if (!isValidFilter(name))
@@ -376,7 +376,7 @@ function getPolygons() {
     try {
         kml = new DOMParser().parseFromString(fs.readFileSync('neighbourhoods.kml', 'utf8'));
     } catch (e) {
-        kml = new DOMParser().parseFromString(fs.readFileSync('../pikachu-bot/assets/data/neighbourhoods.kml', 'utf8'));
+        kml = new DOMParser().parseFromString(fs.readFileSync('../assets/data/neighbourhoods.kml', 'utf8'));
     }
 
     let polygonCollection = tj.kml(kml);

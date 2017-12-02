@@ -11,7 +11,7 @@ const Discord = require('discord.js');
 const auth = require('./auth.json');
 
 // Import botutils module
-const bu = require('../assets/modules/dbutils');
+const bu = require('../assets/modules/botutils');
 
 // Import database utility functions module
 const db = require('../assets/modules/dbutils');
