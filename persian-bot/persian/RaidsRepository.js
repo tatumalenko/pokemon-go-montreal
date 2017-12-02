@@ -12,10 +12,10 @@ class RaidsRepository {
      * @param {Raid} raid
      */
     ReportRaid(raid) {
+        console.log("Adding raid");
         var collectionName = this.raidsCollection;
         MongoClient.connect(this.connectionString, function (err, db) {
             var collection = db.collection(collectionName);
-            // TODO: Fix wrong date in database.
             collection.insertOne(raid, function (err, r) {
                 if (err) {
                     console.log("Error:" + err);
@@ -25,6 +25,25 @@ class RaidsRepository {
         });
     }
 
+    /**
+     * Remove a raid at the same location from our storage.
+     * @param {Raid} raid
+     */
+    async RemoveEquivalent(raid) {
+        console.log("Removing potential equivalent");
+        var existingRaid;
+        await this.GetRaid(raid.latitude, raid.longitude).then(function(raidFound) {
+            existingRaid = raidFound;
+        });
+
+        if (typeof existingRaid !== "undefined") {
+            this.RemoveRaid(existingRaid);
+        }
+    }
+
+    /**
+     * Get all current raids from the database. This method is for testing purposes only.
+     */
     async GetAllRaids() {
         var raids = [];
 
@@ -40,6 +59,28 @@ class RaidsRepository {
         });
 
         return raids;
+    }
+
+    /**
+     * Get a raid from a location.
+     * @param {*} lat
+     * @param {*} long
+     */
+    async GetRaid(lat, long) {
+        var raid;
+        var collectionName = this.raidsCollection;
+        var result = await MongoClient.connect(this.connectionString).then(async(db) => {
+            var collection = db.collection(collectionName);
+
+            var raidObjects = await collection.find({latitude:String(lat),longitude:String(long)}).toArray();
+            if (raidObjects.length > 0) {
+                raid = new Raid(raidObjects[0]);
+            }
+
+            db.close();
+        });
+
+        return raid;
     }
 
     /**

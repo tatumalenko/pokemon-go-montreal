@@ -10,12 +10,15 @@ class RaidCollection {
         var description = "";
 
         var sliced = this.raids.slice(0, this.maxOutput);
-        var more = this.raids.length - this.maxOutput;
 
         sliced.forEach(function(raid, i) {
             description += (i + 1) + ". " + raid.GetDescription() + "\r";
         });
-        description += "... and " + more + " more raids ...";
+
+        var more = this.raids.length - this.maxOutput;
+        if (more > 0) {
+            description += "... and " + more + " more raids ...";
+        }
 
         return description;
     }

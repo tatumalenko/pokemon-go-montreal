@@ -39,7 +39,7 @@ client.on("ready", () => {
 
 client.on("message", async(message) => {
     // For now, Persian is in development phase. stay in the testing.
-    var isIncomingRaid = message.channel.name === configs.income_channel/* && message.author.username === configs.income_username*/;
+    var isIncomingRaid = message.channel.name === configs.income_channel && message.author.username === configs.income_username;
     var isTesting = message.channel.name === configs.test_channel && message.author.username === 'emman31';
     if (!isIncomingRaid && !isTesting) {
         return;
@@ -53,8 +53,9 @@ client.on("message", async(message) => {
             var raid = new Raid(message.content);
             raid.originId = message.id;
 
-            LogNewRaid(raid);
+            await raidRepository.RemoveEquivalent(raid);
             raidRepository.ReportRaid(raid);
+            LogNewRaid(raid);
 
             setTimeout(function() {
                 LogDeletingRaid(raid);

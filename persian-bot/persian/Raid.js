@@ -1,6 +1,9 @@
 class Raid {
     constructor(text) {
         // When the object is rebuilt by Mongo, it calls the constructor with the generic object as parameter.
+        if (typeof(text) === "undefined") {
+            return;
+        }
         if (typeof text !== "string") {
             this._mapObject(text);
             return;
