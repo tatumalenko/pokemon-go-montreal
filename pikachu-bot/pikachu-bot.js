@@ -68,7 +68,7 @@ client.on('message', async(message) => {
                     description: dict.PIKACHU_COMMANDS()
                 }
             });
-            await message.channel.send(new Discord.Attachment('https://github.com/tatumalenko/pikachu-bot/raw/master/assets/media/want-1.gif', 'want-1.gif'));
+            await message.channel.send(new Discord.Attachment('https://github.com/tatumalenko/discord-assets/raw/master/media/want-1.gif', 'want-1.gif'));
         } else if (message.content.substring(0, 1) == '!') {
             let args = message.content.substring(1).split(' ');
             let cmd = args[0];

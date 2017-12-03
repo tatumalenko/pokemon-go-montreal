@@ -226,7 +226,8 @@ async function sendAll(recipients, {
         try {
             await recipient.send(content, embed);
             totalAlertsSent++;
-            successAlertRecipients.push(recipient instanceof Discord.GuildMember ? recipient.displayName : recipient.name);
+            successAlertRecipients.push(recipient.displayName !== undefined ? recipient.displayName : recipient.name);
+            //console.log(recipient.displayName, recipient instanceof Discord.GuildMember);
         } catch (e) {
             //console.log(recipients);
             if (!failedAlertRecipients.length)
