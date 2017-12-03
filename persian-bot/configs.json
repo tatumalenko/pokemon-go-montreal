@@ -1,0 +1,12 @@
+{
+    "command_prefix": "!",
+
+    "income_channel": "raids-income",
+    "income_username": "emman31",
+
+    "log_channel": "bot-logs",
+
+    "test_channel": "bot-testing",
+
+    "raids_collection": "persian_raids_test"
+}
