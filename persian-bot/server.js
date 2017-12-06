@@ -7,6 +7,7 @@ const fs = require("fs");
 const Raid = require("./persian/Raid.js");
 const RaidCollection = require("./persian/RaidCollection.js");
 const RaidsRepository = require("./persian/RaidsRepository.js");
+const NeighborhoodClass = require("./persian/Neighborhood.js");
 
 console.log("Starting bot...\n");
 
@@ -26,6 +27,7 @@ console.log("Finished loading config.");
 
 // Singletons.
 var raidRepository = new RaidsRepository(secrets.mongo_connectionstring, configs.raids_collection);
+var Neighborhood = new NeighborhoodClass(configs.neighborhood_map_path);
 // TODO: onstart, launch DB cleanup again.
 
 client.on("ready", () => {
@@ -52,7 +54,10 @@ client.on("message", async(message) => {
         try{
             var raid = new Raid();
             raid.BuildFromText(message.content);
+
             raid.originId = message.id;
+
+            raid.neighborhood = Neighborhood.GetNeighborhood(raid.latitude, raid.longitude);
 
             await raidRepository.RemoveEquivalent(raid);
             raidRepository.ReportRaid(raid);

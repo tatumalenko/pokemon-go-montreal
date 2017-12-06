@@ -5,11 +5,11 @@ class Raid {
             return;
         }
         if (typeof object !== "string") {
-            this._mapObject(text);
+            this._mapObject(object);
         }
     }
     BuildFromText(text) {
-        if (typeof object !== "string") {
+        if (typeof text !== "string") {
             return;
         }
 
