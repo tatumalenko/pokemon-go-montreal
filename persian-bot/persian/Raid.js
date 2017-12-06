@@ -1,13 +1,18 @@
 class Raid {
-    constructor(text) {
+    constructor(object) {
         // When the object is rebuilt by Mongo, it calls the constructor with the generic object as parameter.
-        if (typeof(text) === "undefined") {
+        if (typeof(object) === "undefined") {
             return;
         }
-        if (typeof text !== "string") {
+        if (typeof object !== "string") {
             this._mapObject(text);
+        }
+    }
+    BuildFromText(text) {
+        if (typeof object !== "string") {
             return;
         }
+
         // Get basic information from the first line of the raid.
         var firstLineRegex = /\*\*(.*)\*\* - Level: (\d)( - CP: (.*))?/;
         var firstLineMatches = firstLineRegex.exec(text);
@@ -39,6 +44,7 @@ class Raid {
         var googleMapMatches = googleMapRegex.exec(text);
         this.googleMapUrl = googleMapMatches[1];
     }
+
     GetMinutesLeft() {
         var diffMilli = this.endTime - Date.now();
         var diffMinutes = parseInt(diffMilli / (1000 * 60));

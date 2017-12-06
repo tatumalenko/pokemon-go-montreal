@@ -50,7 +50,8 @@ client.on("message", async(message) => {
         console.log("============== RAID! ==============");
 
         try{
-            var raid = new Raid(message.content);
+            var raid = new Raid();
+            raid.BuildFromText(message.content);
             raid.originId = message.id;
 
             await raidRepository.RemoveEquivalent(raid);
