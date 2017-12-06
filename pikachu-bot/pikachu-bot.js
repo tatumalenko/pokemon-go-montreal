@@ -11,7 +11,7 @@ const Discord = require('discord.js');
 const auth = require('./auth.json');
 
 // Import botutils module
-const bu = require('../assets/modules/dbutils');
+const bu = require('../assets/modules/botutils');
 
 // Import database utility functions module
 const db = require('../assets/modules/dbutils');
@@ -68,7 +68,7 @@ client.on('message', async(message) => {
                     description: dict.PIKACHU_COMMANDS()
                 }
             });
-            await message.channel.send(new Discord.Attachment('https://github.com/tatumalenko/pikachu-bot/raw/master/assets/media/want-1.gif', 'want-1.gif'));
+            await message.channel.send(new Discord.Attachment('https://github.com/tatumalenko/discord-assets/raw/master/media/want-1.gif', 'want-1.gif'));
         } else if (message.content.substring(0, 1) == '!') {
             let args = message.content.substring(1).split(' ');
             let cmd = args[0];
