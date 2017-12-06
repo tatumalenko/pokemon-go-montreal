@@ -27,7 +27,7 @@ console.log("Finished loading config.");
 
 // Singletons.
 var raidRepository = new RaidsRepository(secrets.mongo_connectionstring, configs.raids_collection);
-var Neighborhood = new NeighborhoodClass(configs.neighborhood_map_path);
+var Neighborhood = new NeighborhoodClass(__dirname + "/" + configs.neighborhood_map_path);
 // TODO: onstart, launch DB cleanup again.
 
 client.on("ready", () => {
