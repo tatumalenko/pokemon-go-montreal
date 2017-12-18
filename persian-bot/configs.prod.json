@@ -8,5 +8,7 @@
 
     "test_channel": "bot-testing",
 
-    "raids_collection": "persian_raids"
+    "raids_collection": "persian_raids",
+
+    "neighborhood_map_path": "../assets/data/neighbourhoods.kml"
 }
