@@ -35,7 +35,7 @@ client.on('channelCreate', channel => {
 });
 
 // Create an event listener for command messages
-client.on('message', (message) => {
+client.on('message', async(message) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     try {
@@ -48,7 +48,7 @@ client.on('message', (message) => {
         // }
 
         if (message.content === '<@380373659493335042>') {
-            message.channel.send({
+            await message.channel.send({
                 embed: {
                     description: '**Professor Willow here!** Ready to help!\n\n'
 
@@ -76,13 +76,52 @@ client.on('message', (message) => {
             });
 
         } else if (message.content.substring(0, 1) == '!') {
-            var args = message.content.substring(1).split(' ');
-            var cmd = args[0];
+            let args = message.content.substring(1).split(' ');
+            const cmd = args[0];
 
             args = args.splice(1);
             switch (cmd) {
+                case 'announcement':
+                    if (message.channel.name !== 'secret-treehouse' && message.channel.name !== 'bot-logs' && message.channel.name !== 'announcements-post') return;
+                    if (!message.channel.permissionsFor(message.author).has('ADMINISTRATOR')) return;
+
+                    args = args.join(' ').split(' | ');
+                    const embed = {};
+                    let channelDestination;
+                    for (let i = 0; i < args.length - 1; i = i + 2) {
+                        switch (args[i]) {
+                            case 'channel':
+                                channelDestination = message.guild.channels.find('name', args[i + 1]);
+                                break;
+                            case 'msg':
+                                embed.description = args[i + 1].replace(/\\n/g, '\n');
+                                break;
+                            case 'title':
+                                embed.title = args[i + 1];
+                                break;
+                            case 'url':
+                                embed.url = args[i + 1];
+                                break;
+                            case 'image':
+                                embed.image = {
+                                    url: args[i + 1]
+                                };
+                                break;
+                        }
+                    }
+
+                    embed.color = '15588666';
+                    if (!channelDestination) channelDestination = message.channel;
+
+                    console.log(embed);
+
+                    await channelDestination.send({
+                        embed
+                    })
+
+                    break;
                 case 'count':
-                    if (message.channel.name === 'secret-treehouse') {
+                    if (message.channel.name === 'secret-treehouse' || message.channel.name === 'bot-testing') {
                         if (args[0] === undefined) {
                             message.channel.send("There are **" + message.guild.memberCount + "** members currently onboard!");
                         } else if (args[0] === "days" && args[1] !== undefined) {

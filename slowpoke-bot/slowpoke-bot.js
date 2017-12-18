@@ -130,6 +130,7 @@ client.on('message', async(message) => {
                 return;
             }
 
+
             if (pd.isMoveName(dco.msg.args.join(' '))) { // args[0] = moveName
                 await dco.channel.send({
                     embed: pd.moveInfo(new pd.Move({

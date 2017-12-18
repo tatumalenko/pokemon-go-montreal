@@ -327,15 +327,19 @@ function pokemonInfo(pokemon) {
 // Requires key-value pairs for move name, type, kind, power, time
 function moveInfo(move) {
 
+    const epsStr = move.kind.includes('Charge') ? '' : '**Approx. EPS**: ' + '`' + (move.energy / move.time * 1000).toFixed(1) + '`\n';
+
     return {
         title: move.name,
         url: 'https://db.pokemongohub.net/moves/' + move.type.toLowerCase(),
         description: '**' + move.kind + ' Move**\n' +
             '**Type**: ' + typeCode(move) + move.type + '\n' +
             '**Power**: ' + '`' + move.power + '`\n' +
+            '**Energy**: ' + '`' + move.energy + '`\n' +
             '**Duration** (sec): ' + '`' + move.time / 1000 + '`\n' +
-            '**Approx. DPS (PPS)**: ' + '`' + (move.power / move.time * 1000).toFixed(2) + '`\n' +
-            '*Note*: DPS damage per second, PPS power per second\n',
+            '**Approx. DPS**: ' + '`' + (move.power / move.time * 1000).toFixed(1) + '`\n' +
+            epsStr +
+            '*Note: Approx. DPS is actually power per second*\n',
         color: typeColor(move)
     };
 }

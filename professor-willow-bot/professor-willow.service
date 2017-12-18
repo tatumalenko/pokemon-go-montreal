@@ -1,0 +1,13 @@
+[Unit]
+Description=Professor Willow Discord Bot
+Documentation=None.
+After=network.target
+
+[Service]
+Type=simple
+#User=ubuntu
+ExecStart=/usr/bin/node /bots/discord-bots/professor-willow-bot/professor-willow-bot.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

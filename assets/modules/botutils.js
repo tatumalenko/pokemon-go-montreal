@@ -17,7 +17,8 @@ process.on('unhandledRejection', console.error); // Nodejs config to better trac
 const Discord = require('discord.js');
 
 // Import Pokedex class Pokemon
-const pd = require('../../../slowpoke-bot/assets/modules/pokedex');
+const pd = require('../../slowpoke-bot/assets/modules/pokedex');
+
 
 // Import database utility functions module
 const db = require('./dbutils');
@@ -25,7 +26,7 @@ const db = require('./dbutils');
 // Import the turf module
 let turf = require('turf');
 
-const DISCORD_PATTERN = /[\[.*\]]?\s?([a-zA-Z]+|[a-zA-Z]+ - \w|[a-zA-Z]+[\'][a-zA-Z]+)\s?-?\s? \((\d+%)\) - \(CP: (\d+)\) - \(Level: (-?\d+)\)[\s+]?\n[\s+]?\nUntil: (.*)[\s+]?\nL30\+ IV: (.*) \(\d+%\)[\s+]?\nL30\+ Moveset: (.*)[\s+]?\n.*\nAddress: (.*)\n.*\n.*\nGoogle Map: <?(.*)>?/;
+const DISCORD_PATTERN = /[\[.*\]]?\s?([a-zA-Z]+|[a-zA-Z]+ - \w|[a-zA-Z]+[\'][a-zA-Z]+)\s?-?\s? \((\d+%)\) - \(CP: (\d+)\) - \(Level: (-?\d+)\)[\s+]?\n[\s+]?\nUntil: (.*)[\s+]?\nWeather boosted: .*\nL30\+ IV: (.*) \(\d+%\)[\s+]?\nL30\+ Moveset: (.*)[\s+]?\n.*\nAddress: (.*)\n.*\n.*\nGoogle Map: <?(.*)>?/;
 const DISCORD_PATTERN_NOSTATS = /[\[.*\]]?\s?([a-zA-Z]+|[a-zA-Z]+\s?-?\s?\w)\s?-?\s?\n\nUntil: (.*)[\s+]?\nAddress: (.*)\n.*\n.*\nGoogle Map: <?(.*)>?/;
 
 const polygons = db.getPolygons();
@@ -197,7 +198,7 @@ function createEmbed(ctx) {
             url: spawn.maplink,
             color: 3066993,
             thumbnail: {
-                'url': 'https://floatzel.net/pokemon/black-white/sprites/images/' + (spawn.name.toLowerCase().includes('unown') ? 201 : (pokemonNames.findIndex((name) => name === spawn.name.toLowerCase() ? true : false) + 1)) + '.png'
+                'url': 'http://floatzel.net/pokemon/black-white/sprites/images/' + (spawn.name.toLowerCase().includes('unown') ? 201 : (pokemonNames.findIndex((name) => name === spawn.name.toLowerCase() ? true : false) + 1)) + '.png'
             }
         }
     };

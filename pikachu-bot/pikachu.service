@@ -1,0 +1,13 @@
+[Unit]
+Description=Pikachu Discord Bot
+Documentation=None.
+After=network.target
+
+[Service]
+Type=simple
+#User=ubuntu
+ExecStart=/usr/bin/node /bots/discord-bots/pikachu-bot/pikachu-bot.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,5 @@
 /*
- * Database Utility Functions  
+ * Database Utility Functions
  */
 
 module.exports = {
@@ -346,7 +346,7 @@ function isValidFilter(filter) {
     //console.log(filter);
 
     const englishPokemonNames = getPokemons();
-    const frenchPokemonNames = getPokemons('french');
+    const frenchPokemonNames = getPokemons('french').map(e => clean(e));
     const neighbourhoodNames = getNeighbourhoods();
 
     // Check if filter is a valid one
