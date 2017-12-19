@@ -4,7 +4,8 @@ from tweepy.api import API
 from discordWebhooks import Webhook, Attachment, Field
 import calendar, time, random, json
 from time import gmtime, strftime
-import re 
+import re
+import os
 
 #todo: fix & < and > see: https://api.slack.com/docs/message-formatting
 

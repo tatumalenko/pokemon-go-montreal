@@ -1,0 +1,16 @@
+{
+    "Twitter": {
+        "consumer_secret": "0zCIiWvCcvsNz0m7RJSzFPdIsTyo8MjVfXWl4AGMUB73WnmhuS",
+        "access_token": "816666530318524416-FB934V9n5HYdIK4Axzn90uA0ax0nJZv",
+        "consumer_key": "4tCNKtGatS0uE7qGEIBXNAzxG",
+        "access_token_secret": "8ajjtGrUcLH4m2JTEOKRLEk318DEg26IRyY4zCkmCHBzT"
+    },
+    "twitter_ids": ["2839430431", "783281708137324549", "4840958511", "849344094681870336", "816666530318524416"],
+    "Discord": [{
+        "IncludeReplyToUser": false,
+        "IncludeRetweet": false,
+        "IncludeUserReply": false,
+        "webhook_urls": ["https://discordapp.com/api/webhooks/360757582253654016/foX4zyICueXC9sgaqVN4qcnV3bWgXwayZ9UCOjGZaFWj-n51MonhUzchTTx0cfDcMEJ9"],
+        "twitter_ids": ["2839430431", "783281708137324549", "4840958511", "849344094681870336", "816666530318524416"]
+    }]
+}
