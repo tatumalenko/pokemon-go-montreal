@@ -26,7 +26,10 @@ class StdOutListener(StreamListener):
         data = status._json
         #print(data)
 
-        with open('data.json') as data_file:
+        dn = os.path.dirname(os.path.realpath(__file__))
+        fn = os.path.join(dn, 'data.json')
+
+        with open(fn) as data_file:
             dataD = json.load(data_file)
 
         for dataDiscord in dataD['Discord']:
@@ -158,7 +161,10 @@ class StdOutListener(StreamListener):
 if __name__ == '__main__':
     print('Bot started.')
 
-    with open('data.json') as data_file:
+    dn = os.path.dirname(os.path.realpath(__file__))
+    fn = os.path.join(dn, 'data.json')
+
+    with open(fn) as data_file:
         data = json.load(data_file)
         data_file.close()
 
