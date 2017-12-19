@@ -1,0 +1,13 @@
+[Unit]
+Description=Go News Webhook Discord Bot
+Documentation=None.
+After=network.target
+
+[Service]
+Type=simple
+#User=ubuntu
+ExecStart=/usr/bin/python /bots/discord-bots/go-news-webhook/main.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
