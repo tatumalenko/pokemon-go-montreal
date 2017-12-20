@@ -6,6 +6,7 @@ After=network.target
 [Service]
 Type=simple
 #User=ubuntu
+WorkingDirectory=/bots/discord-bots/slowpoke-bot
 ExecStart=/usr/bin/node /bots/discord-bots/slowpoke-bot/slowpoke-bot.js
 Restart=on-failure
 
