@@ -1,0 +1,35 @@
+{
+    "apps": [{
+            "name": "pikachu-bot",
+            "cwd": "/Users/tatumalenko/Documents/Code/discord/discord-bots/pikachu-bot",
+            "script": "pikachu-bot.js",
+            "watch": ["./", "../assets"],
+            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "exec_mode": "cluster_mode"
+        },
+        {
+            "name": "slowpoke-bot",
+            "cwd": "/Users/tatumalenko/Documents/Code/discord/discord-bots/slowpoke-bot",
+            "script": "slowpoke-bot.js",
+            "watch": ["./", "../assets"],
+            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "exec_mode": "cluster_mode"
+        },
+        {
+            "name": "self-bot",
+            "cwd": "/Users/tatumalenko/Documents/Code/discord/discord-bots/self-bot",
+            "script": "self-bot.js",
+            "watch": ["./", "../assets"],
+            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "exec_mode": "cluster_mode"
+        },
+        {
+            "name": "professor-willow-bot",
+            "cwd": "/Users/tatumalenko/Documents/Code/discord/discord-bots/professor-willow-bot",
+            "script": "professor-willow-bot.js",
+            "watch": ["./", "../assets"],
+            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "exec_mode": "cluster_mode"
+        }
+    ]
+}
