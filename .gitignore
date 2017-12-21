@@ -3,3 +3,4 @@
 node_modules
 processes.json
 database.db
+assets/db/database.db
