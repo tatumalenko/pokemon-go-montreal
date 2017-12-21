@@ -1,6 +1,6 @@
 const TwitterPackage = require('twitter');
 const Discord = require('discord.js');
-const secrets = require('./secrets2.json');
+const secrets = require('./secrets.json');
 
 const Twitter = new TwitterPackage(secrets.twitter);
 const wh = new Discord.WebhookClient(secrets.discord.webhook_id, secrets.discord.webhook_token);
