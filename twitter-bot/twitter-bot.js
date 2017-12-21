@@ -1,11 +1,11 @@
 const TwitterPackage = require('twitter');
 const Discord = require('discord.js');
-const secrets = require('./secrets.json');
+const secrets = require('./secrets2.json');
 
 const Twitter = new TwitterPackage(secrets.twitter);
 const wh = new Discord.WebhookClient(secrets.discord.webhook_id, secrets.discord.webhook_token);
 
-const TWITTER_USER_IDS = ['943808102549336064']; //['2839430431', '783281708137324549', '4840958511', '849344094681870336', '816666530318524416'];
+const TWITTER_USER_IDS = ['2839430431', '783281708137324549', '4840958511', '849344094681870336', '816666530318524416'];
 
 const colors = ['#7f0000', '#535900', '#40d9ff', '#8c7399', '#d97b6c', '#f2ff40', '#8fb6bf', '#502d59', '#66504d',
     '#89b359', '#00aaff', '#d600e6', '#401100', '#44ff00', '#1a2b33', '#ff00aa', '#ff8c40', '#17330d',
@@ -19,12 +19,8 @@ Twitter.stream('statuses/filter', {
 }, (stream) => {
     stream.on('data', async(tweet) => {
         try {
-            // if (!TWITTER_USER_IDS.includes(tweet.user.id_str) ||
-            //     tweet.retweeted_status ||
-            //     tweet.in_reply_to_user_id_str ||
-            //     tweet.in_reply_to_status_id_str) return;
-
-            if (tweet.retweeted_status ||
+            if (!TWITTER_USER_IDS.includes(tweet.user.id_str) ||
+                tweet.retweeted_status ||
                 tweet.in_reply_to_user_id_str ||
                 tweet.in_reply_to_status_id_str) return;
 
