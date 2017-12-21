@@ -19,8 +19,12 @@ Twitter.stream('statuses/filter', {
 }, (stream) => {
     stream.on('data', async(tweet) => {
         try {
-            if (!TWITTER_USER_IDS.includes(tweet.user.id_str) ||
-                tweet.retweeted_status ||
+            // if (!TWITTER_USER_IDS.includes(tweet.user.id_str) ||
+            //     tweet.retweeted_status ||
+            //     tweet.in_reply_to_user_id_str ||
+            //     tweet.in_reply_to_status_id_str) return;
+
+            if (tweet.retweeted_status ||
                 tweet.in_reply_to_user_id_str ||
                 tweet.in_reply_to_status_id_str) return;
 
