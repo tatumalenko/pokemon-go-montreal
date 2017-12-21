@@ -1,5 +1,13 @@
 {
     "apps": [{
+            "name": "twitter-bot",
+            "cwd": "/bots/discord-bots/twitter-bot",
+            "script": "twitter-bot.js",
+            "watch": ["./", "../assets"],
+            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "exec_mode": "cluster_mode"
+        },
+        {
             "name": "pikachu-bot",
             "cwd": "/bots/discord-bots/pikachu-bot",
             "script": "pikachu-bot.js",

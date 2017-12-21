@@ -1,0 +1,6 @@
+.eslintrc.json
+.vscode
+node_modules
+auth.json
+processes.json
+database.db
