@@ -14,11 +14,13 @@ client.on('ready', () => {
 // Create an event listener for new guild members
 client.on('guildMemberAdd', member => {
     // Send the message to a designated channel on a server:
-    const channel = member.guild.channels.find('name', 'general');
+    const channel = member.guild.channels.find('name', 'welcome');
     // Do nothing if the channel wasn't found on this server
     if (!channel) return;
     // Send the message, mentioning the member
-    channel.send(`Welcome to Pokemon GO Montreal, ${member}! I'm Professor Willow and will be your guide! Tag me (type @Professor Willow) if ever you want some help or tips!`);
+    channel.send('Welcome to Pokémon GO Montréal, ' + member +
+        '! I\'m Professor Willow and will be your guide! Tag me (type @Professor Willow) if ever you want some help or tips! ' +
+        'Set your team by typing `!team <team>` where `<team>` is either `valor`, `instinct`, or `mystic`.');
 });
 
 client.on('guildMemberRemove', member => {
@@ -39,48 +41,48 @@ client.on('message', async(message) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     try {
-        // if (message.channel.name == 'bot-testing' /*message.member.id  == '350677679957213190'*/ ) {
-        //     if (message.content.includes('<@210950208421494797>')) {
-        //         //message.edit(message.content.split('<@210950208421494797>').filter(e => e != '<@210950208421494797>').filter(e => e != ''));
-        //         message.channel.send('Nice try, ' + message.member + '!');
-        //     }
-
-        // }
-
         if (message.content === '<@380373659493335042>') {
             await message.channel.send({
                 embed: {
-                    description: '**Professor Willow here!** Ready to help!\n\n'
-
-                        +
-                        'To get some cool wild spawn alerts for specific Pokemon within the neighbourhoods you choose, head over to '
-
-                        +
-                        message.guild.channels.find('name', 'wants-post')
-
-                        +
-                        ' and let ' + message.guild.members.find('id', '360755167953682432') + ' assist you by typing `\'!want help\'` there!\n\n'
-
-                        +
-                        'To get some info and stats on Pokemon including IVs, ATK/DEF/STA, and much more, head over to '
-
-                        +
-                        message.guild.channels.find('name', 'pokedex')
-
-                        +
-                        ' and let ' + message.guild.members.find('id', '359610082457288706') + ' assist you by typing `\'!pd help\'` there!\n\n'
-
-                        +
+                    description: '**Professor Willow here!** Ready to help!\n\n' +
+                        'To get some cool wild spawn alerts for specific Pokemon within the neighbourhoods you choose, head over to ' +
+                        message.guild.channels.find('name', 'wants-post') +
+                        ' and let ' + message.guild.members.find('id', '360755167953682432') + ' assist you by typing `\'!want help\'` there!\n\n' +
+                        'To get some info and stats on Pokemon including IVs, ATK/DEF/STA, and much more, head over to ' +
+                        message.guild.channels.find('name', 'pokedex') +
+                        ' and let ' + message.guild.members.find('id', '359610082457288706') + ' assist you by typing `\'!pd help\'` there!\n\n' +
                         'For any other questions or help, don\'t be shy to ask one of the admin or mod staff, they would be delighted to answer any questions!'
                 }
             });
-
         } else if (message.content.substring(0, 1) == '!') {
             let args = message.content.substring(1).split(' ');
             const cmd = args[0];
-
             args = args.splice(1);
-            switch (cmd) {
+            const arg = args.join(' ').toLowerCase();
+
+            switch (cmd.toLowerCase()) {
+                case 'team':
+                    if (message.channel.name !== 'welcome' && message.channel.name !== 'bot-testing') return;
+
+                    const teamNames = ['valor', 'instinct', 'mystic'];
+                    if (!teamNames.includes(arg)) return;
+                    const teamName = teamNames[teamNames.indexOf(arg)];
+
+                    for (const teamName of teamNames) {
+                        if (hasRole(message.member, teamName)) {
+                            await message.channel.send('You already have a team role, ' + message.member);
+                            return;
+                        }
+                    }
+                    const teamRole = message.guild.roles.find('name', arg);
+                    try {
+                        await message.member.addRole(teamRole);
+                        message.channel.send('Got it! Added ' + message.member + ' to Team ' + teamName.charAt(0).toUpperCase() + teamName.slice(1));
+                    } catch (e) {
+                        console.log(e);
+                    }
+
+                    break;
                 case 'announcement':
                     if (message.channel.name !== 'secret-treehouse' && message.channel.name !== 'bot-logs' && message.channel.name !== 'announcements-post') return;
                     if (!message.channel.permissionsFor(message.author).has('ADMINISTRATOR')) return;
@@ -149,7 +151,6 @@ client.on('message', async(message) => {
                     }
                     break;
                 case 'clear':
-
                     // Check the following permissions before deleting messages:
                     //    1. Check if the user has enough permissions
                     //    2. Check if I have the permission to execute the command
@@ -190,3 +191,9 @@ client.on('message', async(message) => {
 
 // Log our bot in
 client.login(auth.token);
+
+function hasRole(member, roleName) {
+    return member.roles.some(role => {
+        return roleName.toLowerCase() === role.name;
+    });
+}
