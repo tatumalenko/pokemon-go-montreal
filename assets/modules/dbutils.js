@@ -23,7 +23,7 @@ module.exports = {
 };
 
 // Other pokemon conditional filters
-const POKEMON_CONDITIONAL_FILTERS = ['iv90', 'iv100', 'cp2500', 'iv90lv30', 'iv90lv25', 'iv95lv25'];
+const POKEMON_CONDITIONAL_FILTERS = ['iv90', 'iv95', 'iv97', 'iv100', 'cp2500', 'iv90lv30', 'iv90lv25', 'iv95lv25'];
 
 // Import the sqlite module
 const sqlite = require('sqlite');
