@@ -178,6 +178,8 @@ async function getFilteredMembers(guild, ctx) {
         (member) => hasEveryFilter(member, [spawn.name, spawn.neighbourhood]),
         (member) => hasEveryFilter(member, ['unown']) && spawn.name.toLowerCase().includes('unown'),
         (member) => hasEveryFilter(member, ['iv100', spawn.neighbourhood]) && (spawn.iv ? spawn.iv.replace('%', '') >= 99 : false),
+        (member) => hasEveryFilter(member, ['iv97', spawn.neighbourhood]) && (spawn.iv ? spawn.iv.replace('%', '') >= 97 : false),
+        (member) => hasEveryFilter(member, ['iv95', spawn.neighbourhood]) && (spawn.iv ? spawn.iv.replace('%', '') >= 95 : false),
         (member) => hasEveryFilter(member, ['iv90', spawn.neighbourhood]) && (spawn.iv ? spawn.iv.replace('%', '') >= 90 : false),
         (member) => hasEveryFilter(member, ['cp2500', spawn.neighbourhood]) && (spawn.cp ? spawn.cp >= 2500 : false),
         (member) => hasEveryFilter(member, ['iv90lv30', spawn.neighbourhood]) && (spawn.iv ? spawn.iv.replace('%', '') >= 90 : false) && (spawn.level ? parseInt(spawn.level) > 29 : false),
