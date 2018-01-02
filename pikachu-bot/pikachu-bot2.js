@@ -10,11 +10,17 @@ process.on('unhandledRejection', console.error); // Nodejs config to better trac
 const Discord = require('discord.js');
 const auth = require('./auth.json');
 
-// Import botutils module
-const bu = require('../assets/modules/botutils3');
-
-// Import database utility functions module
-const db = require('../assets/modules/dbutils3');
+// Import utility classes
+const MU = require('../assets/modules/mongoutils3');
+const mongoutils = new MU.MongoUtils();
+const GU = require('../assets/modules/geoutils');
+const geoutils = new GU.GeoUtils();
+const SU = require('../assets/modules/spawnutils');
+const spawnutils = new SU.SpawnUtils();
+const DiscU = require('../assets/modules/discordutils');
+const discordutils = new DiscU.DiscordUtils();
+const DictU = require('../assets/modules/dictutils');
+const dictutils = new DictU.DictUtils();
 
 // Import localization dictionary module json object
 const dict = require('../assets/modules/dictionary').dict();
@@ -22,7 +28,7 @@ const dict = require('../assets/modules/dictionary').dict();
 /**---------------------------------------------------------------------------------------------
  * CREATE IMPORTANT CONSTANTS TO BE REUSED ON NEARLY EVERY EVENT
  *--------------------------------------------------------------------------------------------*/
-const neighbourhoodNames = db.getNeighbourhoods();
+const neighbourhoodNames = dictutils.getNeighbourhoodNamesArray();
 
 const client = new Discord.Client({
     fetchAllMembers: true // Required in order for bot to cache ALL members (otherwise only up to 250 members might be cached)
@@ -31,7 +37,7 @@ const client = new Discord.Client({
 /**---------------------------------------------------------------------------------------------
  * EVENT: READY
  *--------------------------------------------------------------------------------------------*/
-client.on('ready', () => {
+client.on('ready', async() => {
     console.log('-----------------------------------------------------------------');
     console.log('I am ready!');
     console.log('-----------------------------------------------------------------');
@@ -41,7 +47,7 @@ client.on('ready', () => {
  * EVENT: GUILD MEMBER ADD
  *--------------------------------------------------------------------------------------------*/
 // client.on('guildMemberAdd', async(member) => {
-//     await db.addMember(member);
+//     await mongoutils.addMember(member);
 //     console.log('New member added to database: ' + member.displayName);
 // });
 
@@ -49,7 +55,7 @@ client.on('ready', () => {
  * EVENT: GUILD MEMBER REMOVE
  *--------------------------------------------------------------------------------------------*/
 // client.on('guildMemberRemove', async(member) => {
-//     await db.removeMember(member);
+//     await mongoutils.removeMember(member);
 //     console.log('Member removed from database: ' + member.displayName);
 // });
 
@@ -76,14 +82,17 @@ client.on('message', async(message) => {
             args = args.splice(1).map(e => e.trim()).filter(e => e !== '');
 
             switch (cmd) {
+                case 'checkwant':
+                    if (!discordutils.hasRole(message.member, 'admin')) return;
+                    await message.channel.send('`' + await mongoutils.getFiltersStr(message.guild.members.find('displayName', args[0])) + '`');
+                    break;
                 case 'neighbourhoods':
-                    if (!bu.hasRole(message.member, 'admin')) return;
+                    if (!discordutils.hasRole(message.member, 'admin')) return;
                     await message.channel.send(neighbourhoodNames);
                     break;
-
                 case 'meowth':
                     {
-                        if (!bu.hasRole(message.member, 'admin')) return;
+                        if (!discordutils.hasRole(message.member, 'admin')) return;
                         const meowthChannelNames = ['raids-post'].concat(neighbourhoodNames).filter(e => e !== 'laval' && e !== 'wilds-post');
                         await message.channel.send(meowthChannelNames.join(', '));
                         await message.channel.send(meowthChannelNames.map(() => 'Montreal Canada').join(', '));
@@ -91,31 +100,27 @@ client.on('message', async(message) => {
                     }
                 case 'translate':
                 case 'traduit':
-                    await message.channel.send(db.getTranslation(args.join(' ')));
+                    await message.channel.send(dictutils.getTranslation(args.join(' ')));
                     break;
                 case 'want2':
-                case 'veux':
-                    //if (message.channel.name !== 'bot-testing' && message.channel.name !== 'wants-post')
+                case 'veux2':
                     if (message.channel.name !== 'bot-testing' && message.channel.name !== 'wants-post')
                         return;
 
                     // !want or !veux
                     if (!args.length) {
-                        let mf = await db.getFilters(null, message.member.id);
-
-                        if (cmd === 'veux')
-                            mf.pokemon = mf.pokemon.map(e => db.getTranslation(e));
-
-                        await message.channel.send('__**Current alerts/Alertes actuelles**__\n ' +
-                            '**Pokemon**: \n`{' + (mf.pokemon ? mf.pokemon : ' . ') + '}` ' +
-                            '\n**Neighbourhood(s)/quartier(s)**: \n`{' + (mf.neighbourhood ? mf.neighbourhood : ' ') + '}`');
-                        return;
+                        console.log(await mongoutils.getFiltersStr(message.member));
+                        await message.channel.send(await mongoutils.getFiltersStr(message.member));
                     }
 
                     switch (args.join(' ').toLowerCase()) {
                         case 'everywhere':
                         case 'partout':
-                            await db.setFilters(message.member.id, 'neighbourhood', neighbourhoodNames);
+                            await mongoutils.setFilters({
+                                memberId: message.member.id,
+                                what: 'neighbourhood',
+                                whatNames: neighbourhoodNames
+                            });
                             message.react('✅');
                             break;
                         case 'help':
@@ -159,8 +164,10 @@ client.on('message', async(message) => {
                             }
                             args.forEach(async(arg) => {
                                 try {
-                                    //arg = arg.replace('’', '\'');
-                                    await db.addFilter(message.member.id, arg);
+                                    await mongoutils.addFilter({
+                                        memberId: message.member.id,
+                                        filter: arg
+                                    });
                                     await message.react('✅');
                                 } catch (e) {
                                     await message.react('❌');
@@ -172,19 +179,27 @@ client.on('message', async(message) => {
                     break;
 
                 case 'unwant2':
-                case 'veuxpas':
+                case 'veuxpas2':
                     if (message.channel.name !== 'bot-testing' && message.channel.name !== 'wants-post')
                         return;
 
                     switch (args.join(' ').toLowerCase()) {
                         case 'everywhere':
                         case 'partout':
-                            await db.setFilters(message.member.id, 'neighbourhood', []);
+                            await mongoutils.setFilters({
+                                memberId: message.member.id,
+                                what: 'neighbourhood',
+                                whatNames: []
+                            });
                             await message.react('✅');
                             break;
                         case 'all':
                         case 'tous':
-                            await db.setFilters(message.member.id, 'pokemon', []);
+                            await mongoutils.setFilters({
+                                memberId: message.member.id,
+                                what: 'pokemon',
+                                whatNames: []
+                            });
                             await message.react('✅');
                             break;
                         default:
@@ -194,38 +209,50 @@ client.on('message', async(message) => {
                             }
                             args.forEach(async(arg) => {
                                 try {
-                                    await db.removeFilter(message.member.id, arg);
+                                    await mongoutils.removeFilter({
+                                        memberId: message.member.id,
+                                        filter: arg
+                                    });
                                     await message.react('✅');
-                                } catch (e) {
+                                } catch (err) {
                                     await message.react('❌');
-                                    await message.channel.send(e);
+                                    await message.channel.send(err);
                                 }
                             });
                             break;
                     }
                     break;
             }
-        } else if (message.channel.name === 'wilds-income') {
-            let spawn = bu.createSpawn(message);
+        } else if (message.channel.name === 'discord-income') {
+            let spawn = spawnutils.createSpawn(message);
 
-            const spawnNeighbourhood = await bu.findPointInPolygon(spawn.coordinates); // returns spawn with neighbourhood and client fields
+            const spawnNeighbourhood = await geoutils.findPointInPolygon(spawn.coordinates);
 
             spawn = {
                 neighbourhood: spawnNeighbourhood,
                 ...spawn
             };
 
-            const embed = bu.createEmbed(spawn, client);
+            const embed = spawnutils.createSpawnEmbed({
+                spawn,
+                client
+            }); // embed = {content, embed}
 
-            const recipients = await bu.getRecipients(spawn, client);
+            const recipients = await spawnutils.getDiscordRecipientsArray({
+                spawn,
+                client
+            });
 
-            await bu.sendAll(recipients, embed);
-            //await bu.sendAll([message.guild.channels.find('name', 'wilds-post')], embed);
+            console.log(recipients.map(r => r.displayName));
+
+            // await discordutils.sendEmbedToRepicients(recipients, embed);
+            await discordutils.sendEmbedToRepicients([client.guilds.get('352462877845749762').members.find('displayName', 'uphillsimplex')], embed);
+            ////await discordutils.sendEmbedToRepicients([message.guild.channels.find('name', 'wilds-post')], embed);
         } else {
             // Message does not start with '!' nor does it originates from the 'tweet-income' channel
         }
-    } catch (e) {
-        console.log(e);
+    } catch (err) {
+        console.log(err.stack);
     }
 });
 

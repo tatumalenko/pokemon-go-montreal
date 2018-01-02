@@ -1,13 +1,49 @@
 const DB_URL_PATH = 'mongodb://localhost:27017/pikachu';
 const COLLECTION_NAME = 'members';
-const du = require('./dbutils');
-process.on('unhandledRejection', console.error); // Nodejs config to better trace unhandled promise rejections
+const du = require('./dbutils3');
+//process.on('unhandledRejection', console.error); // Nodejs config to better trace unhandled promise rejections
+
+const MongoClient = require('mongodb').MongoClient;
+
+const query = {
+    'filters': {
+        $elemMatch: {
+            pokemon: 'blissey',
+            neighbourhood: {
+                $in: ['plateau']
+            },
+            iv: {
+                $lte: 91
+            },
+            level: {
+                $lte: 21
+            }
+        }
+    }
+};
 
 async function test() {
-    await convert();
+    //await convert();
+    const db = await open();
+    const res = await find(query, COLLECTION_NAME, db);
+
+    console.log(res.map(e => e.username));
 }
 
-test();
+
+
+async function test_open() {
+    const db = await open();
+    console.log(db);
+}
+
+(async function () {
+    try {
+        test2();
+    } catch (err) {
+        console.log(err.stack);
+    }
+})();
 
 async function convert() {
     const sqldb = await du.getTable();
@@ -28,6 +64,24 @@ async function convert() {
                         pokemon: 'all',
                         neighbourhood: curNeigh,
                         iv: 90,
+                        level: 0,
+                        cp: 0
+                    };
+                    break;
+                case 'iv95':
+                    tempFilter = {
+                        pokemon: 'all',
+                        neighbourhood: curNeigh,
+                        iv: 95,
+                        level: 0,
+                        cp: 0
+                    };
+                    break;
+                case 'iv97':
+                    tempFilter = {
+                        pokemon: 'all',
+                        neighbourhood: curNeigh,
+                        iv: 97,
                         level: 0,
                         cp: 0
                     };
@@ -122,9 +176,10 @@ async function open(url = DB_URL_PATH) {
     const mongo = require('mongodb').MongoClient;
 
     try {
-        return await mongo.connect(url);
+        const client = await mongo.connect(url);
+        return await client.db('pikachu');
     } catch (e) {
-        console.error(e);
+        console.log(e);
     }
 }
 
@@ -134,26 +189,24 @@ async function createCollection(collectionName, db) {
     try {
         return await db.createCollection(collectionName);
     } catch (e) {
-        console.error(e);
+        console.log(e);
     }
 }
 
 async function insert(docObj, collectionName = COLLECTION_NAME, db) {
-    //if (!db) db = await open();
 
     try {
         return await db.collection(collectionName).insert(docObj); // docObj can be array of objects also
     } catch (e) {
-        console.error(e);
+        console.log(e);
     }
 }
 
 async function find(query, collectionName = COLLECTION_NAME, db) {
-    if (!db) db = await open();
 
     try {
         return await db.collection(collectionName).find(query).toArray();
     } catch (e) {
-        console.error(e);
+        console.log(e);
     }
 }
