@@ -62,6 +62,26 @@ class RaidsRepository {
     }
 
     /**
+     * Get a raid from a neighborhood.
+     */
+    async GetRaids(neighborhood) {
+        var raids = [];
+        var collectionName = this.raidsCollection;
+        var result = await MongoClient.connect(this.connectionString).then(async(db) => {
+            var collection = db.collection(collectionName);
+
+            var raidObjects = await collection.find({neighborhood:String(neighborhood)}).toArray();
+            await raidObjects.forEach(raidObject => {
+                raids.push(new Raid(raidObject));
+            });
+
+            db.close();
+        });
+
+        return raids;
+    }
+
+    /**
      * Get a raid from a location.
      * @param {*} lat
      * @param {*} long
@@ -99,6 +119,10 @@ class RaidsRepository {
             });
             db.close();
         });
+    }
+
+    CleanRaids() {
+        
     }
 }
 

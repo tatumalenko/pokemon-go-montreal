@@ -28,7 +28,7 @@ console.log("Finished loading config.");
 // Singletons.
 var raidRepository = new RaidsRepository(secrets.mongo_connectionstring, configs.raids_collection);
 var Neighborhood = new NeighborhoodClass(__dirname + "/" + configs.neighborhood_map_path);
-// TODO: onstart, launch DB cleanup again.
+
 
 client.on("ready", () => {
     var meowth = client.users.find('username', "Meowth 2.0");
@@ -36,6 +36,8 @@ client.on("ready", () => {
         console.log("Can't have Persian without a Meowth first!");
     }
     
+    // TODO: onstart, launch DB cleanup again.
+
     console.log("Persian up!");
 });
 
@@ -102,25 +104,28 @@ client.on("message", async(message) => {
             case 'raids':
                 // TODO: Detect current channel and find the neighborhood
 
+                var foundRaids = await raidRepository.GetRaids(commandArgs[1]);
+                console.log(foundRaids);
+
                 var commandInitiator = message.author;
                 
                 // Build a list of available raids.
                 var raidText = "";
-                for (var i = 0; i < current_raids.length; i ++) {
-                    raidText += current_raids[i].GetDescription() + "\n";
+                for (var i = 0; i < foundRaids.length; i ++) {
+                    raidText += raidReactions[i] + " " + foundRaids[i].GetDescription() + "\n";
                 }
         
                 var raids = [];
-                var embed = {embed:{title:"Available raids in <Insert neighborhood here>.",description:raidText}};
+                var embed = {embed:{title:"Available raids in " + commandArgs[1] + ".",description:raidText}};
                 await message.channel.send(embed).then(async (message) => {
                     // Add reactions so the user can select a raid to launch.
-                    for (var i = 0; i < current_raids.length; i++) {
+                    for (var i = 0; i < foundRaids.length; i++) {
                         await message.react(raidReactions[i]);
                     }
         
                     // Keep a list of raids for the current message.
                     // TODO: test concurent messages.
-                    raids[message.id] = current_raids;
+                    raids[message.id] = foundRaids;
                     message.awaitReactions(function(reaction) {
                         // If a reaction reaches '2', that means the user has selected a raid.
                         if (reaction.count >= 2 && reaction.users.find('username', commandInitiator.username)) {
