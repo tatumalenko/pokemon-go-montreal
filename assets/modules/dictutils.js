@@ -1,7 +1,5 @@
-// Import the pkmn.json static database file
-const pkmndict = require('../data/pkmn.json');
+const pkmndict = require('../data/pkmn_en.json');
 const pkmndict_fr = require('../data/pkmn_fr.json');
-
 const neighbourhood_dict = require('../data/neighbourhood_synonyms.json').neighbourhood_dict;
 
 const Diacritics = require('diacritic');
@@ -13,8 +11,10 @@ class DictUtils {
 
     isValidFilter(filter) {
         //console.log(filter);
-        filter = this.clean(filter);
+        filter = this.getNeighbourhoodSynonym(this.clean(filter));
         //console.log(filter);
+
+        // console.log(filter + ': ' + this.getNeighbourhoodSynonym(this.clean(filter)));
 
         const englishPokemonNames = this.getPokemonNamesArray();
         const frenchPokemonNames = this.getPokemonNamesArray('french').map(e => this.clean(e));
@@ -25,6 +25,21 @@ class DictUtils {
             return false;
         else
             return true;
+    }
+
+    getFilterType(word) {
+        if (this.isValidFilter(word))
+            word = this.getEnglishName(word);
+        else
+            return false;
+
+        const englishPokemonNames = this.getPokemonNamesArray();
+        const neighbourhoodNames = this.getNeighbourhoodNamesArray();
+
+        if (englishPokemonNames.contains(word))
+            return 'pokemon';
+        else if (neighbourhoodNames.contains(word))
+            return 'neighbourhood';
     }
 
     clean(name) {
@@ -50,9 +65,9 @@ class DictUtils {
 
     getPokemonNamesArray(language = 'english') {
         if (language === 'french')
-            return [...pkmndict_fr.pokemon_list];
+            return [...pkmndict_fr.pokemon_list, 'tous'];
         else
-            return [...pkmndict.pokemon_list];
+            return [...pkmndict.pokemon_list, 'all'];
     }
 
     getNeighbourhoodNamesArray() {
@@ -60,7 +75,7 @@ class DictUtils {
         for (let neighbourhood of neighbourhood_dict) {
             neighbourhoodNames.push(neighbourhood[0]);
         }
-        return neighbourhoodNames;
+        return [...neighbourhoodNames, 'everywhere', 'partout', 'location', 'locations'];
     }
 
     getTranslation(pokemonName) {
@@ -77,7 +92,7 @@ class DictUtils {
     }
 
     getEnglishName(name) {
-        name = this.clean(name);
+        name = this.getNeighbourhoodSynonym(this.clean(name));
 
         const englishPokemonNames = this.getPokemonNamesArray();
         const frenchPokemonNames = this.getPokemonNamesArray('french').map(e => this.clean(e));

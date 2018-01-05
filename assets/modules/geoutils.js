@@ -1,8 +1,9 @@
-const tj = require('togeojson'),
-    fs = require('fs'),
-    DOMParser = require('xmldom').DOMParser;
-
+const tj = require('togeojson');
+const fs = require('fs');
+const DOMParser = require('xmldom').DOMParser;
 const turf = require('turf');
+
+const KML_FILE_NAME = 'neighbourhoods2.kml';
 
 class GeoUtils {
     constructor() {
@@ -62,13 +63,15 @@ class GeoUtils {
 
     getNeighbourhoodPolygonCoordsArray() {
         let kml;
+
+        // Depending on where I use this module, the pwd of execution might be relatively at different spots
         try {
-            kml = new DOMParser().parseFromString(fs.readFileSync('neighbourhoods2.kml', 'utf8'));
+            kml = new DOMParser().parseFromString(fs.readFileSync(KML_FILE_NAME, 'utf8'));
         } catch (e) {
             try {
-                kml = new DOMParser().parseFromString(fs.readFileSync('../assets/data/neighbourhoods2.kml', 'utf8'));
+                kml = new DOMParser().parseFromString(fs.readFileSync('../assets/data/' + KML_FILE_NAME, 'utf8'));
             } catch (err) {
-                kml = new DOMParser().parseFromString(fs.readFileSync('../data/neighbourhoods2.kml', 'utf8'));
+                kml = new DOMParser().parseFromString(fs.readFileSync('../data/' + KML_FILE_NAME, 'utf8'));
             }
         }
 

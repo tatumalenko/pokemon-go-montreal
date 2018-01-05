@@ -11,7 +11,7 @@ const Discord = require('discord.js');
 const auth = require('./auth.json');
 
 // Import utility classes
-const MU = require('../assets/modules/mongoutils3');
+const MU = require('../assets/modules/mongoutils');
 const mongoutils = new MU.MongoUtils();
 const GU = require('../assets/modules/geoutils');
 const geoutils = new GU.GeoUtils();
@@ -82,174 +82,177 @@ client.on('message', async(message) => {
             args = args.splice(1).map(e => e.trim()).filter(e => e !== '');
 
             switch (cmd) {
+                case 'neighbourhoods':
+                case 'quartiers':
+                    await message.channel.send('**Neighbourhoods/Quartiers: ** ' + dictutils.getNeighbourhoodNamesArray().sort().join(', '));
+                    break;
+                case 'location':
+                case 'locations':
+                    // e.g.: '!location' or '!locations'
+                    if (!args.length) {
+                        await message.channel.send('**' + message.member.displayName + ' Location(s): ** ' + await mongoutils.getDefaultNeighbourhood(message.member.id));
+                        return;
+                    }
+
+                    // e.g.: '!location plateau, ville-marie'
+                    try {
+                        await mongoutils.setDefaultNeighbourhood({
+                            memberId: message.member.id,
+                            args: args.join(' ').toLowerCase()
+                        });
+                        await message.react('✅');
+                    } catch (e) {
+                        await message.react('❌');
+                        await message.channel.send(e);
+                    }
+                    break;
                 case 'checkwant':
                     if (!discordutils.hasRole(message.member, 'admin')) return;
-                    await message.channel.send('`' + await mongoutils.getFiltersStr(message.guild.members.find('displayName', args[0])) + '`');
+                    await message.channel.send('`' + await mongoutils.createFiltersString(message.guild.members.find('displayName', args[0])) + '`');
                     break;
-                case 'neighbourhoods':
-                    if (!discordutils.hasRole(message.member, 'admin')) return;
-                    await message.channel.send(neighbourhoodNames);
-                    break;
-                case 'meowth':
-                    {
-                        if (!discordutils.hasRole(message.member, 'admin')) return;
-                        const meowthChannelNames = ['raids-post'].concat(neighbourhoodNames).filter(e => e !== 'laval' && e !== 'wilds-post');
-                        await message.channel.send(meowthChannelNames.join(', '));
-                        await message.channel.send(meowthChannelNames.map(() => 'Montreal Canada').join(', '));
-                        break;
-                    }
-                case 'translate':
-                case 'traduit':
-                    await message.channel.send(dictutils.getTranslation(args.join(' ')));
-                    break;
-                case 'want2':
-                case 'veux2':
-                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'wants-post')
+                    // case 'meowth':
+                    //     {
+                    //         if (!discordutils.hasRole(message.member, 'admin')) return;
+                    //         const meowthChannelNames = ['raids-post'].concat(neighbourhoodNames).filter(e => e !== 'laval' && e !== 'wilds-post');
+                    //         await message.channel.send(meowthChannelNames.join(', '));
+                    //         await message.channel.send(meowthChannelNames.map(() => 'Montreal Canada').join(', '));
+                    //         break;
+                    //     }
+                    // case 'translate':
+                    // case 'traduit':
+                    //     await message.channel.send(dictutils.getTranslation(args.join(' ')));
+                    //     break;
+                case 'want':
+                case 'veux':
+                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone')
                         return;
 
-                    // !want or !veux
+                    // '!want' or '!veux'
                     if (!args.length) {
-                        console.log(await mongoutils.getFiltersStr(message.member));
-                        await message.channel.send(await mongoutils.getFiltersStr(message.member));
+                        await message.channel.send(await mongoutils.createFiltersString(message.member));
+                        return;
                     }
 
-                    switch (args.join(' ').toLowerCase()) {
-                        case 'everywhere':
-                        case 'partout':
-                            await mongoutils.setFilters({
+                    // '!want on' or '!want off'
+                    if (['on', 'off'].includes(args.join('').toLowerCase())) {
+                        try {
+                            await mongoutils.setStatus({
                                 memberId: message.member.id,
-                                what: 'neighbourhood',
-                                whatNames: neighbourhoodNames
+                                arg: args.join('').toLowerCase()
                             });
-                            message.react('✅');
-                            break;
-                        case 'help':
-                            await message.channel.send({
-                                embed: {
-                                    description: dict.WANT_HELP()
-                                }
-                            });
-                            break;
-                        case 'aide':
-                            await message.channel.send({
-                                embed: {
-                                    description: dict.VEUX_AIDE()
-                                }
-                            });
-                            break;
-                        case 'help more':
-                            await message.channel.send({
-                                embed: {
-                                    description: dict.WANT_HELP_MORE() +
-                                        '`' + neighbourhoodNames.join('\n') + '`'
-                                }
-                            });
-                            break;
-
-                        case 'aide plus':
-                            await message.channel.send({
-                                embed: {
-                                    description: dict.VEUX_AIDE_PLUS() +
-                                        '`' + neighbourhoodNames.join('\n') + '`'
-                                }
-                            });
-                            break;
-
-                        default:
-                            if (args.length > 1) {
-                                cmd === 'want' ?
-                                    await message.channel.send(dict.WANT_MULTIPLE_COMMAND_ERROR()) :
-                                    await message.channel.send(dict.VEUX_ERREUR_COMMANDES_MULTIPLES());
-                                return;
-                            }
-                            args.forEach(async(arg) => {
-                                try {
-                                    await mongoutils.addFilter({
-                                        memberId: message.member.id,
-                                        filter: arg
-                                    });
-                                    await message.react('✅');
-                                } catch (e) {
-                                    await message.react('❌');
-                                    await message.channel.send(e);
-                                }
-                            });
-                            break;
+                            await message.react('✅');
+                        } catch (e) {
+                            await message.react('❌');
+                            await message.channel.send(e);
+                        }
+                        return;
                     }
+
+                    try {
+                        const filters = await mongoutils.createQueryFilterArrayFromMessage({
+                            memberId: message.member.id,
+                            cmd: cmd,
+                            args: args.join(' ').toLowerCase()
+                        });
+
+                        for (const filter of filters)
+                            await mongoutils.addFilter({
+                                memberId: message.member.id,
+                                filter: filter
+                            });
+                        await message.react('✅');
+                    } catch (e) {
+                        await message.react('❌');
+                        await message.channel.send(e);
+                    }
+
+                    // switch (args.join(' ').toLowerCase()) {
+                    //     // case 'help':
+                    //     //     await message.channel.send({
+                    //     //         embed: {
+                    //     //             description: dict.WANT_HELP()
+                    //     //         }
+                    //     //     });
+                    //     //     break;
+                    //     // case 'aide':
+                    //     //     await message.channel.send({
+                    //     //         embed: {
+                    //     //             description: dict.VEUX_AIDE()
+                    //     //         }
+                    //     //     });
+                    //     //     break;
+                    //     // case 'help more':
+                    //     //     await message.channel.send({
+                    //     //         embed: {
+                    //     //             description: dict.WANT_HELP_MORE() +
+                    //     //                 '`' + neighbourhoodNames.join('\n') + '`'
+                    //     //         }
+                    //     //     });
+                    //     //     break;
+                    //     // case 'aide plus':
+                    //     //     await message.channel.send({
+                    //     //         embed: {
+                    //     //             description: dict.VEUX_AIDE_PLUS() +
+                    //     //                 '`' + neighbourhoodNames.join('\n') + '`'
+                    //     //         }
+                    //     //     });
+                    //     //     break;
+                    // }
                     break;
 
-                case 'unwant2':
-                case 'veuxpas2':
-                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'wants-post')
+                case 'unwant':
+                case 'veuxpas':
+                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone')
                         return;
 
-                    switch (args.join(' ').toLowerCase()) {
-                        case 'everywhere':
-                        case 'partout':
-                            await mongoutils.setFilters({
+                    try {
+                        if (args.join(' ').toLowerCase() === 'everything') {
+                            await mongoutils.clearFilters(message.member.id);
+                        } else {
+                            const filters = await mongoutils.createQueryFilterArrayFromMessage({
                                 memberId: message.member.id,
-                                what: 'neighbourhood',
-                                whatNames: []
+                                cmd: cmd,
+                                args: args.join(' ').toLowerCase()
                             });
-                            await message.react('✅');
-                            break;
-                        case 'all':
-                        case 'tous':
-                            await mongoutils.setFilters({
-                                memberId: message.member.id,
-                                what: 'pokemon',
-                                whatNames: []
-                            });
-                            await message.react('✅');
-                            break;
-                        default:
-                            if (args.length > 1) {
-                                await message.channel.send('Please only send one Pokemon or neighbourhood name per \'!want\' command.');
-                                return;
-                            }
-                            args.forEach(async(arg) => {
-                                try {
-                                    await mongoutils.removeFilter({
-                                        memberId: message.member.id,
-                                        filter: arg
-                                    });
-                                    await message.react('✅');
-                                } catch (err) {
-                                    await message.react('❌');
-                                    await message.channel.send(err);
-                                }
-                            });
-                            break;
+
+                            for (const filter of filters)
+                                await mongoutils.removeFilter({
+                                    memberId: message.member.id,
+                                    filter: filter
+                                });
+                        }
+                        await message.react('✅');
+                    } catch (err) {
+                        await message.react('❌');
+                        await message.channel.send(err);
                     }
                     break;
             }
         } else if (message.channel.name === 'discord-income') {
-            let spawn = spawnutils.createSpawn(message);
+            // let spawn = spawnutils.createSpawn(message);
 
-            const spawnNeighbourhood = await geoutils.findPointInPolygon(spawn.coordinates);
+            // const spawnNeighbourhood = await geoutils.findPointInPolygon(spawn.coordinates);
 
-            spawn = {
-                neighbourhood: spawnNeighbourhood,
-                ...spawn
-            };
+            // spawn = {
+            //     neighbourhood: spawnNeighbourhood,
+            //     ...spawn
+            // };
 
-            const embed = spawnutils.createSpawnEmbed({
-                spawn,
-                client
-            }); // embed = {content, embed}
+            // const embed = spawnutils.createSpawnEmbed({
+            //     spawn,
+            //     client
+            // }); // embed = {content, embed}, it's weird, I know..
 
-            const recipients = await spawnutils.getDiscordRecipientsArray({
-                spawn,
-                client
-            });
+            // const recipients = await spawnutils.getDiscordRecipientsArray({
+            //     spawn,
+            //     client
+            // });
 
-            console.log(recipients.map(r => r.displayName));
-
-            // await discordutils.sendEmbedToRepicients(recipients, embed);
-            await discordutils.sendEmbedToRepicients([client.guilds.get('352462877845749762').members.find('displayName', 'uphillsimplex')], embed);
-            ////await discordutils.sendEmbedToRepicients([message.guild.channels.find('name', 'wilds-post')], embed);
+            // await discordutils.sendEmbedToRepicients([client.guilds.get('352462877845749762').members.find('displayName', 'uphillsimplex')], embed);
+            // // await discordutils.sendEmbedToRepicients(recipients, embed); // Post in DM channel to members
+            // // await discordutils.sendEmbedToRepicients([message.guild.channels.find('name', 'wilds-post')], embed); // Post in wilds-post channel
         } else {
-            // Message does not start with '!' nor does it originates from the 'tweet-income' channel
+            // Message does not start with '!' nor does it originates from wilds-income
         }
     } catch (err) {
         console.log(err.stack);

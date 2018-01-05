@@ -1,4 +1,4 @@
-const MU = require('./mongoutils3');
+const MU = require('./mongoutils');
 const mongoutils = new MU.MongoUtils();
 
 const DictU = require('./dictutils');
@@ -87,7 +87,7 @@ class SpawnUtils {
             spawn.level = pkmn.calcLevel();
         }
 
-        const content = 'Pika-Pika! Wild ' + (spawn.neighbourhood !== 'laval' ? `${spawn.name}` : `${client.guilds.get('343117705974644748').roles.find('name', spawn.name.toLowerCase().includes('unown') ? 'unown' : spawn.name.toLowerCase())}`) +
+        const content = 'Pika! Wild ' + (spawn.neighbourhood !== 'laval' ? `${spawn.name}` : `${client.guilds.get('343117705974644748').roles.find('name', spawn.name.toLowerCase().includes('unown') ? 'unown' : spawn.name.toLowerCase())}`) +
             ` (IV: ${spawn.iv} - CP: ${spawn.cp} - LV: ${spawn.level}) spawning in ${spawn.neighbourhood}! \nDetails: ${spawn.address}`;
 
         const embed = {
@@ -130,7 +130,7 @@ class SpawnUtils {
     }) {
         try {
             if (spawn.neighbourhood === 'laval') {
-                // // SPAWN IS IN LAVAL
+                // // SPAWN IS IN LAVAL (PUSH IT TO THEIR SERVER)
                 // if (!client.guilds.get('343117705974644748').roles.find('name', spawn.name.toLowerCase())) {
                 //     // ROLE DOES NOT YET EXIST
                 //     await client.guilds.get('343117705974644748').createRole({
@@ -146,16 +146,13 @@ class SpawnUtils {
                 // }
             } else {
                 // SPAWN IS IN MONTREAL
-                // console.log('SPAWN.NAME: ' + spawn.name);
                 const filter = {
                     pokemon: spawn.name.toLowerCase(),
                     neighbourhood: spawn.neighbourhood,
                     level: parseInt(spawn.level),
                     iv: parseInt(spawn.iv)
                 }
-                // console.log('FILTER.POKEMON: ' + filter.pokemon);
 
-                // return [client.guilds.get('352462877845749762').members.find('displayName', 'uphillsimplex')];
                 const filteredMemberIds = await mongoutils.getFilteredMemberIds(filter);
                 const filteredDiscordMembers = await filteredMemberIds.map(id => client.guilds.get('352462877845749762').members.find('id', id));
                 return filteredDiscordMembers;
