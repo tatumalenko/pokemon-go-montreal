@@ -37,6 +37,14 @@ client.on("ready", () => {
     }
     
     // TODO: onstart, launch DB cleanup again.
+    raidRepository.GetAllRaids().then(async(raids) => {
+        raids.forEach(raid => {
+            timeoutRaid(raid);
+        });
+    }).catch(function(e) {
+        console.log("-> Error getting raids from the repository.");
+        console.log(e);
+    });
 
     console.log("Persian up!");
 });
@@ -51,32 +59,8 @@ client.on("message", async(message) => {
 
     // New raids found, insert in our storage.
     if (isIncomingRaid) {
-        console.log("============== RAID! ==============");
-
-        try{
-            var raid = new Raid();
-            raid.BuildFromText(message.content);
-
-            raid.originId = message.id;
-
-            raid.neighborhood = Neighborhood.GetNeighborhood(raid.latitude, raid.longitude);
-
-            await raidRepository.RemoveEquivalent(raid);
-            raidRepository.ReportRaid(raid);
-            LogNewRaid(raid);
-
-            setTimeout(function() {
-                LogDeletingRaid(raid);
-                raidRepository.RemoveRaid(raid);
-            }, raid.GetMinutesLeft() * 60 * 1000);
-        }catch(e) {
-            console.log(e);
-        }
-
-        console.log(raid.GetDescription());
-        console.log("===================================");
+        AddIncomingRaid(message);
     }
-
 
     if (isTesting) {
         if (message.content == "!all") {
@@ -155,18 +139,51 @@ client.on("message", async(message) => {
             client.channels.get(matches[1]).send("This is a test");
         }*/
     }
-
-    function LogDeletingRaid(raid) {
-        LogDiscord("[Raid Deleted]" + raid.GetDescription());
-    }
-
-    function LogNewRaid(raid) {
-        LogDiscord("[New Raid]" + raid.GetDescription());
-    }
-
-    function LogDiscord(message) {
-        client.channels.find('name', configs.log_channel).send(message);
-    }
 });
-  
+
+function LogDeletingRaid(raid) {
+    LogDiscord("[Raid Deleted]" + raid.GetDescription());
+}
+
+function LogNewRaid(raid) {
+    LogDiscord("[New Raid]" + raid.GetDescription());
+}
+
+function LogDiscord(message) {
+    client.channels.find('name', configs.log_channel).send(message);
+}
+
+async function AddIncomingRaid(discordMessage) {
+    console.log("============== RAID! ==============");
+    
+    try{
+        var raid = new Raid();
+        raid.BuildFromText(discordMessage.content);
+
+        raid.originId = discordMessage.id;
+
+        raid.neighborhood = Neighborhood.GetNeighborhood(raid.latitude, raid.longitude);
+
+        await raidRepository.RemoveEquivalent(raid);
+        raidRepository.ReportRaid(raid);
+        LogNewRaid(raid);
+
+        timeoutRaid(raid);
+    }catch(e) {
+        console.log(e);
+    }
+
+    console.log(raid.GetDescription());
+    console.log("===================================");
+}
+
+function timeoutRaid(raid) {
+    var timeout = raid.GetMinutesLeft() * 60 * 1000;
+    setTimeout(function() {
+        LogDeletingRaid(raid);
+        raidRepository.RemoveRaid(raid);
+    }, timeout);
+    console.log("Raid set to timeout in " + timeout + " miliseconds. (" + (timeout / 60 / 1000) + " minutes.)");
+}
+
 client.login(secrets.discord_bot_token);
