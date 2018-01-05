@@ -43,7 +43,7 @@ const tj = require('togeojson'),
     DOMParser = require('xmldom').DOMParser;
 
 // Import the pkmn.json static database file
-const pkmndict = require('../data/pkmn.json');
+const pkmndict = require('../data/pkmn_en.json');
 const pkmndict_fr = require('../data/pkmn_fr.json');
 
 const Diacritics = require('diacritic');

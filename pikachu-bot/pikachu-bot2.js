@@ -90,7 +90,7 @@ client.on('message', async(message) => {
                 case 'locations':
                     // e.g.: '!location' or '!locations'
                     if (!args.length) {
-                        await message.channel.send('**' + message.member.displayName + ' Location(s): ** ' + await mongoutils.getDefaultNeighbourhood(message.member.id));
+                        await message.channel.send('**' + message.member.displayName + ' Location(s): ** ' + await mongoutils.getDefaultNeighbourhood(message.member.id).join(', '));
                         return;
                     }
 
