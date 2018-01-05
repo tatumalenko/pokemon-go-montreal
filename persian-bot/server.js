@@ -28,7 +28,7 @@ console.log("Finished loading config.");
 // Singletons.
 var raidRepository = new RaidsRepository(secrets.mongo_connectionstring, configs.raids_collection);
 var Neighborhood = new NeighborhoodClass(__dirname + "/" + configs.neighborhood_map_path);
-// TODO: onstart, launch DB cleanup again.
+
 
 client.on("ready", () => {
     var meowth = client.users.find('username', "Meowth 2.0");
@@ -36,6 +36,16 @@ client.on("ready", () => {
         console.log("Can't have Persian without a Meowth first!");
     }
     
+    // TODO: onstart, launch DB cleanup again.
+    raidRepository.GetAllRaids().then(async(raids) => {
+        raids.forEach(raid => {
+            timeoutRaid(raid);
+        });
+    }).catch(function(e) {
+        console.log("-> Error getting raids from the repository.");
+        console.log(e);
+    });
+
     console.log("Persian up!");
 });
 
@@ -49,32 +59,8 @@ client.on("message", async(message) => {
 
     // New raids found, insert in our storage.
     if (isIncomingRaid) {
-        console.log("============== RAID! ==============");
-
-        try{
-            var raid = new Raid();
-            raid.BuildFromText(message.content);
-
-            raid.originId = message.id;
-
-            raid.neighborhood = Neighborhood.GetNeighborhood(raid.latitude, raid.longitude);
-
-            await raidRepository.RemoveEquivalent(raid);
-            raidRepository.ReportRaid(raid);
-            LogNewRaid(raid);
-
-            setTimeout(function() {
-                LogDeletingRaid(raid);
-                raidRepository.RemoveRaid(raid);
-            }, raid.GetMinutesLeft() * 60 * 1000);
-        }catch(e) {
-            console.log(e);
-        }
-
-        console.log(raid.GetDescription());
-        console.log("===================================");
+        AddIncomingRaid(message);
     }
-
 
     if (isTesting) {
         if (message.content == "!all") {
@@ -102,25 +88,28 @@ client.on("message", async(message) => {
             case 'raids':
                 // TODO: Detect current channel and find the neighborhood
 
+                var foundRaids = await raidRepository.GetRaids(commandArgs[1]);
+                console.log(foundRaids);
+
                 var commandInitiator = message.author;
                 
                 // Build a list of available raids.
                 var raidText = "";
-                for (var i = 0; i < current_raids.length; i ++) {
-                    raidText += current_raids[i].GetDescription() + "\n";
+                for (var i = 0; i < foundRaids.length; i ++) {
+                    raidText += raidReactions[i] + " " + foundRaids[i].GetDescription() + "\n";
                 }
         
                 var raids = [];
-                var embed = {embed:{title:"Available raids in <Insert neighborhood here>.",description:raidText}};
+                var embed = {embed:{title:"Available raids in " + commandArgs[1] + ".",description:raidText}};
                 await message.channel.send(embed).then(async (message) => {
                     // Add reactions so the user can select a raid to launch.
-                    for (var i = 0; i < current_raids.length; i++) {
+                    for (var i = 0; i < foundRaids.length; i++) {
                         await message.react(raidReactions[i]);
                     }
         
                     // Keep a list of raids for the current message.
                     // TODO: test concurent messages.
-                    raids[message.id] = current_raids;
+                    raids[message.id] = foundRaids;
                     message.awaitReactions(function(reaction) {
                         // If a reaction reaches '2', that means the user has selected a raid.
                         if (reaction.count >= 2 && reaction.users.find('username', commandInitiator.username)) {
@@ -150,18 +139,51 @@ client.on("message", async(message) => {
             client.channels.get(matches[1]).send("This is a test");
         }*/
     }
-
-    function LogDeletingRaid(raid) {
-        LogDiscord("[Raid Deleted]" + raid.GetDescription());
-    }
-
-    function LogNewRaid(raid) {
-        LogDiscord("[New Raid]" + raid.GetDescription());
-    }
-
-    function LogDiscord(message) {
-        client.channels.find('name', configs.log_channel).send(message);
-    }
 });
-  
+
+function LogDeletingRaid(raid) {
+    LogDiscord("[Raid Deleted]" + raid.GetDescription());
+}
+
+function LogNewRaid(raid) {
+    LogDiscord("[New Raid]" + raid.GetDescription());
+}
+
+function LogDiscord(message) {
+    client.channels.find('name', configs.log_channel).send(message);
+}
+
+async function AddIncomingRaid(discordMessage) {
+    console.log("============== RAID! ==============");
+    
+    try{
+        var raid = new Raid();
+        raid.BuildFromText(discordMessage.content);
+
+        raid.originId = discordMessage.id;
+
+        raid.neighborhood = Neighborhood.GetNeighborhood(raid.latitude, raid.longitude);
+
+        await raidRepository.RemoveEquivalent(raid);
+        raidRepository.ReportRaid(raid);
+        LogNewRaid(raid);
+
+        timeoutRaid(raid);
+    }catch(e) {
+        console.log(e);
+    }
+
+    console.log(raid.GetDescription());
+    console.log("===================================");
+}
+
+function timeoutRaid(raid) {
+    var timeout = raid.GetMinutesLeft() * 60 * 1000;
+    setTimeout(function() {
+        LogDeletingRaid(raid);
+        raidRepository.RemoveRaid(raid);
+    }, timeout);
+    console.log("Raid set to timeout in " + timeout + " miliseconds. (" + (timeout / 60 / 1000) + " minutes.)");
+}
+
 client.login(secrets.discord_bot_token);
