@@ -38,6 +38,14 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode"
+        },
+        {
+            "name": "persian-bot",
+            "cwd": "/bots/discord-bots/persian-bot",
+            "script": "server.js",
+            "watch": ["./", "../assets"],
+            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "exec_mode": "cluster_mode"
         }
     ]
 }
