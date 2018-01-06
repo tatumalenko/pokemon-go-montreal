@@ -6,7 +6,7 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm Z"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
             "name": "pikachu-bot",
@@ -15,7 +15,7 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm Z"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
             "name": "slowpoke-bot",
@@ -24,7 +24,7 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm Z"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
             "name": "self-bot",
@@ -33,7 +33,7 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm Z"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
             "name": "professor-willow-bot",
@@ -42,7 +42,7 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm Z"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
             "name": "persian-bot",
@@ -51,7 +51,7 @@
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
             "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm Z"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
         }
     ]
 }
