@@ -1,6 +1,7 @@
 const pkmndict = require('../data/pkmn_en.json');
 const pkmndict_fr = require('../data/pkmn_fr.json');
 const neighbourhood_dict = require('../data/neighbourhood_synonyms.json').neighbourhood_dict;
+const raid_channels = require('../data/raid_channels.json');
 
 const Diacritics = require('diacritic');
 
@@ -53,6 +54,14 @@ class DictUtils {
         }
 
         return Diacritics.clean(cleanName); // Replaces accented characters with regular ones
+    }
+
+    getNeighbourhoodsFromRaidChannel(raidChannel) {
+        if (typeof raid_channels[raidChannel] != undefined && raid_channels[raidChannel].length > 0) {
+            return raid_channels[raidChannel];
+        }
+
+        return [raidChannel];
     }
 
     getNeighbourhoodSynonym(filter) {
