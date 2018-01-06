@@ -5,7 +5,8 @@
             "script": "twitter-bot.js",
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode"
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm Z"
         },
         {
             "name": "pikachu-bot",
@@ -13,7 +14,8 @@
             "script": "pikachu-bot.js",
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode"
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm Z"
         },
         {
             "name": "slowpoke-bot",
@@ -21,7 +23,8 @@
             "script": "slowpoke-bot.js",
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode"
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm Z"
         },
         {
             "name": "self-bot",
@@ -29,7 +32,8 @@
             "script": "self-bot.js",
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode"
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm Z"
         },
         {
             "name": "professor-willow-bot",
@@ -37,7 +41,8 @@
             "script": "professor-willow-bot.js",
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode"
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm Z"
         },
         {
             "name": "persian-bot",
@@ -45,7 +50,8 @@
             "script": "server.js",
             "watch": ["./", "../assets"],
             "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode"
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm Z"
         }
     ]
 }
