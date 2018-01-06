@@ -186,7 +186,7 @@ class MongoUtils {
                 $push: {
                     filters: filter
                 }
-            })
+            });
         } catch (err) {
             console.log(err);
         }
@@ -225,7 +225,7 @@ class MongoUtils {
                 $pull: {
                     filters: filter
                 }
-            })
+            });
         } catch (err) {
             console.log(err.stack);
         }
@@ -239,7 +239,7 @@ class MongoUtils {
                 $set: {
                     filters: []
                 }
-            })
+            });
         } catch (err) {
             console.log(err.stack);
         }
@@ -358,7 +358,7 @@ class MongoUtils {
         const queryFilter = await this.createQueryFilterArrayFromMessage({
             cmd: 'want',
             args
-        })
+        });
 
         const defaultNeighbourhood = queryFilter[0].neighbourhood; // Only one should be returned since no pokemon where specified
 
@@ -376,15 +376,15 @@ class MongoUtils {
     filterEquals(filter1, filter2, fields = ['pokemon', 'neighbourhood', 'iv', 'level']) {
         // Deep compare each object field using fields elements as keys to compare within
         if (!fields.every((e) => {
-                if (Array.isArray(filter1[e]) && Array.isArray(filter2[e])) {
+            if (Array.isArray(filter1[e]) && Array.isArray(filter2[e])) {
 
-                    // If object field is array, sort and ensure all array elements equal
-                    return filter1[e].sort().every((e2, i) => {
-                        return e2 === filter2[e].sort()[i];
-                    });
-                }
-                return filter1[e] === filter2[e];
-            }))
+                // If object field is array, sort and ensure all array elements equal
+                return filter1[e].sort().every((e2, i) => {
+                    return e2 === filter2[e].sort()[i];
+                });
+            }
+            return filter1[e] === filter2[e];
+        }))
             return false;
         return true;
     }
