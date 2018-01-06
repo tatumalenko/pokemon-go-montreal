@@ -3,6 +3,10 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
 
+// Common.
+const DictU = require('../assets/modules/dictutils');
+const DictUtils = new DictU.DictUtils();
+
 // Internal.
 const Raid = require("./persian/Raid.js");
 const RaidCollection = require("./persian/RaidCollection.js");
@@ -36,7 +40,7 @@ client.on("ready", () => {
         console.log("Can't have Persian without a Meowth first!");
     }
     
-    // TODO: onstart, launch DB cleanup again.
+    // onstart, launch DB cleanup again.
     raidRepository.GetAllRaids().then(async(raids) => {
         raids.forEach(raid => {
             timeoutRaid(raid);
@@ -50,18 +54,17 @@ client.on("ready", () => {
 });
 
 client.on("message", async(message) => {
-    // For now, Persian is in development phase. stay in the testing.
-    var isIncomingRaid = message.channel.name === configs.income_channel && message.author.username === configs.income_username;
-    var isTesting = message.channel.name === configs.test_channel && message.author.username === 'emman31';
-    if (!isIncomingRaid && !isTesting) {
-        return;
-    }
+    var isIncomingRaid = 
+        message.channel.name === configs.income_channel && 
+        message.author.username === configs.income_username;
+
+    var isAdminUser = message.author.username === configs.admin_user;
 
     // New raids found, insert in our storage.
     if (isIncomingRaid) {
         AddIncomingRaid(message);
     }
-
+/*
     if (isTesting) {
         if (message.content == "!all") {
             raidRepository.GetAllRaids().then(async(raids) => {
@@ -75,7 +78,7 @@ client.on("message", async(message) => {
                 console.log(e);
             });
         }
-    }
+    }*/
 
     // User commands management.
     if (message.content.startsWith(configs.command_prefix)) {
@@ -86,9 +89,25 @@ client.on("message", async(message) => {
 
         switch(commandArgs[0]) {
             case 'raids':
-                // TODO: Detect current channel and find the neighborhood
+                if (commandArgs[1] === "hoods" && isAdminUser) {
+                    showAllRaidsByNeighborhood(message);
+                }
 
-                var foundRaids = await raidRepository.GetRaids(commandArgs[1]);
+                // First check if channel was specified. If not, assume current channel.
+                var channel = commandArgs[1];
+                if (typeof channel == undefined || channel == "") {
+                    channel = message.channel.name;
+                }
+
+                // With the channel, we then find a list of neighborhoods.
+                var neighborhoods = DictUtils.getNeighbourhoodsFromRaidChannel(channel);
+                var foundRaids = [];
+                for (var i = 0; i < neighborhoods.length; i ++) {
+                    neighborhoods[i] = DictUtils.getNeighbourhoodSynonym(neighborhoods[i]);
+                    foundRaids = foundRaids.concat(await raidRepository.GetRaids(neighborhoods[i]));
+                }
+
+                //var foundRaids = await raidRepository.GetRaids(neighborhood);
                 console.log(foundRaids);
 
                 var commandInitiator = message.author;
@@ -150,7 +169,11 @@ function LogNewRaid(raid) {
 }
 
 function LogDiscord(message) {
-    client.channels.find('name', configs.log_channel).send(message);
+    client.channels.find('name', configs.log_channel).send(message).catch(function(e) {
+        console.log("-> Looks like there was an error with Discord... Trying to fix it...");
+        console.log(e);
+        client = new Discord.Client();
+    });
 }
 
 async function AddIncomingRaid(discordMessage) {
@@ -184,6 +207,23 @@ function timeoutRaid(raid) {
         raidRepository.RemoveRaid(raid);
     }, timeout);
     console.log("Raid set to timeout in " + timeout + " miliseconds. (" + (timeout / 60 / 1000) + " minutes.)");
+}
+
+function showAllRaidsByNeighborhood(discordMessage) {
+    raidRepository.GetAllRaids().then(async(raids) => {
+        raids.forEach(raid => {
+            timeoutRaid(raid);
+        });
+
+        var raidCollection = new RaidCollection(raids);
+        var messageText = raidCollection.GetDescription();
+
+        var embed = {embed:{title:"All the raids!",description:messageText}};
+        message.channel.send(embed);
+    }).catch(function(e) {
+        console.log("-> Error getting raids from the repository.");
+        console.log(e);
+    });
 }
 
 client.login(secrets.discord_bot_token);

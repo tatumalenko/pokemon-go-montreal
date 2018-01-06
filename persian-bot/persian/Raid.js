@@ -52,7 +52,8 @@ class Raid {
     }
     GetDescription() {
         var name = this.pokemon.toLowerCase() === "egg" ? this.pokemon + " level " + this.level : this.pokemon;
-        return "**" + name + "** ending in **" + this.GetMinutesLeft() + " minutes** at __**" + this.address + "**__";
+        return "**" + name + "** ending in **" + this.GetMinutesLeft() + " minutes**" + 
+               " at __**" + this.address + " (" + this.neighborhood + ")**__";
     }
     GetMeowthCommand() {
         var minutesLeft = this.GetMinutesLeft();
@@ -70,7 +71,7 @@ class Raid {
 
         var tempHours = parseInt(parts[1], 10);
 
-        var hours = text.toLowerCase().includes("am") ?
+        var hours = parts[4].toLowerCase().includes("am") ?
             function(am) {return am < 12 ? am : 0}(tempHours) :
             function(pm) {return pm < 12 ? pm + 12 : 12}(tempHours);
 
@@ -95,6 +96,7 @@ class Raid {
         this.mapUrl = object.mapUrl;
         this.googleMapUrl = object.googleMapUrl;
         this.originId = object.originId;
+        this.neighborhood = object.neighborhood;
     }
 }
 
