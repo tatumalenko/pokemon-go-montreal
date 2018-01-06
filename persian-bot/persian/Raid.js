@@ -62,15 +62,27 @@ class Raid {
 
     /**
      * Private function to extract a date from the text according to a regex.
+     * Code taken from: https://stackoverflow.com/questions/16382266/javascript-set-time-string-to-date-object
+     * And modified...
      */
     _getDate(text, regex) {
-        var matches = regex.exec(text);
+        var parts = text.match(regex);
+
+        var tempHours = parseInt(parts[1], 10);
+
+        var hours = text.toLowerCase().includes("am") ?
+            function(am) {return am < 12 ? am : 0}(tempHours) :
+            function(pm) {return pm < 12 ? pm + 12 : 12}(tempHours);
+
+        var minutes = parseInt(parts[2], 10);
+        var seconds = parseInt(parts[3], 10)
+
         var date = new Date();
-        var hours = parseInt(matches[1]);
-        if (matches[4] == 'PM') {
-            hours += 12;
-        }
-        date.setHours(hours, parseInt(matches[2]), parseInt(matches[3]));
+
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        date.setSeconds(seconds);
+
         return date;
     };
 
