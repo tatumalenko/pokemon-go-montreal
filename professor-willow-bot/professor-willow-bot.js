@@ -29,7 +29,7 @@ client.on('guildMemberRemove', member => {
     // Do nothing if the channel wasn't found on this server
     if (!channel) return;
     // Send the message, mentioning the member
-    channel.send(`Gee-Golly. ${member} has left us. 😢`);
+    channel.send(`Gee-Golly. ${member.displayName} has left us. 😢`);
 });
 
 client.on('channelCreate', channel => {
