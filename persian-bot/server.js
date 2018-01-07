@@ -102,14 +102,14 @@ client.on("message", async(message) => {
                 // With the channel, we then find a list of neighborhoods.
                 var neighborhoods = DictUtils.getNeighbourhoodsFromRaidChannel(channel);
                 neighborhoods.push(channel);
+                neighborhoods = [... new Set(neighborhoods)];
 
+                console.log("Neigborhoods:" + neighborhoods);
                 var foundRaids = [];
                 for (var i = 0; i < neighborhoods.length; i ++) {
                     neighborhoods[i] = DictUtils.getNeighbourhoodSynonym(neighborhoods[i]);
                     foundRaids = foundRaids.concat(await raidRepository.GetRaids(neighborhoods[i]));
                 }
-
-                console.log(foundRaids);
 
                 var commandInitiator = message.author;
                 
