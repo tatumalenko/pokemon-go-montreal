@@ -57,7 +57,7 @@ class DictUtils {
     }
 
     getNeighbourhoodsFromRaidChannel(raidChannel) {
-        if (typeof raid_channels[raidChannel] != undefined && raid_channels[raidChannel].length > 0) {
+        if (raid_channels[raidChannel] !== undefined && raid_channels[raidChannel].length > 0) {
             return raid_channels[raidChannel];
         }
 
