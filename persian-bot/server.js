@@ -1,37 +1,24 @@
 // External dependencies.
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const fs = require("fs");
-
-// Common.
-const DictU = require('../assets/modules/dictutils');
-const DictUtils = new DictU.DictUtils();
 
 // Internal.
 const Raid = require("./persian/Raid.js");
 const RaidCollection = require("./persian/RaidCollection.js");
 const RaidsRepository = require("./persian/RaidsRepository.js");
 const NeighborhoodClass = require("./persian/Neighborhood.js");
+const CommandManagerClass = require("./persian/commands/CommandManager.js")
+const ConfigManager = require("./persian/ConfigManager.js")
 
 console.log("Starting bot...\n");
 
-const raidReactions = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
-
-// Loading secrets.
-var secretsString = fs.readFileSync(__dirname + "/secrets.json");
-var secrets = JSON.parse(secretsString);
-console.log("Finished loading secrets. shhh...");
-
-// Loading configs.
-var configsString = fs.readFileSync(__dirname + "/configs.json");
-var configs = JSON.parse(configsString);
-console.log("=============== CONFIG ===============");
-console.log(configs);
-console.log("Finished loading config.");
+var configs = ConfigManager.GetConfigs();
+var secrets = ConfigManager.GetSecrets();
 
 // Singletons.
 var raidRepository = new RaidsRepository(secrets.mongo_connectionstring, configs.raids_collection);
 var Neighborhood = new NeighborhoodClass(__dirname + "/" + configs.neighborhood_map_path);
+var CommandManager = new CommandManagerClass(configs.command_prefix);
 
 
 client.on("ready", () => {
@@ -80,73 +67,9 @@ client.on("message", async(message) => {
         }
     }*/
 
-    // User commands management.
-    if (message.content.startsWith(configs.command_prefix)) {
-        var commandText = message.content.substring(configs.command_prefix.length);
-        console.log("User: '" + message.author.username + "' Command: '" + message.content + "'");
-
-        var commandArgs = commandText.split(" ");
-
-        switch(commandArgs[0]) {
-            case 'raids':
-                if (commandArgs[1] === "hoods" && isAdminUser) {
-                    showAllRaidsByNeighborhood(message);
-                }
-
-                // First check if channel was specified. If not, assume current channel.
-                var channel = commandArgs[1];
-                if (typeof channel == undefined || channel == "") {
-                    channel = message.channel.name;
-                }
-
-                // With the channel, we then find a list of neighborhoods.
-                var neighborhoods = DictUtils.getNeighbourhoodsFromRaidChannel(channel);
-                neighborhoods.push(channel);
-                neighborhoods = [... new Set(neighborhoods)];
-
-                console.log("Neigborhoods:" + neighborhoods);
-                var foundRaids = [];
-                for (var i = 0; i < neighborhoods.length; i ++) {
-                    neighborhoods[i] = DictUtils.getNeighbourhoodSynonym(neighborhoods[i]);
-                    foundRaids = foundRaids.concat(await raidRepository.GetRaids(neighborhoods[i]));
-                }
-
-                var commandInitiator = message.author;
-                
-                // Build a list of available raids.
-                var raidText = "";
-                for (var i = 0; i < foundRaids.length; i ++) {
-                    raidText += raidReactions[i] + " " + foundRaids[i].GetDescription() + "\n";
-                }
-        
-                var raids = [];
-                var embed = {embed:{title:"Available raids in " + commandArgs[1] + ".",description:raidText}};
-                await message.channel.send(embed).then(async (message) => {
-                    // Add reactions so the user can select a raid to launch.
-                    for (var i = 0; i < foundRaids.length; i++) {
-                        await message.react(raidReactions[i]);
-                    }
-        
-                    // Keep a list of raids for the current message.
-                    // TODO: test concurent messages.
-                    raids[message.id] = foundRaids;
-                    message.awaitReactions(function(reaction) {
-                        // If a reaction reaches '2', that means the user has selected a raid.
-                        if (reaction.count >= 2 && reaction.users.find('username', commandInitiator.username)) {
-                            // Find the chosen raid.
-                            for (var i = 0; i < raidReactions.length; i ++) {
-                                if (raidReactions[i] == reaction.emoji.name) {
-                                    // Send Meowth's command.
-                                    message.channel.send(raids[message.id][i].GetMeowthCommand());
-                                }
-                            }
-                            // remove the message to clear cluster...
-                            message.delete();
-                        }
-                    });
-                });
-            break;
-        }
+    var command = CommandManager.GetCommand(message);
+    if (command !== null) {
+        command.Execute();
     }
 
     if (message.author.username == "Meowth 2.0") { 
