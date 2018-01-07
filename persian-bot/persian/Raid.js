@@ -57,7 +57,12 @@ class Raid {
     }
     GetMeowthCommand() {
         var minutesLeft = this.GetMinutesLeft();
-        var command = "!raid " + this.pokemon + " " + this.address + " " + minutesLeft;
+        var prefix = "!raid " + this.pokemon;
+        if (this.pokemon.toLowerCase() === "egg") {
+            prefix = "!raidegg " + this.level;
+        }
+
+        var command = prefix + " " + this.address + " " + minutesLeft;
         return command;
     }
 
