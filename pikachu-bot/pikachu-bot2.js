@@ -1,5 +1,5 @@
 /**---------------------------------------------------------------------------------------------
- * pikachu-bot.js 
+ * pikachu-bot.js
  *--------------------------------------------------------------------------------------------*/
 process.on('unhandledRejection', console.error); // Nodejs config to better trace unhandled promise rejections
 
@@ -12,17 +12,17 @@ const auth = require('./auth.json');
 
 // Import utility classes
 const MongoUtils = require('../assets/modules/MongoUtils');
-const mongoutils = new MongoUtils();
 const GeoUtils = require('../assets/modules/GeoUtils');
-const geoutils = new GeoUtils();
 const SpawnUtils = require('../assets/modules/SpawnUtils');
-const spawnutils = new SpawnUtils();
 const DiscordUtils = require('../assets/modules/DiscordUtils');
-const discordutils = new DiscordUtils();
 const DictUtils = require('../assets/modules/DictUtils');
-const dictutils = new DictUtils();
-
 const SpellChecker = require('../assets/modules/SpellChecker');
+
+const mongoutils = new MongoUtils();
+const geoutils = new GeoUtils();
+const spawnutils = new SpawnUtils();
+const discordutils = new DiscordUtils();
+const dictutils = new DictUtils();
 const speller = new SpellChecker({}, { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });
 
 // Import localization dictionary module json object
@@ -33,14 +33,14 @@ const dict = require('../assets/modules/dictionary').dict();
  *--------------------------------------------------------------------------------------------*/
 const neighbourhoodNames = dictutils.getNeighbourhoodNamesArray();
 
-const client = new Discord.Client({
-    fetchAllMembers: true // Required in order for bot to cache ALL members (otherwise only up to 250 members might be cached)
-}); // Create an instance of a Discord client
+// `fetchAllMembers` required in order for bot to cache ALL members (otherwise only
+// up to 250 members might be cached)
+const client = new Discord.Client({ fetchAllMembers: true });
 
 /**---------------------------------------------------------------------------------------------
  * EVENT: READY
  *--------------------------------------------------------------------------------------------*/
-client.on('ready', async() => {
+client.on('ready', async () => {
     console.log('-----------------------------------------------------------------');
     console.log('I am ready!');
     console.log('-----------------------------------------------------------------');
@@ -66,7 +66,7 @@ client.on('ready', async() => {
  * EVENT: MESSAGE
  *--------------------------------------------------------------------------------------------*/
 // Create an event listener for command messages
-client.on('message', async(message) => {
+client.on('message', async (message) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     try {
@@ -78,40 +78,40 @@ client.on('message', async(message) => {
             //     }
             // });
             // await message.channel.send(new Discord.Attachment('https://github.com/tatumalenko/discord-assets/raw/master/pikachu-bot/media/want-1.gif', 'want-1.gif'));
-        } else if (message.content.substring(0, 1) == '!') {
+        } else if (message.content.substring(0, 1) === '!') {
             let args = message.content.substring(1).split(' ');
-            let cmd = args[0];
+            const cmd = args[0];
             const memberId = message.author.id;
 
             args = args.splice(1).map(e => e.trim()).filter(e => e !== '');
 
             switch (cmd) {
-                case 'spell':                
-                    await message.channel.send(speller.correct(args.join('')) ? `Did you mean? ${speller.correct(args.join(''))}` : `No possible corrections found.`);
+                case 'spell':
+                    await message.channel.send(speller.correct(args.join('')) ? `Did you mean? ${speller.correct(args.join(''))}` : 'No possible corrections found.');
                     break;
                 case 'neighbourhoods':
                 case 'quartiers':
-                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm')
+                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm') {
                         return;
+                    }
 
-                    await message.channel.send('**Neighbourhoods/Quartiers: ** ' + dictutils.getNeighbourhoodNamesArray().sort().join(', '));
+                    await message.channel.send(`**Neighbourhoods/Quartiers: ** ${dictutils.getNeighbourhoodNamesArray().sort().join(', ')}`);
                     break;
                 case 'location':
                 case 'locations':
-                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm')
-                        return;
+                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm') { return; }
 
                     // e.g.: '!location' or '!locations'
                     if (!args.length) {
-                        await message.channel.send('**' + message.member.displayName + ' Location(s): ** ' + await mongoutils.getDefaultNeighbourhood(memberId));
+                        await message.channel.send(`**${message.member.displayName} Location(s): ** ${await mongoutils.getDefaultNeighbourhood(memberId)}`);
                         return;
                     }
 
                     // e.g.: '!location plateau, ville-marie'
                     try {
                         await mongoutils.setDefaultNeighbourhood({
-                            memberId: memberId,
-                            args: args.join(' ').toLowerCase()
+                            memberId,
+                            args: args.join(' ').toLowerCase(),
                         });
                         await message.react('✅');
                     } catch (e) {
@@ -122,31 +122,30 @@ client.on('message', async(message) => {
                 case 'checkwant':
                     if (!discordutils.hasRole(message.member, 'admin')) return;
 
-                    await message.channel.send('`' + await mongoutils.createFiltersString(message.guild.members.find('displayName', args[0])) + '`');
+                    await message.channel.send(`\`${await mongoutils.createFiltersString(message.guild.members.find('displayName', args[0]))}\``);
                     break;
                 case 'meowth':
-                    {
-                        if (!discordutils.hasRole(message.member, 'admin')) return;
+                {
+                    if (!discordutils.hasRole(message.member, 'admin')) return;
 
-                        const meowthChannelNames = ['raids-post'].concat(neighbourhoodNames).filter(e => e !== 'laval' && e !== 'wilds-post');
-                        await message.channel.send(meowthChannelNames.join(', '));
-                        await message.channel.send(meowthChannelNames.map(() => 'Montreal Canada').join(', '));
-                        break;
-                    }
+                    const meowthChannelNames = ['raids-post'].concat(neighbourhoodNames).filter(e => e !== 'laval' && e !== 'wilds-post');
+                    await message.channel.send(meowthChannelNames.join(', '));
+                    await message.channel.send(meowthChannelNames.map(() => 'Montreal Canada').join(', '));
+                    break;
+                }
                 case 'translate':
                 case 'traduit':
                     // await message.channel.send(dictutils.getTranslation(args.join(' ')));
                     break;
                 case 'want':
                 case 'veux':
-                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm')
-                        return;
+                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm') { return; }
 
                     // '!want' or '!veux'
                     if (!args.length) {
                         await message.channel.send(await mongoutils.createFiltersString({
                             id: memberId,
-                            displayName: client.guilds.find('id', '352462877845749762').members.find('id', memberId).displayName
+                            displayName: client.guilds.find('id', '352462877845749762').members.find('id', memberId).displayName,
                         }));
                         return;
                     }
@@ -155,8 +154,8 @@ client.on('message', async(message) => {
                     if (['on', 'off'].includes(args.join('').toLowerCase())) {
                         try {
                             await mongoutils.setStatus({
-                                memberId: memberId,
-                                arg: args.join('').toLowerCase()
+                                memberId,
+                                arg: args.join('').toLowerCase(),
                             });
                             await message.react('✅');
                         } catch (e) {
@@ -170,46 +169,45 @@ client.on('message', async(message) => {
                         case 'help':
                             await message.channel.send({
                                 embed: {
-                                    description: dict.WANT_HELP()
-                                }
+                                    description: dict.WANT_HELP(),
+                                },
                             });
                             break;
                         case 'aide':
                             await message.channel.send({
                                 embed: {
-                                    description: dict.VEUX_AIDE()
-                                }
+                                    description: dict.VEUX_AIDE(),
+                                },
                             });
                             break;
                         case 'help more':
                             await message.channel.send({
                                 embed: {
-                                    description: dict.WANT_HELP_MORE() +
-                                        '`' + neighbourhoodNames.join('\n') + '`'
-                                }
+                                    description: `${dict.WANT_HELP_MORE()}\`${neighbourhoodNames.join('\n')}\``,
+                                },
                             });
                             break;
                         case 'aide plus':
                             await message.channel.send({
                                 embed: {
-                                    description: dict.VEUX_AIDE_PLUS() +
-                                        '`' + neighbourhoodNames.join('\n') + '`'
-                                }
+                                    description: `${dict.VEUX_AIDE_PLUS()}\`${neighbourhoodNames.join('\n')}\``,
+                                },
                             });
                             break;
                         default:
                             try {
                                 const filters = await mongoutils.createQueryFilterArrayFromMessage({
-                                    memberId: memberId,
-                                    cmd: cmd,
-                                    args: args.join(' ').toLowerCase()
+                                    memberId,
+                                    cmd,
+                                    args: args.join(' ').toLowerCase(),
                                 });
 
-                                for (const filter of filters)
+                                for (const filter of filters) {
                                     await mongoutils.addFilter({
-                                        memberId: memberId,
-                                        filter: filter
+                                        memberId,
+                                        filter,
                                     });
+                                }
                                 await message.react('✅');
                             } catch (e) {
                                 await message.react('❌');
@@ -221,30 +219,32 @@ client.on('message', async(message) => {
 
                 case 'unwant':
                 case 'veuxpas':
-                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm')
-                        return;
+                    if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm') { return; }
 
                     try {
                         if (args.join(' ').toLowerCase() === 'everything') {
                             await mongoutils.clearFilters(message.member.id);
                         } else {
                             const filters = await mongoutils.createQueryFilterArrayFromMessage({
-                                memberId: memberId,
-                                cmd: cmd,
-                                args: args.join(' ').toLowerCase()
+                                memberId,
+                                cmd,
+                                args: args.join(' ').toLowerCase(),
                             });
 
-                            for (const filter of filters)
+                            for (const filter of filters) {
                                 await mongoutils.removeFilter({
-                                    memberId: memberId,
-                                    filter: filter
+                                    memberId,
+                                    filter,
                                 });
+                            }
                         }
                         await message.react('✅');
                     } catch (err) {
                         await message.react('❌');
                         await message.channel.send(err);
                     }
+                    break;
+                default:
                     break;
             }
         } else if (message.channel.name === 'wilds-income') {
