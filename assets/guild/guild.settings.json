@@ -1,0 +1,11 @@
+{
+  "id": "352462877845749762",
+  "channels": {
+    "alert": "wants-post",
+    "pokedex": "pokedex"
+  },
+  "bots": {
+    "alert": "360755167953682432",
+    "pokedex": "359610082457288706"
+  }
+}
