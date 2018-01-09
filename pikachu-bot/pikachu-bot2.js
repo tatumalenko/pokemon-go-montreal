@@ -22,6 +22,9 @@ const discordutils = new DiscU.DiscordUtils();
 const DictU = require('../assets/modules/dictutils');
 const dictutils = new DictU.DictUtils();
 
+const SpellChecker = require('../assets/modules/SpellChecker');
+const speller = new SpellChecker({}, { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });
+
 // Import localization dictionary module json object
 const dict = require('../assets/modules/dictionary').dict();
 
@@ -83,6 +86,9 @@ client.on('message', async(message) => {
             args = args.splice(1).map(e => e.trim()).filter(e => e !== '');
 
             switch (cmd) {
+                case 'spell':                
+                    await message.channel.send(speller.correct(args.join('')) ? `Did you mean? ${speller.correct(args.join(''))}` : `No possible corrections found.`);
+                    break;
                 case 'neighbourhoods':
                 case 'quartiers':
                     if (message.channel.name !== 'bot-testing' && message.channel.name !== 'test-zone' && message.channel.type !== 'dm')
