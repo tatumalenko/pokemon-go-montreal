@@ -266,8 +266,7 @@ class MongoUtils {
                         },
                     },
                 };
-            } else // Not really useful right now honestly
-            {
+            } else { // Not really useful right now honestly
                 query = {
                     status: 'on',
                     filters: {
@@ -320,7 +319,6 @@ class MongoUtils {
                 break;
             default:
                 throw 'Not a valid status option. Pas une option valide pour l\'état. \'on\' or/ou \'off\'';
-                break;
         }
 
         if (!status) return;
