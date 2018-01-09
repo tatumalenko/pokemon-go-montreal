@@ -11,16 +11,16 @@ const Discord = require('discord.js');
 const auth = require('./auth.json');
 
 // Import utility classes
-const MU = require('../assets/modules/mongoutils');
-const mongoutils = new MU.MongoUtils();
-const GU = require('../assets/modules/geoutils');
-const geoutils = new GU.GeoUtils();
-const SU = require('../assets/modules/spawnutils');
-const spawnutils = new SU.SpawnUtils();
-const DiscU = require('../assets/modules/discordutils');
-const discordutils = new DiscU.DiscordUtils();
-const DictU = require('../assets/modules/dictutils');
-const dictutils = new DictU.DictUtils();
+const MongoUtils = require('../assets/modules/MongoUtils');
+const mongoutils = new MongoUtils();
+const GeoUtils = require('../assets/modules/GeoUtils');
+const geoutils = new GeoUtils();
+const SpawnUtils = require('../assets/modules/SpawnUtils');
+const spawnutils = new SpawnUtils();
+const DiscordUtils = require('../assets/modules/DiscordUtils');
+const discordutils = new DiscordUtils();
+const DictUtils = require('../assets/modules/DictUtils');
+const dictutils = new DictUtils();
 
 const SpellChecker = require('../assets/modules/SpellChecker');
 const speller = new SpellChecker({}, { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });
@@ -103,7 +103,7 @@ client.on('message', async(message) => {
 
                     // e.g.: '!location' or '!locations'
                     if (!args.length) {
-                        await message.channel.send('**' + message.member.displayName + ' Location(s): ** ' + await mongoutils.getDefaultNeighbourhood(memberId).join(', '));
+                        await message.channel.send('**' + message.member.displayName + ' Location(s): ** ' + await mongoutils.getDefaultNeighbourhood(memberId));
                         return;
                     }
 

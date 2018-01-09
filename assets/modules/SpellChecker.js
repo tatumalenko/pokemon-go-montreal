@@ -1,9 +1,9 @@
 const didYouMean = require('didyoumean2');
 const _ = require('lodash');
 const neighbourhoods = require('../data/neighbourhood_synonyms').neighbourhood_dict;
-const DictU = require('./dictutils');
+const DictUtils = require('./DictUtils');
 
-const dictutils = new DictU.DictUtils();
+const dictutils = new DictUtils();
 
 const isEmpty = obj => Object.keys(obj).length === 0;
 const has = Object.prototype.hasOwnProperty; // Cache the lookup once, in module scope.

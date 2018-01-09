@@ -1,6 +1,6 @@
 const tj = require('togeojson');
 const fs = require('fs');
-const DOMParser = require('xmldom').DOMParser;
+const { DOMParser } = require('xmldom');
 const turf = require('turf');
 
 const KML_FILE_NAME = 'neighbourhoods2.kml';
@@ -12,31 +12,32 @@ class GeoUtils {
 
     createPoint({
         lat,
-        lon
+        lon,
     }) {
         return {
-            'type': 'Feature',
-            'properties': {
-                'marker-color': '#f00'
+            type: 'Feature',
+            properties: {
+                'marker-color': '#f00',
             },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [lat, lon]
-            }
+            geometry: {
+                type: 'Point',
+                coordinates: [lat, lon],
+            },
         };
     }
 
     /* USED IN pikachu-bot2.js */
     findPointInPolygon({
         lat,
-        lon
+        lon,
     }) {
         try {
-            let hasFoundPoint, spawnNeighbourhood;
+            let hasFoundPoint, 
+spawnNeighbourhood;
 
             const point = this.createPoint({
                 lat,
-                lon
+                lon,
             });
             const polygons = this.getNeighbourhoodPolygonCoordsArray();
 
@@ -52,10 +53,8 @@ class GeoUtils {
             }
 
             if (hasFoundPoint)
-                return spawnNeighbourhood;
-            else
-                return false;
-
+                {return spawnNeighbourhood;}
+            return false;
         } catch (err) {
             console.log(err.stack);
         }
@@ -69,21 +68,21 @@ class GeoUtils {
             kml = new DOMParser().parseFromString(fs.readFileSync(KML_FILE_NAME, 'utf8'));
         } catch (e) {
             try {
-                kml = new DOMParser().parseFromString(fs.readFileSync('../assets/data/' + KML_FILE_NAME, 'utf8'));
+                kml = new DOMParser().parseFromString(fs.readFileSync(`../assets/data/${KML_FILE_NAME}`, 'utf8'));
             } catch (err) {
-                kml = new DOMParser().parseFromString(fs.readFileSync('../data/' + KML_FILE_NAME, 'utf8'));
+                kml = new DOMParser().parseFromString(fs.readFileSync(`../data/${KML_FILE_NAME}`, 'utf8'));
             }
         }
 
-        let polygonCollection = tj.kml(kml);
-        let polygons = [];
+        const polygonCollection = tj.kml(kml);
+        const polygons = [];
 
         for (let i = 0; i < polygonCollection.features.length; i++) {
             polygons[i] = polygonCollection.features[i];
         }
 
-        for (var i = 0; i < polygons.length; i++) { // i: number of neighbourhood polygons
-            for (var j = 0; j < polygons[i].geometry.coordinates[0].length; j++) { // j: number of gps triples within polygon
+        for (let i = 0; i < polygons.length; i++) { // i: number of neighbourhood polygons
+            for (let j = 0; j < polygons[i].geometry.coordinates[0].length; j++) { // j: number of gps triples within polygon
                 polygons[i].geometry.coordinates[0][j].pop(); // Take out altitute coordinate {z: 0}
                 polygons[i].geometry.coordinates[0][j].reverse(); // Flip (lng,lat) into (lat,lng) pairs
             }
@@ -93,6 +92,4 @@ class GeoUtils {
     }
 }
 
-module.exports = {
-    GeoUtils
-};
+module.exports = GeoUtils;

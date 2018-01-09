@@ -1,13 +1,14 @@
-const MongoClient = require('mongodb').MongoClient;
-const DictU = require('./dictutils');
-const dictutils = new DictU.DictUtils();
-const dbsql = require('./sqlutils');
+const { MongoClient } = require('mongodb');
+const DictUtils = require('./DictUtils');
+const sqlutils = require('./sqlutils');
+
+const dictutils = new DictUtils();
 
 class MongoUtils {
     constructor(
         urlPath = 'mongodb://localhost:27017/pikachu',
         dbName = 'pikachu',
-        collectionName = 'members'
+        collectionName = 'members',
     ) {
         this.urlPath = urlPath; // Connection URL
         this.dbName = dbName; // Database Name
@@ -17,11 +18,11 @@ class MongoUtils {
 
     async convert() {
         try {
-            const sqldb = await dbsql.getTable();
-            let docArray = [];
+            const sqldb = await sqlutils.getTable();
+            const docArray = [];
 
             for (const member of sqldb) {
-                let filters = [];
+                const filters = [];
 
                 for (const filter of member.pokemon.split(',')) {
                     let tempFilter;
@@ -33,7 +34,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 90,
-                                level: 0
+                                level: 0,
                             };
                             break;
                         case 'iv95':
@@ -41,7 +42,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 95,
-                                level: 0
+                                level: 0,
                             };
                             break;
                         case 'iv97':
@@ -49,7 +50,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 97,
-                                level: 0
+                                level: 0,
                             };
                             break;
                         case 'iv100':
@@ -57,7 +58,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 100,
-                                level: 0
+                                level: 0,
                             };
                             break;
                         case 'iv90lv30':
@@ -65,7 +66,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 90,
-                                level: 30
+                                level: 30,
                             };
                             break;
                         case 'iv90lv25':
@@ -73,7 +74,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 90,
-                                level: 25
+                                level: 25,
                             };
                             break;
                         case 'iv95lv25':
@@ -81,7 +82,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 95,
-                                level: 25
+                                level: 25,
                             };
                             break;
                         case 'cp2500':
@@ -89,7 +90,7 @@ class MongoUtils {
                                 pokemon: 'all',
                                 neighbourhood: curNeigh,
                                 iv: 0,
-                                level: 30
+                                level: 30,
                             };
                             break;
                         case 'unown':
@@ -98,32 +99,32 @@ class MongoUtils {
                                 neighbourhood: ['everywhere'],
                                 iv: 0,
                                 level: 0,
-                                cp: 0
+                                cp: 0,
                             };
                             break;
                         default:
-                            if (filter)
+                            if (filter) {
                                 tempFilter = {
                                     pokemon: filter,
                                     neighbourhood: curNeigh,
                                     iv: 0,
                                     level: 0,
-                                    cp: 0
+                                    cp: 0,
                                 };
+                            }
 
                             break;
                     }
 
-                    if (tempFilter)
-                        filters.push(tempFilter);
+                    if (tempFilter) { filters.push(tempFilter); }
                 }
 
-                let doc = {
+                const doc = {
                     id: member.id,
                     username: member.nickname,
                     status: 'on',
                     defaultNeighbourhood: [],
-                    filters: filters
+                    filters,
                 };
 
                 docArray.push(doc);
@@ -146,18 +147,16 @@ class MongoUtils {
     }
 
     close() {
-        if (this.client)
-            this.client.close();
+        if (this.client) { this.client.close(); }
     }
 
     async getFilters(memberId) {
         try {
             const dbMember = await this.db.find({
-                'id': memberId
+                id: memberId,
             }).toArray(); // Array of member objects is returned
 
-            if (dbMember.length > 1)
-                console.log('\nCAREFUL: mongoutils.getFilters found two collection objects with same id field! Using first one found.\n');
+            if (dbMember.length > 1) { console.log('\nCAREFUL: mongoutils.getFilters found two collection objects with same id field! Using first one found.\n'); }
 
             return dbMember[0].filters; // Hopefully the first is the only one
         } catch (err) {
@@ -167,25 +166,24 @@ class MongoUtils {
 
     async addFilter({
         memberId, // String
-        filter // Object
+        filter, // Object
     }) {
         const hasFilter = await this.hasFilter({
             memberId,
-            filter
+            filter,
         });
 
         if (hasFilter) {
             throw ':flag_gb: You already have this filter or attempted to add two or more of the same. \n:flag_fr: Vous avez déjà ce filtre ou vous avez essayez d\'ajouter deux ou plus identiques.';
-            return;
         }
 
         try {
             await this.db.update({
-                id: memberId
+                id: memberId,
             }, {
                 $push: {
-                    filters: filter
-                }
+                    filters: filter,
+                },
             });
         } catch (err) {
             console.log(err);
@@ -194,13 +192,12 @@ class MongoUtils {
 
     async hasFilter({
         memberId, // String
-        filter // Object
+        filter, // Object
     }) {
         try {
             const memberFilters = await this.getFilters(memberId);
             for (const memberFilter of memberFilters) {
-                if (this.filterEquals(filter, memberFilter))
-                    return true;
+                if (this.filterEquals(filter, memberFilter)) { return true; }
             }
             // A less 'deep' copy equality check - only checks pokemon, iv, and level fields (omits neighbourhood equality checks)
             // for (const memberFilter of memberFilters) {
@@ -216,15 +213,15 @@ class MongoUtils {
 
     async removeFilter({
         memberId, // String
-        filter // Object
+        filter, // Object
     }) {
         try {
             await this.db.update({
-                id: memberId
+                id: memberId,
             }, {
                 $pull: {
-                    filters: filter
-                }
+                    filters: filter,
+                },
             });
         } catch (err) {
             console.log(err.stack);
@@ -234,11 +231,11 @@ class MongoUtils {
     async clearFilters(memberId) {
         try {
             await this.db.update({
-                id: memberId
+                id: memberId,
             }, {
                 $set: {
-                    filters: []
-                }
+                    filters: [],
+                },
             });
         } catch (err) {
             console.log(err.stack);
@@ -249,43 +246,45 @@ class MongoUtils {
         try {
             let query;
 
-            if (filter.neighbourhood)
+            if (filter.neighbourhood) {
                 query = {
-                    'status': 'on',
-                    'filters': {
+                    status: 'on',
+                    filters: {
                         $elemMatch: {
                             pokemon: {
-                                $in: [filter.name, 'all']
+                                $in: [filter.name, 'all'],
                             },
                             neighbourhood: {
-                                $in: [filter.neighbourhood, 'all']
+                                $in: [filter.neighbourhood, 'all'],
                             },
                             iv: {
-                                $lte: filter.iv ? filter.iv : 0
+                                $lte: filter.iv ? filter.iv : 0,
                             },
                             level: {
-                                $lte: filter.level ? filter.level : 0
-                            }
-                        }
-                    }
+                                $lte: filter.level ? filter.level : 0,
+                            },
+                        },
+                    },
                 };
-            else // Not really useful right now honestly
+            } else // Not really useful right now honestly
+            {
                 query = {
-                    'status': 'on',
-                    'filters': {
+                    status: 'on',
+                    filters: {
                         $elemMatch: {
                             pokemon: {
-                                $in: [filter.pokemon, 'all']
+                                $in: [filter.pokemon, 'all'],
                             },
                             iv: {
-                                $lte: filter.iv ? filter.iv : 0
+                                $lte: filter.iv ? filter.iv : 0,
                             },
                             level: {
-                                $lte: filter.level ? filter.level : 0
-                            }
-                        }
-                    }
+                                $lte: filter.level ? filter.level : 0,
+                            },
+                        },
+                    },
                 };
+            }
 
             const result = await this.db.find(query).toArray();
             return result.map(e => e.id);
@@ -298,7 +297,7 @@ class MongoUtils {
         if (!memberId) return;
 
         const members = await this.db.find({
-            id: memberId
+            id: memberId,
         }).toArray();
 
         return members[0].status;
@@ -306,7 +305,7 @@ class MongoUtils {
 
     async setStatus({
         memberId, // String
-        arg // String
+        arg, // String
     }) {
         if (!memberId) return;
 
@@ -327,11 +326,11 @@ class MongoUtils {
         if (!status) return;
 
         await this.db.update({
-            id: memberId
+            id: memberId,
         }, {
             $set: {
-                status: status
-            }
+                status,
+            },
         });
     }
 
@@ -341,7 +340,7 @@ class MongoUtils {
         if (!memberId) return;
 
         const members = await this.db.find({
-            id: memberId
+            id: memberId,
         }).toArray();
 
         return members[0].defaultNeighbourhood.sort();
@@ -349,15 +348,15 @@ class MongoUtils {
 
     async setDefaultNeighbourhood({
         memberId, // String
-        args // String (everything proceeding 'want'/'unwant' cmd)
+        args, // String (everything proceeding 'want'/'unwant' cmd)
     }) {
         if (!memberId) return;
 
-        // Use createQueryFilterArrayFromMessage method's validation logic and 
+        // Use createQueryFilterArrayFromMessage method's validation logic and
         // use it later to extract neighbourhoods user entered
         const queryFilter = await this.createQueryFilterArrayFromMessage({
             cmd: 'want',
-            args
+            args,
         });
 
         const defaultNeighbourhood = queryFilter[0].neighbourhood; // Only one should be returned since no pokemon where specified
@@ -365,11 +364,11 @@ class MongoUtils {
         if (!defaultNeighbourhood) return;
 
         await this.db.update({
-            id: memberId
+            id: memberId,
         }, {
             $set: {
-                defaultNeighbourhood: defaultNeighbourhood.sort()
-            }
+                defaultNeighbourhood: defaultNeighbourhood.sort(),
+            },
         });
     }
 
@@ -377,15 +376,11 @@ class MongoUtils {
         // Deep compare each object field using fields elements as keys to compare within
         if (!fields.every((e) => {
             if (Array.isArray(filter1[e]) && Array.isArray(filter2[e])) {
-
                 // If object field is array, sort and ensure all array elements equal
-                return filter1[e].sort().every((e2, i) => {
-                    return e2 === filter2[e].sort()[i];
-                });
+                return filter1[e].sort().every((e2, i) => e2 === filter2[e].sort()[i]);
             }
             return filter1[e] === filter2[e];
-        }))
-            return false;
+        })) { return false; }
         return true;
     }
 
@@ -396,7 +391,7 @@ class MongoUtils {
                 status: 'on',
                 defaultNeighbourhood: [],
                 username: member.nickname,
-                filters: []
+                filters: [],
             });
         } catch (err) {
             console.log(err.stack);
@@ -406,7 +401,7 @@ class MongoUtils {
     async removeMember(member) {
         try {
             await this.db.remove({
-                id: member.id
+                id: member.id,
             });
         } catch (err) {
             console.log(err.stack);
@@ -421,12 +416,10 @@ class MongoUtils {
             let defaultNeighbourhood = await this.getDefaultNeighbourhood(memberId);
             defaultNeighbourhood = defaultNeighbourhood ? defaultNeighbourhood.join(', ') : 'none/aucun';
 
-            const strArr = ['**User/Utilisateur:** ' + member.displayName + '\n**Status:** ' + await this.getStatus(memberId) + '\n**Default Locations Défaults:** ' + defaultNeighbourhood + '\n**POKEMON | NEIGHBOURHOOD | LV | IV**'];
+            const strArr = [`**User/Utilisateur:** ${member.displayName}\n**Status:** ${await this.getStatus(memberId)}\n**Default Locations Défaults:** ${defaultNeighbourhood}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`];
 
             for (const filter of filters) {
-                strArr.push(
-                    '`' + filter.pokemon + ' | ' + (typeof filter.neighbourhood === 'object' ? filter.neighbourhood.sort().join(', ') : filter.neighbourhood) + ' | ' + filter.level + ' | ' + filter.iv + '`'
-                );
+                strArr.push(`\`${filter.pokemon} | ${typeof filter.neighbourhood === 'object' ? filter.neighbourhood.sort().join(', ') : filter.neighbourhood} | ${filter.level} | ${filter.iv}\``);
             }
             return strArr.sort().join('\n');
         } catch (err) {
@@ -437,7 +430,7 @@ class MongoUtils {
     async createQueryFilterArrayFromMessage({
         memberId, // String
         cmd, // String
-        args // String
+        args, // String
     }) {
         const pokemonNames = []; // Can be length of 0+
         let neighbourhoodNames = []; // Can be length of 0+
@@ -447,7 +440,9 @@ class MongoUtils {
         // Clean args string (replace commas with space and replace multiple spaces with one space)
         const cleanArgs = args.replace(/,/g, ' ').replace(/\s+/g, ' ');
         // Extract words from string and convert to lowercase and take out iv/lv keywords out
-        const words = cleanArgs.replace(/\d+/g, '').replace(/\s+/g, ' ').trim().split(' ').map(w => w.toLowerCase()).filter(word => !['iv', 'niveau', 'lv', 'level', 'lvl'].includes(word.replace(/\d+/, '')));
+        const words = cleanArgs.replace(/\d+/g, '').replace(/\s+/g, ' ').trim().split(' ')
+            .map(w => w.toLowerCase())
+            .filter(word => !['iv', 'niveau', 'lv', 'level', 'lvl'].includes(word.replace(/\d+/, '')));
         // Extract numbers from string and reverse method ensures non-zero are placed into iv/level arrays first
         const numbers = cleanArgs.match(/\d+/g) ? cleanArgs.match(/\d+/g).reverse() : cleanArgs.match(/\d+/g);
 
@@ -456,92 +451,67 @@ class MongoUtils {
         // Loop through words and extract pokemonNames and neighbourhoodNames
         for (const word of words) {
             if (dictutils.isValidFilter(word)) {
-                if (dictutils.getFilterType(word) === 'pokemon')
-                    pokemonNames.push(dictutils.getEnglishName(word));
-                else if (dictutils.getFilterType(word) === 'neighbourhood')
-                    neighbourhoodNames.push(dictutils.getEnglishName(word).replace('partout', 'everywhere'));
-                else // Word is neither pokemonName or neighbourhoodName
-                    throw ':flag_gb: Invalid entry. Enter \'!neighbourhoods\' to see possible options.\n:flag_fr: Entré invalide. Entrez \'!quartiers\' pour voir options possibles.';
-            } else
-                throw ':flag_gb: Invalid entry. Enter \'!neighbourhoods\' to see possible options.\n:flag_fr: Entré invalide. Entrez \'!quartiers\' pour voir options possibles.';
+                if (dictutils.getFilterType(word) === 'pokemon') { pokemonNames.push(dictutils.getEnglishName(word)); } else if (dictutils.getFilterType(word) === 'neighbourhood') { neighbourhoodNames.push(dictutils.getEnglishName(word).replace('partout', 'everywhere')); } else // Word is neither pokemonName or neighbourhoodName
+                { throw ':flag_gb: Invalid entry. Enter \'!neighbourhoods\' to see possible options.\n:flag_fr: Entré invalide. Entrez \'!quartiers\' pour voir options possibles.'; }
+            } else { throw ':flag_gb: Invalid entry. Enter \'!neighbourhoods\' to see possible options.\n:flag_fr: Entré invalide. Entrez \'!quartiers\' pour voir options possibles.'; }
         }
 
         // Loop through numbers and extract levels and ivs based on magnitudes
-        if (numbers)
+        if (numbers) {
             for (const number of numbers) {
-                if (number >= 41 && number <= 100)
-                    ivs.push(number);
-                else if (number == 0 && levels.length > 0) // Ensures if two 0s are entered, the second goes into the ivs array
-                    ivs.push(number);
-                else if (number >= 0 && number <= 40)
-                    levels.push(number);
-                else
-                    throw 'Invalid number entered, must be between 0 and 100. Le nombre entré est invalide, doit être compris entre 0 et 100.';
+                if (number >= 41 && number <= 100) { ivs.push(number); } else if (number == 0 && levels.length > 0) // Ensures if two 0s are entered, the second goes into the ivs array
+                { ivs.push(number); } else if (number >= 0 && number <= 40) { levels.push(number); } else { throw 'Invalid number entered, must be between 0 and 100. Le nombre entré est invalide, doit être compris entre 0 et 100.'; }
             }
+        }
 
-        // Validate pokemonNames.length > 1 else assume 'all', 
-        // neighbourhoodNames.length > 1 else assume 'everywhere', 
+        // Validate pokemonNames.length > 1 else assume 'all',
+        // neighbourhoodNames.length > 1 else assume 'everywhere',
         // ivs.length = levels.length = 1
-        if (pokemonNames.length < 1 && (cmd === 'want' || cmd === 'veux'))
-            pokemonNames.push('all');
-        if (neighbourhoodNames.length < 1 && (cmd === 'want' || cmd === 'veux'))
-            if (defaultNeighbourhood && defaultNeighbourhood.length > 0)
-                neighbourhoodNames = defaultNeighbourhood;
-            else
-                neighbourhoodNames = ['everywhere'];
-        if (ivs.length > 1)
-            throw ':flag_gb: Invalid number entered, only enter 1 number between 41 and 100.\n:flag_fr: Nombre invalide entré, entrez seulement 1 nombre entre 41 et 100.';
-        if (levels.length > 1)
-            throw ':flag_gb: Invalid number entered, only enter 1 number between 0 and 40.\n:flag_fr: Nombre invalide entré, entrez seulement 1 nombre compris entre 0 et 40.';
+        if (pokemonNames.length < 1 && (cmd === 'want' || cmd === 'veux')) { pokemonNames.push('all'); }
+        if (neighbourhoodNames.length < 1 && (cmd === 'want' || cmd === 'veux')) {
+            if (defaultNeighbourhood && defaultNeighbourhood.length > 0) { neighbourhoodNames = defaultNeighbourhood; } else { neighbourhoodNames = ['everywhere']; }
+        }
+        if (ivs.length > 1) { throw ':flag_gb: Invalid number entered, only enter 1 number between 41 and 100.\n:flag_fr: Nombre invalide entré, entrez seulement 1 nombre entre 41 et 100.'; }
+        if (levels.length > 1) { throw ':flag_gb: Invalid number entered, only enter 1 number between 0 and 40.\n:flag_fr: Nombre invalide entré, entrez seulement 1 nombre compris entre 0 et 40.'; }
 
         const filters = [];
 
-        if (cmd === 'want' || cmd === 'veux')
+        if (cmd === 'want' || cmd === 'veux') {
             for (const pokemonName of pokemonNames) {
                 filters.push({
                     pokemon: pokemonName,
                     neighbourhood: neighbourhoodNames.sort(),
                     iv: ivs[0] ? parseInt(ivs[0]) : 0,
-                    level: levels[0] ? parseInt(levels[0]) : 0
+                    level: levels[0] ? parseInt(levels[0]) : 0,
                 });
             }
-        else if (cmd === 'unwant' || cmd === 'veuxpas') {
-            if (pokemonNames.length > 0)
+        } else if (cmd === 'unwant' || cmd === 'veuxpas') {
+            if (pokemonNames.length > 0) {
                 for (const pokemonName of pokemonNames) {
                     const tempFilter = {};
                     tempFilter.pokemon = pokemonName;
                     if (neighbourhoodNames.length > 0) {
-                        // Use defaultNeighbourhood if location/locations is used to unwant
-                        if (neighbourhoodNames.includes('location') || neighbourhoodNames.includes('locations'))
-                            tempFilter.neighbourhood = await this.getDefaultNeighbourhood(memberId);
-                        else
-                            tempFilter.neighbourhood = neighbourhoodNames.sort();
+                    // Use defaultNeighbourhood if location/locations is used to unwant
+                        if (neighbourhoodNames.includes('location') || neighbourhoodNames.includes('locations')) { tempFilter.neighbourhood = await this.getDefaultNeighbourhood(memberId); } else { tempFilter.neighbourhood = neighbourhoodNames.sort(); }
                     }
 
-                    if (ivs.length > 0)
-                        tempFilter.iv = parseInt(ivs[0]);
+                    if (ivs.length > 0) { tempFilter.iv = parseInt(ivs[0]); }
 
-                    if (levels.length > 0)
-                        tempFilter.level = parseInt(levels[0]);
+                    if (levels.length > 0) { tempFilter.level = parseInt(levels[0]); }
 
                     filters.push(tempFilter);
                 }
-            else { // pokemonNames.length === 0
+            } else { // pokemonNames.length === 0
                 const tempFilter = {};
 
                 if (neighbourhoodNames.length > 0) {
                     // Use defaultNeighbourhood if location/locations is used to unwant
-                    if (neighbourhoodNames.includes('location') || neighbourhoodNames.includes('locations'))
-                        tempFilter.neighbourhood = await this.getDefaultNeighbourhood(memberId);
-                    else
-                        tempFilter.neighbourhood = neighbourhoodNames.sort();
+                    if (neighbourhoodNames.includes('location') || neighbourhoodNames.includes('locations')) { tempFilter.neighbourhood = await this.getDefaultNeighbourhood(memberId); } else { tempFilter.neighbourhood = neighbourhoodNames.sort(); }
                 }
 
-                if (ivs.length > 0)
-                    tempFilter.iv = parseInt(ivs[0]);
+                if (ivs.length > 0) { tempFilter.iv = parseInt(ivs[0]); }
 
-                if (levels.length > 0)
-                    tempFilter.level = parseInt(levels[0]);
+                if (levels.length > 0) { tempFilter.level = parseInt(levels[0]); }
 
                 filters.push(tempFilter);
             }
@@ -551,9 +521,7 @@ class MongoUtils {
     }
 }
 
-module.exports = {
-    MongoUtils
-};
+module.exports = MongoUtils;
 
 // Some test code, ignore...
 // (async function () {
