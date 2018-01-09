@@ -4,9 +4,9 @@ const auth = require('./auth.json');
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
-const DiscU = require('../assets/modules/discordutils');
+const DiscordUtils = require('../assets/modules/DiscordUtils');
 
-const discordutils = new DiscU.DiscordUtils();
+const discordutils = new DiscordUtils();
 
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
