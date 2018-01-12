@@ -35,9 +35,9 @@ client.on('guildMemberRemove', (member) => {
     channel.send(`Gee-Golly. ${member.displayName} has left us.  😢`);
 });
 
-client.on('channelCreate', (channel) => {
-    // console.log(channel);
-});
+// client.on('channelCreate', (channel) => {
+//     // console.log(channel);
+// });
 
 // Create an event listener for command messages
 client.on('message', async (message) => {
@@ -135,7 +135,7 @@ client.on('message', async (message) => {
                         if (args[0] === undefined) {
                             message.channel.send(`There are **${message.guild.memberCount}** members currently onboard!`);
                         } else if (args[0] === 'days' && args[1] !== undefined) {
-                            const guild = message.guild;
+                            const { guild } = message;
                             let newMembers = 0;
                             const days = args[1];
                             const daysMs = days * 24 * 60 * 60 * 1000;
@@ -146,7 +146,7 @@ client.on('message', async (message) => {
 
                             const compareDateMs = curDateMs - daysMs;
 
-                            guild.members.forEach((guildMember, guildMemberId) => {
+                            guild.members.forEach((guildMember) => {
                                 const joinedDateMs = guildMember.joinedTimestamp;
 
                                 if (joinedDateMs > compareDateMs) {
@@ -178,7 +178,7 @@ client.on('message', async (message) => {
                         message.channel.fetchMessages()
                             .then((messages) => {
                                 if (args[0] !== undefined) {
-                                    message.channel.bulkDelete(parseInt(args[0]) + 1);
+                                    message.channel.bulkDelete(parseInt(args[0], 10) + 1);
                                 } else {
                                     message.channel.send('You need to enter a number following the `!clear` command to indicate how many messages to delete!\n' +
                                         'Example: `!clear 2`');
