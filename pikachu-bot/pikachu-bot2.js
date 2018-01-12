@@ -69,6 +69,8 @@ client.on('ready', async () => {
 client.on('message', async (message) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
+    const prefix = message.content.charAt(0);
+
     try {
         if (message.content === '<@360755167953682432>') {
             // await message.channel.send({
@@ -78,10 +80,15 @@ client.on('message', async (message) => {
             //     }
             // });
             // await message.channel.send(new Discord.Attachment('https://github.com/tatumalenko/discord-assets/raw/master/pikachu-bot/media/want-1.gif', 'want-1.gif'));
+        } else if (prefix === '?') {
+            const arg = message.content.slice(1);
+            await message.channel.send(speller.correct(arg) ? `Did you mean? ${speller.correct(arg)}` : 'No possible corrections found.');
+            return;
         } else if (message.content.substring(0, 1) === '!') {
             let args = message.content.substring(1).split(' ');
             const cmd = args[0];
-            const memberId = message.author.id;
+            // const memberId = message.author.id;
+            const { username: memberUsername, id: memberId } = message.author;
 
             args = args.splice(1).map(e => e.trim()).filter(e => e !== '');
 
@@ -103,7 +110,7 @@ client.on('message', async (message) => {
 
                     // e.g.: '!location' or '!locations'
                     if (!args.length) {
-                        await message.channel.send(`**${message.member.displayName} Location(s): ** ${await mongoutils.getDefaultNeighbourhood(memberId)}`);
+                        await message.channel.send(`**${memberUsername} Location(s): ** ${await mongoutils.getDefaultNeighbourhood(memberId)}`);
                         return;
                     }
 
@@ -145,7 +152,7 @@ client.on('message', async (message) => {
                     if (!args.length) {
                         await message.channel.send(await mongoutils.createFiltersString({
                             id: memberId,
-                            displayName: client.guilds.find('id', '352462877845749762').members.find('id', memberId).displayName,
+                            displayName: memberUsername,
                         }));
                         return;
                     }
