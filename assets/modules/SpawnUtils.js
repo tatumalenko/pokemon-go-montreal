@@ -151,7 +151,7 @@ class SpawnUtils {
                     pokemon: spawn.name.toLowerCase(),
                     neighbourhood: spawn.neighbourhood,
                     level: parseInt(spawn.level),
-                    iv: parseInt(spawn.iv),
+                    iv: parseInt(spawn.iv, 10),
                 };
 
                 const filteredMemberIds = await mongoutils.getFilteredMemberIds(filter);
