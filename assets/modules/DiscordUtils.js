@@ -6,7 +6,7 @@ class DiscordUtils {
     }
 
     hasRole(member, roleName) {
-        return member.roles.some((role) => roleName.toLowerCase() === role.name);
+        return member.roles.some(role => roleName.toLowerCase() === role.name);
     }
 
     async sendEmbedToRepicients(recipients, {
@@ -23,13 +23,12 @@ class DiscordUtils {
                 totalAlertsSent++;
                 successAlertRecipients.push(recipient.displayName !== undefined ? recipient.displayName : recipient.name);
             } catch (err) {
-                if (!failedAlertRecipients.length)
-                    {failedAlertRecipients.push('\nERROR: \n');}
-                failedAlertRecipients.push(`(CODE ${  err.code  }) ${  recipient instanceof Discord.GuildMember ? recipient.displayName : recipient.name  }\n`);
+                if (!failedAlertRecipients.length) { failedAlertRecipients.push('\nERROR: \n'); }
+                failedAlertRecipients.push(`(CODE ${err.code}) ${recipient instanceof Discord.GuildMember ? recipient.displayName : recipient.name}\n`);
                 console.log(err.stack);
             }
         }
-        console.log(`${content  }\nAlerts sent: ${  totalAlertsSent  } (${  successAlertRecipients.join(', ')  })`);
+        console.log(`${content}\nAlerts sent: ${totalAlertsSent} (${successAlertRecipients.join(', ')})`);
         console.log('-----------------------------------------------------------------');
     }
 }
