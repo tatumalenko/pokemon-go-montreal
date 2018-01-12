@@ -32,8 +32,8 @@ class GeoUtils {
         lon,
     }) {
         try {
-            let hasFoundPoint, 
-spawnNeighbourhood;
+            let hasFoundPoint;
+            let spawnNeighbourhood;
 
             const point = this.createPoint({
                 lat,
@@ -53,11 +53,12 @@ spawnNeighbourhood;
             }
 
             if (hasFoundPoint)
-                {return spawnNeighbourhood;}
+                { return spawnNeighbourhood; }
             return false;
         } catch (err) {
             console.log(err.stack);
         }
+        
     }
 
     getNeighbourhoodPolygonCoordsArray() {
