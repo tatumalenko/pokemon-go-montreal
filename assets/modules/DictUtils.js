@@ -54,7 +54,7 @@ class DictUtils {
             return raid_channels[raidChannel];
         }
 
-        return [raidChannel];
+        return [];
     }
 
     getNeighbourhoodSynonym(filter) {

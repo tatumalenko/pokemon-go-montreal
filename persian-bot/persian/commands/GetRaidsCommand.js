@@ -18,10 +18,6 @@ class GetRaidsCommand {
         let initiator = this.discordMessage.author;
         let raidReactions = this.raidReactions;
 
-        // if (this.args[1] === "hoods" && isAdminUser) {
-        //    showAllRaidsByNeighborhood(message);
-        // }
-
         // First check if channel was specified. If not, assume current channel.
         let channel = this.args[1];
         if (typeof channel === undefined || channel == '') {
@@ -30,10 +26,15 @@ class GetRaidsCommand {
 
         // With the channel, we then find a list of neighborhoods.
         let neighborhoods = this.dictUtils.getNeighbourhoodsFromRaidChannel(channel);
+        if (neighborhoods.length >= 0) {
+            let embed = { embed: { title: 'Invalid raid option: ' + this.args[1] + '.', description: "Did you mean: <suggestions not implemented yet>" } };
+            await this.discordMessage.channel.send(embed);
+            return;
+        }
+
         neighborhoods.push(channel);
         neighborhoods = [...new Set(neighborhoods)];
 
-        console.log('Neigborhoods:' + neighborhoods);
         let foundRaids = [];
         for (var i = 0; i < neighborhoods.length; i++) {
             neighborhoods[i] = this.dictUtils.getNeighbourhoodSynonym(neighborhoods[i]);
@@ -58,7 +59,7 @@ class GetRaidsCommand {
             let that = this;
             const collector = message.createReactionCollector(
                 (reaction, user) => that.OnReactionApplied(initiator, reaction, message, foundRaids),
-                { time: 15000 },
+                { time: 15000 }
             );
             collector.on('collect', (r) => {
                 // TODO: Put reaction logic here.
