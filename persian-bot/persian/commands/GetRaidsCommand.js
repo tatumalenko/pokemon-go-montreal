@@ -43,7 +43,7 @@ class GetRaidsCommand {
         }
 
         // Build a list of available raids.
-        let raidText = '';
+        let raidText = 'No raid found.';
         for (var i = 0; i < foundRaids.length; i++) {
             raidText += `${raidReactions[i]  } ${  foundRaids[i].GetDescription()  }\n`;
         }
