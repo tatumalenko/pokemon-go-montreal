@@ -16,7 +16,7 @@ class CommandManager {
         
         switch(commandArgs[0]) {
             case 'raids':
-                console.log("User: '" + discordMessage.author.username + "' Command: '" + message.content + "'");
+                console.log("User: '" + discordMessage.author.username + "' Command: '" + discordMessage.content + "'");
                 if (commandArgs[1] === "all") {
                     return new GetAllRaidsCommand(discordMessage, commandArgs);
                 }

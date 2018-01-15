@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 const DictUtils = require('../../../assets/modules/DictUtils');
 const RaidsRepository = require('../../persian/RaidsRepository.js');
 const ConfigManager = require('../../persian/ConfigManager.js');

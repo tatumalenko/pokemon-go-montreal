@@ -52,8 +52,11 @@ class Raid {
     }
     GetDescription() {
         var name = this.pokemon.toLowerCase() === "egg" ? this.pokemon + " level " + this.level : this.pokemon;
+
+        let location = "[" + this.address + " (" + this.neighborhood + ")](" + this.googleMapUrl + ")";
+
         return "**" + name + "** ending in **" + this.GetMinutesLeft() + " minutes**" + 
-               " at __**" + this.address + " (" + this.neighborhood + ")**__";
+               " at __**" + location + "**__";
     }
     GetMeowthCommand() {
         var minutesLeft = this.GetMinutesLeft();
