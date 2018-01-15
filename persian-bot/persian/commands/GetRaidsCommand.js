@@ -26,7 +26,7 @@ class GetRaidsCommand {
 
         // With the channel, we then find a list of neighborhoods.
         let neighborhoods = this.dictUtils.getNeighbourhoodsFromRaidChannel(channel);
-        if (neighborhoods.length >= 0) {
+        if (neighborhoods.length <= 0) {
             let embed = { embed: { title: 'Invalid raid option: ' + this.args[1] + '.', description: "Did you mean: <suggestions not implemented yet>" } };
             await this.discordMessage.channel.send(embed);
             return;
@@ -63,11 +63,11 @@ class GetRaidsCommand {
             );
             collector.on('collect', (r) => {
                 // TODO: Put reaction logic here.
-                console.log(`Collected ${r.emoji.name}`);
+                //console.log(`Collected ${r.emoji.name}`);
             });
             collector.on('end', (collected) => {
                 // TODO: Put reaction cleanup here.
-                console.log(`Collected ${collected} items`);
+                //console.log(`Collected ${collected} items`);
             });
 
         });
