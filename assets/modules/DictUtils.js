@@ -54,6 +54,10 @@ class DictUtils {
             return raid_channels[raidChannel];
         }
 
+        if (this.getFilterType(raidChannel) == 'neighbourhood') {
+            return [raidChannel]
+        }
+
         return [];
     }
 

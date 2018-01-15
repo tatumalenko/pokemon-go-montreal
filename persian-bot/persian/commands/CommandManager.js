@@ -1,4 +1,5 @@
 const GetRaidsCommand = require("./GetRaidsCommand.js");
+const GetAllRaidsCommand = require("./GetAllRaidsCommand.js");
 
 class CommandManager {
     constructor(commandPrefix) {
@@ -15,11 +16,15 @@ class CommandManager {
         
         switch(commandArgs[0]) {
             case 'raids':
+                console.log("User: '" + discordMessage.author.username + "' Command: '" + message.content + "'");
+                if (commandArgs[1] === "all") {
+                    return new GetAllRaidsCommand(discordMessage, commandArgs);
+                }
                 return new GetRaidsCommand(discordMessage, commandArgs);
             default:
                 return null;
         }
-        console.log("User: '" + discordMessage.author.username + "' Command: '" + message.content + "'");
+        
     }
 }
 
