@@ -48,46 +48,35 @@ class GetRaidsCommand {
             raidText += `${raidReactions[i]  } ${  foundRaids[i].GetDescription()  }\n`;
         }
 
-        let raids = [];
         let embed = { embed: { title: 'Available raids in ' + this.args[1] + '.', description: raidText } };
         await this.discordMessage.channel.send(embed).then(async (message) => {
+            let messageReactions = [];
             // Add reactions so the user can select a raid to launch.
             for (let i = 0; i < foundRaids.length; i++) {
+                messageReactions.push(raidReactions[i]);
                 await message.react(raidReactions[i]);
             }
 
             // Create a reaction collector
             let that = this;
             const collector = message.createReactionCollector(
-                (reaction, user) => that.OnReactionApplied(initiator, reaction, message, foundRaids),
+                (reaction, user) => reaction.users.find('username', initiator.username) && messageReactions.includes(reaction.emoji.name),
+                { max: 1 },
                 { time: 15000 }
             );
-            collector.on('collect', (r) => {
-                // TODO: Put reaction logic here.
-                //console.log(`Collected ${r.emoji.name}`);
+            collector.on('collect', (reaction) => {
+                // Find the chosen raid.
+                for (let i = 0; i < this.raidReactions.length; i++) {
+                    if (this.raidReactions[i] == reaction.emoji.name) {
+                        message.channel.send(foundRaids[i].GetMeowthCommand());
+                    }
+                }
             });
             collector.on('end', (collected) => {
-                // TODO: Put reaction cleanup here.
-                //console.log(`Collected ${collected} items`);
+                message.clearReactions();
             });
 
         });
-    }
-
-    OnReactionApplied(initiator, reaction, message, raids) {
-        // If a reaction reaches '2', that means the user has selected a raid.
-        if (reaction.count >= 2 && reaction.users.find('username', initiator.username)) {
-            // Find the chosen raid.
-            for (let i = 0; i < this.raidReactions.length; i++) {
-                if (this.raidReactions[i] == reaction.emoji.name) {
-                    // Send Meowth's command.
-                    message.channel.send(raids[i].GetMeowthCommand());
-                    message.clearReactions(); // TODO: Should not clear reactions here?
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 
