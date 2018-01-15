@@ -28,7 +28,11 @@ class GetRaidsCommand {
         // With the channel, we then find a list of neighborhoods.
         let neighborhoods = this.dictUtils.getNeighbourhoodsFromRaidChannel(channel);
         if (neighborhoods.length <= 0) {
-            let embed = { embed: { title: 'Invalid raid option: ' + this.args[1] + '.', description: "Did you mean: <suggestions not implemented yet>" } };
+            let embed = { embed: { 
+                title: 'Invalid raid option: ' + this.args[1] + '.', 
+                description: "Did you mean: <suggestions not implemented yet>" ,
+                color: 0x6D0000
+            } };
             await this.discordMessage.channel.send(embed);
             return;
         }
@@ -44,11 +48,13 @@ class GetRaidsCommand {
 
         // Build a list of available raids.
         let raidText = 'No raid found.';
+        let color = 0xC2DC01;
         for (var i = 0; i < foundRaids.length; i++) {
             raidText += `${raidReactions[i]  } ${  foundRaids[i].GetDescription()  }\n`;
+            color = 0x1B9600;
         }
 
-        let embed = { embed: { title: 'Available raids in ' + this.args[1] + '.', description: raidText } };
+        let embed = { embed: { title: 'Available raids in ' + this.args[1] + '.', description: raidText, color: color } };
         await this.discordMessage.channel.send(embed).then(async (message) => {
             let messageReactions = [];
             // Add reactions so the user can select a raid to launch.
