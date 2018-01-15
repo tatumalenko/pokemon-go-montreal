@@ -46,12 +46,17 @@ class GetRaidsCommand {
             foundRaids = foundRaids.concat(await this.raidRepository.GetRaids(neighborhoods[i]));
         }
 
-        // Build a list of available raids.
-        let raidText = 'No raid found.';
-        let color = 0xC2DC01;
-        for (var i = 0; i < foundRaids.length; i++) {
-            raidText += `${raidReactions[i]  } ${  foundRaids[i].GetDescription()  }\n`;
+        let raidText = '';
+        let color = 0x0;
+        if (foundRaids.length <= 0) {
+            raidText = 'No raid found.';
+            color = 0xC2DC01;
+        }else {
             color = 0x1B9600;
+            // Build a list of available raids.
+            for (var i = 0; i < foundRaids.length; i++) {
+                raidText += `${raidReactions[i]  } ${  foundRaids[i].GetDescription()  }\n`;
+            }
         }
 
         let embed = { embed: { title: 'Available raids in ' + this.args[1] + '.', description: raidText, color: color } };
