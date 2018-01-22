@@ -4,7 +4,7 @@
         "es6": true,
         "node": true
     },
-    "extends": "airbnb-base", 
+    "extends": "airbnb", 
     "parserOptions": {
         "ecmaVersion": 8,
         "sourceType": "module",
@@ -13,6 +13,10 @@
         }
     },
     "rules": {
+        "import/no-dynamic-require": "off",
+        "max-len": "off",
+        "no-use-before-define": "off",
+        "consistent-return": "off",
         "no-console": "off",
         "indent": [
             "error",
