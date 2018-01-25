@@ -151,7 +151,7 @@ class Utils {
             .map(w => w.toLowerCase())
             .filter(word => !['iv', 'niveau', 'lv', 'level', 'lvl'].includes(word.replace(/\d+/, '')));
 
-        console.log(cleanArgs);
+        // console.log(cleanArgs);
         // Extract numbers from string and reverse method ensures non-zero are placed into iv/level arrays first
         const numbers = cleanArgs.match(/\d+/g)
             ? cleanArgs.match(/\d+/g).map(e => parseInt(e, 10)).reverse()
@@ -220,7 +220,7 @@ class Utils {
         }
 
         return {
-            pokemonNames, neighbourhoodNames, ivs, levels,
+            pokemonNames, neighbourhoodNames: neighbourhoodNames.sort(), ivs, levels,
         };
     }
 }
