@@ -11,7 +11,7 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            const user = await this.client.userRepo.fetchUser(msg.author);
+            const user = await this.client.userRepository.fetchUser(msg.author);
 
             // e.g.: '!location' or '!locations'
             if (args.length === 0) {
