@@ -1,10 +1,10 @@
 module.exports = class {
     constructor(...params) {
         Object.assign(this, {
-            name: 'location',
+            name: 'locations',
             enabled: true,
             runIn: [], // [] = uses app.js runIn property values
-            aliases: ['locations', 'mylocations', 'home', 'default', 'favorites'],
+            aliases: ['location', 'mylocations', 'home', 'default', 'favorites'],
             description: '',
         });
     }
