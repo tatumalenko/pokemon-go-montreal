@@ -35,4 +35,8 @@ module.exports = {
         clientId: '',
         botToken: '',
     },
+    meowth: {
+        clientId: '406662051948265474',
+        botToken: 'NDA2NjYyMDUxOTQ4MjY1NDc0.DU2Nkg.MAyjWS6TDNXzKGqmE-gB1m_ddMA',
+    },
 };
