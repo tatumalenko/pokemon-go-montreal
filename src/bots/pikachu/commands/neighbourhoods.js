@@ -4,7 +4,7 @@ module.exports = class {
             name: 'neighbourhoods',
             enabled: true,
             runIn: [], // [] = uses app.js runIn property values
-            aliases: ['quartiers', 'districts', 'areas', 'sectors', 'arrondissements'],
+            aliases: ['quartiers', 'neighbourhood', 'quartier', 'districts', 'areas', 'sectors', 'arrondissements'],
             description: '',
         });
     }
