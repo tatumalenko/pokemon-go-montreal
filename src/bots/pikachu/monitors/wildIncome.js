@@ -17,7 +17,13 @@ module.exports = class {
 
             const spawnEmbed = this.createWildSpawnEmbed(spawn); // embed = {content, embed}, it's weird, I know..
 
+            // if (spawn.iv === 'NA') { spawn.iv = 0; }
+
+            // if (spawn.level === 'NA') { spawn.level = 0; }
+
             const recipients = await this.findDiscordRecipients(spawn);
+
+            // console.log(recipients.map(r => r.displayName));
 
             await sendEmbedToRepicients([this.client.guilds.get(this.client.configs.guildId).members.find('displayName', 'uphillsimplex')], spawnEmbed);
             // await sendEmbedToRepicients(recipients, spawnEmbed); // Post in DM channel to members
