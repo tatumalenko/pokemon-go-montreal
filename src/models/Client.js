@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const Utils = require('../utils/Utils');
+const SpellChecker = require('../utils/SpellChecker');
 const UserRepository = require('../repositories/UserRepository');
 const NeighbourhoodRepository = require('../repositories/NeighbourhoodRepository');
 
@@ -19,6 +20,7 @@ class Client extends Discord.Client {
         this.userRepository = new UserRepository(this.configs.dbMongo);
         this.neighbourhoodRepository = new NeighbourhoodRepository(this.configs.polygonMapPath);
         this.utils = Utils;
+        this.spellchecker = new SpellChecker([...Utils.getPokemonNames(), ...Utils.getPokemonNames('french'), Utils.getNeighbourhoodNames()], { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });
 
         this.on('ready', this.ready); // Runs dynamic import of module files inside folders in `rootDirName`
         this.on('message', this.message); // Runs the on message event listener
