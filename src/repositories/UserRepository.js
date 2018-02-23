@@ -91,21 +91,21 @@ class UserRepository {
                 queryUser = {
                     'preferences.wild.pokemons': {
                         $elemMatch: {
-                            status: 'on',
                             name: {
-                                $in: [spawn.name, 'all'],
+                                $in: [spawn.name.toLowerCase(), 'all'],
                             },
                             iv: {
-                                $lte: spawn.iv ? spawn.iv : 0,
+                                $lte: spawn.iv && spawn.iv !== 'NA' ? spawn.iv : 0,
                             },
                             level: {
-                                $lte: spawn.level ? spawn.level : 0,
+                                $lte: spawn.level && spawn.iv !== 'NA' ? spawn.level : 0,
                             },
                             neighbourhoods: {
-                                $in: [spawn.location.neighbourhood, 'all'],
+                                $in: [spawn.location.neighbourhood.toLowerCase(), 'everywhere'],
                             },
                         },
                     },
+                    'preferences.wild.status': 'on',
                 };
             } else if (spawn instanceof RaidSpawn) {
                 queryUser = {
@@ -125,6 +125,10 @@ class UserRepository {
                     },
                 };
             }
+            // console.log(queryUser['preferences.wild.pokemons'].$elemMatch.name);
+            // console.log(queryUser['preferences.wild.pokemons'].$elemMatch.iv);
+            // console.log(queryUser['preferences.wild.pokemons'].$elemMatch.level);
+            // console.log(queryUser['preferences.wild.pokemons'].$elemMatch.neighbourhoods);
             matchedUsers = await User.find(queryUser);
         } catch (err) {
             console.log(err);
