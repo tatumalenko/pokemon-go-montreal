@@ -8,7 +8,7 @@ module.exports = class {
             description: '',
         });
     }
-    // eslint-disable-next-line class-methods-use-this
+
     async run(msg, { prefix, cmd, args }) {
         try {
             const word = args.join(' ');

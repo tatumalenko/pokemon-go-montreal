@@ -3,8 +3,8 @@ const _ = require('lodash');
 const Utils = require('../utils/Utils');
 
 const { Schema } = mongoose;
-const { pokemonListEnglish } = require('../../data/pokemonListEnglish.json');
-const { neighbourhoodList } = require('../../data/neighbourhoodList.json');
+// const { pokemonListEnglish } = require('../../data/pokemonListEnglish.json');
+// const { neighbourhoodList } = require('../../data/neighbourhoodList.json');
 
 const UserSchema = Schema({
     id: { type: String, required: true },

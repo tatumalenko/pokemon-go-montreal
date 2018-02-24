@@ -1,5 +1,3 @@
-// const Utils = require('../../../utils/Utils');
-
 module.exports = class {
     constructor(...params) {
         Object.assign(this, {
@@ -10,7 +8,6 @@ module.exports = class {
         });
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async run(member, ...params) {
         try {
             await this.client.userRepository.addUser(member);

@@ -13,6 +13,11 @@
         }
     },
     "rules": {
+        "no-unused-vars": "off",
+        "class-methods-use-this": "off",
+        "no-useless-escape": "off",
+        "no-param-reassign": "off",
+        "global-require": "off",
         "import/no-dynamic-require": "off",
         "max-len": "off",
         "no-use-before-define": "off",

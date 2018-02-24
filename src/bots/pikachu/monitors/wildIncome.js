@@ -10,7 +10,6 @@ module.exports = class {
         });
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async run(msg, ...params) {
         try {
             const spawn = new WildSpawn(createWildSpawnParams(msg));

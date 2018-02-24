@@ -9,7 +9,6 @@ module.exports = class {
         });
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async run(msg, { prefix, cmd, args }) {
         try {
             await msg.channel.send('Some help will arrive shortly! *I hope*');
