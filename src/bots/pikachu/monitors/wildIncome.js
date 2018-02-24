@@ -23,10 +23,10 @@ module.exports = class {
 
             const recipients = await this.findDiscordRecipients(spawn);
 
-            // console.log(recipients.map(r => r.displayName));
+            console.log(recipients.map(r => r.displayName));
 
-            await sendEmbedToRepicients([this.client.guilds.get(this.client.configs.guildId).members.find('displayName', 'uphillsimplex')], spawnEmbed);
-            // await sendEmbedToRepicients(recipients, spawnEmbed); // Post in DM channel to members
+            // await sendEmbedToRepicients([this.client.guilds.get(this.client.configs.guildId).members.find('displayName', 'uphillsimplex')], spawnEmbed);
+            await sendEmbedToRepicients(recipients, spawnEmbed); // Post in DM channel to members
             // await sendEmbedToRepicients([msg.guild.channels.find('name', 'wilds-post')], spawnEmbed); // Post in wilds-post channel
         } catch (e) {
             console.log(e);
