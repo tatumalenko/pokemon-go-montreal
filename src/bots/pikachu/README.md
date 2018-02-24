@@ -63,6 +63,9 @@ Relates wild spawn alerts by DM to respective users that match the query matchin
 
 ## Notes:
 
+* **TO-DO**: (`guildMemberAdd.js` & `guildMemberRemove.js`)
+    - [ ] Test scenarios!
+
 * **TO-DO**: (`User.js`)
     - [x] Find way to make a validator function for each test in order to output error message for each when they fail
 
