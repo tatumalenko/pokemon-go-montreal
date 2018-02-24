@@ -13,7 +13,7 @@ module.exports = class {
     // eslint-disable-next-line class-methods-use-this
     async run(member, ...params) {
         try {
-            await this.client.userRepo.add(member);
+            await this.client.userRepository.addUser(member);
         } catch (e) {
             console.log(e);
         }
