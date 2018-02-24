@@ -29,10 +29,12 @@ class UserRepository {
 
     // eslint-disable-next-line class-methods-use-this
     async addUser(discordUser) {
-        await User.add({
+        await User.update({
             id: discordUser.id,
-            name: discordUser.username,
-        });
+        }, {
+            id: discordUser.id,
+            name: discordUser.username ? discordUser.username : discordUser.displayName,
+        }, { upsert: true });
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -106,6 +108,7 @@ class UserRepository {
                         },
                     },
                     'preferences.wild.status': 'on',
+                    'preferences.wild.blacklist': { $nin: [spawn.name.toLowerCase()] },
                 };
             } else if (spawn instanceof RaidSpawn) {
                 queryUser = {
