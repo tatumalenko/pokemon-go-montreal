@@ -58,6 +58,10 @@ class Utils {
         return Diacritics.clean(cleanName); // Replaces accented characters with regular ones
     }
 
+    static removeSpacesCommasFromString(str) {
+        return str.replace(/,/g, ' ').replace(/\s{2,}/g, ' ');
+    }
+
     static getNeighbourhoodsFromRaidChannel(raidChannel) {
         if (raidChannelList[raidChannel] !== undefined && raidChannelList[raidChannel].length > 0) {
             return raidChannelList[raidChannel];
@@ -110,6 +114,7 @@ class Utils {
         const neighbourhoodNames = this.getNeighbourhoodNames();
 
         if (!this.isValidFilter(name)) {
+            console.log(name);
             throw new Error('Error in `Utils.getEnglishName(name)`: `name` not a valid filter option.');
         } else if (frenchPokemonNames.includes(name)) {
             return englishPokemonNames[frenchPokemonNames.indexOf(name.toLowerCase())];
@@ -129,7 +134,7 @@ class Utils {
     static parseMessageForCommand(msg) {
         const prefix = msg.content.charAt(0);
         const cmd = msg.content.slice(1).split(' ')[0].toLowerCase();
-        const args = msg.content.slice(1).split(' ').slice(1).map(e => e.toLowerCase().trim());
+        const args = this.removeSpacesCommasFromString(msg.content.slice(1)).split(' ').slice(1).map(e => e.toLowerCase());
 
         return { prefix, cmd, args };
     }
@@ -141,7 +146,8 @@ class Utils {
         const ivs = []; // Should only be length of 1
 
         // Clean args string (replace commas with space and replace multiple spaces with one space)
-        const cleanArgs = args.replace(/,/g, ' ').replace(/\s+/g, ' ');
+        // const cleanArgs = args.replace(/,/g, ' ').replace(/\s+/g, ' ');
+        const cleanArgs = this.removeSpacesCommasFromString(args);
 
         // Extract words from string and convert to lowercase and take out iv/lv keywords out
         const words = cleanArgs.replace(/\d+/g, '')
