@@ -76,6 +76,18 @@ const UserSchema = Schema({
                     },
                 ],
             },
+            blacklist: {
+                type: [String],
+                validate: [
+                    {
+                        validator: v => v.every(str => Utils.getPokemonNames('english').includes(str)),
+                        message: Utils.createErrorMsg({
+                            english: 'Oops. Invalid Pokemon name!',
+                            french: 'Oops. Nom de Pokemon invalide!',
+                        }),
+                    },
+                ],
+            },
         },
     },
 });

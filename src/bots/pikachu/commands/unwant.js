@@ -12,6 +12,34 @@ module.exports = class {
     // eslint-disable-next-line class-methods-use-this
     async run(msg, { prefix, cmd, args }) {
         try {
+            // !unwant blacklist name1 name2 name3
+            const blacklistAliases = ['blacklist', 'nowant', 'ignore'];
+            if (blacklistAliases.some(alias => args.join(' ').toLowerCase().includes(alias))) {
+                try {
+                    const user = await this.client.userRepository.fetchUser(msg.author);
+                    const userBlacklist = user.preferences.wild.blacklist;
+                    const argsWithoutAlias = args.filter(arg => !blacklistAliases.includes(arg.toLowerCase()));
+                    const pokemonNames = argsWithoutAlias.map(e => this.client.utils.getEnglishName(e));
+                    const blacklist = userBlacklist.filter(arg => !pokemonNames.includes(arg));
+                    // console.log(userBlacklist[0]);
+                    // console.log(argsWithoutAlias);
+                    // console.log(user.preferences.wild.blacklist);
+                    // console.log(blacklist);
+                    user.preferences.wild.blacklist = blacklist;
+
+                    await user.save();
+                    await msg.react('✅');
+                } catch (e) {
+                    await msg.react('❌');
+                    if (Object.keys(e).includes('errors')) {
+                        await msg.channel.send(e.errors['preferences.wild.blacklist'].message);
+                    } else {
+                        await msg.channel.send(e.message);
+                    }
+                }
+                return;
+            }
+
             const defaultAliases = ['locations', 'mylocations', 'home', 'default', 'favorites'];
             const reqPreferences = this.createQueryFromArgs(args.join(' '));
 

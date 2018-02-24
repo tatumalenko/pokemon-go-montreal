@@ -1,3 +1,5 @@
+process.on('unhandledRejection', console.error); // Nodejs config to better trace unhandled promise rejections
+
 module.exports = class {
     constructor(...params) {
         Object.assign(this, {
@@ -12,6 +14,10 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
+            // Ensures if member isnt in repo, they will be
+            await this.client.userRepository.addUser(msg.author);
+
+            // Fetch user, with the assurance they are in repo
             const user = await this.client.userRepository.fetchUser(msg.author);
 
             // '!want' or '!veux'
@@ -21,16 +27,37 @@ module.exports = class {
             }
 
             // '!want on' or '!want off'
-            if (['on', 'off'].includes(args.join(''))) {
+            if (['on', 'off'].includes(args.join('').toLowerCase())) {
                 try {
                     if (user.preferences.wild.status !== args.join('')) {
                         user.preferences.wild.status = args.join('');
                     }
-                    user.save();
+                    await user.save();
                     await msg.react('✅');
                 } catch (e) {
                     await msg.react('❌');
                     await msg.channel.send(e);
+                }
+                return;
+            }
+
+            // !want blacklist name1 name2 name3
+            const blacklistAliases = ['blacklist', 'nowant', 'ignore'];
+            if (blacklistAliases.some(alias => args.join(' ').toLowerCase().includes(alias))) {
+                try {
+                    const blacklist = this.createPokemonNameListFromArgs(user, args.filter(arg => !blacklistAliases.includes(arg.toLowerCase())));
+                    user.preferences.wild.blacklist = blacklist;
+                    // console.log(user.preferences.wild.blacklist);
+                    // console.log(blacklist);
+                    await user.save();
+                    await msg.react('✅');
+                } catch (e) {
+                    await msg.react('❌');
+                    if (Object.keys(e).includes('errors')) {
+                        await msg.channel.send(e.errors['preferences.wild.blacklist'].message);
+                    } else {
+                        await msg.channel.send(e.message);
+                    }
                 }
                 return;
             }
@@ -60,6 +87,18 @@ module.exports = class {
                 await msg.channel.send(e.message);
             }
         }
+    }
+
+    /**
+     * Return a list (array) of pokemon names that were validated using the
+     * `Utils.getEnglishName` function.
+     * @param {String} args
+     * @return {String[]} list of Pokemon names
+     */
+    createPokemonNameListFromArgs(user, args) {
+        const names = args.map(e => e.toLowerCase());
+        const curBlacklist = user.preferences.wild.blacklist;
+        return Array.from(new Set([...names, ...curBlacklist].sort()));
     }
 
     createQueryFromArgs(args) {
@@ -99,12 +138,15 @@ module.exports = class {
     createWildPreferenceString(user) {
         const userLocations = (user.locations && user.locations.length > 1) ? user.locations.join(', ') : 'none set/aucunes établis';
 
-        const strArr = [`**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}\n**Default Locations Défaults:** ${userLocations}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`];
+        const strHeader = [`**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`];
+        strHeader.push(`**Blacklist:** ${user.preferences.wild.blacklist.sort().join(', ')}`);
+        strHeader.push(`**Default Locations Défaults:** ${userLocations}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`);
 
+        const strPokemons = [];
         user.preferences.wild.pokemons.forEach((pokemon) => {
-            strArr.push(`\`${pokemon.name} | ${pokemon.neighbourhoods.join(', ')} | ${pokemon.level} | ${pokemon.iv}\``);
+            strPokemons.push(`\`${pokemon.name} | ${pokemon.neighbourhoods.join(', ')} | ${pokemon.level} | ${pokemon.iv}\``);
         });
 
-        return strArr.sort().join('\n');
+        return [...strHeader, ...strPokemons.sort()].join('\n');
     }
 };
