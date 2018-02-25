@@ -1,55 +1,18 @@
 {
-    "apps": [{
-            "name": "twitter-bot",
-            "cwd": "/bots/discord-bots/twitter-bot",
-            "script": "twitter-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
-        },
+    "apps": [
         {
-            "name": "pikachu-bot",
-            "cwd": "/bots/discord-bots/pikachu-bot",
-            "script": "pikachu-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
-        },
-        {
-            "name": "slowpoke-bot",
-            "cwd": "/bots/discord-bots/slowpoke-bot",
-            "script": "slowpoke-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
-        },
-        {
-            "name": "self-bot",
-            "cwd": "/bots/discord-bots/self-bot",
-            "script": "self-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
-        },
-        {
-            "name": "professor-willow-bot",
-            "cwd": "/bots/discord-bots/professor-willow-bot",
-            "script": "professor-willow-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
-        },
-        {
-            "name": "persian-bot",
-            "cwd": "/bots/discord-bots/persian-bot",
-            "script": "server.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
+            "name": "pikachu",
+            "cwd": "src/bots/pikachu",
+            "script": "app.js",
+            "watch": [
+                "./",
+                "../assets"
+            ],
+            "ignore_watch": [
+                "../assets/db",
+                ".git",
+                ".DS_Store"
+            ],
             "exec_mode": "cluster_mode",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         }
