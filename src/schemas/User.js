@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 const Utils = require('../utils/Utils');
+const configs = require('../../configs/configs');
 
 const { Schema } = mongoose;
 // const { pokemonListEnglish } = require('../../data/pokemonListEnglish.json');
@@ -92,5 +93,5 @@ const UserSchema = Schema({
     },
 });
 
-module.exports = mongoose.model('User', UserSchema, 'users');
+module.exports = mongoose.model('User', UserSchema, configs.dbMongo.schemaCollectionNames.user);
 

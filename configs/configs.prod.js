@@ -5,9 +5,11 @@ module.exports = {
     rootDirPath: process.cwd(),
     cmdPrefix: '!',
     dbMongo: {
-        collectionName: 'users',
-        dbName: 'pikachu',
         dbPath: 'mongodb://localhost:27017/pikachu',
+        schemaCollectionNames: {
+            user: 'users',
+            raid: 'raids',
+        },
     },
     polygonMapPath: path.join(process.cwd(), '../../../data/neighbourhoodPolygons.kml'),
 

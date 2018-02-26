@@ -4,9 +4,7 @@ const WildSpawn = require('../models/WildSpawn');
 const RaidSpawn = require('../models/RaidSpawn');
 
 class UserRepository {
-    constructor({ dbPath, dbName, collectionName }) {
-        this.collectionName = collectionName;
-        this.dbName = dbName;
+    constructor(dbPath) {
         this.dbPath = dbPath;
         this.db = null;
         this.init();

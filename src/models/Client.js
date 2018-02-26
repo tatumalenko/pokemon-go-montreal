@@ -17,7 +17,7 @@ class Client extends Discord.Client {
         this.configs.moduleDirNames = ['commands', 'events', 'monitors'];
         this.configs.runIn = options.runIn;
         this.name = options.name;
-        this.userRepository = new UserRepository(this.configs.dbMongo);
+        this.userRepository = new UserRepository(this.configs.dbMongo.dbPath);
         this.neighbourhoodRepository = new NeighbourhoodRepository(this.configs.polygonMapPath);
         this.utils = Utils;
         this.spellchecker = new SpellChecker([...Utils.getPokemonNames(), ...Utils.getPokemonNames('french'), Utils.getNeighbourhoodNames()], { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });

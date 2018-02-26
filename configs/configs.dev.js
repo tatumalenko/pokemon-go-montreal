@@ -5,11 +5,14 @@ module.exports = {
     rootDirPath: process.cwd(),
     cmdPrefix: '!',
     dbMongo: {
-        collectionName: 'users',
-        dbName: 'pikachu',
         dbPath: 'mongodb://localhost:27017/pikachu',
+        schemaCollectionNames: {
+            user: 'users',
+            raid: 'raids',
+        },
     },
     polygonMapPath: path.join(process.cwd(), '../../../data/neighbourhoodPolygons.kml'),
+
     pikachu: {
         clientId: '360755167953682432',
         botToken: 'MzYwNzU1MTY3OTUzNjgyNDMy.DKtMdg.B-Un1hzaDeXk0pe6KVt-BZ5q6ZQ',
@@ -33,5 +36,9 @@ module.exports = {
     persian: {
         clientId: '',
         botToken: '',
+    },
+    meowth: {
+        clientId: '406662051948265474',
+        botToken: 'NDA2NjYyMDUxOTQ4MjY1NDc0.DU2Nkg.MAyjWS6TDNXzKGqmE-gB1m_ddMA',
     },
 };
