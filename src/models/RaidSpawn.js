@@ -3,6 +3,7 @@ const Pokemon = require('./Pokemon');
 
 class RaidSpawn extends Spawn {
     constructor({
+        tier,
         name,
         moveset,
         time: { remaining, ending },
@@ -26,7 +27,7 @@ class RaidSpawn extends Spawn {
                 address,
             },
         });
-        this.tier = 0;
+        this.tier = tier;
     }
 }
 

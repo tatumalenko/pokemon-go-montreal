@@ -35,7 +35,7 @@ module.exports = {
     },
     persian: {
         clientId: '',
-        botToken: '',
+        botToken: 'Mzg2Mjk3MTMxOTQ3Nzg2MjQw.DQN3mg.9u5CJ_lv9hWOwdIW7StQirTWuvM',
     },
     meowth: {
         clientId: '406662051948265474',
