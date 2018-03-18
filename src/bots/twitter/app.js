@@ -25,10 +25,10 @@ Twitter.stream('statuses/filter', {
                 tweet.in_reply_to_status_id_str) return;
 
             let mediaUrl;
-            if (tweet.entities.hasOwnProperty('media')) {
-                for (const media of tweet.entities.media) {
-                    if (media.type == 'photo') { mediaUrl = media.media_url; }
-                }
+            if (Object.prototype.hasOwnProperty.call(tweet.entities, 'media')) {
+                tweet.entities.media.forEach((media) => {
+                    if (media.type === 'photo') { mediaUrl = media.media_url; }
+                });
             }
 
             const data = {

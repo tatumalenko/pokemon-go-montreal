@@ -46,8 +46,8 @@ client.on('message', (message) => {
                 console.log(`spawn.name.toLowerCase(): ${spawn.name.toLowerCase()}`);
                 console.log(`WILD_CHANNELS.some(c => c === spawn.name.toLowerCase()): ${WILD_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))}`);
 
-                if (WILD_NAMED_POKEMON_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))) // If the spawn's name is in one of the wild channels
-                { return; } // Dead-end listener knowing that another identical message will appear from the Pokemon's named channel
+                // Dead-end listener knowing that another identical message will appear from the Pokemon's named channel
+                if (WILD_NAMED_POKEMON_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))) { return; }// If the spawn's name is in one of the wild channels
             }
 
             client.guilds.find('id', configs.guildId).channels.find('name', 'discord-income').send(message.content);
