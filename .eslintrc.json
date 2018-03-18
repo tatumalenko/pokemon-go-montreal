@@ -13,6 +13,7 @@
         }
     },
     "rules": {
+        "no-await-in-loop": "off",
         "no-unused-vars": "off",
         "class-methods-use-this": "off",
         "no-useless-escape": "off",
