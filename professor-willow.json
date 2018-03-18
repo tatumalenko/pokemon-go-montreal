@@ -1,0 +1,19 @@
+{
+    "apps": [
+        {
+            "name": "professor-willow",
+            "cwd": "src/bots/professor-willow",
+            "script": "app.js",
+            "watch": [
+                "./",
+                "../assets"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster_mode",
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+        }
+    ]
+}

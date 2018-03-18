@@ -1,15 +1,14 @@
 {
     "apps": [
         {
-            "name": "pikachu",
-            "cwd": "src/bots/pikachu",
+            "name": "twitter",
+            "cwd": "src/bots/twitter",
             "script": "app.js",
             "watch": [
                 "./",
                 "../assets"
             ],
             "ignore_watch": [
-                "../assets/db",
                 ".git",
                 ".DS_Store"
             ],
