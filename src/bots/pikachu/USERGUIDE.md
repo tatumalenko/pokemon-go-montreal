@@ -19,6 +19,9 @@
             * None specified: `0` (i.e. any iv)
     2) `!want blacklist <pokemon1[, pokemon2, pokemon3, ...]>`
         * **Description**: Blocks any alerts coming from specified names, useful when having `all` for a preference but wish to ignore common Pokemon
+    3) `!want <status>`
+        * **Description**: Changes the status of wild spawn alerts user receives
+        * `<status>`: either `on` or `off`
 ---
 ### **`!unwant`** (or `!veuxpas`)
 
