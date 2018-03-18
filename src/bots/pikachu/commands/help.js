@@ -11,7 +11,7 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            await msg.channel.send('Some help will arrive shortly! *I hope*');
+            await msg.channel.send('Please consult the user guide/SVP consultez le guide d\'utilisateur: https://drive.google.com/file/d/1AwIL-Y9aSiZDJ0Feg9sz_E84SLLhDRI8/view?usp=sharing');
         } catch (e) {
             await msg.channel.send(e.message);
             console.log(e);
