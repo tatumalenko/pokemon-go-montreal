@@ -1,6 +1,6 @@
 // Import the discord.js module
 const Discord = require('discord.js');
-const auth = require('./auth.json');
+const configs = require('../../../configs/configs');
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -14,7 +14,7 @@ client.on('ready', () => {
 // Create an event listener for new guild members
 client.on('guildMemberAdd', (member) => {
     // Send the message to a designated channel on a server:
-    const channel = member.guild.channels.find('name', 'welcome');
+    const channel = member.guild.channels.find('name', configs.channels.joinTeam);
     // Do nothing if the channel wasn't found on this server
     if (!channel) return;
     // Send the message, mentioning the member
@@ -25,7 +25,7 @@ client.on('guildMemberAdd', (member) => {
 
 client.on('guildMemberRemove', (member) => {
     // Send the message to a designated channel on a server:
-    const channel = member.guild.channels.find('name', 'secret-treehouse');
+    const channel = member.guild.channels.find('name', configs.channels.adminMods);
     // Do nothing if the channel wasn't found on this server
     if (!channel) return;
     // Send the message, mentioning the member
@@ -41,16 +41,16 @@ client.on('message', async (message) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     try {
-        if (message.content === '<@380373659493335042>') {
+        if (message.content === `<@${configs['professor-willow'].clientId}>`) {
             await message.channel.send({
                 embed: {
                     description: `${'**Professor Willow here!** Ready to help!\n\n' +
                         'To get some cool wild spawn alerts for specific Pokemon within the neighbourhoods you choose, head over to '}${
                         message.guild.channels.find('name', 'wants-post')
-                    } and let ${message.guild.members.find('id', '360755167953682432')} assist you by typing \`'!want help'\` there!\n\n` +
+                    } and let ${message.guild.members.find('id', configs.pikachu.clientId)} assist you by typing \`'!want help'\` there!\n\n` +
                         `To get some info and stats on Pokemon including IVs, ATK/DEF/STA, and much more, head over to ${
                             message.guild.channels.find('name', 'pokedex')
-                        } and let ${message.guild.members.find('id', '359610082457288706')} assist you by typing \`'!pd help'\` there!\n\n` +
+                        } and let ${message.guild.members.find('id', configs.slowpoke.clientId)} assist you by typing \`'!pd help'\` there!\n\n` +
                         'For any other questions or help, don\'t be shy to ask one of the admin or mod staff, they would be delighted to answer any questions!',
                 },
             });
@@ -62,7 +62,7 @@ client.on('message', async (message) => {
 
             switch (cmd.toLowerCase()) {
                 case 'team': {
-                    if (message.channel.name !== 'welcome' && message.channel.name !== 'bot-testing') return;
+                    if (message.channel.name !== configs.channels.joinTeam && message.channel.name !== configs.channels.botTesting) return;
 
                     const validTeamNames = ['valor', 'instinct', 'mystic'];
                     if (!validTeamNames.includes(arg)) return;
@@ -86,7 +86,7 @@ client.on('message', async (message) => {
                     break;
                 case 'announcement':
                 {
-                    if (message.channel.name !== 'secret-treehouse' && message.channel.name !== 'bot-logs' && message.channel.name !== 'announcements-post') return;
+                    if (message.channel.name !== configs.channels.adminMods && message.channel.name !== configs.channels.botLogs && message.channel.name !== configs.channels.announcementPost) return;
                     if (!message.channel.permissionsFor(message.author).has('ADMINISTRATOR')) return;
 
                     args = args.join(' ').split(' | ');
@@ -128,7 +128,7 @@ client.on('message', async (message) => {
                     break;
                 }
                 case 'count':
-                    if (message.channel.name === 'secret-treehouse' || message.channel.name === 'bot-testing') {
+                    if (message.channel.name === configs.channels.adminMods || message.channel.name === configs.channels.botTesting) {
                         if (args[0] === undefined) {
                             message.channel.send(`There are **${message.guild.memberCount}** members currently onboard!`);
                         } else if (args[0] === 'days' && args[1] !== undefined) {
@@ -197,7 +197,7 @@ client.on('message', async (message) => {
 });
 
 // Log our bot in
-client.login(auth.token);
+client.login(configs['professor-willow'].botToken);
 
 function hasRole(member, roleName) {
     return member.roles.some(role => roleName.toLowerCase() === role.name);

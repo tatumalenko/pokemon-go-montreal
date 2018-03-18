@@ -1,6 +1,5 @@
 // Import the discord.js module
 const Discord = require('discord.js');
-const auth = require('./auth.json');
 const configs = require('../../../configs/configs');
 const { createWildSpawnParams } = require('../../utils/Utils');
 
@@ -65,4 +64,4 @@ client.on('message', (message) => {
 });
 
 // Login bot
-client.login(auth.token);
+client.login(configs['self-bot'].botToken);

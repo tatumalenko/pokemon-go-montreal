@@ -1,7 +1,7 @@
 // Import the discord.js module
 const Discord = require('discord.js');
 const pd = require('./assets/modules/pokedex');
-const auth = require('./auth.json');
+const configs = require('../../../configs/configs');
 const Utils = require('../../utils/Utils');
 
 const validCmds = ['pd', 'dex', 'slowpoke', 'sp'];
@@ -295,7 +295,7 @@ client.on('message', async (message) => {
 });
 
 // Log our bot in
-client.login(auth.token);
+client.login(configs.slowpoke.botToken);
 
 /**
  * object.compare(arg)
