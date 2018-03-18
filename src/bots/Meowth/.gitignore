@@ -1,0 +1,9 @@
+
+*.bat
+config.json
+data/serverdict_backup
+data/serverdict
+
+logs/meowth.log
+__pychache__/
+*.py[cod]
