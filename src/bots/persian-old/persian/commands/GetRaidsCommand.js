@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const DictUtils = require('../../../assets/modules/DictUtils');
+const Utils = require("../../../../utils/Utils.js");
+//const DictUtils = require('../../../assets/modules/DictUtils');
 const RaidsRepository = require('../../persian/RaidsRepository.js');
 const ConfigManager = require('../../persian/ConfigManager.js');
 
@@ -7,7 +8,7 @@ class GetRaidsCommand {
     constructor(discordMessage, args) {
         this.discordMessage = discordMessage;
         this.args = args;
-        this.dictUtils = new DictUtils();
+        //this.dictUtils = new DictUtils();
         this.raidReactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟'];
 
         let configs = ConfigManager.GetConfigs();
@@ -26,7 +27,7 @@ class GetRaidsCommand {
         }
 
         // With the channel, we then find a list of neighborhoods.
-        let neighborhoods = this.dictUtils.getNeighbourhoodsFromRaidChannel(channel);
+        let neighborhoods = Utils.getNeighbourhoodsFromRaidChannel(channel);
         if (neighborhoods.length <= 0) {
             let embed = { embed: { 
                 title: 'Invalid raid option: ' + this.args[1] + '.', 
@@ -42,7 +43,7 @@ class GetRaidsCommand {
 
         let foundRaids = [];
         for (var i = 0; i < neighborhoods.length; i++) {
-            neighborhoods[i] = this.dictUtils.getNeighbourhoodSynonym(neighborhoods[i]);
+            neighborhoods[i] = Utils.getNeighbourhoodSynonym(neighborhoods[i]);
             foundRaids = foundRaids.concat(await this.raidRepository.GetRaids(neighborhoods[i]));
         }
 

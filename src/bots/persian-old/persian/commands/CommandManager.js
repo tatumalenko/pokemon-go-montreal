@@ -1,5 +1,5 @@
 const GetRaidsCommand = require("./GetRaidsCommand.js");
-const GetAllRaidsCommand = require("./GetAllRaidsCommand.js");
+//const GetAllRaidsCommand = require("./GetAllRaidsCommand.js"); TODO
 
 class CommandManager {
     constructor(commandPrefix) {
