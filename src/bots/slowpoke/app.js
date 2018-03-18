@@ -36,14 +36,14 @@ client.on('message', async (message) => {
         };
         // await dco.channel.send(dco.msg.args);
 
-        if (!(dco.channel.compare('bot-testing') || dco.channel.compare('pokedex'))) return;
+        if (!(dco.channel.name === configs.channels.botTesting || dco.channel.name === configs.channels.pokedex)) return;
 
         // Our bot needs to know if it will execute a command
         // It will listen for messages that will start with `!`
         if (dco.msg.cmd) { // Not a falsy value (undefined, null, 0 etc)
             if (!validCmds.includes(dco.msg.cmd.toLowerCase())) return; // Not the 'pd' command
 
-            if (dco.msg.args.join(' ').compare('help') || dco.msg.args.length === 0) {
+            if (dco.msg.args.length === 0 || dco.msg.args.join(' ').toLowerCase().includes('help')) {
                 await dco.channel.send({
                     embed: {
                         description: '**Slowpoke bot here!** `These are some of the cool things you can ask me to tell you about.`\n' +
@@ -70,7 +70,7 @@ client.on('message', async (message) => {
                     },
                 });
                 return;
-            } else if (dco.msg.args.join(' ').compare('help more')) {
+            } else if (dco.msg.args.join(' ').toLowerCase().includes('help more')) {
                 await dco.channel.send({
                     embed: {
                         description: '\n**Basic examples**: ' +
@@ -93,13 +93,13 @@ client.on('message', async (message) => {
                 return;
             }
 
-            if (dco.msg.args[0].compare('cost')) {
+            if (dco.msg.args[0].toLowerCase().includes('cost')) {
                 const lvs = [];
                 for (let i = 1; i < 41; i += 0.5) { lvs.push(i); }
 
                 console.log(dco.msg.args[1], dco.msg.args[2]);
                 console.log(`dco.msg.args.length !== 3: ${dco.msg.args.length !== 3}`);
-                console.log(`!isFinite(dco.msg.args[1]) || !isFinite(dco.msg.args[2]): ${!isFinite(dco.msg.args[1])}` || !isFinite(dco.msg.args[2]));
+                console.log(`!isFinite(dco.msg.args[1]) || !isFinite(dco.msg.args[2]): ${!Number.isFinite(Number(dco.msg.args[1]))}` || !Number.isFinite(Number(dco.msg.args[2])));
                 console.log(`=> 1, <= 40, lv? ${dco.msg.args[1] < 1 || dco.msg.args[1] > 40 ||
                     dco.msg.args[2] < 1 || dco.msg.args[2] > 40 ||
                     !lvs.some(lv => [dco.msg.args[1], dco.msg.args[2]].some(arg => lv !== arg))}`);
@@ -109,7 +109,7 @@ client.on('message', async (message) => {
                 if (dco.msg.args.length !== 3) return;
 
 
-                if (!isFinite(dco.msg.args[1]) || !isFinite(dco.msg.args[2])) return;
+                if (!Number.isFinite(Number(dco.msg.args[1])) || !Number.isFinite(Number(dco.msg.args[2]))) return;
 
 
                 if (dco.msg.args[1] < 1 || dco.msg.args[1] > 40 ||
@@ -148,7 +148,7 @@ client.on('message', async (message) => {
             // console.log(db.isValidFilter([dco.msg.args[0], dco.msg.args[1]].join(' ')));
             if (Utils.isValidFilter([dco.msg.args[0], dco.msg.args[1]].join(' '))) {
                 const otherArgs = [];
-                for (let i = 2; i < dco.msg.args.length; i++) { otherArgs.push(dco.msg.args[i]); }
+                for (let i = 2; i < dco.msg.args.length; i += 1) { otherArgs.push(dco.msg.args[i]); }
 
                 pkmnName = [dco.msg.args[0], dco.msg.args[1]].join(' ').toLowerCase();
                 dco.msg.args = [pkmnName, ...otherArgs];
@@ -174,7 +174,7 @@ client.on('message', async (message) => {
             }
 
             // console.log(pd.isPokemonName(pkmnName));
-            const pokemonInfo = pd.pokemonInfo(new pd.Pokemon({
+            let pokemonInfo = pd.pokemonInfo(new pd.Pokemon({
                 name: pkmnName,
             }));
 
@@ -205,30 +205,42 @@ client.on('message', async (message) => {
                         switch (dco.msg.args[i].toLowerCase()) {
                             case 'hp':
                                 // Validate cp value to be numeric and less than 400?
-                                if (!(isFinite(dco.msg.args[i + 1]) && dco.msg.args[i + 1] > 0 && dco.msg.args[i + 1] <= 400)) { return await dco.channel.send('Invalid value for `hp`, please enter a single number between 1 and 400!'); }
+                                if (!(Number.isFinite(Number(dco.msg.args[i + 1])) && dco.msg.args[i + 1] > 0 && dco.msg.args[i + 1] <= 400)) {
+                                    return await dco.channel.send('Invalid value for `hp`, please enter a single number between 1 and 400!');
+                                }
                                 hp = dco.msg.args[i + 1];
                                 break;
                             case 'cp':
                                 // Validate cp value to be numeric and less than 4000?
-                                if (!(isFinite(dco.msg.args[i + 1]) && dco.msg.args[i + 1] > 0 && dco.msg.args[i + 1] <= 6000)) { return await dco.channel.send('Invalid value for `cp`, please enter a single number between 1 and 6000!'); }
+                                if (!(Number.isFinite(Number(dco.msg.args[i + 1])) && dco.msg.args[i + 1] > 0 && dco.msg.args[i + 1] <= 6000)) {
+                                    return await dco.channel.send('Invalid value for `cp`, please enter a single number between 1 and 6000!');
+                                }
                                 cp = dco.msg.args[i + 1];
                                 break;
                             case 'level':
                                 // Validate level value to be numeric and within 1-40?
-                                if (!(isFinite(dco.msg.args[i + 1]) && dco.msg.args[i + 1] > 0 && dco.msg.args[i + 1] <= 40)) { return await dco.channel.send('Invalid value for `level`, please enter a single number between 1 and 40!'); }
+                                if (!(Number.isFinite(Number(dco.msg.args[i + 1])) && dco.msg.args[i + 1] > 0 && dco.msg.args[i + 1] <= 40)) {
+                                    return await dco.channel.send('Invalid value for `level`, please enter a single number between 1 and 40!');
+                                }
                                 level = dco.msg.args[i + 1];
                                 break;
                             case 'iv':
+                            {
                                 // Parse string formatted as 'atk/def/sta' into {atk: atk, def: def, sta: sta}
-                                if (!dco.msg.args[i + 1].includes('/')) { return await dco.channel.send('Invalid value for `iv`, please enter it in this format: `atk/def/sta`'); }
-                                const ivArr = dco.msg.args[i + 1].split('/').map(e => parseInt(e));
-                                if (!ivArr.every(e => isFinite(e) && e >= 0)) { return await dco.channel.send('Invalid value for `iv`, please enter it in this format: `atk/def/sta`'); }
+                                if (!dco.msg.args[i + 1].includes('/')) {
+                                    return await dco.channel.send('Invalid value for `iv`, please enter it in this format: `atk/def/sta`');
+                                }
+                                const ivArr = dco.msg.args[i + 1].split('/').map(e => Number.parseInt(e, 10));
+                                if (!ivArr.every(e => Number.isFinite(Number(e)) && e >= 0)) {
+                                    return await dco.channel.send('Invalid value for `iv`, please enter it in this format: `atk/def/sta`');
+                                }
                                 iv = {
                                     atk: ivArr[0],
                                     def: ivArr[1],
                                     sta: ivArr[2],
                                 };
                                 break;
+                            }
                             default:
                                 await dco.channel.send(`${dco.msg.args[i]} is not a valid command. Try \`cp\`, \`level\`, or \`iv\`, followed by a space and its value.`);
                                 return;
@@ -243,7 +255,7 @@ client.on('message', async (message) => {
 
                     // console.log(cp, hp);
                     if (iv) {
-                        const pokemonInfo = pd.pokemonInfo(new pd.Pokemon({
+                        pokemonInfo = pd.pokemonInfo(new pd.Pokemon({
                             name: pkmnName,
                             cp,
                             level,
@@ -297,33 +309,3 @@ client.on('message', async (message) => {
 // Log our bot in
 client.login(configs.slowpoke.botToken);
 
-/**
- * object.compare(arg)
- * Compare object's name or id value if not a String
- * (case insensitive) to argument's name or id value
- * if not a String and return their boolean result
- *
- * @param       arg  Argument object to compare
- * @return      boolean
- * @access      public
- */
-Object.prototype.compare = function (arg) {
-    try {
-        if (typeof (arg) === 'string') {
-            if (typeof (this.valueOf()) === 'string') {
-                return this.valueOf().toLowerCase() === arg.toLowerCase();
-            }
-            if (this.hasOwnProperty('name')) {
-                return this.name.toLowerCase() === arg.toLowerCase();
-            } throw 'Object.name is undefined';
-        } else {
-            if (this.hasOwnProperty('id') && arg.hasOwnProperty('id')) {
-                return this.id === arg.id;
-            }
-            if (!this.hasOwnProperty('id')) throw 'Object.id is undefined';
-            if (!arg.hasOwnProperty('id')) throw 'Argument.id is undefined';
-        }
-    } catch (e) {
-        console.log(e);
-    }
-};
