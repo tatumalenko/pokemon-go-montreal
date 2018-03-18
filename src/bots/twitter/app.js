@@ -36,7 +36,7 @@ Twitter.stream('statuses/filter', {
                 description: tweet.text,
                 timestamp: new Date(),
                 url: `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`,
-                color: parseInt(colors[(Math.random() * colors.length) | 0].replace('#', ''), 16).toString(10),
+                color: parseInt(colors[(Math.random() * colors.length) || 0].replace('#', ''), 16).toString(10),
                 image: {
                     url: media_url,
                 },

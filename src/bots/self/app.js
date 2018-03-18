@@ -1,7 +1,8 @@
 // Import the discord.js module
 const Discord = require('discord.js');
 const auth = require('./auth.json');
-const { createSpawn } = require('../assets/modules/botutils');
+const configs = require('../../../configs/configs');
+const { createWildSpawnParams } = require('../../utils/Utils');
 
 const WILD_IV0_IV90_CP2500_CHANNELS = ['iv0', 'iv90', 'cp2500'];
 const WILD_GEN1_CHANNELS = ['aerodactyl', 'alakazam', 'arcanine', 'blastoise', 'chansey', 'charizard', 'dragonair', 'dragonite', 'dratini', 'exeggutor', 'flareon', 'gengar', 'golem', 'gyarados', 'hitmonchan', 'hitmonlee', 'jolteon', 'lapras', 'lickitung', 'machamp', 'muk', 'porygon', 'rhydon', 'snorlax', 'vaporeon', 'venusaur'];
@@ -41,7 +42,7 @@ client.on('message', (message) => {
 
             // Attempt to dead-end listener if finds spawn name to have a named channel after itself to prevent double DMs
             if (WILD_IV0_IV90_CP2500_CHANNELS.some(c => c === message.channel.name.toLowerCase())) { // If this msg comes from iv90 or cp2500
-                const spawn = createSpawn(message); // Create spawn to extract name using name method used in Pikachu
+                const spawn = createWildSpawnParams(message); // Create spawn to extract name using name method used in Pikachu
 
                 console.log(`spawn.name.toLowerCase(): ${spawn.name.toLowerCase()}`);
                 console.log(`WILD_CHANNELS.some(c => c === spawn.name.toLowerCase()): ${WILD_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))}`);
@@ -50,12 +51,12 @@ client.on('message', (message) => {
                 { return; } // Dead-end listener knowing that another identical message will appear from the Pokemon's named channel
             }
 
-            client.guilds.find('id', '352462877845749762').channels.find('name', 'discord-income').send(message.content);
+            client.guilds.find('id', configs.guildId).channels.find('name', 'discord-income').send(message.content);
         } else if (message.guild.name === 'MontrealPokeMap' && RAID_CHANNELS.some(c => c === message.channel.name)) {
             // console.log('-----------------------------------------------------------------');
             // console.log(message.content);
             // console.log('-----------------------------------------------------------------');
-            client.guilds.find('id', '352462877845749762').channels.find('name', 'raids-income').send(message.content);
+            client.guilds.find('id', configs.guildId).channels.find('name', 'raids-income').send(message.content);
         }
     } catch (e) {
         console.log(e);

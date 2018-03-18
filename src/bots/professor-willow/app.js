@@ -4,9 +4,6 @@ const auth = require('./auth.json');
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
-const DiscordUtils = require('../assets/modules/DiscordUtils');
-
-const discordutils = new DiscordUtils();
 
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
@@ -71,12 +68,12 @@ client.on('message', async (message) => {
                     if (!validTeamNames.includes(arg)) return;
                     const requestedTeamName = validTeamNames[validTeamNames.indexOf(arg)];
 
-                    for (const teamName of validTeamNames) {
-                        if (discordutils.hasRole(message.member, teamName)) {
+                    validTeamNames.forEach(async (teamName) => {
+                        if (hasRole(message.member, teamName)) {
                             await message.channel.send(`You already have a team role, ${message.member}`);
-                            return;
+                            return false; // Dead-end, return false since nothing triggers ESLINT error
                         }
-                    }
+                    });
 
                     const teamRole = message.guild.roles.find('name', requestedTeamName);
                     try {
@@ -174,7 +171,7 @@ client.on('message', async (message) => {
 
                     // Only delete messages if the channel type is TextChannel
                     // DO NOT delete messages in DM Channel or Group DM Channel
-                    if (message.channel.type == 'text') {
+                    if (message.channel.type === 'text') {
                         message.channel.fetchMessages()
                             .then((messages) => {
                                 if (args[0] !== undefined) {
@@ -201,3 +198,7 @@ client.on('message', async (message) => {
 
 // Log our bot in
 client.login(auth.token);
+
+function hasRole(member, roleName) {
+    return member.roles.some(role => roleName.toLowerCase() === role.name);
+}

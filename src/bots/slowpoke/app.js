@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const pd = require('./assets/modules/pokedex');
 const auth = require('./auth.json');
-const db = require('../assets/modules/dbutils');
+const Utils = require('../../utils/Utils');
 
 const validCmds = ['pd', 'dex', 'slowpoke', 'sp'];
 
@@ -146,7 +146,7 @@ client.on('message', async (message) => {
 
             let pkmnName;
             // console.log(db.isValidFilter([dco.msg.args[0], dco.msg.args[1]].join(' ')));
-            if (db.isValidFilter([dco.msg.args[0], dco.msg.args[1]].join(' '))) {
+            if (Utils.isValidFilter([dco.msg.args[0], dco.msg.args[1]].join(' '))) {
                 const otherArgs = [];
                 for (let i = 2; i < dco.msg.args.length; i++) { otherArgs.push(dco.msg.args[i]); }
 
@@ -169,7 +169,7 @@ client.on('message', async (message) => {
                     break;
 
                 default:
-                    pkmnName = db.getEnglishName(pkmnName);
+                    pkmnName = Utils.getEnglishName(pkmnName);
                     break;
             }
 
