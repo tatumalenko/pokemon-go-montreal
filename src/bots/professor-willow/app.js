@@ -68,12 +68,12 @@ client.on('message', async (message) => {
                     if (!validTeamNames.includes(arg)) return;
                     const requestedTeamName = validTeamNames[validTeamNames.indexOf(arg)];
 
-                    validTeamNames.forEach(async (teamName) => {
+                    for (const teamName of validTeamNames) {
                         if (hasRole(message.member, teamName)) {
                             await message.channel.send(`You already have a team role, ${message.member}`);
-                            return false; // Dead-end, return false since nothing triggers ESLINT error
+                            return; // Dead-end, return false since nothing triggers ESLINT error
                         }
-                    });
+                    }
 
                     const teamRole = message.guild.roles.find('name', requestedTeamName);
                     try {
