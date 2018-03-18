@@ -136,7 +136,8 @@ module.exports = class {
 
     // eslint-disable-next-line class-methods-use-this
     createWildPreferenceString(user) {
-        const userLocations = (user.locations && user.locations.length > 1) ? user.locations.join(', ') : 'none set/aucunes établis';
+        console.log(user.locations);
+        const userLocations = (user.locations && user.locations.length >= 1) ? user.locations.join(', ') : 'none set/aucunes établis';
 
         const strHeader = [`**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`];
         strHeader.push(`**Blacklist:** ${user.preferences.wild.blacklist.sort().join(', ')}`);
