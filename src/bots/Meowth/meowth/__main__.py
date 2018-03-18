@@ -830,7 +830,7 @@ async def on_message(message):
         firstsplit = re.split("\n|\r", messagelist.pop(0))
         command = firstsplit.pop(0).lower()
         message.content = command + "\n" + "\n".join(firstsplit) + " " + " ".join(messagelist)
-    if not message.author.bot:
+    if not message.author.bot or message.author.bot:
         await Meowth.process_commands(message)
 
 """
@@ -2580,43 +2580,44 @@ def invite_processing(invite_bytes: bytes) -> BytesIO:
     return txt
 
 async def _invite(ctx):
-    bot = ctx.bot
-    channel = ctx.message.channel
-    author = ctx.message.author
-    server = ctx.message.server
-    await bot.send_typing(channel)
-    exraidlist = ''
-    exraid_dict = {}
-    exraidcount = 0
-    rc_dict = bot.server_dict[server.id]['raidchannel_dict']
-    for channelid in rc_dict:
-        if not discord.utils.get(server.channels, id=channelid):
-            continue
-        if rc_dict[channelid]['egglevel'] == 'EX' or rc_dict[channelid]['type'] == 'exraid':
-            exraid_channel = bot.get_channel(channelid)
-            if exraid_channel.mention != '#deleted-channel':
-                exraidcount += 1
-                exraidlist += '\n**' + str(exraidcount) + '.**   ' + exraid_channel.mention
-                exraid_dict[str(exraidcount)] = exraid_channel
-    if exraidcount == 0:
-        await bot.send_message(channel, "Meowth! No EX Raids have been reported in this server! Use **!exraid** to report one!")
-        return
-    await bot.send_message(channel, "Meowth! {0}, you've told me you have an invite to an EX Raid, and I'm just going to take your word for it! The following {1} EX Raids have been reported:\n{2}\nReply with **the number** (1, 2, etc) of the EX Raid you have been invited to. If none of them match your invite, type 'N' and report it with **!exraid**".format(author.mention, str(exraidcount), exraidlist))
-    reply = await bot.wait_for_message(author=author)
-    if reply.content.lower() == 'n':
-        await bot.send_message(channel, "Meowth! Be sure to report your EX Raid with **!exraid**!")
-    elif not reply.content.isdigit() or int(reply.content) > exraidcount:
-        await bot.send_message(channel, "Meowth! I couldn't tell which EX Raid you meant! Try the **!invite** command again, and make sure you respond with the number of the channel that matches!")
-    elif int(reply.content) <= exraidcount and int(reply.content) > 0:
-        overwrite = discord.PermissionOverwrite()
-        overwrite.send_messages = True
-        overwrite.read_messages = True
-        exraid_channel = exraid_dict[str(int(reply.content))]
-        await bot.edit_channel_permissions(exraid_channel, author, overwrite)
-        await bot.send_message(channel, "Meowth! Alright {0}, you can now send messages in {1}! Make sure you let the trainers in there know if you can make it to the EX Raid!".format(author.mention, exraid_channel.mention))
-        await _maybe(exraid_channel, author, 1, party=None)
-    else:
-        await bot.send_message(channel, "Meowth! I couldn't understand your reply! Try the **!invite** command again!")
+    return
+    # bot = ctx.bot
+    # channel = ctx.message.channel
+    # author = ctx.message.author
+    # server = ctx.message.server
+    # await bot.send_typing(channel)
+    # exraidlist = ''
+    # exraid_dict = {}
+    # exraidcount = 0
+    # rc_dict = bot.server_dict[server.id]['raidchannel_dict']
+    # for channelid in rc_dict:
+    #     if not discord.utils.get(server.channels, id=channelid):
+    #         continue
+    #     if rc_dict[channelid]['egglevel'] == 'EX' or rc_dict[channelid]['type'] == 'exraid':
+    #         exraid_channel = bot.get_channel(channelid)
+    #         if exraid_channel.mention != '#deleted-channel':
+    #             exraidcount += 1
+    #             exraidlist += '\n**' + str(exraidcount) + '.**   ' + exraid_channel.mention
+    #             exraid_dict[str(exraidcount)] = exraid_channel
+    # if exraidcount == 0:
+    #     await bot.send_message(channel, "Meowth! No EX Raids have been reported in this server! Use **!exraid** to report one!")
+    #     return
+    # await bot.send_message(channel, "Meowth! {0}, you've told me you have an invite to an EX Raid, and I'm just going to take your word for it! The following {1} EX Raids have been reported:\n{2}\nReply with **the number** (1, 2, etc) of the EX Raid you have been invited to. If none of them match your invite, type 'N' and report it with **!exraid**".format(author.mention, str(exraidcount), exraidlist))
+    # reply = await bot.wait_for_message(author=author)
+    # if reply.content.lower() == 'n':
+    #     await bot.send_message(channel, "Meowth! Be sure to report your EX Raid with **!exraid**!")
+    # elif not reply.content.isdigit() or int(reply.content) > exraidcount:
+    #     await bot.send_message(channel, "Meowth! I couldn't tell which EX Raid you meant! Try the **!invite** command again, and make sure you respond with the number of the channel that matches!")
+    # elif int(reply.content) <= exraidcount and int(reply.content) > 0:
+    #     overwrite = discord.PermissionOverwrite()
+    #     overwrite.send_messages = True
+    #     overwrite.read_messages = True
+    #     exraid_channel = exraid_dict[str(int(reply.content))]
+    #     await bot.edit_channel_permissions(exraid_channel, author, overwrite)
+    #     await bot.send_message(channel, "Meowth! Alright {0}, you can now send messages in {1}! Make sure you let the trainers in there know if you can make it to the EX Raid!".format(author.mention, exraid_channel.mention))
+    #     await _maybe(exraid_channel, author, 1, party=None)
+    # else:
+    #     await bot.send_message(channel, "Meowth! I couldn't understand your reply! Try the **!invite** command again!")
 
 """
 Raid Channel Management
