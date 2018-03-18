@@ -20,7 +20,7 @@ client.on('guildMemberAdd', (member) => {
     // Send the message, mentioning the member
     channel.send(`Welcome to Pokémon GO Montréal, ${member
     }! I'm Professor Willow and will be your guide! Tag me (type @Professor Willow) if ever you want some help or tips! ` +
-        'Set your team by typing `!team <team>` where `<team>` is either `valor`, `instinct`, or `mystic`.');
+        'Set your team by typing either `!team mystic`, `!team instinct`, or `!team valor`.');
 });
 
 client.on('guildMemberRemove', (member) => {
