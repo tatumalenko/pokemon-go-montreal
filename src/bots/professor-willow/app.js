@@ -68,6 +68,7 @@ client.on('message', async (message) => {
                     if (!validTeamNames.includes(arg)) return;
                     const requestedTeamName = validTeamNames[validTeamNames.indexOf(arg)];
 
+                    // eslint-disable-next-line
                     for (const teamName of validTeamNames) {
                         if (hasRole(message.member, teamName)) {
                             await message.channel.send(`You already have a team role, ${message.member}`);
