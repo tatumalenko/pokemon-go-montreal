@@ -28,7 +28,7 @@ module.exports = class {
                     }));
                 }
                 const locations = args.join(' ')
-                    .match(/(\w+[-\w+])/ig)
+                    .match(/(?:\w|['-]\w)+/ig)
                     .filter(l => !Number(l))
                     .map(e => this.client.utils.getNeighbourhoodAlias(e));
                 console.log(locations);
