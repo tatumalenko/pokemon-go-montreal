@@ -38,6 +38,7 @@ module.exports = class {
             } catch (e) {
                 await msg.react('❌');
                 if (e.message.includes('is not a valid enum value')) {
+                    console.log(e.message);
                     const badEntry = /`(\w+[-\w+])` is not a valid enum/i.exec(e.message);
                     if (badEntry) {
                         await msg.channel.send(this.client.utils.createErrorMsg({
