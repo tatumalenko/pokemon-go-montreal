@@ -17,10 +17,11 @@ module.exports = {
     rootDirPath: process.cwd(),
     cmdPrefix: '!',
     dbMongo: {
-        dbPath: 'mongodb://localhost:27017/pikachu',
+        dbPath: 'mongodb://localhost:27017/pokemongo',
         schemaCollectionNames: {
             user: 'users',
             raid: 'raids',
+            gym: 'gyms',
         },
     },
     polygonMapPath: path.join(process.cwd(), '../../../data/neighbourhoodPolygons.kml'),
@@ -52,7 +53,8 @@ module.exports = {
     },
     persian: {
         clientId: '',
-        botToken: 'Mzg2Mjk3MTMxOTQ3Nzg2MjQw.DQN3mg.9u5CJ_lv9hWOwdIW7StQirTWuvM',
+        // botToken: 'Mzg2Mjk3MTMxOTQ3Nzg2MjQw.DQN3mg.9u5CJ_lv9hWOwdIW7StQirTWuvM',
+        botToken: 'MzgwOTA0NzY0MTUxNTYyMjQ3.DO_YuQ.J07Q1y9ZQlVcEt7xve8mDRFIzrA',
     },
     meowth: {
         clientId: '406662051948265474',
