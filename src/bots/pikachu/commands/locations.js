@@ -46,6 +46,15 @@ module.exports = class {
                             french: `Oops! \`${badEntry[1]}\` n'est pas un nom de quartier valide!`,
                         }));
                     }
+                } else if (e.message.includes('User validation failed: locations')) {
+                    console.log(e.message);
+                    const badEntries = e.message.match(/(\d+)/g).map(e => e + 1);
+                    if (badEntries) {
+                        await msg.channel.send(this.client.utils.createErrorMsg({
+                            english: `Oops! The \`${badEntries}\` entries are not valid neighbourhood names.`,
+                            french: `Oops! Les \`${badEntries}\` entrées ne sont pas des noms de quartiers valides!`,
+                        }));
+                    }
                 } else if (e instanceof Error) {
                     await msg.channel.send(e.message);
                 }
