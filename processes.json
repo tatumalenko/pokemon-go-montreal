@@ -1,56 +1,103 @@
 {
-    "apps": [{
-            "name": "twitter-bot",
-            "cwd": "/bots/discord-bots/twitter-bot",
-            "script": "twitter-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
+    "apps": [
+        {
+            "name": "pikachu",
+            "cwd": "src/bots/pikachu",
+            "script": "app.js",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
-            "name": "pikachu-bot",
-            "cwd": "/bots/discord-bots/pikachu-bot",
-            "script": "pikachu-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
+            "name": "slowpoke",
+            "cwd": "src/bots/slowpoke",
+            "script": "app.js",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
-            "name": "slowpoke-bot",
-            "cwd": "/bots/discord-bots/slowpoke-bot",
-            "script": "slowpoke-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
+            "name": "professor-willow",
+            "cwd": "src/bots/professor-willow",
+            "script": "app.js",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
-            "name": "self-bot",
-            "cwd": "/bots/discord-bots/self-bot",
-            "script": "self-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
+            "name": "self",
+            "cwd": "src/bots/self",
+            "script": "app.js",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
-            "name": "professor-willow-bot",
-            "cwd": "/bots/discord-bots/professor-willow-bot",
-            "script": "professor-willow-bot.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
+            "name": "twitter",
+            "cwd": "src/bots/twitter",
+            "script": "app.js",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
         {
-            "name": "persian-bot",
-            "cwd": "/bots/discord-bots/persian-bot",
-            "script": "server.js",
-            "watch": ["./", "../assets"],
-            "ignore_watch": ["../assets/db", ".git", ".DS_Store"],
-            "exec_mode": "cluster_mode",
+            "name": "meowth",
+            "cwd": "src/bots/Meowth",
+            "script": "launcher.py",
+            "args": "-s",
+            "interpreter": "/usr/bin/python3.5",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "fork",
+            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        {
+            "name": "persian",
+            "cwd": "src/bots/persian",
+            "script": "app.js",
+            "watch": [
+                "./"
+            ],
+            "ignore_watch": [
+                ".git",
+                ".DS_Store"
+            ],
+            "exec_mode": "cluster",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         }
     ]
