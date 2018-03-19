@@ -12,6 +12,7 @@ const RaidSchema = Schema({
     chargeMove: { type: String, required: false },
     ending: { type: Date, required: true },
     gym: { type: String, required: true },
+    eligible: { type: Boolean, required: true },
     latitude: { type: String, required: true },
     longitude: { type: String, required: true },
     address: { type: String, required: true },

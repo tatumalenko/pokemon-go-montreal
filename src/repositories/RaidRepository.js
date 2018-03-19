@@ -36,23 +36,11 @@ class RaidRepository {
             chargeMove: raid.moveset.charge,
             ending: raid.time.ending,
             gym: raid.gym,
+            eligible: raid.eligible,
             latitude: raid.location.coordinates.latitude,
             longitude: raid.location.coordinates.longitude,
             address: raid.location.address,
         }, { upsert: true });
-        /**
-            gym,
-            eligible,
-            moveset,
-            time: { ending: endTime },
-            location: {
-                coordinates: {
-                    latitude,
-                    longitude,
-                },
-                address,
-            },
-        */
     }
 }
 
