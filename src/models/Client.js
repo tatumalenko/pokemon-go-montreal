@@ -6,6 +6,7 @@ const Utils = require('../utils/Utils');
 const SpellChecker = require('../utils/SpellChecker');
 const UserRepository = require('../repositories/UserRepository');
 const RaidRepository = require('../repositories/RaidRepository');
+const GymRepository = require('../repositories/GymRepository');
 const NeighbourhoodRepository = require('../repositories/NeighbourhoodRepository');
 
 const configs = require('../../configs/configs.js');
@@ -20,6 +21,7 @@ class Client extends Discord.Client {
         this.name = options.name;
         this.userRepository = new UserRepository(this.configs.dbMongo.dbPath);
         this.raidRepository = new RaidRepository(this.configs.dbMongo.dbPath);
+        this.gymRepository = new GymRepository(this.configs.dbMongo.dbPath);
         this.neighbourhoodRepository = new NeighbourhoodRepository(this.configs.polygonMapPath);
         this.utils = Utils;
         this.spellchecker = new SpellChecker([...Utils.getPokemonNames(), ...Utils.getPokemonNames('french'), Utils.getNeighbourhoodNames()], { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });

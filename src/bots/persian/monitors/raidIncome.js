@@ -12,10 +12,24 @@ module.exports = class {
 
     async run(msg, ...params) {
         console.log('==== INCOMING RAID ====');
-        // console.log(msg);
+        // Save the raid
         const raidSpawn = this.createRaidSpawnFromString(msg.content);
         this.client.raidRepository.addRaid(raidSpawn);
+        console.log('> Updated raid!');
         console.log(raidSpawn);
+
+        // Save/Update gym info.
+        const gym = {
+            name: raidSpawn.gym,
+            latitude: raidSpawn.location.coordinates.latitude,
+            longitude: raidSpawn.location.coordinates.longitude,
+            neighbourhood: raidSpawn.location.neighbourhood,
+            eligible: raidSpawn.eligible,
+        };
+
+        this.client.gymRepository.addUpdateGym(gym);
+        console.log('> Updated gym!');
+        console.log(gym);
 
         console.log('=======================');
     }
