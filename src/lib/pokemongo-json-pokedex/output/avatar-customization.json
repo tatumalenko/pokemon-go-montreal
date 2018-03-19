@@ -66,6 +66,16 @@
             "Backpack"
         ],
         "category": "Backpack",
+        "name": "Backpack Frlg 0",
+        "id": "f_backpack_frlg_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Backpack"
+        ],
+        "category": "Backpack",
         "name": "Backpack Ultra 0",
         "id": "f_backpack_ultra"
     },
@@ -208,6 +218,26 @@
         "category": "Belt",
         "name": "Belt Simple 3",
         "id": "f_belt_simple_3"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Belt"
+        ],
+        "category": "Belt",
+        "name": "Belt Teamrocket 0",
+        "id": "f_belt_teamrocket_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Belt"
+        ],
+        "category": "Belt",
+        "name": "Belt Teamrocket 1",
+        "id": "f_belt_teamrocket_1"
     },
     {
         "gender": "Female",
@@ -356,6 +386,16 @@
             "Gloves"
         ],
         "category": "Gloves",
+        "name": "Gloves Battlegirl 0",
+        "id": "f_gloves_battlegirl_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Gloves"
+        ],
+        "category": "Gloves",
         "name": "Gloves Default 0",
         "id": "f_gloves_default_0"
     },
@@ -398,6 +438,26 @@
         "category": "Gloves",
         "name": "Gloves Empty",
         "id": "f_gloves_empty"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Gloves"
+        ],
+        "category": "Gloves",
+        "name": "Gloves Frlg 0",
+        "id": "f_gloves_frlg_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Gloves"
+        ],
+        "category": "Gloves",
+        "name": "Gloves Teamrocket 0",
+        "id": "f_gloves_teamrocket_0"
     },
     {
         "gender": "Female",
@@ -596,6 +656,16 @@
             "Hat"
         ],
         "category": "Hat",
+        "name": "Hat Frlg 0",
+        "id": "f_hat_frlg_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Hat"
+        ],
+        "category": "Hat",
         "name": "Hat Knitted 0",
         "id": "f_hat_knitted_0"
     },
@@ -628,6 +698,16 @@
         "category": "Hat",
         "name": "Hat Mimikyu 0",
         "id": "f_hat_mimikyu_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Hat"
+        ],
+        "category": "Hat",
+        "name": "Hat Teamrocket 0",
+        "id": "f_hat_teamrocket_0"
     },
     {
         "gender": "Female",
@@ -706,6 +786,16 @@
             "Pants"
         ],
         "category": "Pants",
+        "name": "Pants Battlegirl 0",
+        "id": "f_pants_battlegirl_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
         "name": "Pants Default 0",
         "id": "f_pants_default_0"
     },
@@ -758,6 +848,16 @@
         "category": "Pants",
         "name": "Pants Default 5",
         "id": "f_pants_default_5"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
+        "name": "Pants Frlg 0",
+        "id": "f_pants_frlg_0"
     },
     {
         "gender": "Female",
@@ -936,6 +1036,16 @@
             "Pants"
         ],
         "category": "Pants",
+        "name": "Pants Teamrocket 0",
+        "id": "f_pants_teamrocket_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
         "name": "Pants Turbine 0",
         "id": "f_pants_miniskirt_turbine_0"
     },
@@ -968,6 +1078,16 @@
         "category": "Pants",
         "name": "Pants Ultra 0",
         "id": "f_pants_ultra_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Battlegirl 0",
+        "id": "f_shirt_battlegirl_0"
     },
     {
         "gender": "Female",
@@ -1067,6 +1187,16 @@
         "category": "Shirt",
         "name": "Shirt Default 8",
         "id": "f_shirt_default_8"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Frlg 0",
+        "id": "f_shirt_frlg_0"
     },
     {
         "gender": "Female",
@@ -1228,6 +1358,26 @@
             "Shirt"
         ],
         "category": "Shirt",
+        "name": "Shirt Teamrocket 0",
+        "id": "f_shirt_teamrocket_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Teamrocket 1",
+        "id": "f_shirt_teamrocket_1"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
         "name": "Shirt Tshirt Cycling 0",
         "id": "f_shirt_tshirt_cycling_0"
     },
@@ -1368,6 +1518,16 @@
             "Shoes"
         ],
         "category": "Shoes",
+        "name": "Shoes Battlegirl 0",
+        "id": "f_shoes_battlegirl_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
         "name": "Shoes Default 0",
         "id": "f_shoes_default_0"
     },
@@ -1440,6 +1600,36 @@
         "category": "Shoes",
         "name": "Shoes Empty",
         "id": "f_shoes_empty"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Frlg 0",
+        "id": "f_shoes_frlg_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Teamrocket 0",
+        "id": "f_shoes_teamrocket_0"
+    },
+    {
+        "gender": "Female",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Teamrocket 1",
+        "id": "f_shoes_teamrocket_1"
     },
     {
         "gender": "Female",
@@ -1578,6 +1768,16 @@
             "Backpack"
         ],
         "category": "Backpack",
+        "name": "Backpack Frlg 0",
+        "id": "m_backpack_frlg_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Backpack"
+        ],
+        "category": "Backpack",
         "name": "Backpack Ultra 0",
         "id": "m_backpack_ultra"
     },
@@ -1650,6 +1850,16 @@
         "category": "Glasses",
         "name": "Glasses Empty",
         "id": "m_glasses_empty"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Glasses"
+        ],
+        "category": "Glasses",
+        "name": "Glasses Jogger 0",
+        "id": "m_glasses_jogger_0"
     },
     {
         "gender": "Male",
@@ -1770,6 +1980,36 @@
         "category": "Gloves",
         "name": "Gloves Empty",
         "id": "m_gloves_empty"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Gloves"
+        ],
+        "category": "Gloves",
+        "name": "Gloves Frlg 0",
+        "id": "m_gloves_frlg_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Gloves"
+        ],
+        "category": "Gloves",
+        "name": "Gloves Jogger 0",
+        "id": "m_gloves_jogger"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Gloves"
+        ],
+        "category": "Gloves",
+        "name": "Gloves Teamrocket 0",
+        "id": "m_gloves_teamrocket_0"
     },
     {
         "gender": "Male",
@@ -1948,6 +2188,36 @@
             "Hat"
         ],
         "category": "Hat",
+        "name": "Hat Fisher 0",
+        "id": "m_hat_fisher_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Hat"
+        ],
+        "category": "Hat",
+        "name": "Hat Frlg 0",
+        "id": "m_hat_frlg_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Hat"
+        ],
+        "category": "Hat",
+        "name": "Hat Jogger 0",
+        "id": "m_hat_jogger_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Hat"
+        ],
+        "category": "Hat",
         "name": "Hat Magikarp",
         "id": "m_hat_magikarp"
     },
@@ -1960,6 +2230,16 @@
         "category": "Hat",
         "name": "Hat Mimikyu 0",
         "id": "m_hat_mimikyu_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Hat"
+        ],
+        "category": "Hat",
+        "name": "Hat Teamrocket 0",
+        "id": "m_hat_teamrocket_0"
     },
     {
         "gender": "Male",
@@ -1990,6 +2270,36 @@
         "category": "Pants",
         "name": "Pants Default 0",
         "id": "m_pants_default_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
+        "name": "Pants Fisher 0",
+        "id": "m_pants_fisher_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
+        "name": "Pants Frlg 0",
+        "id": "m_pants_frlg_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
+        "name": "Pants Jogger 0",
+        "id": "m_pants_jogger_0"
     },
     {
         "gender": "Male",
@@ -2070,6 +2380,16 @@
         "category": "Pants",
         "name": "Pants Sweats 4",
         "id": "m_pants_sweats_4"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Pants"
+        ],
+        "category": "Pants",
+        "name": "Pants Teamrocket 0",
+        "id": "m_pants_teamrocket_0"
     },
     {
         "gender": "Male",
@@ -2180,6 +2500,36 @@
         "category": "Shirt",
         "name": "Shirt Default 7",
         "id": "m_shirt_default_7"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Fisher 0",
+        "id": "m_shirt_fisher_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Frlg 0",
+        "id": "m_shirt_frlg_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Jogger 0",
+        "id": "m_shirt_jogger_0"
     },
     {
         "gender": "Male",
@@ -2330,6 +2680,26 @@
         "category": "Shirt",
         "name": "Shirt Sweatshirt Streak 4",
         "id": "m_shirt_sweatshirt_streak_4"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Teamrocket 0",
+        "id": "m_shirt_teamrocket_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shirt"
+        ],
+        "category": "Shirt",
+        "name": "Shirt Teamrocket 1",
+        "id": "m_shirt_teamrocket_1"
     },
     {
         "gender": "Male",
@@ -2544,6 +2914,56 @@
         "category": "Shoes",
         "name": "Shoes Empty",
         "id": "m_shoes_empty"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Fisher 0",
+        "id": "m_shoes_fisher_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Frlg 0",
+        "id": "m_shoes_frlg_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Jogger 0",
+        "id": "m_shoes_jogger_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Teamrocket 0",
+        "id": "m_shoes_teamrocket_0"
+    },
+    {
+        "gender": "Male",
+        "enabled": true,
+        "slot": [
+            "Shoes"
+        ],
+        "category": "Shoes",
+        "name": "Shoes Teamrocket 1",
+        "id": "m_shoes_teamrocket_1"
     },
     {
         "gender": "Male",

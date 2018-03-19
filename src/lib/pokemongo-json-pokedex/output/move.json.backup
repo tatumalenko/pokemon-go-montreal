@@ -2989,7 +2989,7 @@
             "id": "POKEMON_TYPE_FLYING",
             "name": "Flying"
         },
-        "power": 80,
+        "power": 70,
         "criticalChance": 0.05,
         "staminaLossScalar": 0.04,
         "trainerLevelMin": 1,
@@ -3654,7 +3654,7 @@
         "staminaLossScalar": 0.01,
         "trainerLevelMin": 1,
         "trainerLevelMax": 100,
-        "vfxName": "present_fast",
+        "vfxName": "present",
         "durationMs": 1300,
         "damageWindowStartMs": 1100,
         "damageWindowEndMs": 1300,

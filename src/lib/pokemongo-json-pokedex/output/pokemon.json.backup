@@ -1055,7 +1055,6 @@
             "collisionRadius": 0.102,
             "dodgeDistance": 1,
             "dodgeProbability": 0.15,
-            "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
             "minPokemonActionFrequency": 0.2,
             "movementType": {
@@ -1154,6 +1153,7 @@
             "cameraDistance": 2.6325,
             "collisionRadius": 0.117,
             "dodgeDistance": 1,
+            "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
             "minPokemonActionFrequency": 0.2,
             "movementType": null,
@@ -1585,7 +1585,7 @@
             "baseCaptureRate": 0.125,
             "cameraDistance": 3.465,
             "collisionRadius": 0.308,
-            "dodgeDistance": 0.125,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.2,
             "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
@@ -4381,7 +4381,7 @@
             "baseCaptureRate": 0.5,
             "cameraDistance": 4.8150005,
             "collisionRadius": 0.0535,
-            "dodgeDistance": 0.125,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.2,
             "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
@@ -8729,7 +8729,7 @@
             "baseCaptureRate": 0.5,
             "cameraDistance": 3.42,
             "collisionRadius": 0.456,
-            "dodgeDistance": 0.1,
+            "dodgeDistance": 0.8,
             "dodgeProbability": 0.3,
             "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
@@ -8837,7 +8837,7 @@
             "baseCaptureRate": 0.2,
             "cameraDistance": 4.125,
             "collisionRadius": 0.44,
-            "dodgeDistance": 0.1,
+            "dodgeDistance": 0.8,
             "dodgeProbability": 0.15,
             "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
@@ -15345,7 +15345,7 @@
             "baseCaptureRate": 0.03,
             "cameraDistance": 3.88125,
             "collisionRadius": 0.4485,
-            "dodgeDistance": 0.125,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.15,
             "jumpTime": 1,
             "maxPokemonActionFrequency": 1.6,
@@ -17467,7 +17467,7 @@
             "baseCaptureRate": 0.5,
             "cameraDistance": 3.375,
             "collisionRadius": 0.364,
-            "dodgeDistance": 0.125,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.15,
             "jumpTime": 1.5,
             "maxPokemonActionFrequency": 1.6,
@@ -17579,7 +17579,7 @@
             "baseCaptureRate": 0.15,
             "cameraDistance": 4,
             "collisionRadius": 0.364,
-            "dodgeDistance": 0.1,
+            "dodgeDistance": 0.8,
             "dodgeProbability": 0.15,
             "jumpTime": 1.8,
             "maxPokemonActionFrequency": 1.6,
@@ -20456,7 +20456,7 @@
             "baseCaptureRate": 0.3,
             "cameraDistance": 5,
             "collisionRadius": 0.2,
-            "dodgeDistance": 0.125,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.2,
             "jumpTime": 2,
             "maxPokemonActionFrequency": 1.6,
@@ -23607,8 +23607,12 @@
         ],
         "quickMoves": [
             {
-                "name": "Present Fast",
-                "id": "PRESENT_FAST"
+                "name": "Ice Shard Fast",
+                "id": "ICE_SHARD_FAST"
+            },
+            {
+                "name": "Quick Attack Fast",
+                "id": "QUICK_ATTACK_FAST"
             }
         ],
         "family": {
@@ -26187,7 +26191,7 @@
         "stats": {
             "baseAttack": 239,
             "baseDefense": 274,
-            "baseStamina": 193
+            "baseStamina": 212
         },
         "types": [
             {
@@ -26228,7 +26232,7 @@
             "shoulderModeScale": 0.5
         },
         "nextEvolutionBranches": [],
-        "maxCP": 3889,
+        "maxCP": 4063,
         "futureEvolutions": {
             "futureEvolutions": [],
             "name": "Ho Oh",
@@ -26901,8 +26905,8 @@
         },
         "cinematicMoves": [
             {
-                "name": "Focus Blast",
-                "id": "FOCUS_BLAST"
+                "name": "Stone Edge",
+                "id": "STONE_EDGE"
             },
             {
                 "name": "Overheat",
@@ -26911,6 +26915,10 @@
             {
                 "name": "Brave Bird",
                 "id": "BRAVE_BIRD"
+            },
+            {
+                "name": "Focus Blast",
+                "id": "FOCUS_BLAST"
             }
         ],
         "quickMoves": [
@@ -29886,7 +29894,7 @@
             "baseCaptureRate": 0.2,
             "cameraDistance": 4,
             "collisionRadius": 0.4,
-            "dodgeDistance": 0.4,
+            "dodgeDistance": 0.8,
             "dodgeProbability": 0.2,
             "jumpTime": 1.1,
             "maxPokemonActionFrequency": 1.6,
@@ -30638,7 +30646,7 @@
             "baseCaptureRate": 0.1,
             "cameraDistance": 4,
             "collisionRadius": 0.25,
-            "dodgeDistance": 0.35,
+            "dodgeDistance": 0.7,
             "dodgeProbability": 0.3,
             "jumpTime": 1.1,
             "maxPokemonActionFrequency": 1.6,
@@ -30904,8 +30912,8 @@
         },
         "cinematicMoves": [
             {
-                "name": "Stomp",
-                "id": "STOMP"
+                "name": "Crunch",
+                "id": "CRUNCH"
             },
             {
                 "name": "Disarming Voice",
@@ -31277,7 +31285,7 @@
             "attackTimer": 20,
             "baseFleeRate": 0.06,
             "baseCaptureRate": 0.2,
-            "cameraDistance": 6,
+            "cameraDistance": 7,
             "collisionRadius": 1,
             "dodgeDistance": 1,
             "dodgeProbability": 0.05,
@@ -32860,7 +32868,7 @@
             }
         },
         "camera": {
-            "cylinderRadius": 0.3,
+            "cylinderRadius": 1,
             "diskRadius": 0.555,
             "shoulderModeScale": 0.5
         },
@@ -33651,7 +33659,7 @@
             "attackTimer": 20,
             "baseFleeRate": 0.1,
             "baseCaptureRate": 0.5,
-            "cameraDistance": 4.5,
+            "cameraDistance": 5,
             "collisionRadius": 0.4,
             "dodgeDistance": 1,
             "dodgeProbability": 0.05,
@@ -34576,7 +34584,7 @@
             "baseCaptureRate": 0.1,
             "cameraDistance": 3,
             "collisionRadius": 0.25,
-            "dodgeDistance": 0.2,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.3,
             "jumpTime": 1.1,
             "maxPokemonActionFrequency": 1.6,
@@ -35144,7 +35152,7 @@
             }
         },
         "camera": {
-            "cylinderGround": 0.6,
+            "cylinderGround": 1.2,
             "cylinderRadius": 1.3,
             "diskRadius": 0.555,
             "shoulderModeScale": 0.5
@@ -36734,8 +36742,8 @@
         ],
         "quickMoves": [
             {
-                "name": "Waterfall Fast",
-                "id": "WATERFALL_FAST"
+                "name": "Water Gun Fast",
+                "id": "WATER_GUN_FAST"
             },
             {
                 "name": "Dragon Tail Fast",
@@ -36818,22 +36826,26 @@
         "name": "Castform",
         "cinematicMoves": [
             {
-                "name": "Fire Blast",
-                "id": "FIRE_BLAST"
+                "name": "Stomp",
+                "id": "STOMP"
             },
             {
-                "name": "Solar Beam",
-                "id": "SOLAR_BEAM"
+                "name": "Crunch",
+                "id": "CRUNCH"
+            },
+            {
+                "name": "Ancient Power",
+                "id": "ANCIENT_POWER"
             }
         ],
         "quickMoves": [
             {
-                "name": "Ember Fast",
-                "id": "EMBER_FAST"
+                "name": "Bite Fast",
+                "id": "BITE_FAST"
             },
             {
-                "name": "Tackle Fast",
-                "id": "TACKLE_FAST"
+                "name": "Rock Smash Fast",
+                "id": "ROCK_SMASH_FAST"
             }
         ],
         "family": {
@@ -36851,8 +36863,8 @@
         },
         "types": [
             {
-                "id": "POKEMON_TYPE_FIRE",
-                "name": "Fire"
+                "id": "POKEMON_TYPE_NORMAL",
+                "name": "Normal"
             }
         ],
         "modelScale": 1.57,
@@ -37481,7 +37493,7 @@
             "attackTimer": 20,
             "baseFleeRate": 0.1,
             "baseCaptureRate": 0.3,
-            "cameraDistance": 5,
+            "cameraDistance": 6,
             "collisionRadius": 0.25,
             "dodgeDistance": 1,
             "dodgeProbability": 0.15,
@@ -40011,8 +40023,8 @@
         "id": "KYOGRE",
         "name": "Kyogre",
         "buddySize": {
-            "id": "BUDDY_BIG",
-            "name": "Big"
+            "id": "BUDDY_FLYING",
+            "name": "Flying"
         },
         "cinematicMoves": [
             {
@@ -40032,6 +40044,10 @@
             {
                 "name": "Waterfall Fast",
                 "id": "WATERFALL_FAST"
+            },
+            {
+                "name": "Dragon Tail Fast",
+                "id": "DRAGON_TAIL_FAST"
             }
         ],
         "family": {
@@ -40039,7 +40055,7 @@
             "name": "Kyogre"
         },
         "height": 4.5,
-        "modelHeight": 1,
+        "modelHeight": 5.1,
         "kmBuddyDistance": 20,
         "weight": 352,
         "stats": {
@@ -40077,7 +40093,7 @@
         },
         "camera": {
             "cylinderGround": 0.5,
-            "cylinderRadius": 5,
+            "cylinderRadius": 3.3,
             "diskRadius": 0.555,
             "shoulderModeScale": 0.5
         },
@@ -40160,7 +40176,7 @@
             "attackTimer": 20,
             "baseFleeRate": 0.01,
             "baseCaptureRate": 0.02,
-            "cameraDistance": 6,
+            "cameraDistance": 7,
             "collisionRadius": 1,
             "dodgeDistance": 1,
             "dodgeProbability": 0.15,
@@ -40257,20 +40273,17 @@
             "attackTimer": 20,
             "baseFleeRate": 0.01,
             "baseCaptureRate": 0.02,
-            "cameraDistance": 5,
+            "cameraDistance": 6,
             "collisionRadius": 1,
-            "dodgeDistance": 0.5,
+            "dodgeDistance": 1,
             "dodgeProbability": 0.15,
             "jumpTime": 1.1,
             "maxPokemonActionFrequency": 1.6,
             "minPokemonActionFrequency": 0.2,
-            "movementType": {
-                "name": "Movement Flying",
-                "id": "MOVEMENT_FLYING"
-            }
+            "movementType": null
         },
         "camera": {
-            "cylinderGround": 0.3,
+            "cylinderGround": 1,
             "cylinderRadius": 2,
             "diskRadius": 0.555,
             "shoulderModeScale": 0.5
