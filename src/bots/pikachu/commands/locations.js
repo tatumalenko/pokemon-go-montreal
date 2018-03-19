@@ -30,12 +30,16 @@ module.exports = class {
                 const locations = args.join(' ')
                     .match(/(?:\w|['-]\w)+/ig)
                     .filter(l => !Number(l))
-                    .map(e => this.client.utils.getNeighbourhoodAlias(e));
+                    .map(e => this.client.utils.getNeighbourhoodAlias(e))
+                    .sort();
                 console.log(locations);
-                user.locations = locations.sort();
+                user.locations = locations;
                 await user.save();
                 await msg.react('✅');
             } catch (e) {
+                const userEntries = args.join(' ')
+                    .match(/(?:\w|['-]\w)+/ig)
+                    .filter(l => !Number(l));
                 await msg.react('❌');
                 if (e.message.includes('is not a valid enum value')) {
                     console.log(e.message);
@@ -48,11 +52,11 @@ module.exports = class {
                     }
                 } else if (e.message.includes('User validation failed: locations')) {
                     console.log(e.message);
-                    const badEntries = e.message.match(/(\d+)/g).map(e => e + 1);
+                    const badEntries = e.message.match(/(\d+)/g).map(idx => userEntries[idx]).join(', ');
                     if (badEntries) {
                         await msg.channel.send(this.client.utils.createErrorMsg({
-                            english: `Oops! The \`${badEntries}\` entries are not valid neighbourhood names.`,
-                            french: `Oops! Les \`${badEntries}\` entrées ne sont pas des noms de quartiers valides!`,
+                            english: `Oops! \`${badEntries}\` are not valid neighbourhood names.`,
+                            french: `Oops! \`${badEntries}\` ne sont pas des noms de quartiers valides!`,
                         }));
                     }
                 } else if (e instanceof Error) {
