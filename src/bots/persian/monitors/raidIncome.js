@@ -11,58 +11,60 @@ module.exports = class {
     }
 
     async run(msg, ...params) {
-        console.log("==== INCOME ====");
-        //console.log(msg);
-        let raidSpawn = this._createRaidSpawnFromString(msg.content);
+        console.log('==== INCOMING RAID ====');
+        // console.log(msg);
+        const raidSpawn = this.createRaidSpawnFromString(msg.content);
+        this.client.raidRepository.addRaid(raidSpawn);
         console.log(raidSpawn);
 
-        console.log("================");
+        console.log('=======================');
     }
 
-    _createRaidSpawnFromString(text) {
+    createRaidSpawnFromString(text) {
         // Get basic information from the first line of the raid.
-        let firstLineRegex = /\*\*(.*)\*\* - Level: (\d)( - CP: (.*))?/;
-        let firstLineMatches = firstLineRegex.exec(text);
-        //let modifier = firstLineMatches.length == 5 ? 0 : 1;
-        let name = firstLineMatches[1];
-        let tier = firstLineMatches[2];
-        //this.cp = firstLineMatches[4 - modifier];
-
-        // TODO: moveset.
+        const firstLineMatches = /\*\*(.*)\*\* - Level: (\d)( - CP: (.*))?/.exec(text);
+        const name = firstLineMatches[1];
+        const tier = firstLineMatches[2];
 
         // Find start and end time of the raid.
-        let startRegex = /\*\*Start\*\*: (\d{2}):(\d{2}):(\d{2})(PM|AM)/;
-        let startTime = this._getDate(text, startRegex);
-        let endRegex = /\*\*End\*\*: (\d{2}):(\d{2}):(\d{2})(PM|AM)/;
-        let endTime = this._getDate(text, endRegex);
+        const startTime = this.getDate(text, /\*\*Start\*\*: (\d{2}):(\d{2}):(\d{2})(PM|AM)/);
+        const endTime = this.getDate(text, /\*\*End\*\*: (\d{2}):(\d{2}):(\d{2})(PM|AM)/);
 
         // location.
-        let addressRegex = /\*\*Address\*\*: (.*)/;
-        let addressMatches = addressRegex.exec(text);
-        let address = addressMatches[1];
+        const addressMatches = /\*\*Address\*\*: (.*)/.exec(text);
+        const address = addressMatches[1];
 
-        let mapRegex = /\*\*Map\*\*: <(.*#(.*),(.*))>/;
-        let mapMatches = mapRegex.exec(text);
-        //let mapUrl = mapMatches[1];
-        let latitude = mapMatches[2];
-        let longitude = mapMatches[3];
+        const mapMatches = /\*\*Map\*\*: <(.*#(.*),(.*))>/.exec(text);
+        const latitude = mapMatches[2];
+        const longitude = mapMatches[3];
 
-        //let googleMapRegex = /\*\*Google Map\*\*: <(.*)>/;
-        //let googleMapMatches = googleMapRegex.exec(text);
-        //let googleMapUrl = googleMapMatches[1];
+        // Gym.
+        const gymMatches = /\*\*Gym name\*\*: (.*)/.exec(text);
+        const gym = gymMatches[1];
 
-        let raidSpawn = new RaidSpawn({
-            tier: tier,
-            name: name,
-            moveset: 'moveset...',
-            time: { /*remaining: 'remaining...',*/ ending: endTime }, // ?!?
+        // Moveset.
+        const movesetMatches = /\*\*Moveset\*\*: (.*) - (.*)/.exec(text);
+        let moveset = { fast: 'N/A', charge: 'N/A' };
+        if (movesetMatches !== null) {
+            moveset = { fast: movesetMatches[1], charge: movesetMatches[2] };
+        }
+
+        const eligible = text.includes('EX Raid Eligible: YES');
+
+        const raidSpawn = new RaidSpawn({
+            tier,
+            name,
+            gym,
+            eligible,
+            moveset,
+            time: { ending: endTime },
             location: {
                 coordinates: {
-                    latitude: latitude,
-                    longitude: longitude,
+                    latitude,
+                    longitude,
                 },
-                address: address
-            }
+                address,
+            },
         });
 
         return raidSpawn;
@@ -73,24 +75,24 @@ module.exports = class {
      * Code taken from: https://stackoverflow.com/questions/16382266/javascript-set-time-string-to-date-object
      * And modified...
      */
-    _getDate(text, regex) {
-        var parts = text.match(regex);
+    getDate(text, regex) {
+        const parts = text.match(regex);
 
-        var tempHours = parseInt(parts[1], 10);
+        const tempHours = parseInt(parts[1], 10);
 
-        var hours = parts[4].toLowerCase().includes("am") ?
-            function(am) {return am < 12 ? am : 0}(tempHours) :
-            function(pm) {return pm < 12 ? pm + 12 : 12}(tempHours);
+        const hours = parts[4].toLowerCase().includes('am') ?
+            (function fixAM(am) { return am < 12 ? am : 0; }(tempHours)) :
+            (function fixPM(pm) { return pm < 12 ? pm + 12 : 12; }(tempHours));
 
-        var minutes = parseInt(parts[2], 10);
-        var seconds = parseInt(parts[3], 10)
+        const minutes = parseInt(parts[2], 10);
+        const seconds = parseInt(parts[3], 10);
 
-        var date = new Date();
+        const date = new Date();
 
         date.setHours(hours);
         date.setMinutes(minutes);
         date.setSeconds(seconds);
 
         return date;
-    };
-}
+    }
+};

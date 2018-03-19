@@ -5,6 +5,8 @@ class RaidSpawn extends Spawn {
     constructor({
         tier,
         name,
+        gym,
+        eligible,
         moveset,
         time: { remaining, ending },
         location: {
@@ -28,6 +30,8 @@ class RaidSpawn extends Spawn {
             },
         });
         this.tier = tier;
+        this.gym = gym;
+        this.eligible = eligible;
     }
 }
 
