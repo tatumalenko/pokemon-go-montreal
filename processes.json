@@ -76,14 +76,7 @@
             "script": "launcher.py",
             "args": ["-s"],
             "interpreter": "/usr/bin/python3.5",
-            "watch": [
-                "./"
-            ],
-            "ignore_watch": [
-                ".git",
-                ".DS_Store",
-                "./logs"
-            ],
+            "watch": "false",
             "exec_mode": "fork",
             "log_date_format": "YYYY-MM-DD HH:mm:ss"
         },
