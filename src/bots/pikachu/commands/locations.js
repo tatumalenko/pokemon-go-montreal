@@ -56,7 +56,7 @@ module.exports = class {
                     if (badEntries) {
                         await msg.channel.send(this.client.utils.createErrorMsg({
                             english: `Oops! \`${badEntries}\` are not valid neighbourhood names.`,
-                            french: `Oops! \`${badEntries}\` ne sont pas des noms de quartiers valides!`,
+                            french: `Oops! \`${badEntries}\` ne sont pas des noms de quartiers valides.`,
                         }));
                     }
                 } else if (e instanceof Error) {
