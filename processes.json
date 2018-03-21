@@ -12,7 +12,12 @@
                 ".DS_Store"
             ],
             "exec_mode": "cluster",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "CLIENT_ID": "360755167953682432",
+                "BOT_TOKEN": "MzYwNzU1MTY3OTUzNjgyNDMy.DKtMdg.B-Un1hzaDeXk0pe6KVt-BZ5q6ZQ"
+            }
         },
         {
             "name": "slowpoke",
@@ -26,7 +31,12 @@
                 ".DS_Store"
             ],
             "exec_mode": "cluster",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "CLIENT_ID": "359610082457288706",
+                "BOT_TOKEN": "MzU5NjEwMDgyNDU3Mjg4NzA2.DKJgkQ.elGGht2B_zLaleHVCFV-y_hMAOw"
+            }
         },
         {
             "name": "professor-willow",
@@ -43,7 +53,8 @@
             "log_date_format": "YYYY-MM-DD HH:mm:ss",
             "env": {
                 "NODE_ENV": "development",
-                "PROFESSOR_WILLOW_BOT_TOKEN": "MzgwMzczNjU5NDkzMzM1MDQy.DO3qGg.kx5pjOVZDy2AIlxALq83xO_wCKQ"
+                "CLIENT_ID": "380373659493335042",
+                "BOT_TOKEN": "MzgwMzczNjU5NDkzMzM1MDQy.DO3qGg.kx5pjOVZDy2AIlxALq83xO_wCKQ"
             }
         },
         {
@@ -58,7 +69,12 @@
                 ".DS_Store"
             ],
             "exec_mode": "cluster",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "CLIENT_ID": "352891309024870403",
+                "BOT_TOKEN": "MzUyODkxMzA5MDI0ODcwNDAz.DLOHrA.OQmvHa88PRfzLMmPWBdoydNv_RU"
+            }
         },
         {
             "name": "twitter",
@@ -72,7 +88,16 @@
                 ".DS_Store"
             ],
             "exec_mode": "cluster",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "WEBHOOK_ID": "360757582253654016",
+                "WEBHOOK_TOKEN": "foX4zyICueXC9sgaqVN4qcnV3bWgXwayZ9UCOjGZaFWj-n51MonhUzchTTx0cfDcMEJ9",
+                "CONSUMER_KEY": "W9zZScb5eDIERWYnMIzMIynwk",
+                "CONSUMER_SECRET": "etd9MEj8m11CkXIA77vwVwI8vhYBCYfQC4dlhMftt96q2wwl0K",
+                "ACCESS_TOKEN_KEY": "943808102549336064-0P7fv6egC1203BfpRy2YazjRlygR5A8",
+                "ACCESS_TOKEN_SECRET": "f9GsuXmpiJ4hBBYS6jJQgRbo9QqMCBNNzrPj1T8Pendxp"
+            }
         },
         {
             "name": "meowth",
@@ -82,7 +107,12 @@
             "interpreter": "/usr/bin/python3.5",
             "watch": "false",
             "exec_mode": "fork",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "CLIENT_ID": "406662051948265474",
+                "BOT_TOKEN": "NDA2NjYyMDUxOTQ4MjY1NDc0.DU2Nkg.MAyjWS6TDNXzKGqmE-gB1m_ddMA"
+            }
         },
         {
             "name": "persian",
@@ -96,7 +126,12 @@
                 ".DS_Store"
             ],
             "exec_mode": "cluster",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "CLIENT_ID": "",
+                "BOT_TOKEN": "MzgwOTA0NzY0MTUxNTYyMjQ3.DO_YuQ.J07Q1y9ZQlVcEt7xve8mDRFIzrA"
+            }
         }
     ]
 }
