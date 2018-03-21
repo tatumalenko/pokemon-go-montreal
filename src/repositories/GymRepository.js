@@ -31,6 +31,12 @@ class RaidRepository {
             longitude: gym.longitude,
         }, gym, { upsert: true });
     }
+
+    async fetchAllGyms() {
+        const gyms = await Gym.find();
+
+        return gyms;
+    }
 }
 
 module.exports = RaidRepository;
