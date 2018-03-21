@@ -40,7 +40,11 @@
                 ".DS_Store"
             ],
             "exec_mode": "cluster",
-            "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "env": {
+                "NODE_ENV": "development",
+                "PROFESSOR_WILLOW_BOT_TOKEN": "MzgwMzczNjU5NDkzMzM1MDQy.DO3qGg.kx5pjOVZDy2AIlxALq83xO_wCKQ"
+            }
         },
         {
             "name": "self",

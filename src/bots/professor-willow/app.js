@@ -191,7 +191,8 @@ client.on('message', async (message) => {
                     }
                     break;
                 case 'echo':
-
+                    if (!message.channel.permissionsFor(message.author).has('ADMINISTRATOR')) return;
+                    message.channel.send(args.map(v => `${eval(v)}\n`));
                     break;
                 default:
                     break;
