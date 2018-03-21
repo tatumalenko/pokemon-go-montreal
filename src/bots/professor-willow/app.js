@@ -3,7 +3,9 @@ const Discord = require('discord.js');
 const configs = require('../../../configs/configs');
 
 // Create an instance of a Discord client
-const client = new Discord.Client();
+const client = new Discord.Client({
+    fetchAllMembers: true,
+});
 
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
@@ -187,6 +189,9 @@ client.on('message', async (message) => {
                                 console.log(err);
                             });
                     }
+                    break;
+                case 'echo':
+
                     break;
                 default:
                     break;
