@@ -23,10 +23,10 @@ module.exports = class {
                 } else {
                     if (gymsByNeigborhood[`${element.neighbourhood}`] == null) {
                         gymsByNeigborhood[`${element.neighbourhood}`] = [];
+                        nbNeighbourhood += 1;
                     }
 
                     gymsByNeigborhood[`${element.neighbourhood}`].push(element);
-                    nbNeighbourhood += 1;
                 }
             });
 
