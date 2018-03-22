@@ -173,7 +173,7 @@ module.exports = class {
             strPokemons.push(`\`${pokemon.name} | ${pokemon.neighbourhoods.join(', ')} | ${pokemon.level} | ${pokemon.iv}\``);
         });
 
-        const MAX_MSG_CHAR_COUNT = 2000 - 5; // 2000 char limit and some safety margin
+        const MAX_MSG_CHAR_COUNT = 2000 - 100; // 2000 char limit and some safety margin
         if ([...strHeader, ...strPokemons.sort()].join('\n').length > MAX_MSG_CHAR_COUNT) {
             const charCnt = 0;
             const strArray = [];
