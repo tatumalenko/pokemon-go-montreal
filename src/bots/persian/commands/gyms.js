@@ -10,6 +10,10 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
+            if (args.length > 0) {
+                return;
+            }
+
             const gyms = await this.client.gymRepository.fetchAllGyms();
             let message = '';
 
