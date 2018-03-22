@@ -1,0 +1,41 @@
+const fs = require('fs');
+
+module.exports = class {
+    constructor(...params) {
+        Object.assign(this, {
+            name: 'gyms',
+            enabled: true,
+            runIn: [], // [] = uses app.js runIn property values
+            description: '',
+        });
+    }
+
+    async run(msg, { prefix, cmd, args }) {
+        try {
+            if (!args.includes('csv')) {
+                return;
+            }
+
+            const gyms = await this.client.gymRepository.fetchAllGyms();
+
+            // Building CSV structure
+            let csv = '';
+            gyms.forEach((element) => {
+                csv += `${element.name},${element.latitude},${element.longitude}\n`;
+            });
+
+            // Output the file
+            // TODO: Configure output path
+            fs.writeFile('/tmp/gyms.csv', csv, async (err) => {
+                if (err) {
+                    await msg.channel.send(err);
+                } else {
+                    await msg.channel.send('Done!');
+                }
+            });
+        } catch (e) {
+            await msg.channel.send(e.message);
+            console.log(e);
+        }
+    }
+};
