@@ -6,5 +6,5 @@ new Client({
     },
     name: 'pikachu',
     appDirName: __dirname,
-    runIn: ['bot-testing2', 'test-zone', 'dm'], // = ['all'] for any channel
+    runIn: ['bot-testing2', 'test-zone', 'wants-post', 'dm'], // = ['all'] for any channel
 }).login();
