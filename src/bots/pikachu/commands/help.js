@@ -11,9 +11,8 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            const examples = `
-            \`\`\`md
-            # -------------------------
+            const examples = '\`\`\`md' +
+            `# -------------------------
             # PIKACHU QUICK HELP GUIDE
             # -------------------------
               [Command](Description):
@@ -32,8 +31,8 @@ module.exports = class {
             [!map](display all avail. neighbourhoods and link to new neighbourhood map)
             [!map r](display all avail. neighbourhoods starting in letter 'r')
             [!translate poussifeu](display the translated FR-EN or EN-FR Pokemon name)
-            [!spell blissay](display all likely words you meant - either name or neighbourhood)
-            \`\`\``;
+            [!spell blissay](display all likely words you meant - either name or neighbourhood)` +
+            '\`\`\`';
             const mapLink = 'https://drive.google.com/open?id=1HeJJCUg7MdazGHeUU1-e3txsMjXreJdN';
             const docLink = 'https://github.com/tatumalenko/pokemon-go-montreal/tree/master/src/bots/pikachu';
             await msg.channel.send(`Detailed instructions: <${docLink}>
