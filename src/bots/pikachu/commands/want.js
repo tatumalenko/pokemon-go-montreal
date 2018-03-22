@@ -41,6 +41,15 @@ module.exports = class {
                 return;
             }
 
+            if (args.length === 2 && (args[0].toLowerCase() === 'id' || args[0].toLowerCase() === 'name')) {
+                if (!msg.channel.permissionsFor(msg.author).has('ADMINISTRATOR')) {
+                    await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                    return;
+                }
+                await msg.channel.send(this.createWildPreferenceString(this.client.guilds.get(this.client.configs.guildId).members.find(args[0].toLowerCase(), args[1])));
+                return;
+            }
+
             // !want blacklist name1 name2 name3
             const blacklistAliases = ['blacklist', 'nowant', 'ignore'];
             if (blacklistAliases.some(alias => args.join(' ').toLowerCase().includes(alias))) {
