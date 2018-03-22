@@ -77,11 +77,11 @@ What follows are the detailed instruction for each command.
     * `!locations rosemont downtown` -- Set default locations to Rosemont and Downtown (Centre-Ville)
     * `!locations` -- Displays current default locations set
 ---
-### **`!neighbourhoods`** (or `!quartiers, !neighbourhood, !quartier, !districts, !areas, !sectors, !arrondissements`)
+### **`!neighbourhoods`** (or `!map`, `!quartiers, !neighbourhood, !quartier, !districts, !areas, !sectors, !arrondissements`)
 
 * **Usage**:
     1) `!neighbourhoods`
-        * **Description**: Prints all avail. neighbourhoods
+        * **Description**: Prints all avail. neighbourhoods and link to new neighbourhood map
     2) `!neighbourhoods <firstLetter>`
         * **Description**: Displays all avail. neighbourhoods starting in `<firstLetter>`
 ---

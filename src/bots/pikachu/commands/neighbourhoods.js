@@ -4,7 +4,7 @@ module.exports = class {
             name: 'neighbourhoods',
             enabled: true,
             runIn: [], // [] = uses app.js runIn property values
-            aliases: ['quartiers', 'neighbourhood', 'quartier', 'districts', 'areas', 'sectors', 'arrondissements'],
+            aliases: ['map', 'quartiers', 'neighbourhood', 'quartier', 'districts', 'areas', 'sectors', 'arrondissements'],
             description: '',
         });
     }
@@ -13,7 +13,10 @@ module.exports = class {
     async run(msg, { prefix, cmd, args }) {
         try {
             if (args.length === 0) {
-                await msg.channel.send(`**Neighbourhoods/Quartiers: ** ${this.client.utils.getNeighbourhoodNames().join(', ')}`);
+                const mapLink = 'https://drive.google.com/open?id=1HeJJCUg7MdazGHeUU1-e3txsMjXreJdN';
+                await msg.channel.send(`Map: ${mapLink}
+                    **Neighbourhoods/Quartiers: ** ${this.client.utils.getNeighbourhoodNames().join(', ')}
+                    `);
                 return;
             }
             await msg.channel.send(`**Neighbourhoods/Quartiers (${args.join('').charAt(0)}...?): ** ${this.client.utils.getNeighbourhoodNames().filter(n => n.charAt(0) === args.join('').charAt(0)).join(', ')}`);
