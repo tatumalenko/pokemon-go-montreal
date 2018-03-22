@@ -93,8 +93,9 @@ client.on('message', async (message) => {
                     if (!message.channel.permissionsFor(message.author).has('ADMINISTRATOR')) return;
 
                     args = args.join(' ').split(' | ');
-                    const richEmbed = {};
-                    richEmbed.embed = {};
+                    const embed = {
+                        embed: {},
+                    };
                     let content;
                     let channelDestination;
                     for (let i = 0; i < args.length - 1; i += 2) {
@@ -106,16 +107,16 @@ client.on('message', async (message) => {
                                 channelDestination = message.guild.channels.find('name', args[i + 1]);
                                 break;
                             case 'msg':
-                                richEmbed.embed.description = args[i + 1].replace(/\\n/g, '\n');
+                                embed.embed.description = args[i + 1].replace(/\\n/g, '\n');
                                 break;
                             case 'title':
-                                richEmbed.embed.title = args[i + 1];
+                                embed.embed.title = args[i + 1];
                                 break;
                             case 'url':
-                                richEmbed.embed.url = args[i + 1];
+                                embed.embed.url = args[i + 1];
                                 break;
                             case 'image':
-                                richEmbed.embed.image = {
+                                embed.embed.image = {
                                     url: args[i + 1],
                                 };
                                 break;
@@ -124,23 +125,24 @@ client.on('message', async (message) => {
                         }
                     }
 
-                    if (Object.keys(richEmbed.embed).length !== 0) { richEmbed.embed.color = '15588666'; }
+                    if (Object.keys(embed.embed).length !== 0) { embed.embed.color = '15588666'; }
 
                     if (!channelDestination) channelDestination = message.channel;
 
-                    console.log(content, richEmbed);
-                    console.log(!!content, Object.keys(richEmbed.embed).length);
+                    const richEmbed = { content, embed };
+                    console.log(richEmbed);
+                    console.log(!!content, Object.keys(embed.embed).length);
 
-                    if (content && Object.keys(richEmbed.embed).length !== 0) {
+                    if (content && Object.keys(embed.embed).length !== 0) {
                         await channelDestination.send({
                             content,
-                            embed: richEmbed,
+                            embed,
                         });
-                    } else if (content && Object.keys(richEmbed.embed).length === 0) {
+                    } else if (content && Object.keys(embed.embed).length === 0) {
                         await channelDestination.send(content);
-                    } else if (!content && Object.keys(richEmbed.embed).length !== 0) {
+                    } else if (!content && Object.keys(embed.embed).length !== 0) {
                         await channelDestination.send({
-                            embed: richEmbed.embed,
+                            embed: embed.embed,
                         });
                     }
                     break;
