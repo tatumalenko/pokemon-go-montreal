@@ -31,14 +31,13 @@ module.exports = class {
             '[!map](display all avail. neighbourhoods and link to new neighbourhood map)\n' +
             '[!map r](display all avail. neighbourhoods starting in letter \'r\')\n' +
             '[!translate poussifeu](display the translated FR-EN or EN-FR Pokemon name)\n' +
-            '[!spell blissay](display all likely words you meant - either name or neighbourhood)\n' +
+            '[!spell blissay](display all likely words you meant)\n' +
             '\`\`\`';
             const mapLink = 'https://drive.google.com/open?id=1HeJJCUg7MdazGHeUU1-e3txsMjXreJdN';
             const docLink = 'https://github.com/tatumalenko/pokemon-go-montreal/tree/master/src/bots/pikachu';
-            await msg.channel.send(`Detailed instructions: <${docLink}>
-                Map: <${mapLink}>
-                ${examples}
-                `);
+            await msg.channel.send(`**Detailed instructions:** <${docLink}>\n` +
+                `**Map:** <${mapLink}>\n` +
+                `${examples}`);
         } catch (e) {
             await msg.channel.send(e.message);
             console.log(e);
