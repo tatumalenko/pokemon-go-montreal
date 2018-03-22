@@ -126,7 +126,12 @@ client.on('message', async (message) => {
                     embed.color = '15588666';
                     if (!channelDestination) channelDestination = message.channel;
 
+                    const testEmbed = {
+                        content,
+                        embed: { embed },
+                    };
                     console.log(content, embed);
+                    console.log(testEmbed);
 
                     if (content && Object.keys(embed).length !== 0) {
                         await channelDestination.send({
