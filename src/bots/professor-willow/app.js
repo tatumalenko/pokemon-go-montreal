@@ -130,6 +130,7 @@ client.on('message', async (message) => {
                     const richEmbed = { content, embed };
                     console.log(richEmbed);
                     console.log(!!content, Object.keys(embed).length);
+                    console.log('!!content && Object.keys(embed).length !== 0', !!content && Object.keys(embed).length !== 0);
 
                     if (!!content && Object.keys(embed).length !== 0) {
                         await channelDestination.send({
