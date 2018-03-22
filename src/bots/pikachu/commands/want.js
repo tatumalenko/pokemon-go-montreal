@@ -192,7 +192,8 @@ module.exports = class {
                     strArray[idx] = `${strArray[idx]}${strPokemon}\n`;
                 }
             }
-            console.log(strArray);
+            console.log(strArray[0]);
+            console.log(strArray[1]);
             return strArray;
         }
 
