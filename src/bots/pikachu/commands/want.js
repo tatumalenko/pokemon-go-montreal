@@ -164,7 +164,7 @@ module.exports = class {
         console.log(user.locations);
         const userLocations = (user.locations && user.locations.length >= 1) ? user.locations.join(', ') : 'none set/aucunes établis';
 
-        const strHeader = `[**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}]`;
+        const strHeader = [`**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`];
         strHeader.push(`**Blacklist:** ${user.preferences.wild.blacklist.sort().join(', ')}`);
         strHeader.push(`**Default Locations Défaults:** ${userLocations}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`);
 
