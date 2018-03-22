@@ -46,7 +46,9 @@ module.exports = class {
                     await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
                     return;
                 }
-                await msg.channel.send(this.createWildPreferenceString(this.client.userRepository.fetchUser(this.client.guilds.get(this.client.configs.guildId).members.find(args[0].toLowerCase() === 'name' ? 'displayName' : 'id', args[1]))));
+                const requestedDiscordMember = await this.client.guilds.get(this.client.configs.guildId).members.find(args[0].toLowerCase() === 'name' ? 'displayName' : 'id', args[1]);
+                const requestedUser = await this.client.userRepository.fetchUser(requestedDiscordMember);
+                await msg.channel.send(this.createWildPreferenceString(requestedUser));
                 return;
             }
 
