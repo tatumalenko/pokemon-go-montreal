@@ -33,6 +33,11 @@ module.exports = class {
             await this.client.utils.sendEmbedToRepicients([msg.guild.channels.find('name', this.client.configs.channels.wildAlerts)], spawnEmbed); // Post in wilds-post channel
         } catch (e) {
             console.log(e);
+            try {
+                await this.client.guilds.get(this.client.configs.guildId).channels.find('name', this.client.configs.channels.botLogs).send(e);
+            } catch (e2) {
+                console.log(`Couldn't send caught error to ${this.client.configs.channels.botLogs} channel!`);
+            }
         }
     }
 
