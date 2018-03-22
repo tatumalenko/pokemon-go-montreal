@@ -11,27 +11,27 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            const examples = '\`\`\`md' +
-            `# -------------------------
-            # PIKACHU QUICK HELP GUIDE
-            # -------------------------
-              [Command](Description):
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            [!want](display all current wild preferences)
-            [!want on](turn on wild alerts)
-            [!want off](turn off wild alerts)
-            [!want <pokemon> <neighbourhood> <min level> <min iv>](add wild preference)
-            [!want all everywhere 100](add 'all' Pokemon and 'everywhere' for neighbourhood)
-            [!want blissey chansey snorlax rosemont 80](add multiple Pokemon)
-            [!want all rosemont downtown 25 90](add multiple neighbourhoods)
-            [!unwant all rosemont downtown 25 90](remove specific preference)
-            [!unwant all](remove every preference with 'all' as Pokemon)
-            [!locations](display all current default locations)
-            [!locations rosemont downtown](set default locations to two neighbourhoods)
-            [!map](display all avail. neighbourhoods and link to new neighbourhood map)
-            [!map r](display all avail. neighbourhoods starting in letter 'r')
-            [!translate poussifeu](display the translated FR-EN or EN-FR Pokemon name)
-            [!spell blissay](display all likely words you meant - either name or neighbourhood)` +
+            const examples = '\`\`\`md\n' +
+            '# -------------------------\n' +
+            '# PIKACHU QUICK HELP GUIDE\n' +
+            '# -------------------------\n' +
+            '  [Command](Description):\n' +
+            '~~~~~~~~~~~~~~~~~~~~~~~~~~~\n' +
+            '[!want](display all current wild preferences)\n' +
+            '[!want on](turn on wild alerts)\n' +
+            '[!want off](turn off wild alerts)\n' +
+            '[!want <pokemon> <neighbourhood> <min level> <min iv>](add wild preference)\n' +
+            '[!want all everywhere 100](add \'all\' Pokemon and \'everywhere\' for neighbourhood)\n' +
+            '[!want blissey chansey snorlax rosemont 80](add multiple Pokemon)\n' +
+            '[!want all rosemont downtown 25 90](add multiple neighbourhoods)\n' +
+            '[!unwant all rosemont downtown 25 90](remove specific preference)\n' +
+            '[!unwant all](remove every preference with \'all\' as Pokemon)\n' +
+            '[!locations](display all current default locations)\n' +
+            '[!locations rosemont downtown](set default locations to two neighbourhoods)\n' +
+            '[!map](display all avail. neighbourhoods and link to new neighbourhood map)\n' +
+            '[!map r](display all avail. neighbourhoods starting in letter \'r\')\n' +
+            '[!translate poussifeu](display the translated FR-EN or EN-FR Pokemon name)\n' +
+            '[!spell blissay](display all likely words you meant - either name or neighbourhood)\n' +
             '\`\`\`';
             const mapLink = 'https://drive.google.com/open?id=1HeJJCUg7MdazGHeUU1-e3txsMjXreJdN';
             const docLink = 'https://github.com/tatumalenko/pokemon-go-montreal/tree/master/src/bots/pikachu';
