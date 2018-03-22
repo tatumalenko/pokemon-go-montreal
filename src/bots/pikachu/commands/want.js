@@ -60,7 +60,14 @@ module.exports = class {
                     return;
                 }
                 const requestedUser = await this.client.userRepository.fetchUser(requestedDiscordMember);
-                await msg.channel.send(this.createWildPreferenceString(requestedUser));
+                const wantSummary = this.createWildPreferenceString(requestedUser);
+                if (!Array.isArray(wantSummary)) {
+                    await msg.channel.send(wantSummary);
+                } else {
+                    wantSummary.forEach(async (str) => {
+                        await msg.channel.send(str);
+                    });
+                }
                 return;
             }
 
