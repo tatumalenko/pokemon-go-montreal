@@ -11,7 +11,8 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            const examples = `\`\`\`md
+            const examples = `
+            \`\`\`md
             # -------------------------
             # PIKACHU QUICK HELP GUIDE
             # -------------------------
