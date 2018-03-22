@@ -164,7 +164,7 @@ module.exports = class {
         console.log(user.locations);
         const userLocations = (user.locations && user.locations.length >= 1) ? user.locations.join(', ') : 'none set/aucunes établis';
 
-        const strHeader = `**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`;
+        const strHeader = `[**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}]`;
         strHeader.push(`**Blacklist:** ${user.preferences.wild.blacklist.sort().join(', ')}`);
         strHeader.push(`**Default Locations Défaults:** ${userLocations}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`);
 
@@ -176,10 +176,10 @@ module.exports = class {
         const MAX_MSG_CHAR_COUNT = 2000 - 5; // 2000 char limit and some safety margin
         if ([...strHeader, ...strPokemons.sort()].join('\n').split('').length > MAX_MSG_CHAR_COUNT) {
             const charCnt = 0;
-
             const strArray = [];
-            strArray.push(`${strHeader}\n`);
             let idx = 0;
+            strArray[idx] = `${strHeader.join('\n')}`;
+
             // eslint-disable-next-line
             for (const strPokemon of strPokemons) {
                 if ((strArray[idx].length + strPokemon.length) > MAX_MSG_CHAR_COUNT) {
@@ -192,6 +192,6 @@ module.exports = class {
             return strArray;
         }
 
-        return [strHeader, ...strPokemons.sort()].join('\n');
+        return [...strHeader, ...strPokemons.sort()].join('\n');
     }
 };
