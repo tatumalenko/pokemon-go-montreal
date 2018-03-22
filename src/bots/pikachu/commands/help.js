@@ -11,7 +11,7 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            await msg.channel.send('Please consult the user guide/SVP consultez le guide d\'utilisateur: https://drive.google.com/file/d/18SHd81xCW8_Ccq9AcAmSn_eqFh953NwF/view?usp=sharing');
+            await msg.channel.send('**Please consult the following guide/SVP consultez le guide suivant:** https://github.com/tatumalenko/pokemon-go-montreal/tree/master/src/bots/pikachu');
         } catch (e) {
             await msg.channel.send(e.message);
             console.log(e);
