@@ -94,9 +94,13 @@ client.on('message', async (message) => {
 
                     args = args.join(' ').split(' | ');
                     const embed = {};
+                    let content;
                     let channelDestination;
                     for (let i = 0; i < args.length - 1; i += 2) {
                         switch (args[i]) {
+                            case 'content':
+                                content = args[i + 1];
+                                break;
                             case 'channel':
                                 channelDestination = message.guild.channels.find('name', args[i + 1]);
                                 break;
@@ -124,10 +128,18 @@ client.on('message', async (message) => {
 
                     console.log(embed);
 
-                    await channelDestination.send({
-                        embed,
-                    });
-
+                    if (content && Object.keys(embed).length !== 0) {
+                        await channelDestination.send({
+                            content,
+                            embed,
+                        });
+                    } else if (content && Object.keys(embed).length === 0) {
+                        await channelDestination.send(content);
+                    } else if (!content && Object.keys(embed).length !== 0) {
+                        await channelDestination.send({
+                            embed,
+                        });
+                    }
                     break;
                 }
                 case 'count':
