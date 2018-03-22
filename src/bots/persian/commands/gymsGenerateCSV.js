@@ -19,9 +19,10 @@ module.exports = class {
             const gyms = await this.client.gymRepository.fetchAllGyms();
 
             // Building CSV structure
-            let csv = '';
+            let csv = 'Gym Name,Latitude,Longitude\n';
             gyms.forEach((element) => {
-                csv += `${element.name},${element.latitude},${element.longitude}\n`;
+                const name = element.name.replace(',', ' ');
+                csv += `${name},${element.latitude},${element.longitude}\n`;
             });
 
             // Output the file
