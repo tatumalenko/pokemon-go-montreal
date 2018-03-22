@@ -183,7 +183,7 @@ module.exports = class {
 
             // eslint-disable-next-line
             for (const strPokemon of strPokemons) {
-                console.log(`strArray[idx].length + strPokemon.length: ${strArray[idx].length}${strPokemon.length}`);
+                console.log(`strArray[idx].length + strPokemon.length: ${strArray[idx].length + strPokemon.length}`);
                 if ((strArray[idx].length + strPokemon.length) > MAX_MSG_CHAR_COUNT) {
                     idx += 1;
                     strArray[idx] = `${strPokemon}\n`;
