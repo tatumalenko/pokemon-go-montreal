@@ -128,15 +128,16 @@ client.on('message', async (message) => {
 
                     const testEmbed = {
                         content,
-                        embed: { embed },
+                        embed,
                     };
                     console.log(content, embed);
                     console.log(testEmbed);
+                    console.log(!!content, Object.keys(embed).length);
 
                     if (content && Object.keys(embed).length !== 0) {
                         await channelDestination.send({
                             content,
-                            embed: { embed },
+                            embed,
                         });
                     } else if (content && Object.keys(embed).length === 0) {
                         await channelDestination.send(content);
