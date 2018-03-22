@@ -26,7 +26,7 @@ module.exports = class {
 
             // await this.client.utils.sendEmbedToRepicients([this.client.guilds.get(this.client.configs.guildId).members.find('displayName', 'uphillsimplex')], spawnEmbed);
             await this.client.utils.sendEmbedToRepicients(recipients, spawnEmbed); // Post in DM channel to members
-            await this.client.utils.sendEmbedToRepicients([msg.guild.channels.find('name', this.configs.channels.wildAlerts)], spawnEmbed); // Post in wilds-post channel
+            await this.client.utils.sendEmbedToRepicients([msg.guild.channels.find('name', this.client.configs.channels.wildAlerts)], spawnEmbed); // Post in wilds-post channel
         } catch (e) {
             console.log(e);
         }
