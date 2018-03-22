@@ -44,7 +44,7 @@ module.exports = class {
             // !want name uphillsimplex
             // !want id 165542964867760129
             if (args.length === 2 && (args[0].toLowerCase() === 'id' || args[0].toLowerCase() === 'name')) {
-                if (!msg.author.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
+                if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
                     await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
                     return;
                 }
