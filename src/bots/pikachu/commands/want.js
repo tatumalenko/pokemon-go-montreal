@@ -173,7 +173,8 @@ module.exports = class {
             strPokemons.push(`\`${pokemon.name} | ${pokemon.neighbourhoods.join(', ')} | ${pokemon.level} | ${pokemon.iv}\``);
         });
 
-        const MAX_MSG_CHAR_COUNT = 2000 - 100; // 2000 char limit and some safety margin
+        const MAX_MSG_CHAR_COUNT = 2000 - 400; // 2000 char limit and some safety margin
+        console.log(`[...strHeader, ...strPokemons.sort()].join('\n').length: ${[...strHeader, ...strPokemons.sort()].join('\n').length}`);
         if ([...strHeader, ...strPokemons.sort()].join('\n').length > MAX_MSG_CHAR_COUNT) {
             const charCnt = 0;
             const strArray = [];
@@ -182,6 +183,7 @@ module.exports = class {
 
             // eslint-disable-next-line
             for (const strPokemon of strPokemons) {
+                console.log(`strArray[idx].length + strPokemon.length: ${strArray[idx].length}${strPokemon.length}`);
                 if ((strArray[idx].length + strPokemon.length) > MAX_MSG_CHAR_COUNT) {
                     idx += 1;
                     strArray[idx] = `${strPokemon}\n`;
