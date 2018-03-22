@@ -22,7 +22,14 @@ module.exports = class {
 
             // '!want' or '!veux'
             if (args.length === 0) {
-                await msg.channel.send(this.createWildPreferenceString(user));
+                const wantSummary = this.createWildPreferenceString(user);
+                if (!Array.isArray(wantSummary)) {
+                    await msg.channel.send(wantSummary);
+                } else {
+                    wantSummary.forEach(async (str) => {
+                        await msg.channel.send(str);
+                    });
+                }
                 return;
             }
 
@@ -41,8 +48,7 @@ module.exports = class {
                 return;
             }
 
-            // !want name uphillsimplex
-            // !want id 165542964867760129
+            // '!want name uphillsimplex' or '!want id 165542964867760129'
             if (args.length === 2 && (args[0].toLowerCase() === 'id' || args[0].toLowerCase() === 'name')) {
                 if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
                     await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
@@ -153,10 +159,12 @@ module.exports = class {
 
     // eslint-disable-next-line class-methods-use-this
     createWildPreferenceString(user) {
+        if (!user) throw new Error('User is not found!');
+
         console.log(user.locations);
         const userLocations = (user.locations && user.locations.length >= 1) ? user.locations.join(', ') : 'none set/aucunes établis';
 
-        const strHeader = [`**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`];
+        const strHeader = `**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`;
         strHeader.push(`**Blacklist:** ${user.preferences.wild.blacklist.sort().join(', ')}`);
         strHeader.push(`**Default Locations Défaults:** ${userLocations}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`);
 
@@ -165,6 +173,25 @@ module.exports = class {
             strPokemons.push(`\`${pokemon.name} | ${pokemon.neighbourhoods.join(', ')} | ${pokemon.level} | ${pokemon.iv}\``);
         });
 
-        return [...strHeader, ...strPokemons.sort()].join('\n');
+        const MAX_MSG_CHAR_COUNT = 2000 - 5; // 2000 char limit and some safety margin
+        if ([...strHeader, ...strPokemons.sort()].join('\n').split('').length > MAX_MSG_CHAR_COUNT) {
+            const charCnt = 0;
+
+            const strArray = [];
+            strArray.push(`${strHeader}\n`);
+            let idx = 0;
+            // eslint-disable-next-line
+            for (const strPokemon of strPokemons) {
+                if ((strArray[idx].length + strPokemon.length) > MAX_MSG_CHAR_COUNT) {
+                    idx += 1;
+                    strArray[idx] = `${strPokemon}\n`;
+                } else {
+                    strArray[idx] = `${strArray[idx]}${strPokemon}\n`;
+                }
+            }
+            return strArray;
+        }
+
+        return [strHeader, ...strPokemons.sort()].join('\n');
     }
 };
