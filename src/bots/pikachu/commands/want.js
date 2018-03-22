@@ -47,6 +47,10 @@ module.exports = class {
                     return;
                 }
                 const requestedDiscordMember = await this.client.guilds.get(this.client.configs.guildId).members.find(args[0].toLowerCase() === 'name' ? 'displayName' : 'id', args[1]);
+                if (!requestedDiscordMember) {
+                    await msg.channel.send('Could not find user in this server!');
+                    return;
+                }
                 const requestedUser = await this.client.userRepository.fetchUser(requestedDiscordMember);
                 await msg.channel.send(this.createWildPreferenceString(requestedUser));
                 return;
