@@ -174,7 +174,7 @@ module.exports = class {
         });
 
         const MAX_MSG_CHAR_COUNT = 2000 - 5; // 2000 char limit and some safety margin
-        if ([...strHeader, ...strPokemons.sort()].join('\n').split('').length > MAX_MSG_CHAR_COUNT) {
+        if ([...strHeader, ...strPokemons.sort()].join('\n').length > MAX_MSG_CHAR_COUNT) {
             const charCnt = 0;
             const strArray = [];
             let idx = 0;
@@ -189,6 +189,7 @@ module.exports = class {
                     strArray[idx] = `${strArray[idx]}${strPokemon}\n`;
                 }
             }
+            console.log(strArray);
             return strArray;
         }
 
