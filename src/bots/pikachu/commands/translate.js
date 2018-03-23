@@ -3,7 +3,7 @@ module.exports = class {
         Object.assign(this, {
             name: 'translate',
             enabled: true,
-            runIn: [], // [] = uses app.js runIn property values
+            runIn: ['all'], // [] = uses app.js runIn property values
             aliases: ['traduit'],
             description: '',
         });
