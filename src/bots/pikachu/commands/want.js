@@ -168,42 +168,52 @@ module.exports = class {
     createWildPreferenceString(user) {
         if (!user) throw new Error('User is not found!');
 
-        console.log(user.locations);
-        const userLocations = (user.locations && user.locations.length >= 1) ? user.locations.join(', ') : 'none set/aucunes établis';
+        const userBlacklist = (user.preferences.wild.blacklist && user.preferences.wild.blacklist.length >= 1) ? user.preferences.wild.blacklist.sort().join(', ') : 'none/aucun';
+        const userLocations = (user.locations && user.locations.length >= 1) ? user.locations.join(', ') : 'none/aucun';
 
-        const strHeader = [`**User/Utilisateur:** ${user.name}\n**Status:** ${user.preferences.wild.status}`];
-        strHeader.push(`**Blacklist:** ${user.preferences.wild.blacklist.sort().join(', ')}`);
-        strHeader.push(`**Default Locations Défaults:** ${userLocations}\n**POKEMON | NEIGHBOURHOOD | LV | IV**`);
+        const strHeader = [`**USER/UTILISATEUR:** \`${user.name}\``];
+        strHeader.push(`**STATUS:** \`${user.preferences.wild.status}\``);
+        strHeader.push(`**BLACKLIST:** \`${userBlacklist}\``);
+        strHeader.push(`**DEFAULT LOCATIONS DÉFAULTS:** \`${userLocations}\`\n`);
+        strHeader.push('**NEIGHBOURHOOD/QUARTIER:**\n   `POKEMON | LV | IV`');
 
-        const strPokemons = [];
+        const neighbourhoodKeyPokemonNameLevelIvValue = {};
+
         user.preferences.wild.pokemons.forEach((pokemon) => {
-            strPokemons.push(`\`${pokemon.name} | ${pokemon.neighbourhoods.join(', ')} | ${pokemon.level} | ${pokemon.iv}\``);
+            if (!Object.keys(neighbourhoodKeyPokemonNameLevelIvValue).includes(pokemon.neighbourhoods.join(', '))) {
+                neighbourhoodKeyPokemonNameLevelIvValue[pokemon.neighbourhoods.join(', ')] = [];
+            }
+            neighbourhoodKeyPokemonNameLevelIvValue[pokemon.neighbourhoods.join(', ')].push(`\`${pokemon.name} | ${pokemon.level} | ${pokemon.iv}\``);
         });
 
-        const MAX_MSG_CHAR_COUNT = 2000 - 400; // 2000 char limit and some safety margin
-        console.log(`[...strHeader, ...strPokemons.sort()].join('\n').length: ${[...strHeader, ...strPokemons.sort()].join('\n').length}`);
-        if ([...strHeader, ...strPokemons.sort()].join('\n').length > MAX_MSG_CHAR_COUNT) {
-            const charCnt = 0;
-            const strArray = [];
-            let idx = 0;
-            strArray[idx] = `${strHeader.join('\n')}`;
+        const pokemonStatInfos = [];
+        Object.keys(neighbourhoodKeyPokemonNameLevelIvValue).forEach((neighbourhood) => {
+            const nameLevelIvs = neighbourhoodKeyPokemonNameLevelIvValue[neighbourhood];
+            pokemonStatInfos.push(`**${neighbourhood}:**`, ...nameLevelIvs.sort().map(e => `   ${e}`));
+        });
 
-            // eslint-disable-next-line
-            for (const strPokemon of strPokemons) {
-                console.log(`strArray[idx].length + strPokemon.length: ${strArray[idx].length + strPokemon.length}`);
-                console.log(`idx: ${idx}`);
-                if ((strArray[idx].length + strPokemon.length) > MAX_MSG_CHAR_COUNT) {
-                    idx += 1;
-                    strArray[idx] = `${strPokemon}\n`;
-                } else {
-                    strArray[idx] = `${strArray[idx]}${strPokemon}\n`;
-                }
-            }
-            console.log(strArray[0]);
-            console.log(strArray[1]);
-            return strArray;
-        }
-
-        return [...strHeader, ...strPokemons.sort()].join('\n');
+        return createStringOrArrayIfTooLong([...strHeader, ...pokemonStatInfos]);
     }
 };
+
+function createStringOrArrayIfTooLong(arrayOfStrings) {
+    const MAX_CHAR_COUNT_PER_STRING = 2000 - 400; // 2000 char limit and some safety margin
+
+    let tempString = '';
+    const newArrayOfStrings = [];
+
+    // eslint-disable-next-line
+    for (const str of arrayOfStrings) {
+        if (tempString.length + str.length < MAX_CHAR_COUNT_PER_STRING) {
+            tempString += `${str}\n`;
+        } else {
+            newArrayOfStrings.push(tempString);
+            tempString = `${str}\n`;
+        }
+    }
+    if (newArrayOfStrings.length > 0) {
+        newArrayOfStrings.push(tempString);
+    }
+
+    return newArrayOfStrings.length > 0 ? newArrayOfStrings : tempString;
+}
