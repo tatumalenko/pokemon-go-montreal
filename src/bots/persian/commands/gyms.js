@@ -4,6 +4,7 @@ module.exports = class {
             name: 'gyms',
             enabled: true,
             runIn: [], // [] = uses app.js runIn property values
+            aliases: [],
             description: '',
         });
     }
