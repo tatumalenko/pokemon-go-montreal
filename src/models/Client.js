@@ -96,14 +96,12 @@ class Client extends Discord.Client {
 
     async message(msg) {
         try {
-            // Check `client.runIn` values to make sure bot can run in these channels
-            if (this.configs.runIn.includes(msg.channel.name)
-            || this.configs.runIn.includes(msg.channel.type)
-            || this.configs.runIn.includes('all')) {
-                const { prefix } = Utils.parseMessageForCommand(msg);
-                const commandPredicate = this.configs.cmdPrefix === prefix;
-                if (commandPredicate) { await this.commandMessage(msg); }
-            }
+            // Check
+            const { prefix } = Utils.parseMessageForCommand(msg);
+            const commandPredicate = this.configs.cmdPrefix === prefix;
+            if (commandPredicate) { await this.commandMessage(msg); }
+
+            // Check monitor runIn values if not empty
 
             const monitorPredicate = Object.keys(this.monitors).some(key => this.monitors[key].runIn.includes(msg.channel.name));
             if (monitorPredicate) { await this.monitorMessage(msg); }
@@ -121,11 +119,18 @@ class Client extends Discord.Client {
                 || this.commands[command].aliases.includes(cmd)) {
                     // Check `command.enabled` is `true`
                     if (!this.commands[command].enabled) { return; }
-                    // Check if `command.runIn` in empty (use `client.runIn`), else check them
-                    if (this.commands[command].runIn.length !== 0) { // `command.runIn` = []?
+                    // Check if `command.runIn` is empty (else use `client.runIn`)
+                    if (this.commands[command].runIn.length !== 0) { // `command.runIn = []`?
                         if (!this.commands[command].runIn.includes(msg.channel.name)
                         && !this.commands[command].runIn.includes(msg.channel.type)
-                        && !this.commands[command].runIn.includes('all')) { return; }
+                        && !this.commands[command].runIn.includes('all') // `command.runIn[i] == 'all'`
+                        ) { return; }
+                    } else { // Check `client.runIn` values to make sure bot can run in these channels
+                        // eslint-disable-next-line
+                        if (!this.configs.runIn.includes(msg.channel.name) // `client.runIn[i] == msg.channel.name`
+                        && !this.configs.runIn.includes(msg.channel.type) // `client.runIn[i] == 'dm'`
+                        && !this.configs.runIn.includes('all') // `client.runIn[i] == 'all'`
+                        ) { return; }
                     }
                     // Pass `client` into `command` instance as property
                     this.commands[command].client = this;
