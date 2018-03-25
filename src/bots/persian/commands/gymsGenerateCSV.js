@@ -17,12 +17,26 @@ module.exports = class {
                 return;
             }
 
-            const gyms = await this.client.gymRepository.fetchAllGyms();
+            let gyms = [];
+            if (args.includes('eligible')) {
+                gyms = await this.client.gymRepository.fetchEligibleGyms();
+            } else {
+                gyms = await this.client.gymRepository.fetchAllGyms();
+            }
 
             // Building CSV structure
             let csv = 'Gym Name,Latitude,Longitude\n';
             gyms.forEach((element) => {
-                const name = element.name.replace(',', ' ');
+                // We get some gyms from Vancouver. This condition exclude them.
+                if (parseInt(element.longitude, 10) < -74) {
+                    return;
+                }
+
+                let name = element.name.replace(',', ' ');
+                if (element.eligible) {
+                    name += '(Eligible)';
+                }
+
                 csv += `${name},${element.latitude},${element.longitude}\n`;
             });
 

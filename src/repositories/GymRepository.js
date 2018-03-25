@@ -37,6 +37,12 @@ class RaidRepository {
 
         return gyms;
     }
+
+    async fetchEligibleGyms() {
+        const gyms = Gym.where('eligible', true).find();
+
+        return gyms;
+    }
 }
 
 module.exports = RaidRepository;
