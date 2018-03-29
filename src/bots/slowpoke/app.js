@@ -303,6 +303,7 @@ client.on('message', async (message) => {
             console.error(e);
         }
         console.log(e);
+        await message.guild.channels.find('name', 'bot-logs').send(e);
     }
 });
 

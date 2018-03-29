@@ -16,6 +16,7 @@ module.exports = class {
             await this.client.userRepo.remove(member);
         } catch (e) {
             console.log(e);
+            await this.client.guilds.find('id', this.client.configs.guildId).channels.find('name', this.client.configs.channels.botLogs).send(e);
         }
     }
 };

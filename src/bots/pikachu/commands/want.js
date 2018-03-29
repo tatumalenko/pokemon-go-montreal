@@ -116,6 +116,7 @@ module.exports = class {
             } else {
                 await msg.channel.send(e.message);
             }
+            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
         }
     }
 

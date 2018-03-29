@@ -19,6 +19,7 @@ module.exports = class {
                 french: 'Oops! Ce mot ne semble pas être un nom possible!',
             }));
             console.log(e.message);
+            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
         }
     }
 };

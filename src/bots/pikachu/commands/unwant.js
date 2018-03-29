@@ -101,6 +101,7 @@ module.exports = class {
             await msg.react('❌');
             await msg.channel.send(e.message);
             console.log(e);
+            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
         }
     }
 

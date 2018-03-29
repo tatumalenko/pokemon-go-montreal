@@ -41,6 +41,7 @@ module.exports = class {
         } catch (e) {
             await msg.channel.send(e.message);
             console.log(e);
+            await msg.guild.channels.find('name', 'bot-logs').send(e);
         }
     }
 };
