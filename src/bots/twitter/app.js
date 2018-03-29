@@ -17,6 +17,10 @@ const colors = ['#7f0000', '#535900', '#40d9ff', '#8c7399', '#d97b6c', '#f2ff40'
 Twitter.stream('statuses/filter', {
     follow: TWITTER_USER_IDS.join(', '),
 }, (stream) => {
+    console.log('-----------------------------------------------------------------');
+    console.log(`${new Date()}: Twitter bot ready to serve!`);
+    console.log('-----------------------------------------------------------------');
+
     stream.on('data', async (tweet) => {
         try {
             if (!TWITTER_USER_IDS.includes(tweet.user.id_str) ||
@@ -55,6 +59,6 @@ Twitter.stream('statuses/filter', {
     });
 
     stream.on('error', (error) => {
-        console.log(error);
+        console.log(`${new Date()}: ${error}`);
     });
 });
