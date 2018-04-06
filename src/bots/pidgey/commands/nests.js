@@ -28,7 +28,7 @@ module.exports = class {
             let pokemonNameEn = '';
             let pokemonNameFr = '';
             let pokedexNumber = -1;
-            if (isNaN(args[0])) { // TODO: eslint?
+            if (Number.isNaN(args[0])) {
                 if (!pokemonListEn.includes(args[0]) && !pokemonListFr.includes(args[0])) {
                     const test = this.client.spellchecker.getCorrections(args[0]).join(', ');
 
