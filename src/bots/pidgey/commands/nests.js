@@ -1,6 +1,5 @@
 const request = require('request');
 const Location = require('../../../models/Location.js');
-const Utils = require('../../../utils/Utils.js');
 
 module.exports = class {
     constructor(...params) {
@@ -8,7 +7,7 @@ module.exports = class {
             name: 'nests',
             enabled: true,
             runIn: [], // [] = uses app.js runIn property values
-            aliases: ['nest'],
+            aliases: ['nest', 'nid', 'nids'],
             description: '',
         });
     }
@@ -23,16 +22,30 @@ module.exports = class {
                 return;
             }
 
-            const pokemonList = Utils.getPokemonNames();
+            // TODO: Extract that logic...
+            const pokemonListEn = this.client.utils.getPokemonNames();
+            const pokemonListFr = this.client.utils.getPokemonNames('french');
+            let pokemonNameEn = '';
+            let pokemonNameFr = '';
             let pokedexNumber = -1;
-            let pokemonName = '';
             if (isNaN(args[0])) { // TODO: eslint?
-                pokemonName = Utils.getEnglishName(args[0]);
-                pokedexNumber = pokemonList.indexOf(pokemonName) + 1;
+                if (!pokemonListEn.includes(args[0]) && !pokemonListFr.includes(args[0])) {
+                    const test = this.client.spellchecker.getCorrections(args[0]).join(', ');
+
+                    await msg.channel.send(this.client.utils.createErrorMsg({
+                        english: `Unknown Pokémon ${args[0]}. Did you mean:`,
+                        french: `Pokémon inconnu ${args[0]}. Vouliez-vous dire:\n ${test}`,
+                    }));
+                    return;
+                }
+                pokemonNameEn = this.client.utils.getEnglishName(args[0]);
+                pokedexNumber = pokemonListEn.indexOf(pokemonNameEn) + 1;
             } else {
                 [pokedexNumber] = args;
-                pokemonName = pokemonList[pokedexNumber - 1];
+                pokemonNameEn = pokemonListEn[pokedexNumber - 1];
             }
+
+            pokemonNameFr = pokemonListFr[pokedexNumber - 1];
 
             // TODO: extract configurations.
             const postData = {
@@ -58,17 +71,15 @@ module.exports = class {
                     const bodyObject = JSON.parse(body);
 
                     if (bodyObject.localMarkers.length === 0) {
-                        const frenchName = Utils.getPokemonNames('french')[pokedexNumber - 1];
-
                         await msg.channel.send(this.client.utils.createErrorMsg({
-                            english: `No nest found for ${pokemonName} #${pokedexNumber}.`,
-                            french: `Aucun nid trouvé pour ${frenchName} #${pokedexNumber}.`,
+                            english: `No nest found for ${pokemonNameEn} #${pokedexNumber}.`,
+                            french: `Aucun nid trouvé pour ${pokemonNameFr} #${pokedexNumber}.`,
                         }));
                         return;
                     }
 
                     // TODO: Translate
-                    let message = `**Known nests for ${pokemonName} #${pokedexNumber}**\n`;
+                    let message = `Known nests for/Nids répertoriés pour **${pokemonNameEn}/${pokemonNameFr} #${pokedexNumber}**\n`;
                     Object.keys(bodyObject.localMarkers).forEach((key) => {
                         const val = bodyObject.localMarkers[key];
 

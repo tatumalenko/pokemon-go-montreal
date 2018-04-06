@@ -30,6 +30,13 @@ class SpellChecker {
     }
 
     correct(input) {
+        const allCorrections = this.getCorrections(input);
+        const formattedStr = ['\n(alphabetical): ', allCorrections.sort().join(', '), '\n(likelihood): ', ...allCorrections.join(', ')].join('');
+
+        return _.isEmpty(allCorrections) ? '' : formattedStr;
+    }
+
+    getCorrections(input) {
         const corrections = didYouMean(input, this.dictList, this.options);
 
         const options2 = _.clone(this.options);
@@ -41,10 +48,7 @@ class SpellChecker {
             if (word.includes(input) && word.charAt(0) === input.charAt(0)) corrections.push(word);
         });
 
-        const allCorrections = [...corrections, ...corrections2];
-        const formattedStr = ['\n(alphabetical): ', _.uniq(allCorrections).sort().join(', '), '\n(likelihood): ', ..._.uniq(allCorrections).join(', ')].join('');
-
-        return _.isEmpty(allCorrections) ? '' : formattedStr;
+        return _.uniq([...corrections, ...corrections2]);
     }
 }
 
