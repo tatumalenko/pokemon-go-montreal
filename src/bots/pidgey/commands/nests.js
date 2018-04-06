@@ -94,7 +94,7 @@ module.exports = class {
             });
         } catch (e) {
             await msg.channel.send(e.message);
-            console.log(e);
+            console.error(e);
         }
     }
 };

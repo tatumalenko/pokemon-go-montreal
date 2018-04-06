@@ -90,7 +90,7 @@ class Client extends Discord.Client {
             console.log(`${this.user.tag}, Ready to serve ${this.guilds.size} guilds and ${this.users.size} users`);
             console.log('-----------------------------------------------------------------');
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -102,10 +102,11 @@ class Client extends Discord.Client {
             if (commandPredicate) { await this.commandMessage(msg); }
 
             // Check monitor runIn values if not empty
-
-            const monitorPredicate = Object.keys(this.monitors).some(key => this.monitors[key].runIn.includes(msg.channel.name));
-            if (monitorPredicate) { await this.monitorMessage(msg); }
-        } catch (err) { console.log(err); }
+            if (this.monitors) {
+                const monitorPredicate = Object.keys(this.monitors).some(key => this.monitors[key].runIn.includes(msg.channel.name));
+                if (monitorPredicate) { await this.monitorMessage(msg); }
+            }
+        } catch (err) { console.error(err); }
     }
 
     async commandMessage(msg) {
@@ -138,7 +139,7 @@ class Client extends Discord.Client {
                     await this.commands[command].run(msg, { prefix, cmd, args });
                 }
             });
-        } catch (err) { console.log(err); }
+        } catch (err) { console.error(err); }
     }
 
     async monitorMessage(msg) {
@@ -159,7 +160,7 @@ class Client extends Discord.Client {
                     }
                 }
             });
-        } catch (err) { console.log(err); }
+        } catch (err) { console.error(err); }
     }
 
     async guildMemberAdd(member) {
@@ -176,7 +177,7 @@ class Client extends Discord.Client {
                     await this.events[event].run(member, {});
                 }
             });
-        } catch (err) { console.log(err); }
+        } catch (err) { console.error(err); }
     }
 
     async guildMemberRemove(member) {
@@ -193,7 +194,7 @@ class Client extends Discord.Client {
                     await this.events[event].run(member, {});
                 }
             });
-        } catch (err) { console.log(err); }
+        } catch (err) { console.error(err); }
     }
 
     async login() {
