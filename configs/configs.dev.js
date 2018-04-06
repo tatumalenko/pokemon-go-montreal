@@ -55,6 +55,10 @@ module.exports = {
         clientId: process.env.CLIENT_ID,
         botToken: process.env.BOT_TOKEN,
     },
+    pidgey: {
+        clientId: process.env.CLIENT_ID,
+        botToken: process.env.BOT_TOKEN,
+    },
     meowth: {
         clientId: process.env.CLIENT_ID,
         botToken: process.env.BOT_TOKEN,
