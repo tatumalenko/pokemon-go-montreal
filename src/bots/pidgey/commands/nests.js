@@ -16,8 +16,10 @@ module.exports = class {
     async run(msg, { prefix, cmd, args }) {
         try {
             if (args.length === 0) {
-                // TODO: Translate.
-                await msg.channel.send('Please specify a pokemon.');
+                await msg.channel.send(this.client.utils.createErrorMsg({
+                    english: 'Please specify a Pokemon.',
+                    french: 'S\'il vous plaît spécifier un Pokemon.',
+                }));
                 return;
             }
 
