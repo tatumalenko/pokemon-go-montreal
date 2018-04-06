@@ -23,10 +23,16 @@ module.exports = class {
                 return;
             }
 
-            // TODO: extract?
             const pokemonList = Utils.getPokemonNames();
-            const englishName = Utils.getEnglishName(args[0]);
-            const pokedexNumber = pokemonList.indexOf(englishName) + 1;
+            let pokedexNumber = -1;
+            let pokemonName = '';
+            if (isNaN(args[0])) { // TODO: eslint?
+                pokemonName = Utils.getEnglishName(args[0]);
+                pokedexNumber = pokemonList.indexOf(pokemonName) + 1;
+            } else {
+                [pokedexNumber] = args;
+                pokemonName = pokemonList[pokedexNumber - 1];
+            }
 
             // TODO: extract configurations.
             const postData = {
@@ -51,14 +57,24 @@ module.exports = class {
                 if (!error && response.statusCode === 200) {
                     const bodyObject = JSON.parse(body);
 
-                    let message = '';
+                    if (bodyObject.localMarkers.length === 0) {
+                        const frenchName = Utils.getPokemonNames('french')[pokedexNumber - 1];
 
+                        await msg.channel.send(this.client.utils.createErrorMsg({
+                            english: `No nest found for ${pokemonName} #${pokedexNumber}.`,
+                            french: `Aucun nid trouvé pour ${frenchName} #${pokedexNumber}.`,
+                        }));
+                        return;
+                    }
+
+                    // TODO: Translate
+                    let message = `**Known nests for ${pokemonName} #${pokedexNumber}**\n`;
                     Object.keys(bodyObject.localMarkers).forEach((key) => {
                         const val = bodyObject.localMarkers[key];
 
                         const location = new Location({ coordinates: { latitude: val.lt, longitude: val.ln } });
 
-                        message += `${location.neighbourhood}: ${location.gmapsUrl}\n`;
+                        message += `\t${location.neighbourhood}: <${location.gmapsUrl}>\n`;
                     });
 
                     // TODO: Make a more beautiful message.
