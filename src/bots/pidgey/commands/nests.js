@@ -1,6 +1,6 @@
-const querystring = require('querystring');
 const request = require('request');
 const Location = require('../../../models/Location.js');
+const Utils = require('../../../utils/Utils.js');
 
 module.exports = class {
     constructor(...params) {
@@ -16,10 +16,17 @@ module.exports = class {
     async run(msg, { prefix, cmd, args }) {
         try {
             if (args.length === 0) {
+                // TODO: Translate.
                 await msg.channel.send('Please specify a pokemon.');
                 return;
             }
 
+            // TODO: extract?
+            const pokemonList = Utils.getPokemonNames();
+            const englishName = Utils.getEnglishName(args[0]);
+            const pokedexNumber = pokemonList.indexOf(englishName) + 1;
+
+            // TODO: extract configurations.
             const postData = {
                 data: {
                     lat1: 45.71505275353951,
@@ -29,7 +36,7 @@ module.exports = class {
                     zoom: 10.587602669228598,
                     mapFilterValues: {
                         mapTypes: [1],
-                        specieses: [args[0]],
+                        specieses: [pokedexNumber],
                         nestVerificationLevels: [1],
                         nestTypes: [-1],
                     },
@@ -42,8 +49,6 @@ module.exports = class {
                 if (!error && response.statusCode === 200) {
                     const bodyObject = JSON.parse(body);
 
-                    console.log(bodyObject.localMarkers);
-
                     let message = '';
 
                     Object.keys(bodyObject.localMarkers).forEach((key) => {
@@ -52,10 +57,9 @@ module.exports = class {
                         const location = new Location({ coordinates: { latitude: val.lt, longitude: val.ln } });
 
                         message += `${location.neighbourhood}: ${location.gmapsUrl}\n`;
-
-                        console.log(location);
                     });
 
+                    // TODO: Make a more beautiful message.
                     await msg.channel.send(message);
                 }
             });
