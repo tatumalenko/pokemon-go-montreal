@@ -17,7 +17,7 @@ module.exports = {
     rootDirPath: process.cwd(),
     cmdPrefix: '!',
     dbMongo: {
-        dbPath: 'mongodb://localhost:27017/pokemongo',
+        dbPath: process.env.MONGO_DB_PATH,
         schemaCollectionNames: {
             user: 'users',
             raid: 'raids',
