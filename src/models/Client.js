@@ -171,6 +171,7 @@ class Client extends Discord.Client {
 
     async guildMemberAdd(member) {
         try {
+            if (!this.events) { return; }
             // Check for `this.events` which has a property called `eventName = 'guildMemberAdd'`
             Object.keys(this.events).forEach(async (event) => {
             // Check `event.enabled` is `true`
@@ -188,6 +189,7 @@ class Client extends Discord.Client {
 
     async guildMemberRemove(member) {
         try {
+            if (!this.events) { return; }
             // Check for `this.events` which has a property called `eventName = 'guildMemberRemove'`
             Object.keys(this.events).forEach(async (event) => {
             // Check `event.enabled` is `true`
