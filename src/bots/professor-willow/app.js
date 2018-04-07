@@ -221,13 +221,19 @@ client.on('message', async (message) => {
                     // message.channel.send(args.map(v => `${eval(v)}\n`));
                     break;
                 case 'server':
-                    if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
+                    if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')) {
                         await message.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
                         return;
                     }
                     // '!server restart professor-willow'
                     if (args.length === 2 && (args[0].toLowerCase() === 'restart') && (args[1].toLowerCase() === process.env.name)) {
                         await message.channel.send('Got it! Restarting now...');
+                        process.exit(1);
+                    } else if (args.length === 2 && (args[0].toLowerCase() === 'restart') && (args[1].toLowerCase() === 'all')) {
+                        await message.channel.send('Got it! Restarting now...');
+                        await message.channel.send('!server restart pikachu');
+                        await message.channel.send('!server restart slowpoke');
+                        await message.channel.send('!server restart self');
                         process.exit(1);
                     }
                     break;
@@ -252,7 +258,7 @@ Twitter.stream('statuses/filter', {
     follow: TWITTER_USER_IDS.join(', '),
 }, (stream) => {
     console.log('-----------------------------------------------------------------');
-    console.log(`${wh.name}, Ready to serve guilds and users`);
+    console.log('Twitter bot, Ready to serve');
     console.log('-----------------------------------------------------------------');
 
     stream.on('data', async (tweet) => {
