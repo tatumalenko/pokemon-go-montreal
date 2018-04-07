@@ -37,6 +37,13 @@ module.exports = {
     'professor-willow': {
         clientId: process.env.CLIENT_ID,
         botToken: process.env.BOT_TOKEN,
+        webhookId: process.env.WEBHOOK_ID,
+        webhookToken: process.env.WEBHOOK_TOKEN,
+        consumer_key: process.env.CONSUMER_KEY,
+        consumer_secret: process.env.CONSUMER_SECRET,
+        access_token_key: process.env.ACCESS_TOKEN_KEY,
+        access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+        userIds: ['2839430431', '783281708137324549', '4840958511', '849344094681870336', '816666530318524416'],
     },
     'self-bot': {
         clientId: process.env.CLIENT_ID,
