@@ -29,33 +29,46 @@ client.on('ready', () => {
 // Create an event listener for the Map Discord
 // Using the channel name array constant to identify which channel to
 // use for importing the messages into our own server's channel
-client.on('message', (message) => {
+client.on('message', async (message) => {
     try {
         if (message.guild.name === 'MontrealPokeMap' && WILD_CHANNELS.some(c => c === message.channel.name)) {
             // console.log('-----------------------------------------------------------------');
             // console.log(message.content);
             // console.log('-----------------------------------------------------------------');
-
             // console.log('IV90_CP2500_CHANNELS.some(c => c === message.channel.name): ' + IV90_CP2500_CHANNELS.some(c => c === message.channel.name));
-
 
             // Attempt to dead-end listener if finds spawn name to have a named channel after itself to prevent double DMs
             if (WILD_IV0_IV90_CP2500_CHANNELS.some(c => c === message.channel.name.toLowerCase())) { // If this msg comes from iv90 or cp2500
                 const spawn = createWildSpawnParams(message); // Create spawn to extract name using name method used in Pikachu
 
-                console.log(`spawn.name.toLowerCase(): ${spawn.name.toLowerCase()}`);
-                console.log(`WILD_CHANNELS.some(c => c === spawn.name.toLowerCase()): ${WILD_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))}`);
+                // console.log(`spawn.name.toLowerCase(): ${spawn.name.toLowerCase()}`);
+                // console.log(`WILD_CHANNELS.some(c => c === spawn.name.toLowerCase()): ${WILD_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))}`);
 
                 // Dead-end listener knowing that another identical message will appear from the Pokemon's named channel
                 if (WILD_NAMED_POKEMON_CHANNELS.some(c => c === spawn.name.toLowerCase().replace('\'', ''))) { return; }// If the spawn's name is in one of the wild channels
             }
 
-            client.guilds.find('id', configs.guildId).channels.find('name', 'discord-income').send(message.content);
+            await client.guilds.find('id', configs.guildId).channels.find('name', 'discord-income').send(message.content);
         } else if (message.guild.name === 'MontrealPokeMap' && RAID_CHANNELS.some(c => c === message.channel.name)) {
             // console.log('-----------------------------------------------------------------');
             // console.log(message.content);
             // console.log('-----------------------------------------------------------------');
-            client.guilds.find('id', configs.guildId).channels.find('name', 'raids-income').send(message.content);
+            await client.guilds.find('id', configs.guildId).channels.find('name', 'raids-income').send(message.content);
+        } else {
+            if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
+                await message.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                return;
+            }
+            let args = message.content.substring(1).split(' ');
+            const cmd = args[0];
+            args = args.splice(1);
+            // '!server restart self'
+            if (cmd !== 'server') { return; }
+            if (args.length === 2 && (args[0].toLowerCase() === 'restart') && (args[1].toLowerCase() === process.env.name)) {
+                await message.channel.send('Got it! Restarting now...');
+                process.exit(1);
+            }
+            return;
         }
     } catch (e) {
         console.log(e);

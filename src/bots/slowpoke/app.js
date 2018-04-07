@@ -41,6 +41,20 @@ client.on('message', async (message) => {
         // Our bot needs to know if it will execute a command
         // It will listen for messages that will start with `!`
         if (dco.msg.cmd) { // Not a falsy value (undefined, null, 0 etc)
+            if (dco.msg.cmd === 'server') {
+                if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
+                    await message.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                    return;
+                }
+                let args = message.content.substring(1).split(' ');
+                args = args.splice(1);
+                // '!server restart slowpoke'
+                if (args.length === 2 && (args[0].toLowerCase() === 'restart') && (args[1].toLowerCase() === process.env.name)) {
+                    await message.channel.send('Got it! Restarting now...');
+                    process.exit(1);
+                }
+                return;
+            }
             if (!validCmds.includes(dco.msg.cmd.toLowerCase())) return; // Not the 'pd' command
 
             if (dco.msg.args.length === 0 || dco.msg.args.join(' ').toLowerCase().includes('help')) {
