@@ -20,6 +20,7 @@
     "lodash": "^4.17.4",
     "mongodb": "^3.0.1",
     "mongoose": "^4.13.12",
+    "request": "^2.85.0",
     "sqlite": "^2.9.0",
     "sqlite3": "^3.1.13",
     "togeojson": "^0.16.0",
