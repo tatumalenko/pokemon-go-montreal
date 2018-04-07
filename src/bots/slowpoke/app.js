@@ -298,12 +298,9 @@ client.on('message', async (message) => {
     } catch (e) {
         if (e.toString().includes('Must be 2048 or fewer in length.')) {
             await message.channel.send('Too many combinations possible. Refine search. Trop de combinaisons possible. Rafinez votre requête.');
-        } else {
-            // await message.channel.send(e);
-            console.error(e);
         }
-        console.log(e);
-        await message.guild.channels.find('name', 'bot-logs').send(e);
+        console.error(e);
+        if (e.message) { await message.guild.channels.find('name', 'bot-logs').send(e.message); }
     }
 });
 

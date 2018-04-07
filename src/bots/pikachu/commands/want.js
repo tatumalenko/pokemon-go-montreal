@@ -43,7 +43,7 @@ module.exports = class {
                     await msg.react('✅');
                 } catch (e) {
                     await msg.react('❌');
-                    await msg.channel.send(e);
+                    if (e.message) { await msg.channel.send(e.message); }
                 }
                 return;
             }
@@ -113,10 +113,9 @@ module.exports = class {
             await msg.react('❌');
             if (Object.keys(e).includes('errors')) {
                 await msg.channel.send(e.errors['preferences.wild.pokemons'].message);
-            } else {
-                await msg.channel.send(e.message);
-            }
-            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
+            } else if (e.message) { await msg.channel.send(e.message); }
+            console.error(`${process.env.name}.${this.name}: \n${e}`);
+            if (e.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e.message); }
         }
     }
 

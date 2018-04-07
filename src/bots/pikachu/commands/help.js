@@ -39,9 +39,9 @@ module.exports = class {
                 `**Map:** <${mapLink}>\n` +
                 `${examples}`);
         } catch (e) {
-            await msg.channel.send(e.message);
-            console.log(e);
-            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
+            if (e.message) { await msg.channel.send(e.message); }
+            console.error(`${process.env.name}.${this.name}: ${e.message}`);
+            if (e.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.message}`); }
         }
     }
 };

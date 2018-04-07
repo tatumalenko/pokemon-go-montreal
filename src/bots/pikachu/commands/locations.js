@@ -66,9 +66,9 @@ module.exports = class {
                 console.log(e.message);
             }
         } catch (err) {
-            await msg.channel.send(err.message);
-            console.log(err);
-            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(err);
+            if (err.message) { await msg.channel.send(err.message); }
+            console.error(`${process.env.name}.${this.name}: \n${err}`);
+            if (err.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${err.message}`); }
         }
     }
 };

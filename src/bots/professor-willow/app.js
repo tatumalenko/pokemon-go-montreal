@@ -209,8 +209,8 @@ client.on('message', async (message) => {
             }
         } else { return; }
     } catch (e) {
-        console.log(e);
-        await message.guild.channels.find('name', 'bot-logs').send(e);
+        console.error(e);
+        if (e.message) { await message.guild.channels.find('name', 'bot-logs').send(e.message); }
     }
 });
 

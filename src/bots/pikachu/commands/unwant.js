@@ -99,9 +99,9 @@ module.exports = class {
             await msg.react('✅');
         } catch (e) {
             await msg.react('❌');
-            await msg.channel.send(e.message);
-            console.log(e);
-            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
+            if (e.message) { await msg.channel.send(e.message); }
+            console.error(`${process.env.name}.${this.name}: \n${e}`);
+            if (e.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e.message); }
         }
     }
 

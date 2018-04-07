@@ -26,8 +26,8 @@ module.exports = class {
                 english: 'Oops! Something went wrong!',
                 french: 'Oops! Quelque chose s\'est mal passé!',
             }));
-            console.log(e);
-            await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(e);
+            console.error(`${process.env.name}.${this.name}: \n${e}`);
+            if (e.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.message}`); }
         }
     }
 };
