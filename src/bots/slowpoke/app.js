@@ -38,7 +38,7 @@ client.on('message', async (message) => {
         };
         // await dco.channel.send(dco.msg.args);
 
-        if (!(dco.channel.name === configs.channels.botTesting || dco.channel.name === configs.channels.pokedex)) return;
+        if (!(dco.channel.name === configs.channels.botTesting || dco.channel.name === configs.channels.pokedex || dco.channel.name === configs.channels.adminMods)) return;
 
         // Our bot needs to know if it will execute a command
         // It will listen for messages that will start with `!`
