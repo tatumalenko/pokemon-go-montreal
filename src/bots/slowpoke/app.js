@@ -7,12 +7,14 @@ const Utils = require('../../utils/Utils');
 const validCmds = ['pd', 'dex', 'slowpoke', 'sp'];
 
 // Create an instance of a Discord client
-const client = new Discord.Client();
+const client = new Discord.Client({ fetchAllMembers: true });
 
 // The ready event is vital, it means that your bot will only start reacting to information
 // from Discord _after_ ready is emitted
 client.on('ready', () => {
-    console.log('I am ready!');
+    console.log('-----------------------------------------------------------------');
+    console.log(`${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users`);
+    console.log('-----------------------------------------------------------------');
 });
 
 // Create an event listener for command messages
@@ -42,7 +44,7 @@ client.on('message', async (message) => {
         // It will listen for messages that will start with `!`
         if (dco.msg.cmd) { // Not a falsy value (undefined, null, 0 etc)
             if (dco.msg.cmd === 'server') {
-                if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
+                if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')) {
                     await message.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
                     return;
                 }

@@ -15,7 +15,7 @@ module.exports = class {
     async run(msg, { prefix, cmd, args }) {
         try {
             console.log(this.name);
-            if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
+            if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')) {
                 await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
                 return;
             }

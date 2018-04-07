@@ -22,7 +22,7 @@ const client = new Discord.Client();
 // from Discord _after_ ready is emitted
 client.on('ready', () => {
     console.log('-----------------------------------------------------------------');
-    console.log('I am ready!');
+    console.log(`${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users`);
     console.log('-----------------------------------------------------------------');
 });
 
@@ -54,16 +54,16 @@ client.on('message', async (message) => {
             // console.log(message.content);
             // console.log('-----------------------------------------------------------------');
             await client.guilds.find('id', configs.guildId).channels.find('name', 'raids-income').send(message.content);
-        } else {
-            if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod')) {
-                await message.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
-                return;
-            }
+        } else if (message.guild.id === configs.guildId) {
             let args = message.content.substring(1).split(' ');
             const cmd = args[0];
             args = args.splice(1);
             // '!server restart self'
             if (cmd !== 'server') { return; }
+            if (!message.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')) {
+                await message.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                return;
+            }
             if (args.length === 2 && (args[0].toLowerCase() === 'restart') && (args[1].toLowerCase() === process.env.name)) {
                 await message.channel.send('Got it! Restarting now...');
                 process.exit(1);
