@@ -11,6 +11,12 @@ const NeighbourhoodRepository = require('../repositories/NeighbourhoodRepository
 
 const configs = require('../../configs/configs.js');
 
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at:', p, 'reason:', reason);
+    console.log('Exiting bot with status code 1.');
+    process.exit(1);
+});
+
 class Client extends Discord.Client {
     constructor(options) {
         super(options.clientOptions);
