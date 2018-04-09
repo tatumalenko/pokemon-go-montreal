@@ -24,6 +24,9 @@ module.exports = {
             gym: 'gyms',
         },
     },
+    TSR: {
+        getNestURL: 'https://thesilphroad.com/atlas/getLocalNests.json',
+    },
     polygonMapPath: path.join(process.cwd(), '../../../data/neighbourhoodPolygons.kml'),
 
     pikachu: {
