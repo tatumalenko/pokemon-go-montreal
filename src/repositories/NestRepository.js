@@ -2,33 +2,22 @@ const request = require('request-promise-native');
 const Location = require('../models/Location.js');
 
 class NestRepository {
-    constructor(getNestsURL) {
+    constructor(getNestsURL, postData) {
         this.getNestsURL = getNestsURL;
+        this.postData = postData;
     }
 
+    /**
+     * Fetch a list of nests location from TSR for a particular pokemon.
+     * @param {int} pokedexNumber
+     */
     async fetchNests(pokedexNumber) {
-        // TODO: Configs.
-        const postData = {
-            data: {
-                lat1: 45.71505275353951,
-                lng1: -74.02232029875363,
-                lat2: 45.39863265258384,
-                lng2: -73.2820990142938,
-                zoom: 10.587602669228598,
-                mapFilterValues: {
-                    mapTypes: [1],
-                    specieses: [pokedexNumber],
-                    nestVerificationLevels: [1],
-                    nestTypes: [-1],
-                },
-                center_lat: 45.55706542339709,
-                center_lng: -73.65220965652816,
-            },
-        };
+        // Add the pokedex number in the data posted to TSR.
+        this.postData.data.mapFilterValues.specieses = [pokedexNumber];
 
         const nests = [];
 
-        await request({ method: 'POST', uri: this.getNestsURL, form: postData })
+        await request({ method: 'POST', uri: this.getNestsURL, form: this.postData })
             .then((body) => {
                 const bodyObject = JSON.parse(body);
 

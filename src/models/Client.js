@@ -29,7 +29,7 @@ class Client extends Discord.Client {
         this.userRepository = new UserRepository(this.configs.dbMongo.dbPath);
         this.raidRepository = new RaidRepository(this.configs.dbMongo.dbPath);
         this.gymRepository = new GymRepository(this.configs.dbMongo.dbPath);
-        this.nestRepository = new NestRepository(this.configs.TSR.getNestURL);
+        this.nestRepository = new NestRepository(this.configs.TSR.getNestURL, this.configs.TSR.postData);
         this.neighbourhoodRepository = new NeighbourhoodRepository(this.configs.polygonMapPath);
         this.utils = Utils;
         this.spellchecker = new SpellChecker([...Utils.getPokemonNames(), ...Utils.getPokemonNames('french'), Utils.getNeighbourhoodNames()], { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });

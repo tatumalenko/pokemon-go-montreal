@@ -26,6 +26,22 @@ module.exports = {
     },
     TSR: {
         getNestURL: 'https://thesilphroad.com/atlas/getLocalNests.json',
+        postData: {
+            data: {
+                lat1: 45.71505275353951,
+                lng1: -74.02232029875363,
+                lat2: 45.39863265258384,
+                lng2: -73.2820990142938,
+                zoom: 10.587602669228598,
+                mapFilterValues: {
+                    mapTypes: [1],
+                    nestVerificationLevels: [1],
+                    nestTypes: [-1],
+                },
+                center_lat: 45.55706542339709,
+                center_lng: -73.65220965652816,
+            },
+        },
     },
     polygonMapPath: path.join(process.cwd(), '../../../data/neighbourhoodPolygons.kml'),
 
