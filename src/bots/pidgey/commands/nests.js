@@ -79,18 +79,28 @@ module.exports = class {
                         return;
                     }
 
-                    // TODO: Translate
-                    let message = `Known nests for/Nids répertoriés pour **${pokemonNameEn}/${pokemonNameFr} #${pokedexNumber}**\n`;
+                    let description =
+                        '**Nids répertoriés par des joueurs sur [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n' +
+                        '**Nests reported by players on [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n';
                     Object.keys(bodyObject.localMarkers).forEach((key) => {
                         const val = bodyObject.localMarkers[key];
 
                         const location = new Location({ coordinates: { latitude: val.lt, longitude: val.ln } });
 
-                        message += `\t${location.neighbourhood}: <${location.gmapsUrl}>\n`;
+                        // message += `\t${location.neighbourhood}: <${location.gmapsUrl}>\n`;
+                        description += `\t:arrow_forward: ${location.neighbourhood}: [Google Link](<${location.gmapsUrl}>)\n`;
                     });
 
                     // TODO: Make a more beautiful message.
-                    await msg.channel.send(message);
+                    await msg.channel.send({
+                        embed: {
+                            title: `${pokemonNameEn}/${pokemonNameFr} #${pokedexNumber}`,
+                            description,
+                            thumbnail: {
+                                url: `http://floatzel.net/pokemon/black-white/sprites/images/${pokedexNumber}.png`,
+                            },
+                        },
+                    });
                 }
             });
         } catch (e) {
