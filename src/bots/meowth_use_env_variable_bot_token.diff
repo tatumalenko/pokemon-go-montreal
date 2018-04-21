@@ -1,0 +1,13 @@
+diff --git a/src/bots/Meowth/meowth/__main__.py b/src/bots/Meowth/meowth/__main__.py
+index b6e4fae..e75fa56 100644
+--- a/src/bots/Meowth/meowth/__main__.py
++++ b/src/bots/Meowth/meowth/__main__.py
+@@ -6269,7 +6269,7 @@ async def _wildlist(ctx):
+     return listmsg
+ 
+ try:
+-    event_loop.run_until_complete(Meowth.start(config['bot_token']))
++    event_loop.run_until_complete(Meowth.start(os.environ.get("BOT_TOKEN")))
+ except discord.LoginFailure:
+     logger.critical('Invalid token')
+     event_loop.run_until_complete(Meowth.logout())

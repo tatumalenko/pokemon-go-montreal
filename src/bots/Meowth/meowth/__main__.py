@@ -6269,7 +6269,7 @@ async def _wildlist(ctx):
     return listmsg
 
 try:
-    event_loop.run_until_complete(Meowth.start(config['bot_token']))
+    event_loop.run_until_complete(Meowth.start(os.environ.get("BOT_TOKEN")))
 except discord.LoginFailure:
     logger.critical('Invalid token')
     event_loop.run_until_complete(Meowth.logout())
