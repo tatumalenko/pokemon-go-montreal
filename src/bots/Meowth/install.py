@@ -2,14 +2,14 @@ import subprocess
 import pip
 from sys import platform
 
-_apt_req_ = [
+_apt_req_= [
     "tesseract-ocr",
     "tesseract-ocr-eng"
 ]
 
-apt_cmd = "yum install "
+apt_cmd = "apt install "
 
-_pip_req_ = [
+_pip_req_= [
     "discord.py>=0.16.6",
     "pillow>=4.2.1",
     "requests>=2.18.4",
@@ -19,18 +19,15 @@ _pip_req_ = [
     "dateparser>=0.6.0"
 ]
 
-
 def apt_install(packages):
     for package in packages:
         cmd = apt_cmd+package
         subprocess.run(cmd.split())
         print("[+] Package {} Installed".format(str(package)))
 
-
 def pip_install(packages):
     for package in packages:
-        pip.main(['install', package])
-
+        pip.main(['install',package])
 
 if __name__ == '__main__':
     print(str(platform))
