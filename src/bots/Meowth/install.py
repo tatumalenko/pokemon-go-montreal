@@ -2,14 +2,14 @@ import subprocess
 import pip
 from sys import platform
 
-_apt_req_= [
+_apt_req_ = [
     "tesseract-ocr",
     "tesseract-ocr-eng"
 ]
 
-apt_cmd = "apt install "
+apt_cmd = "yum install "
 
-_pip_req_= [
+_pip_req_ = [
     "discord.py>=0.16.6",
     "pillow>=4.2.1",
     "requests>=2.18.4",
