@@ -46,7 +46,17 @@ module.exports = class {
                 if (err) {
                     await msg.channel.send(err);
                 } else {
-                    await msg.channel.send('Done!');
+                    let eligibleText = '';
+                    if (args.includes('eligible')) {
+                        eligibleText = ' eligible';
+                    }
+
+                    msg.channel.send(`Here's a CSV file of all the${eligibleText} gyms in the database.\n` +
+                    'Be aware that this list is not complete.', {
+                        files: [
+                            '/tmp/gyms.csv',
+                        ],
+                    });
                 }
             });
         } catch (e) {
