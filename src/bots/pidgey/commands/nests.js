@@ -64,7 +64,7 @@ module.exports = class {
             });
         } catch (e) {
             await msg.channel.send(e.message);
-            console.error(e);
+            this.client.logger.logError(e);
         }
     }
 

@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
+const Logger = require('../utils/Logger');
 const Utils = require('../utils/Utils');
 const SpellChecker = require('../utils/SpellChecker');
 const UserRepository = require('../repositories/UserRepository');
@@ -31,6 +32,7 @@ class Client extends Discord.Client {
         this.gymRepository = new GymRepository(this.configs.dbMongo.dbPath);
         this.nestRepository = new NestRepository(this.configs.TSR.getNestURL, this.configs.TSR.postData);
         this.neighbourhoodRepository = new NeighbourhoodRepository(this.configs.polygonMapPath);
+        this.logger = new Logger(this);
         this.utils = Utils;
         this.spellchecker = new SpellChecker([...Utils.getPokemonNames(), ...Utils.getPokemonNames('french'), Utils.getNeighbourhoodNames()], { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });
 
@@ -94,11 +96,11 @@ class Client extends Discord.Client {
                 this[moduleDirName] = that[moduleDirName];
             });
 
-            console.log('-----------------------------------------------------------------');
-            console.log(`${this.user.tag}, Ready to serve ${this.guilds.size} guilds and ${this.users.size} users`);
-            console.log('-----------------------------------------------------------------');
+            this.logger.logInfo('\n-----------------------------------------------------------------\n' +
+                `${this.user.tag}, Ready to serve ${this.guilds.size} guilds and ${this.users.size} users\n` +
+                '-----------------------------------------------------------------');
         } catch (err) {
-            console.error(err);
+            this.logger.logError(err);
         }
     }
 
@@ -114,7 +116,7 @@ class Client extends Discord.Client {
                 const monitorPredicate = Object.keys(this.monitors).some(key => this.monitors[key].runIn.includes(msg.channel.name));
                 if (monitorPredicate) { await this.monitorMessage(msg); }
             }
-        } catch (err) { console.error(err); }
+        } catch (err) { this.logger.logError(err); }
     }
 
     async commandMessage(msg) {
@@ -147,7 +149,7 @@ class Client extends Discord.Client {
                     await this.commands[command].run(msg, { prefix, cmd, args });
                 }
             });
-        } catch (err) { console.error(err); }
+        } catch (err) { this.logger.logError(err); }
     }
 
     async monitorMessage(msg) {
@@ -168,7 +170,7 @@ class Client extends Discord.Client {
                     }
                 }
             });
-        } catch (err) { console.error(err); }
+        } catch (err) { this.logger.logError(err); }
     }
 
     async guildMemberAdd(member) {
@@ -186,7 +188,7 @@ class Client extends Discord.Client {
                     await this.events[event].run(member, {});
                 }
             });
-        } catch (err) { console.error(err); }
+        } catch (err) { this.logger.logError(err); }
     }
 
     async guildMemberRemove(member) {
@@ -204,7 +206,7 @@ class Client extends Discord.Client {
                     await this.events[event].run(member, {});
                 }
             });
-        } catch (err) { console.error(err); }
+        } catch (err) { this.logger.logError(err); }
     }
 
     async login() {

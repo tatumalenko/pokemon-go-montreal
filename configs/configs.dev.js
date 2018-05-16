@@ -12,6 +12,7 @@ module.exports = {
         manageRaidAlerts: '',
         botTesting: 'bot-testing',
         botLogs: 'bot-logs',
+        errorLogs: 'error-logs',
         announcementPost: 'announcement-post',
     },
     rootDirPath: process.cwd(),
