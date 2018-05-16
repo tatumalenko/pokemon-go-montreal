@@ -1,5 +1,4 @@
-const request = require('request');
-const Location = require('../../../models/Location.js');
+const PokedexEntry = require('../../../models/PokedexEntry');
 
 module.exports = class {
     constructor(...params) {
@@ -22,38 +21,26 @@ module.exports = class {
                 return;
             }
 
-            // TODO: Extract that logic...
-            const pokemonListEn = this.client.utils.getPokemonNames();
-            const pokemonListFr = this.client.utils.getPokemonNames('french');
-            let pokemonNameEn = '';
-            let pokemonNameFr = '';
-            let pokedexNumber = -1;
-            // eslint-disable-next-line
-            if (isNaN(args[0])) {
-                if (!pokemonListEn.includes(args[0]) && !pokemonListFr.includes(args[0])) {
-                    const test = this.client.spellchecker.getCorrections(args[0]).join(', ');
+            const pokedexEntry = await this.getPokedexEntry(args[0]);
 
-                    await msg.channel.send(this.client.utils.createErrorMsg({
-                        english: `Unknown Pokémon ${args[0]}. Did you mean:`,
-                        french: `Pokémon inconnu ${args[0]}. Vouliez-vous dire:\n ${test}`,
-                    }));
-                    return;
-                }
-                pokemonNameEn = this.client.utils.getEnglishName(args[0]);
-                pokedexNumber = pokemonListEn.indexOf(pokemonNameEn) + 1;
-            } else {
-                [pokedexNumber] = args;
-                pokemonNameEn = pokemonListEn[pokedexNumber - 1];
+            if (pokedexEntry === null) {
+                const corrections = this.client.spellchecker.getCorrections(args[0]).join(', ');
+
+                await msg.channel.send(this.client.utils.createErrorMsg({
+                    english: `Unknown Pokémon ${args[0]}. Did you mean:`,
+                    french: `Pokémon inconnu ${args[0]}. Vouliez-vous dire:\n ${corrections}`,
+                }));
+
+                return;
             }
 
-            pokemonNameFr = pokemonListFr[pokedexNumber - 1];
+            const nests = await this.client.nestRepository.fetchNests(pokedexEntry.number);
 
-            const nests = await this.client.nestRepository.fetchNests(pokedexNumber);
-
+            // Build the right message.
             if (nests.length === 0) {
                 await msg.channel.send(this.client.utils.createErrorMsg({
-                    english: `No nest found for ${pokemonNameEn} #${pokedexNumber}.`,
-                    french: `Aucun nid trouvé pour ${pokemonNameFr} #${pokedexNumber}.`,
+                    english: `No nest found for ${pokedexEntry.nameEn} #${pokedexEntry.number}.`,
+                    french: `Aucun nid trouvé pour ${pokedexEntry.nameFr} #${pokedexEntry.number}.`,
                 }));
                 return;
             }
@@ -68,10 +55,10 @@ module.exports = class {
 
             await msg.channel.send({
                 embed: {
-                    title: `${pokemonNameEn}/${pokemonNameFr} #${pokedexNumber}`,
+                    title: `${pokedexEntry.nameEn}/${pokedexEntry.nameFr} #${pokedexEntry.number}`,
                     description,
                     thumbnail: {
-                        url: `http://floatzel.net/pokemon/black-white/sprites/images/${pokedexNumber}.png`,
+                        url: `http://floatzel.net/pokemon/black-white/sprites/images/${pokedexEntry.number}.png`,
                     },
                 },
             });
@@ -79,5 +66,33 @@ module.exports = class {
             await msg.channel.send(e.message);
             console.error(e);
         }
+    }
+
+    /**
+     * Get a PokedexEntry object based on a pokemon name or pokedex number.
+     * @param {*} input
+     * @returns {PokedexEntry}
+     */
+    async getPokedexEntry(input) {
+        const pokemonListEn = this.client.utils.getPokemonNames();
+        const pokemonListFr = this.client.utils.getPokemonNames('french');
+        let pokemonNameEn = '';
+        let pokemonNameFr = '';
+        let pokedexNumber = -1;
+        // eslint-disable-next-line
+        if (isNaN(input)) {
+            if (!pokemonListEn.includes(input) && !pokemonListFr.includes(input)) {
+                return null;
+            }
+            pokemonNameEn = this.client.utils.getEnglishName(input);
+            pokedexNumber = pokemonListEn.indexOf(pokemonNameEn) + 1;
+        } else {
+            pokedexNumber = input;
+            pokemonNameEn = pokemonListEn[pokedexNumber - 1];
+        }
+
+        pokemonNameFr = pokemonListFr[pokedexNumber - 1];
+
+        return new PokedexEntry({ number: pokedexNumber, nameFr: pokemonNameFr, nameEn: pokemonNameEn });
     }
 };
