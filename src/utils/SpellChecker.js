@@ -36,15 +36,17 @@ class SpellChecker {
         return _.isEmpty(allCorrections) ? '' : formattedStr;
     }
 
-    getCorrections(input) {
-        const corrections = didYouMean(input, this.dictList, this.options);
+    getCorrections(input, dict = null) {
+        const currentDict = dict == null ? this.dictList : dict;
+
+        const corrections = didYouMean(input, currentDict, this.options);
 
         const options2 = _.clone(this.options);
         options2.thresholdType = 'edit-distance';
         options2.threshold = 2;
-        const corrections2 = didYouMean(input, this.dictList, options2);
+        const corrections2 = didYouMean(input, currentDict, options2);
 
-        this.dictList.forEach((word) => {
+        currentDict.forEach((word) => {
             if (word.includes(input) && word.charAt(0) === input.charAt(0)) corrections.push(word);
         });
 

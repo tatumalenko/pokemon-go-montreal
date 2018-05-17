@@ -38,6 +38,16 @@ class RaidRepository {
         return gyms;
     }
 
+    async searchByName(text) {
+        const gyms = await Gym.find(
+            { $text: { $search: text } },
+            // eslint-disable-next-line comma-dangle
+            { score: { $meta: 'textScore' } }
+        ).sort({ score: { $meta: 'textScore' } });
+
+        return gyms;
+    }
+
     async fetchEligibleGyms() {
         const gyms = Gym.where('eligible', true).find();
 
