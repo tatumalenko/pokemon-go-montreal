@@ -59,7 +59,6 @@ module.exports = class {
                                 url: 'https://img00.deviantart.net/ef10/i/2017/352/2/c/pokemon_go_gym_symbol_in_gray_by_memimouse-dbx4hvm.png',
                             },
                             description,
-                            
                         },
                     });
                 });
