@@ -45,7 +45,12 @@ module.exports = class {
             const foundGyms = await this.client.gymRepository.searchByName(query);
 
             // Output
-            if (foundGyms.length > 0) {
+            if (foundGyms.length > 5) {
+                await msg.channel.send(this.client.utils.createErrorMsg({
+                    english: `Too many results (${foundGyms.length}), please narrow down your search.`,
+                    french: `Trop de résultats (${foundGyms.length}), s'il vous plaît affiner votre recherche.`,
+                }));
+            } else if (foundGyms.length > 0) {
                 foundGyms.forEach((gym) => {
                     let description = `[Google Map](<https://maps.google.com/maps?q=${gym.latitude},${gym.longitude}>)`;
                     if (gym.eligible) {
