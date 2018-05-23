@@ -38,6 +38,12 @@ class RaidRepository {
         return gyms;
     }
 
+    async fetchByLocation(latitude, longitude) {
+        const gyms = await Gym.find({ latitude, longitude });
+
+        return gyms;
+    }
+
     async searchByName(text) {
         const gyms = await Gym.find(
             { $text: { $search: text } },

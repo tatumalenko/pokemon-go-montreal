@@ -3,11 +3,11 @@
 module.exports = class {
     constructor(...params) {
         Object.assign(this, {
-            name: 'find-gym',
+            name: 'gym-search',
             enabled: true,
             runIn: [], // [] = uses app.js runIn property values
             aliases: [],
-            description: '',
+            description: 'Search the database for gyms.',
         });
     }
 
@@ -45,6 +45,7 @@ module.exports = class {
             const foundGyms = await this.client.gymRepository.searchByName(query);
 
             // Output
+            // TODO: extract.
             if (foundGyms.length > 5) {
                 await msg.channel.send(this.client.utils.createErrorMsg({
                     english: `Too many results (${foundGyms.length}), please narrow down your search.`,
