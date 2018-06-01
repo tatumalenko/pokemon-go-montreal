@@ -7,3 +7,4 @@ database.db
 assets/db/database.db
 src/bots/Meowth/logs
 src/bots/Meowth/config.json
+**/*.icloud
