@@ -1,36 +1,28 @@
 import * as fs from 'fs';
-import * as path from 'path';
-import * as chalk from 'chalk';
 
 import APP_SETTINGS from '@settings/app';
-import { PokemonWriter } from '@components/pokemon/pokemon.writer';
-import { MoveWriter } from '@components/move/move.writer';
-import { AvatarCustomizationWriter } from '@components/avatar-customization/avatar-customization.writer';
+import { AvatarCustomizationPipeline } from './processing/avatarCustomization';
+import { MovePipeline } from './processing/move';
+import { Pipeline } from '@core';
+import { PokemonPipeline } from './processing/pokemon';
+import { TypePipeline } from './processing/type';
+import chalk from 'chalk';
 
 const gameMaster = require('./data/GAME_MASTER.json');
 const packageJson = require('../package.json');
 
+const done = (err, name) =>
+    err ?
+        (console.log(`${chalk.red('✘')} Error while writing ${name}:`) || console.error(err)) :
+        console.log(`${chalk.green('✔')} Successfully written ${name}`);
+
+const write = (file: string, pipeline: Pipeline, name: string) =>
+    fs.writeFile(file, JSON.stringify(pipeline.Run(), null, 4), err => done(err, name));
 
 console.log(`${chalk.blue('i')} ${packageJson.name} ${chalk.cyan(packageJson.version)} `);
 console.log(`${chalk.blue('i')} Using GAME_MASTER version ${chalk.cyan(gameMaster.version)}`);
 
-new PokemonWriter().Write().then(() => {
-    console.log(`${chalk.green('✓')} Pokemon written to ${chalk.cyan(APP_SETTINGS.POKEMON_FILE)}`);
-}, (err) => {
-    console.log(`${chalk.red('×')} Failed at parsing Pokemon`);
-    console.log(err);
-});
-
-new MoveWriter().Write().then(() => {
-    console.log(`${chalk.green('✓')} Moves written to ${chalk.cyan(APP_SETTINGS.MOVE_FILE)}`);
-}, (err) => {
-    console.log(`${chalk.red('×')} Failed at parsing Moves`);
-    console.log(err);
-});
-
-new AvatarCustomizationWriter().Write().then(() => {
-    console.log(`${chalk.green('✓')} AvatarCostumization written to ${chalk.cyan(APP_SETTINGS.AVATAR_CUSTOMIZATION_FILE)}`);
-}, (err) => {
-    console.log(`${chalk.red('×')} Failed at parsing AvatarCostumization`);
-    console.log(err);
-});
+write('./output/pokemon.json', new PokemonPipeline(gameMaster), 'Pokemons');
+write('./output/type.json', new TypePipeline(gameMaster), 'Types');
+write('./output/avatar-customization.json', new AvatarCustomizationPipeline(gameMaster), 'Avatar Customizations');
+write('./output/move.json', new MovePipeline(gameMaster), 'Moves');
