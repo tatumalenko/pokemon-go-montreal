@@ -3661,5 +3661,100 @@
         "energyDelta": 20,
         "id": "PRESENT_FAST",
         "name": "Present Fast"
+    },
+    {
+        "accuracyChange": 1,
+        "animationId": 5,
+        "pokemonType": {
+            "id": "POKEMON_TYPE_FIRE",
+            "name": "Fire"
+        },
+        "power": 60,
+        "staminaLossScalar": 0.01,
+        "trainerLevelMin": 1,
+        "trainerLevelMax": 100,
+        "vfxName": "weather_ball_fire",
+        "durationMs": 1600,
+        "damageWindowStartMs": 1350,
+        "damageWindowEndMs": 1600,
+        "energyDelta": -33,
+        "id": "WEATHER_BALL_FIRE",
+        "name": "Weather Ball Fire"
+    },
+    {
+        "accuracyChange": 1,
+        "animationId": 5,
+        "pokemonType": {
+            "id": "POKEMON_TYPE_ICE",
+            "name": "Ice"
+        },
+        "power": 60,
+        "staminaLossScalar": 0.01,
+        "trainerLevelMin": 1,
+        "trainerLevelMax": 100,
+        "vfxName": "weather_ball_ice",
+        "durationMs": 1600,
+        "damageWindowStartMs": 1350,
+        "damageWindowEndMs": 1600,
+        "energyDelta": -33,
+        "id": "WEATHER_BALL_ICE",
+        "name": "Weather Ball Ice"
+    },
+    {
+        "accuracyChange": 1,
+        "animationId": 5,
+        "pokemonType": {
+            "id": "POKEMON_TYPE_ROCK",
+            "name": "Rock"
+        },
+        "power": 60,
+        "staminaLossScalar": 0.01,
+        "trainerLevelMin": 1,
+        "trainerLevelMax": 100,
+        "vfxName": "weather_ball_rock",
+        "durationMs": 1600,
+        "damageWindowStartMs": 1350,
+        "damageWindowEndMs": 1600,
+        "energyDelta": -33,
+        "id": "WEATHER_BALL_ROCK",
+        "name": "Weather Ball Rock"
+    },
+    {
+        "accuracyChange": 1,
+        "animationId": 5,
+        "pokemonType": {
+            "id": "POKEMON_TYPE_WATER",
+            "name": "Water"
+        },
+        "power": 60,
+        "staminaLossScalar": 0.01,
+        "trainerLevelMin": 1,
+        "trainerLevelMax": 100,
+        "vfxName": "weather_ball_water",
+        "durationMs": 1600,
+        "damageWindowStartMs": 1350,
+        "damageWindowEndMs": 1600,
+        "energyDelta": -33,
+        "id": "WEATHER_BALL_WATER",
+        "name": "Weather Ball Water"
+    },
+    {
+        "accuracyChange": 1,
+        "animationId": 5,
+        "pokemonType": {
+            "id": "POKEMON_TYPE_GRASS",
+            "name": "Grass"
+        },
+        "power": 100,
+        "staminaLossScalar": 0.01,
+        "trainerLevelMin": 1,
+        "trainerLevelMax": 100,
+        "vfxName": "frenzy_plant",
+        "durationMs": 2600,
+        "damageWindowStartMs": 2145,
+        "damageWindowEndMs": 2550,
+        "energyDelta": -50,
+        "id": "FRENZY_PLANT",
+        "name": "Frenzy Plant"
     }
 ]
