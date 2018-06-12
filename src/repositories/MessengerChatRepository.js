@@ -35,6 +35,14 @@ class MessengerChatRepository {
         return chats;
     }
 
+    async fetch(channelId) {
+        const chat = await MessengerChat.findOne({
+            discordChannel: channelId,
+        });
+
+        return chat;
+    }
+
     async deleteAll() {
         await MessengerChat.deleteMany();
     }
