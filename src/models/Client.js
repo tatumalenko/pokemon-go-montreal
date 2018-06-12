@@ -10,6 +10,7 @@ const RaidRepository = require('../repositories/RaidRepository');
 const GymRepository = require('../repositories/GymRepository');
 const NeighbourhoodRepository = require('../repositories/NeighbourhoodRepository');
 const NestRepository = require('../repositories/NestRepository');
+const MessengerChatRepository = require('../repositories/MessengerChatRepository');
 
 const configs = require('../../configs/configs.js');
 
@@ -32,6 +33,7 @@ class Client extends Discord.Client {
         this.gymRepository = new GymRepository(this.configs.dbMongo.dbPath);
         this.nestRepository = new NestRepository(this.configs.TSR.getNestURL, this.configs.TSR.postData);
         this.neighbourhoodRepository = new NeighbourhoodRepository(this.configs.polygonMapPath);
+        this.messengerChatRepository = new MessengerChatRepository(this.configs.dbMongo.dbPath);
         this.logger = new Logger(this);
         this.utils = Utils;
         this.spellchecker = new SpellChecker([...Utils.getPokemonNames(), ...Utils.getPokemonNames('french'), Utils.getNeighbourhoodNames()], { returnType: 'all-matches', thresholdType: 'similarity', threshold: 0.55 });

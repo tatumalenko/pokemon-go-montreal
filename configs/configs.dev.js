@@ -23,6 +23,7 @@ module.exports = {
             user: 'users',
             raid: 'raids',
             gym: 'gyms',
+            messengerChat: 'messengerChats',
         },
     },
     TSR: {
@@ -72,6 +73,11 @@ module.exports = {
     persian: {
         clientId: process.env.CLIENT_ID,
         botToken: process.env.BOT_TOKEN,
+        gymManagementAllowedRoles: ['admin'],
+        chats: {
+            globalAdminRole: 'admin',
+            managementChannel: '455905163526275094',
+        },
     },
     pidgey: {
         clientId: process.env.CLIENT_ID,
