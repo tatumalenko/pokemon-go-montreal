@@ -87,4 +87,8 @@ module.exports = {
         clientId: process.env.CLIENT_ID,
         botToken: process.env.BOT_TOKEN,
     },
+    delibird: {
+        clientId: process.env.CLIENT_ID,
+        botToken: process.env.BOT_TOKEN,
+    },
 };
