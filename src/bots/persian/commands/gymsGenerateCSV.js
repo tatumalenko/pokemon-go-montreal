@@ -32,12 +32,12 @@ module.exports = class {
                     return;
                 }
 
-                const name = element.name.replace(',', ' ');
+                // const name = element.name.replace(',', ' ');
                 // if (element.eligible) {
                 //    name += '(Eligible)';
                 // }
 
-                csv += `"${name}",${element.latitude},${element.longitude}\n`;
+                csv += `"${element.name}",${element.latitude},${element.longitude}\n`;
             });
 
             // Output the file
