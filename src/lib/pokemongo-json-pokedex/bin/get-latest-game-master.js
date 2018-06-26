@@ -15,10 +15,11 @@ if (!fs.existsSync(dir)) {
 }
 
 
-var fileStream = fs.createWriteStream(file);
-pokemongoGameMaster.getVersion('latest', 'json').then(gameMaster => {
-    pokemongoGameMaster.getLatestVersionName().then(version => {
+let fileStream = fs.createWriteStream(file);
+pokemongoGameMaster.getVersion('latest', 'json').then((gameMaster) => {
+    pokemongoGameMaster.getLatestVersionName().then((version) => {
         gameMaster.version = version;
+        console.log('DEBUG: Stringifying gameMaster to write it in a file.');
         fs.writeFileSync(file, JSON.stringify(gameMaster, null, 4));
         console.log(`${chalk.blue('i')} Successfully fetched GAME_MASTER.json v${version} to ${chalk.blue(file)}`);
     });
