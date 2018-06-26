@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Gym = require('../schemas/Gym');
-const RaidSpawn = require('../models/RaidSpawn');
 
 
 class RaidRepository {
