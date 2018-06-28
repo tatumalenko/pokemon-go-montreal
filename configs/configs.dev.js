@@ -82,6 +82,11 @@ module.exports = {
     pidgey: {
         clientId: process.env.CLIENT_ID,
         botToken: process.env.BOT_TOKEN,
+        noNest: {
+            mythical: [151, 251, 385, 386],
+            legendaries: [144, 145, 146, 150, 243, 244, 245, 249, 250, 377, 378, 379, 380, 381, 382, 383, 384],
+            tenKMEggs: [],
+        },
     },
     meowth: {
         clientId: process.env.CLIENT_ID,
