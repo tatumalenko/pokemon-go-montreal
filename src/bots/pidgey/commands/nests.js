@@ -23,6 +23,10 @@ module.exports = class {
                 return;
             }
 
+            if (!await this.assertPossibleNest(pokedexEntry, msg)) {
+                return;
+            }
+
             const nests = await this.client.nestRepository.fetchNests(pokedexEntry.number);
 
             // Build the right message.
@@ -31,8 +35,11 @@ module.exports = class {
                     english: `No nest found for ${pokedexEntry.nameEn} #${pokedexEntry.number}.`,
                     french: `Aucun nid trouvé pour ${pokedexEntry.nameFr} #${pokedexEntry.number}.`,
                 }));
+                msg.react('😢');
                 return;
             }
+
+            msg.react('✅');
 
             let description =
                 '**Nids répertoriés par des joueurs sur [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n' +
@@ -42,15 +49,8 @@ module.exports = class {
                 description += `\t:arrow_forward: ${nest.location.neighbourhood}: [Google Link](<${nest.location.gmapsUrl}>)\n`;
             });
 
-            await msg.channel.send({
-                embed: {
-                    title: `${pokedexEntry.nameEn}/${pokedexEntry.nameFr} #${pokedexEntry.number}`,
-                    description,
-                    thumbnail: {
-                        url: `http://floatzel.net/pokemon/black-white/sprites/images/${pokedexEntry.number}.png`,
-                    },
-                },
-            });
+            const embed = await this.createNestEmbed(pokedexEntry, description);
+            await msg.channel.send(embed);
         } catch (e) {
             await msg.channel.send(e.message);
             this.client.logger.logError(e);
@@ -85,6 +85,18 @@ module.exports = class {
         return new PokedexEntry({ number: pokedexNumber, nameFr: pokemonNameFr, nameEn: pokemonNameEn });
     }
 
+    async createNestEmbed(pokedexEntry, text) {
+        return {
+            embed: {
+                title: `${pokedexEntry.nameEn}/${pokedexEntry.nameFr} #${pokedexEntry.number}`,
+                description: text,
+                thumbnail: {
+                    url: `http://floatzel.net/pokemon/black-white/sprites/images/${pokedexEntry.number}.png`,
+                },
+            },
+        };
+    }
+
     async assertSyntax(args, channel) {
         if (args.length === 0) {
             await channel.send(this.client.utils.createErrorMsg({
@@ -110,5 +122,21 @@ module.exports = class {
         }
 
         return true;
+    }
+
+    async assertPossibleNest(pokedexEntry, msg) {
+        let message = '';
+        if (this.client.configs.pidgey.noNest.mythical.includes(pokedexEntry.number)) {
+            message = 'This is a mythical Pokémon, they don\'t appear in nests.';
+        } else if (this.client.configs.pidgey.noNest.legendaries.includes(pokedexEntry.number)) {
+            message = 'This is a legendary Pokémon, they don\'t appear in nests.';
+        } else {
+            return true;
+        }
+
+        msg.react('❌');
+        const embed = await this.createNestEmbed(pokedexEntry, message);
+        msg.channel.send(embed);
+        return false;
     }
 };
