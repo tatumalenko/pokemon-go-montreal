@@ -13,24 +13,13 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            if (args.length === 0) {
-                await msg.channel.send(this.client.utils.createErrorMsg({
-                    english: 'Please specify a Pokemon.',
-                    french: 'S\'il vous plaît spécifier un Pokemon.',
-                }));
+            if (!await this.assertSyntax(args, msg.channel)) {
                 return;
             }
 
             const pokedexEntry = await this.getPokedexEntry(args[0]);
 
-            if (pokedexEntry === null) {
-                const corrections = this.client.spellchecker.getCorrections(args[0]).join(', ');
-
-                await msg.channel.send(this.client.utils.createErrorMsg({
-                    english: `Unknown Pokémon ${args[0]}. Did you mean:`,
-                    french: `Pokémon inconnu ${args[0]}. Vouliez-vous dire:\n ${corrections}`,
-                }));
-
+            if (!await this.assertValidPokemon(pokedexEntry, args, msg.channel)) {
                 return;
             }
 
@@ -94,5 +83,32 @@ module.exports = class {
         pokemonNameFr = pokemonListFr[pokedexNumber - 1];
 
         return new PokedexEntry({ number: pokedexNumber, nameFr: pokemonNameFr, nameEn: pokemonNameEn });
+    }
+
+    async assertSyntax(args, channel) {
+        if (args.length === 0) {
+            await channel.send(this.client.utils.createErrorMsg({
+                english: 'Please specify a Pokemon.',
+                french: 'S\'il vous plaît spécifier un Pokemon.',
+            }));
+            return false;
+        }
+
+        return true;
+    }
+
+    async assertValidPokemon(pokedexEntry, args, channel) {
+        if (pokedexEntry === null) {
+            const corrections = this.client.spellchecker.getCorrections(args[0]).join(', ');
+
+            await channel.send(this.client.utils.createErrorMsg({
+                english: `Unknown Pokémon ${args[0]}. Did you mean:`,
+                french: `Pokémon inconnu ${args[0]}. Vouliez-vous dire:\n ${corrections}`,
+            }));
+
+            return false;
+        }
+
+        return true;
     }
 };
