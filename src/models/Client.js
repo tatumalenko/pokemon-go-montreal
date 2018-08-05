@@ -42,6 +42,7 @@ class Client extends Discord.Client {
         this.on('message', this.message); // Runs the on message event listener
         this.on('guildMemberAdd', this.guildMemberAdd);
         this.on('guildMemberRemove', this.guildMemberRemove);
+        this.on('error', (e) => { this.error(e); });
     }
 
     async ready() {
@@ -213,6 +214,10 @@ class Client extends Discord.Client {
 
     async login() {
         return super.login(`${this.configs[this.name].botToken}`);
+    }
+
+    async error(err) {
+        this.logger.logError(err);
     }
 }
 
