@@ -3952,15 +3952,15 @@
     {
         "accuracyChange": 1,
         "animationId": 4,
-        "power": 12,
+        "power": 16,
         "staminaLossScalar": 0.01,
         "trainerLevelMin": 1,
         "trainerLevelMax": 100,
         "vfxName": "smack_down_fast",
-        "durationMs": 900,
-        "damageWindowStartMs": 500,
-        "damageWindowEndMs": 800,
-        "energyDelta": 7,
+        "durationMs": 1200,
+        "damageWindowStartMs": 800,
+        "damageWindowEndMs": 1100,
+        "energyDelta": 8,
         "id": "SMACK_DOWN_FAST",
         "pokemonType": {
             "id": "POKEMON_TYPE_ROCK",
@@ -3988,5 +3988,26 @@
         },
         "name": "Blast Burn",
         "internalId": 298
+    },
+    {
+        "accuracyChange": 1,
+        "animationId": 5,
+        "power": 90,
+        "criticalChance": 0.05,
+        "staminaLossScalar": 0.065,
+        "trainerLevelMin": 1,
+        "trainerLevelMax": 100,
+        "vfxName": "hydro_cannon",
+        "durationMs": 1900,
+        "damageWindowStartMs": 500,
+        "damageWindowEndMs": 1600,
+        "energyDelta": -50,
+        "id": "HYDRO_CANNON",
+        "pokemonType": {
+            "id": "POKEMON_TYPE_WATER",
+            "name": "Water"
+        },
+        "name": "Hydro Cannon",
+        "internalId": 299
     }
 ]
