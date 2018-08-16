@@ -33,6 +33,12 @@ class Logger {
     async logToChannel(channel, message) {
         const dateString = new Date().toLocaleString();
 
+        // If 'message' is not a string, we assume it's an error object...
+        if (typeof message !== 'string') {
+            // eslint-disable-next-line
+            message = message.message;
+        }
+
         const log = `**[${dateString}]** [${this.client.name}] ${message}`;
 
         await this.client.guilds.get(this.client.configs.guildId).channels.find('name', channel).send(log);
