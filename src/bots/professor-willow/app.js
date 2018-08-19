@@ -72,7 +72,7 @@ client.on('message', async (message) => {
                         + 'For any other questions or help, don\'t be shy to ask one of the admin or mod staff, they would be delighted to answer any questions!',
                 },
             });
-        } else if (['damn', 'fuck', 'jesus'].some(word => message.content.includes(word))) {
+        } else if (['damn', 'fuck', 'jesus'].some(word => message.content.toLowerCase().includes(word))) {
             const cussWords = ['tabarbak', 'esti', 'calisse'];
             await message.channel.send(cussWords[Math.floor(Math.random() * cussWords.length)]);
         } else if (message.content.substring(0, 1) === '!') {
