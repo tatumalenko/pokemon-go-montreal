@@ -1,8 +1,8 @@
 // Import the discord.js module
 const Discord = require('discord.js');
+const TwitterPackage = require('twitter');
 const configs = require('../../../configs/configs');
 
-const TwitterPackage = require('twitter');
 
 const Twitter = new TwitterPackage(configs['professor-willow']);
 const wh = new Discord.WebhookClient(configs['professor-willow'].webhookId, configs['professor-willow'].webhookToken);
@@ -37,8 +37,8 @@ client.on('guildMemberAdd', (member) => {
     if (!channel) return;
     // Send the message, mentioning the member
     channel.send(`Welcome to Pokémon GO Montréal, ${member
-    }! I'm Professor Willow and will be your guide! Tag me (type @Professor Willow) if ever you want some help or tips! ` +
-        'Set your team by typing either `!team mystic`, `!team instinct`, or `!team valor`.');
+    }! I'm Professor Willow and will be your guide! Tag me (type @Professor Willow) if ever you want some help or tips! `
+        + 'Set your team by typing either `!team mystic`, `!team instinct`, or `!team valor`.');
 });
 
 client.on('guildMemberRemove', (member) => {
@@ -62,16 +62,19 @@ client.on('message', async (message) => {
         if (message.content === `<@${configs['professor-willow'].clientId}>`) {
             await message.channel.send({
                 embed: {
-                    description: `${'**Professor Willow here!** Ready to help!\n\n' +
-                        'To get some cool wild spawn alerts for specific Pokemon within the neighbourhoods you choose, head over to '}${
+                    description: `${'**Professor Willow here!** Ready to help!\n\n'
+                        + 'To get some cool wild spawn alerts for specific Pokemon within the neighbourhoods you choose, head over to '}${
                         message.guild.channels.find('name', 'wants-post')
-                    } and let ${message.guild.members.find('id', configs.pikachu.clientId)} assist you by typing \`'!want help'\` there!\n\n` +
-                        `To get some info and stats on Pokemon including IVs, ATK/DEF/STA, and much more, head over to ${
+                    } and let ${message.guild.members.find('id', configs.pikachu.clientId)} assist you by typing \`'!want help'\` there!\n\n`
+                        + `To get some info and stats on Pokemon including IVs, ATK/DEF/STA, and much more, head over to ${
                             message.guild.channels.find('name', 'pokedex')
-                        } and let ${message.guild.members.find('id', configs.slowpoke.clientId)} assist you by typing \`'!pd help'\` there!\n\n` +
-                        'For any other questions or help, don\'t be shy to ask one of the admin or mod staff, they would be delighted to answer any questions!',
+                        } and let ${message.guild.members.find('id', configs.slowpoke.clientId)} assist you by typing \`'!pd help'\` there!\n\n`
+                        + 'For any other questions or help, don\'t be shy to ask one of the admin or mod staff, they would be delighted to answer any questions!',
                 },
             });
+        } else if (['damn', 'fuck', 'jesus'].some(word => message.content.includes(word))) {
+            const cussWords = ['tabarbak', 'esti', 'calisse'];
+            await message.channel.send(cussWords[Math.floor(Math.random() * cussWords.length)]);
         } else if (message.content.substring(0, 1) === '!') {
             let args = message.content.substring(1).split(' ');
             const cmd = args[0];
@@ -192,7 +195,9 @@ client.on('message', async (message) => {
                         message.channel.sendMessage(`Sorry, you don't have the permission to execute the command "${message.content}"`);
                         console.log(`Sorry, you don't have the permission to execute the command "${message.content}"`);
                         return;
-                    } else if (!message.channel.permissionsFor(client.user).has('MANAGE_MESSAGES')) {
+                    }
+
+                    if (!message.channel.permissionsFor(client.user).has('MANAGE_MESSAGES')) {
                         message.channel.sendMessage(`Sorry, I don't have the permission to execute the command "${message.content}"`);
                         console.log(`Sorry, I don't have the permission to execute the command "${message.content}"`);
                         return;
@@ -206,8 +211,8 @@ client.on('message', async (message) => {
                                 if (args[0] !== undefined) {
                                     message.channel.bulkDelete(parseInt(args[0], 10) + 1);
                                 } else {
-                                    message.channel.send('You need to enter a number following the `!clear` command to indicate how many messages to delete!\n' +
-                                        'Example: `!clear 2`');
+                                    message.channel.send('You need to enter a number following the `!clear` command to indicate how many messages to delete!\n'
+                                        + 'Example: `!clear 2`');
                                 }
                             })
                             .catch((err) => {
@@ -263,10 +268,10 @@ Twitter.stream('statuses/filter', {
 
     stream.on('data', async (tweet) => {
         try {
-            if (!TWITTER_USER_IDS.includes(tweet.user.id_str) ||
-                tweet.retweeted_status ||
-                tweet.in_reply_to_user_id_str ||
-                tweet.in_reply_to_status_id_str) return;
+            if (!TWITTER_USER_IDS.includes(tweet.user.id_str)
+                || tweet.retweeted_status
+                || tweet.in_reply_to_user_id_str
+                || tweet.in_reply_to_status_id_str) return;
 
             let mediaUrl;
             if (Object.prototype.hasOwnProperty.call(tweet.entities, 'media')) {
