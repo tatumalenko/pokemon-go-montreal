@@ -73,7 +73,7 @@ client.on('message', async (message) => {
                 },
             });
         } else if (['damn', 'fuck', 'jesus'].some(word => message.content.toLowerCase().includes(word))) {
-            const cussWords = ['tabarbak', 'esti', 'calisse'];
+            const cussWords = ['tabarnak', 'esti', 'calisse'];
             await message.channel.send(cussWords[Math.floor(Math.random() * cussWords.length)]);
         } else if (message.content.substring(0, 1) === '!') {
             let args = message.content.substring(1).split(' ');
