@@ -194,7 +194,7 @@ client.on('message', async (message) => {
             console.log(`Is Alolan: ${pkmnName.toLowerCase().includes('alola')}`);
 
             if (pd.isPokemonName(pkmnName)) { // args[0] = pokemonName
-                if (dco.msg.args.length === 1 || pkmnName.toLowerCase().includes('alola')) { // args.length = 1
+                if (dco.msg.args.length === 1 || (dco.msg.args.length === 1 && pkmnName.includes('alola'))) { // args.length = 1
                     // await dco.channel.send({
                     //     embed: pd.pokemonInfo(new pd.Pokemon({
                     //         'name': pkmnName
