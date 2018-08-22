@@ -62,48 +62,44 @@ client.on('message', async (message) => {
             if (dco.msg.args.length === 0 || dco.msg.args.join(' ').toLowerCase().includes('help')) {
                 await dco.channel.send({
                     embed: {
-                        description: '**Slowpoke bot here!** `These are some of the cool things you can ask me to tell you about.`\n' +
-                            '\n**Basic commands**:' +
-                            '\n**`\'!pd <name>\'`**: \n       `will display Pokemon stat and moveset info for Pokemon <name> at level 39 and for perfect IVs`' +
-                            '\n**`\'!pd <move>\'`**: \n       `will display some basic stats for Move name <move>`\n'
+                        description: '**Slowpoke bot here!** `These are some of the cool things you can ask me to tell you about.`\n'
+                            + '\n**Basic commands**:'
+                            + '\n**`\'!pd <name>\'`**: \n       `will display Pokemon stat and moveset info for Pokemon <name> at level 39 and for perfect IVs`'
+                            + '\n**`\'!pd <move>\'`**: \n       `will display some basic stats for Move name <move>`\n'
 
-                            +
-                            '\n**Advanced commands**:' +
-                            '\n**`\'!pd <name> level <num>\'`**: \n          `will display all CP combos possible for IV > 90% of Pokemon <name> at level <num>`' +
-                            '\n**`\'!pd <name> cp <num>\'`**: \n          `will display all IV combos possible for cp = num & level 20`' +
-                            '\n**`\'!pd <name> cp <num1> level <num2>\'`**: \n          `will display all IV combos possible for cp <num1> & level <num2>`' +
-                            '\n**`\'!pd <name> iv <num1>/<num2>/<num3> level <num4>\'`**: \n          `will display CP & other stat info for Pokemon <name> at level <num4> with IV values in <atk>/<def>/<sta> format`'
+                            + '\n**Advanced commands**:'
+                            + '\n**`\'!pd <name> level <num>\'`**: \n          `will display all CP combos possible for IV > 90% of Pokemon <name> at level <num>`'
+                            + '\n**`\'!pd <name> cp <num>\'`**: \n          `will display all IV combos possible for cp = num & level 20`'
+                            + '\n**`\'!pd <name> cp <num1> level <num2>\'`**: \n          `will display all IV combos possible for cp <num1> & level <num2>`'
+                            + '\n**`\'!pd <name> iv <num1>/<num2>/<num3> level <num4>\'`**: \n          `will display CP & other stat info for Pokemon <name> at level <num4> with IV values in <atk>/<def>/<sta> format`'
 
-                            +
-                            '\n\n** Note**: `Here are what the emojis seen when I report a full Pokemon spec card represent.`' +
-                            '\n**`Next to each Pokemon\'s fast or charge move`**: \n          `(`<:power1:385003640622153728>`:Power|`<:lightning1:385004007669891072>`:Energy|`<:stopwatch1:385003619302506498>`:Duration[secs])`' +
-                            '\n**`Next to each Pokemon\'s fast/charge moveset`**: \n          `(`<:swords1:385001990268125184>` Offensive Perfection| `<:shield1:385001970391318538>` Defensive Perfection)`'
+                            + '\n\n** Note**: `Here are what the emojis seen when I report a full Pokemon spec card represent.`'
+                            + '\n**`Next to each Pokemon\'s fast or charge move`**: \n          `(`<:power1:385003640622153728>`:Power|`<:lightning1:385004007669891072>`:Energy|`<:stopwatch1:385003619302506498>`:Duration[secs])`'
+                            + '\n**`Next to each Pokemon\'s fast/charge moveset`**: \n          `(`<:swords1:385001990268125184>` Offensive Perfection| `<:shield1:385001970391318538>` Defensive Perfection)`'
 
-                            +
-                            '\n\n`Offensive and Defensive Perfection represent the \% approaching value to that of the best moveset (i.e. normalized) ' +
-                            'for either they\'re better at attacking (Offensive) or defending (Defensive). In other words, 100\% is the best and the lower is the worst.`' +
-                            '\n\n`For more details on how the values were calculated and see some examples, type` **`\'!pd help more\'`** ',
+                            + '\n\n`Offensive and Defensive Perfection represent the \% approaching value to that of the best moveset (i.e. normalized) '
+                            + 'for either they\'re better at attacking (Offensive) or defending (Defensive). In other words, 100\% is the best and the lower is the worst.`'
+                            + '\n\n`For more details on how the values were calculated and see some examples, type` **`\'!pd help more\'`** ',
                     },
                 });
                 return;
-            } else if (dco.msg.args.join(' ').toLowerCase().includes('help more')) {
+            } if (dco.msg.args.join(' ').toLowerCase().includes('help more')) {
                 await dco.channel.send({
                     embed: {
-                        description: '\n**Basic examples**: ' +
-                            '\n`\'!pd entei\' `' +
-                            '\n`\'!pd dazzling gleam\' `\n'
+                        description: '\n**Basic examples**: '
+                            + '\n`\'!pd entei\' `'
+                            + '\n`\'!pd dazzling gleam\' `\n'
 
-                            +
-                            '\n**Advanced examples**:' +
-                            '\n`\'!pd entei level 20\' `' +
-                            '\n`\'!pd entei cp 1913\' `' +
-                            '\n`\'!pd entei cp 2972 level 32\' `' +
-                            '\n`\'!pd entei iv 12/14/13 level 30\' `' +
-                            '\n\n`The formulas used to rank the movesets are somewhat complicated. The approach ' +
-                            'used is well described in this spreadsheet found` [here](https://www.reddit.com/r/TheSilphRoad/comments/5v0svt/updated_pok%C3%A9mon_go_species_data_and_moveset/).' +
-                            '\n\n`You might notice some discrepencies (especially for the Defensive Perfection values) from other sources such as PokeGenie. This is expected is ' +
-                            'no single method for determining the \'best\' stats/movesets given all the assumptions when not knowing exactly who is the defender. ' +
-                            'These are just rough guidelines and are subjective.`',
+                            + '\n**Advanced examples**:'
+                            + '\n`\'!pd entei level 20\' `'
+                            + '\n`\'!pd entei cp 1913\' `'
+                            + '\n`\'!pd entei cp 2972 level 32\' `'
+                            + '\n`\'!pd entei iv 12/14/13 level 30\' `'
+                            + '\n\n`The formulas used to rank the movesets are somewhat complicated. The approach '
+                            + 'used is well described in this spreadsheet found` [here](https://www.reddit.com/r/TheSilphRoad/comments/5v0svt/updated_pok%C3%A9mon_go_species_data_and_moveset/).'
+                            + '\n\n`You might notice some discrepencies (especially for the Defensive Perfection values) from other sources such as PokeGenie. This is expected is '
+                            + 'no single method for determining the \'best\' stats/movesets given all the assumptions when not knowing exactly who is the defender. '
+                            + 'These are just rough guidelines and are subjective.`',
                     },
                 });
                 return;
@@ -116,9 +112,9 @@ client.on('message', async (message) => {
                 console.log(dco.msg.args[1], dco.msg.args[2]);
                 console.log(`dco.msg.args.length !== 3: ${dco.msg.args.length !== 3}`);
                 console.log(`!isFinite(dco.msg.args[1]) || !isFinite(dco.msg.args[2]): ${!Number.isFinite(Number(dco.msg.args[1]))}` || !Number.isFinite(Number(dco.msg.args[2])));
-                console.log(`=> 1, <= 40, lv? ${dco.msg.args[1] < 1 || dco.msg.args[1] > 40 ||
-                    dco.msg.args[2] < 1 || dco.msg.args[2] > 40 ||
-                    !lvs.some(lv => [dco.msg.args[1], dco.msg.args[2]].some(arg => lv !== arg))}`);
+                console.log(`=> 1, <= 40, lv? ${dco.msg.args[1] < 1 || dco.msg.args[1] > 40
+                    || dco.msg.args[2] < 1 || dco.msg.args[2] > 40
+                    || !lvs.some(lv => [dco.msg.args[1], dco.msg.args[2]].some(arg => lv !== arg))}`);
                 console.log(`dco.msg.args[1] >= dco.msg.args[2]: ${dco.msg.args[1] >= dco.msg.args[2]}`);
 
 
@@ -128,9 +124,9 @@ client.on('message', async (message) => {
                 if (!Number.isFinite(Number(dco.msg.args[1])) || !Number.isFinite(Number(dco.msg.args[2]))) return;
 
 
-                if (dco.msg.args[1] < 1 || dco.msg.args[1] > 40 ||
-                    dco.msg.args[2] < 1 || dco.msg.args[2] > 40 ||
-                    !lvs.some(lv => [dco.msg.args[1], dco.msg.args[2]].some(arg => lv !== arg))) return;
+                if (dco.msg.args[1] < 1 || dco.msg.args[1] > 40
+                    || dco.msg.args[2] < 1 || dco.msg.args[2] > 40
+                    || !lvs.some(lv => [dco.msg.args[1], dco.msg.args[2]].some(arg => lv !== arg))) return;
 
 
                 if (parseFloat(dco.msg.args[1]) >= parseFloat(dco.msg.args[2])) return;
@@ -141,10 +137,10 @@ client.on('message', async (message) => {
                 await dco.channel.send({
                     embed: {
                         title: 'Level Up Costs',
-                        description: `**Start**: \`${dco.msg.args[1]}\`\n` +
-                            `**End**: \`${dco.msg.args[2]}\`\n` +
-                            `<:stardust:383911374532902912>: \`${cost.stardust.toLocaleString('en')}\`\n` +
-                            `<:rarecandy:383911406434516994>: \`${cost.candies}\``,
+                        description: `**Start**: \`${dco.msg.args[1]}\`\n`
+                            + `**End**: \`${dco.msg.args[2]}\`\n`
+                            + `<:stardust:383911374532902912>: \`${cost.stardust.toLocaleString('en')}\`\n`
+                            + `<:rarecandy:383911406434516994>: \`${cost.candies}\``,
                     },
                 });
                 return;
@@ -194,8 +190,11 @@ client.on('message', async (message) => {
                 name: pkmnName,
             }));
 
+            console.log(`Entered: ${pkmnName}`);
+            console.log(`Is Alolan: ${pkmnName.toLowerCase().includes('alola')}`);
+
             if (pd.isPokemonName(pkmnName)) { // args[0] = pokemonName
-                if (dco.msg.args.length === 1) { // args.length = 1
+                if (dco.msg.args.length === 1 || pkmnName.toLowerCase().includes('alola')) { // args.length = 1
                     // await dco.channel.send({
                     //     embed: pd.pokemonInfo(new pd.Pokemon({
                     //         'name': pkmnName
@@ -211,7 +210,9 @@ client.on('message', async (message) => {
                         embed: pokemonInfo[2],
                     });
                     return;
-                } else if ((dco.msg.args.length - 1) % 2 === 0) { // args[1:end].length IS EVEN
+                }
+
+                if ((dco.msg.args.length - 1) % 2 === 0) { // args[1:end].length IS EVEN
                     let hp;
                     let cp;
                     let level;
@@ -322,4 +323,3 @@ client.on('message', async (message) => {
 
 // Log our bot in
 client.login(configs.slowpoke.botToken);
-
