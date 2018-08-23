@@ -11,9 +11,13 @@ module.exports = class {
     async run(member, ...params) {
         try {
             const channel = await this.client.guilds.find('name', this.client.configs.guildId).channels.find('name', this.client.configs.channels.joinTeam);
+            const rulesChannel = await this.client.guilds.find('name', this.client.configs.guildId).channels.find('name', 'regles-rules');
             const greeting = `Welcome to Pokémon GO Montréal, ${member
-            }! I'm Professor Willow and will be your guide! Tag me (type @Professor Willow) if ever you want some help or tips! `
-                + 'Set your team by typing either `!team mystic`, `!team instinct`, or `!team valor`.';
+            }! Please make sure to read the rules in ${rulesChannel}! `
+            + 'Set your team here by typing either `!team mystic`, `!team instinct`, or `!team valor`.'
+            + `Bienvenue à Pokémon GO Montréal, ${member
+            }! S'il vous plaît assurez-vous de lire les règlements dans ${rulesChannel}! `
+            + 'Définissez votre équipe ici en tapant soit «!team mystic», «!team instinct», ou «!team valor».';
             await channel.send(greeting);
         } catch (e) {
             console.error(e);
