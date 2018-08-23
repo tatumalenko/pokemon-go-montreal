@@ -33,7 +33,8 @@ client.on('message', async (message) => {
                     .split(' ')
                     .splice(1)
                     .map(e => e.trim())
-                    .filter(e => e !== ''),
+                    .filter(e => e !== '')
+                    .map(e => e.toLowerCase()),
             },
         };
         // await dco.channel.send(dco.msg.args);
