@@ -56,8 +56,8 @@ client.on('guildMemberRemove', (member) => {
 
 // Create an event listener for command messages
 client.on('message', async (message) => {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
+    const cussWordsFrench = ['shit', 'damn', 'christ', 'jesus'];
+    const cussWordsEnglish = ['merde', 'calisse', 'tabarnak', 'esti'];
     try {
         if (message.content === `<@${configs['professor-willow'].clientId}>`) {
             await message.channel.send({
@@ -72,13 +72,16 @@ client.on('message', async (message) => {
                         + 'For any other questions or help, don\'t be shy to ask one of the admin or mod staff, they would be delighted to answer any questions!',
                 },
             });
-        } else if (['damn', 'fuck', 'jesus'].some(word => message.content.toLowerCase().includes(word))) {
-            const cussWords = ['tabarnak', 'esti', 'calisse'];
+        } else if ([...cussWordsFrench, ...cussWordsEnglish].some(word => message.content.toLowerCase().includes(word))) {
             const channelNames = ['show-off', 'moderation', 'secret-treehouse', 'super-secret-penthouse', 'rant'];
             const randNumber = Math.random();
             const shouldReply = randNumber > 0.1 && randNumber < 0.2;
             if (channelNames.includes(message.channel.name) && shouldReply) { 
-                await message.channel.send(cussWords[Math.floor(Math.random() * cussWords.length)]); 
+                if (cussWordsFrench.some(word => message.content.toLowerCase().includes(word))) {
+                    await message.channel.send(cussWordsEnglish[Math.floor(Math.random() * cussWordsEnglish.length)]); 
+                } else if (cussWordsEnglish.some(word => message.content.toLowerCase().includes(word))) {
+                    await message.channel.send(cussWordsFrench[Math.floor(Math.random() * cussWordsFrench.length)]); 
+                }
             }
         } else if (message.content.substring(0, 1) === '!') {
             let args = message.content.substring(1).split(' ');
