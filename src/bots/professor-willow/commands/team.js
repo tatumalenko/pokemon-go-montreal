@@ -3,7 +3,7 @@ module.exports = class {
         Object.assign(this, {
             name: 'team',
             enabled: true,
-            runIn: ['welcome'], // [] = uses app.js runIn property values
+            runIn: ['welcome', 'bot-testing'], // [] = uses app.js runIn property values
             aliases: ['team', 'equipe', 'équipe'],
             description: '',
         });
@@ -11,6 +11,11 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
+            const teamEmojis = {
+                mystic: '352708130297348097',
+                instinct: '352708126795104256',
+                valor: '352708126887247872'
+            };
             const validTeamNames = ['valor', 'instinct', 'mystic'];
             const memberRoleNames = msg.member.roles.array().map(e => e.name);
             const requestedTeamName = args[0].toLowerCase();
@@ -30,10 +35,12 @@ module.exports = class {
                 await msg.member.removeRole(currentTeamRole);
                 await msg.member.addRole(requestedTeamRole);
                 await msg.channel.send(`Alright, ${msg.member}, switched you to team ${requestedTeamName}!`);
+                await msg.react(msg.guild.emojis.get(teamEmojis[requestedTeamName]));
             } else {
                 const requestedTeamRole = msg.guild.roles.find('name', requestedTeamName);
                 await msg.member.addRole(requestedTeamRole);
                 await msg.channel.send(`Got it! Added ${msg.member} to team ${requestedTeamName}!`);
+                await msg.react(msg.guild.emojis.get(teamEmojis[requestedTeamName]));
             };
         } catch (e) {
             console.error(e);
