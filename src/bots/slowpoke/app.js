@@ -170,7 +170,11 @@ client.on('message', async (message) => {
             // Account for annoying multi worded names or those containing weird characters
             switch (pkmnName) {
                 case 'ho-oh':
-                    pkmnName = 'ho oh';
+                    pkmnName = 'hooh';
+                    break;
+
+                case 'hooh':
+                    pkmnName = 'hooh';
                     break;
 
                 case 'nidoran♀':
