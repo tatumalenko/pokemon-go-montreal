@@ -18,8 +18,11 @@ module.exports = class {
             }
             const roleToEditName = args[1];
             const roleToEdit = await this.client.guilds.find('id', this.client.configs.guildId).roles.find('name', roleToEditName);
+            let roleMember = msg.mentions.members.first();
             const roleMemberName = args[2];
-            const roleMember = msg.mentions.members.first(); // await this.client.guilds.find('id', this.client.configs.guildId).members.get(roleMemberName);
+            if (!roleMember) {
+                roleMember = await this.client.guilds.find('id', this.client.configs.guildId).members.find(e => e.displayName === roleMemberName);
+            }
 
             switch (args[0].toLowerCase()) {
                 case 'add':
