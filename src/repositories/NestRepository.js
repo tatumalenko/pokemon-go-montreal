@@ -9,11 +9,14 @@ class NestRepository {
 
     /**
      * Fetch a list of nests location from TSR for a particular pokemon.
-     * @param {int} pokedexNumber
+     * @param {int|Array} pokedexNumber
      */
     async fetchNests(pokedexNumber) {
         // Add the pokedex number in the data posted to TSR.
-        this.postData.data.mapFilterValues.specieses = [pokedexNumber];
+        if (!Array.isArray(pokedexNumber)) {
+            pokedexNumber = [pokedexNumber];
+        }
+        this.postData.data.mapFilterValues.specieses = pokedexNumber;
 
         const nests = [];
 
@@ -30,7 +33,7 @@ class NestRepository {
 
                     const location = new Location({ coordinates: { latitude: val.lt, longitude: val.ln } });
 
-                    nests.push({ id: key, location });
+                    nests.push({ id: key, pokedexNumber: val.pokemon_id, location });
                 });
             })
             .catch((error) => {
