@@ -131,10 +131,11 @@ class Utils {
         return `:flag_gb: ${english}\n:flag_fr: ${french}`;
     }
 
-    static parseMessageForCommand(msg) {
+    static parseMessageForCommand(msg, lowerCaseArgsFlag = true) {
         const prefix = msg.content.charAt(0);
         const cmd = msg.content.slice(1).split(' ')[0].toLowerCase();
-        const args = this.removeSpacesCommasFromString(msg.content.slice(1)).split(' ').slice(1).map(e => e.toLowerCase());
+        let args = this.removeSpacesCommasFromString(msg.content.slice(1)).split(' ').slice(1);
+        if (lowerCaseArgsFlag) { args = args.map(e => e.toLowerCase()); }
 
         return { prefix, cmd, args };
     }
