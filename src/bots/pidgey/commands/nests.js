@@ -17,44 +17,88 @@ module.exports = class {
                 return;
             }
 
-            const pokedexEntry = await this.getPokedexEntry(args[0]);
-
-            if (!await this.assertValidPokemon(pokedexEntry, args, msg.channel)) {
-                return;
+            if (args[0] in this.client.configs.pidgey.keywords) {
+                this.getMultiplePokemonNest(this.client.configs.pidgey.keywords[args[0]], msg);
+            } else {
+                this.getSinglePokemonNest(args[0], msg);
             }
-
-            if (!await this.assertPossibleNest(pokedexEntry, msg)) {
-                return;
-            }
-
-            const nests = await this.client.nestRepository.fetchNests(pokedexEntry.number);
-
-            // Build the right message.
-            if (nests.length === 0) {
-                await msg.channel.send(this.client.utils.createErrorMsg({
-                    english: `No nest found for ${pokedexEntry.nameEn} #${pokedexEntry.number}.`,
-                    french: `Aucun nid trouvé pour ${pokedexEntry.nameFr} #${pokedexEntry.number}.`,
-                }));
-                msg.react('😢');
-                return;
-            }
-
-            msg.react('✅');
-
-            let description =
-                '**Nids répertoriés par des joueurs sur [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n' +
-                '**Nests reported by players on [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n';
-
-            nests.forEach((nest) => {
-                description += `\t:arrow_forward: ${nest.location.neighbourhood}: [Google Link](<${nest.location.gmapsUrl}>)\n`;
-            });
-
-            const embed = await this.createNestEmbed(pokedexEntry, description);
-            await msg.channel.send(embed);
         } catch (e) {
             await msg.channel.send(e.message);
             this.client.logger.logError(e);
         }
+    }
+
+    async getSinglePokemonNest(userInput, msg) {
+        const pokedexEntry = await this.getPokedexEntry(userInput);
+
+        if (!await this.assertValidPokemon(pokedexEntry, userInput, msg.channel)) {
+            return;
+        }
+
+        if (!await this.assertPossibleNest(pokedexEntry, msg)) {
+            return;
+        }
+
+        const nests = await this.client.nestRepository.fetchNests(pokedexEntry.number);
+
+        // Build the right message.
+        if (nests.length === 0) {
+            await msg.channel.send(this.client.utils.createErrorMsg({
+                english: `No nest found for ${pokedexEntry.nameEn} #${pokedexEntry.number}.`,
+                french: `Aucun nid trouvé pour ${pokedexEntry.nameFr} #${pokedexEntry.number}.`,
+            }));
+            msg.react('😢');
+            return;
+        }
+
+        msg.react('✅');
+
+        let description =
+            '**Nids répertoriés par des joueurs sur [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n' +
+            '**Nests reported by players on [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n';
+
+        nests.forEach((nest) => {
+            description += `\t:arrow_forward: ${nest.location.neighbourhood}: [Google Link](<${nest.location.gmapsUrl}>)\n`;
+        });
+
+        const embed = await this.createNestEmbed(pokedexEntry, description);
+        await msg.channel.send(embed);
+    }
+
+    async getMultiplePokemonNest(pokemonList, msg) {
+        const allNests = await this.client.nestRepository.fetchNests(pokemonList);
+
+        const nestsByPokemon = [];
+
+        // Building a list of nest grouped by pokemon.
+        allNests.forEach((nest) => {
+            if (typeof nestsByPokemon[nest.pokedexNumber] === 'undefined') {
+                nestsByPokemon[nest.pokedexNumber] = [];
+            }
+            nestsByPokemon[nest.pokedexNumber].push(nest);
+        });
+
+        // TODO: Find a way to show the information.
+        let description = '';
+        await nestsByPokemon.forEach(async (nests, pokedexNumber) => {
+            const pokedexEntry = await this.getPokedexEntry(pokedexNumber);
+
+            description += `${pokedexEntry.nameEn}: ${nests.length} Nests.\n`;
+
+            // nests.forEach((nest) => {
+            //     description += `${nest.location.neighbourhood}: [Google Link](<${nest.location.gmapsUrl}>)\n`;
+            // });
+        });
+
+        await msg.channel.send({
+            embed: {
+                title: 'Shinies!!',
+                description,
+                // thumbnail: {
+                //     url: `http://floatzel.net/pokemon/black-white/sprites/images/${pokedexEntry.number}.png`,
+                // },
+            },
+        });
     }
 
     /**
@@ -109,13 +153,13 @@ module.exports = class {
         return true;
     }
 
-    async assertValidPokemon(pokedexEntry, args, channel) {
+    async assertValidPokemon(pokedexEntry, userInput, channel) {
         if (pokedexEntry === null) {
-            const corrections = this.client.spellchecker.getCorrections(args[0]).join(', ');
+            const corrections = this.client.spellchecker.getCorrections(userInput).join(', ');
 
             await channel.send(this.client.utils.createErrorMsg({
-                english: `Unknown Pokémon ${args[0]}. Did you mean:`,
-                french: `Pokémon inconnu ${args[0]}. Vouliez-vous dire:\n ${corrections}`,
+                english: `Unknown Pokémon ${userInput}. Did you mean:`,
+                french: `Pokémon inconnu ${userInput}. Vouliez-vous dire:\n ${corrections}`,
             }));
 
             return false;
