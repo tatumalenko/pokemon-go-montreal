@@ -146,8 +146,9 @@ class Client extends Discord.Client {
                         && !this.configs.runIn.includes('all') // `client.runIn[i] == 'all'`
                         ) { return; }
                     }
-                    // Pass `client` into `command` instance as property
+                    // Pass `client` and `utils` into `command` instance as property
                     this.commands[command].client = this;
+                    this.commands[command].utils = Utils;
                     // Call `command.run()` method
                     await this.commands[command].run(msg, { prefix, cmd, args });
                 }
