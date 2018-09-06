@@ -11,9 +11,14 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
+            // Temp fix to prevent removal of capitalization of params passed by default
+            let { prefix, cmd, args } = this.utils.parseMessageForCommand(msg, false);
+
             if (!msg.channel.permissionsFor(msg.author).has('ADMINISTRATOR')) return;
 
             args = args.join(' ').split(' | ');
+            console.log(msg.content);
+            console.log(args);
             const embed = {};
             let content;
             let channelDestination;
