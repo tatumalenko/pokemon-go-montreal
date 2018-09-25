@@ -3,7 +3,7 @@ module.exports = class {
         Object.assign(this, {
             name: 'role',
             enabled: true,
-            runIn: ['role-management'],
+            runIn: ['role-management', '4200-st-laurent-raid-break'],
             cooldown: 0,
             aliases: ['roles'],
             description: '',
@@ -12,16 +12,36 @@ module.exports = class {
 
     async run(msg, { prefix, cmd, args }) {
         try {
-            if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')) {
-                await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
-                return;
-            }
+            // Temp fix to prevent removal of capitalization of params passed by default
+            const { prefix, cmd, args } = this.utils.parseMessageForCommand(msg, false);
+
             const roleToEditName = args[1];
             const roleToEdit = await this.client.guilds.find('id', this.client.configs.guildId).roles.find('name', roleToEditName);
+
+            // If the role cannot be found.
+            if (!roleToEdit) {
+                throw new Error('The role could not be found! Le role ne semble pas être valid.');
+            }
+
             let roleMember = msg.mentions.members.first();
             const roleMemberName = args[2];
-            if (!roleMember) {
+
+            // Then the member argument isn't present at all -> assume themself as member to edit.
+            if (roleMember === undefined && roleMemberName === undefined) {
+                roleMember = msg.member;
+            } else if (roleMemberName) {
                 roleMember = await this.client.guilds.find('id', this.client.configs.guildId).members.find(e => e.displayName === roleMemberName);
+            }
+
+            // If still not successful at this point, then member could not be found.
+            if (!roleMember) {
+                throw new Error('The member could not be found! Le membre ne semble pas être valid.');
+            }
+
+            if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')
+                    && msg.member.id !== roleMember.id) {
+                await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                return;
             }
 
             switch (args[0].toLowerCase()) {
@@ -42,7 +62,10 @@ module.exports = class {
             return;
         } catch (e) {
             console.error(`${process.env.name}.${this.name}: \n${e}`);
-            if (e.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.message}`); }
+            if (e.message) {
+                await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.message}`);
+                await msg.channel.send(`${process.env.name}.${this.name}: ${e.message}`);
+            }
         }
     }
 };
