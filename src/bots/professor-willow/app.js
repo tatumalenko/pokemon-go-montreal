@@ -12,6 +12,7 @@ new Client({
 }).login();
 
 const TwitterPackage = require('twitter');
+
 const Twitter = new TwitterPackage(configs['professor-willow']);
 const wh = new Discord.WebhookClient(configs['professor-willow'].webhookId, configs['professor-willow'].webhookToken);
 const colors = ['#7f0000', '#535900', '#40d9ff', '#8c7399', '#d97b6c', '#f2ff40', '#8fb6bf', '#502d59', '#66504d',

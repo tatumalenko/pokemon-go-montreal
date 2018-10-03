@@ -14,7 +14,7 @@ module.exports = class {
             const teamEmojis = {
                 mystic: '352708130297348097',
                 instinct: '352708126795104256',
-                valor: '352708126887247872'
+                valor: '352708126887247872',
             };
             const validTeamNames = ['valor', 'instinct', 'mystic'];
             const memberRoleNames = msg.member.roles.array().map(e => e.name);
@@ -41,7 +41,7 @@ module.exports = class {
                 await msg.member.addRole(requestedTeamRole);
                 await msg.channel.send(`Got it! Added ${msg.member} to team ${requestedTeamName}!`);
                 await msg.react(msg.guild.emojis.get(teamEmojis[requestedTeamName]));
-            };
+            }
         } catch (e) {
             console.error(e);
         }
