@@ -13,7 +13,7 @@ module.exports = class {
     // eslint-disable-next-line class-methods-use-this
     async run(member, ...params) {
         try {
-            await this.client.userRepository.remove(member);
+            await this.client.userRepository.removeUser(member);
         } catch (e) {
             console.error(e);
             await this.client.logger.logError(`${process.env.name}.${this.name}: ${e.message}`);
