@@ -1,4 +1,8 @@
-// Import the discord.js module
+process.on('uncaughtException', async (e) => {
+    console.error(e);
+    await this.client.logger.logError(`${process.env.name}: ${e.message}`);
+});
+
 const Discord = require('discord.js');
 const pd = require('./assets/modules/pokedex');
 const configs = require('../../../configs/configs');
@@ -322,7 +326,7 @@ client.on('message', async (message) => {
             await message.channel.send('Too many combinations possible. Refine search. Trop de combinaisons possible. Rafinez votre requête.');
         }
         console.error(e);
-        if (e.message) { await message.guild.channels.find('name', 'bot-logs').send(e.message); }
+        await this.client.logger.logError(`${process.env.name}: ${e.message}`);
     }
 });
 

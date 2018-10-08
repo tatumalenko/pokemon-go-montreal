@@ -22,6 +22,7 @@ module.exports = class {
             await channel.send(greeting);
         } catch (e) {
             console.error(e);
+            await this.client.logger.logError(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

@@ -15,6 +15,7 @@ module.exports = class {
             await channel.send(`Gee-Golly. ${member.displayName} has left us.  😢`);
         } catch (e) {
             console.error(e);
+            await this.client.logger.logError(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

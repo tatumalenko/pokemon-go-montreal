@@ -37,9 +37,8 @@ module.exports = class {
             }
         } catch (e) {
             console.error(e);
-            // if (e.msg) { await msg.channel.send(e.msg); }
-            // console.error(`${process.env.name}.${this.name}: \n${e}`);
-            // if (e.msg) { await msg.guild.channels.find('name', this.client.this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.msg}`); }
+            await msg.channel.send(e.message);
+            await this.client.logger.logInfo(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

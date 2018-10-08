@@ -65,10 +65,10 @@ module.exports = class {
 
                 console.log(e.message);
             }
-        } catch (err) {
-            if (err.message) { await msg.channel.send(err.message); }
-            console.error(`${process.env.name}.${this.name}: \n${err}`);
-            if (err.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${err.message}`); }
+        } catch (e) {
+            console.error(e);
+            await msg.channel.send(e.message);
+            await this.client.logger.logInfo(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

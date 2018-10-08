@@ -45,6 +45,8 @@ module.exports = class {
             }
         } catch (e) {
             console.error(e);
+            await msg.channel.send(e.message);
+            await this.client.logger.logInfo(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };
