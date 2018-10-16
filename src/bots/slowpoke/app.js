@@ -1,5 +1,6 @@
-process.on('uncaughtException', (err) => {
-    console.error('UNCAUGHT EXCEPTION:', err);
+process.on('uncaughtException', async (e) => {
+    console.error(e);
+    await this.client.logger.logError(`${process.env.name}: ${e.message}`);
 });
 
 const { Client } = require('../../models/Client');

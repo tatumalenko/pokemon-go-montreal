@@ -18,8 +18,9 @@ module.exports = class {
                 english: 'Oops! That doesn\'t seem to be a Pokemon name!',
                 french: 'Oops! Ce mot ne semble pas être un nom de Pokemon!',
             }));
-            console.error(`${process.env.name}.${this.name}: \n${e}`);
-            if (e.message) { await msg.guild.channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.message}`); }
+            console.error(e);
+            await msg.channel.send(e.message);
+            await this.client.logger.logInfo(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

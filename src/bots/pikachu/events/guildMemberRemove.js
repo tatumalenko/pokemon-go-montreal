@@ -13,10 +13,10 @@ module.exports = class {
     // eslint-disable-next-line class-methods-use-this
     async run(member, ...params) {
         try {
-            await this.client.userRepo.remove(member);
+            await this.client.userRepository.removeUser(member);
         } catch (e) {
-            console.error(`${process.env.name}.${this.name}: \n${e}`);
-            if (e.message) { await this.client.guilds.find('id', this.client.configs.guildId).channels.find('name', this.client.configs.channels.botLogs).send(`${process.env.name}.${this.name}: ${e.message}`); }
+            console.error(e);
+            await this.client.logger.logError(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

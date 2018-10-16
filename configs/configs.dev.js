@@ -23,7 +23,6 @@ module.exports = {
             user: 'users',
             raid: 'raids',
             gym: 'gyms',
-            messengerChat: 'messengerChats',
         },
     },
     TSR: {

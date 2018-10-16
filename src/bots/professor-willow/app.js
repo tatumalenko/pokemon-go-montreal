@@ -1,3 +1,8 @@
+process.on('uncaughtException', async (e) => {
+    console.error(e);
+    await this.client.logger.logError(`${process.env.name}: ${e.message}`);
+});
+
 const { Client } = require('../../models/Client');
 const Discord = require('discord.js');
 const configs = require('../../../configs/configs');
@@ -62,10 +67,12 @@ Twitter.stream('statuses/filter', {
             await wh.send(`${tweet.user.screen_name} Tweeted!`, embed);
         } catch (e) {
             console.error(e);
+            this.client.logger.logError(`${process.env.name}: ${e.message}`);
         }
     });
 
     stream.on('error', (error) => {
-        console.log(error);
+        console.error(error);
+        this.client.logger.logError(`${process.env.name}: ${error.message}`);
     });
 });

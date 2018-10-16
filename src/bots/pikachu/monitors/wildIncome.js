@@ -32,8 +32,8 @@ module.exports = class {
             await this.client.utils.sendEmbedToRepicients(recipients, spawnEmbed); // Post in DM channel to members
             await this.client.utils.sendEmbedToRepicients([msg.guild.channels.find('name', this.client.configs.channels.wildAlerts)], spawnEmbed); // Post in wilds-post channel
         } catch (e) {
-            console.error(`${process.env.name}.${this.name}: \n${e}`);
-            if (e.message) { await this.client.guilds.get(this.client.configs.guildId).channels.find('name', this.client.configs.channels.botLogs).send(e.message); }
+            console.error(e);
+            await this.client.logger.logError(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 
@@ -88,8 +88,9 @@ module.exports = class {
             const filteredUserIds = (await this.client.userRepository.findUsers(spawn)).map(user => user.id);
             const filteredDiscordMembers = await filteredUserIds.map(id => this.client.guilds.get(this.client.configs.guildId).members.find('id', id));
             return filteredDiscordMembers;
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            console.error(e);
+            await this.client.logger.logInfo(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };

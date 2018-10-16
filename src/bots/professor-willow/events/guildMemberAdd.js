@@ -10,7 +10,13 @@ module.exports = class {
 
     async run(member, ...params) {
         try {
-            const channel = await this.client.guilds.find('id', this.client.configs.guildId).channels.find('name', this.client.configs.channels.joinTeam);
+            if (member.displayName.toLowerCase().includes('discord.gg')) {
+                member.ban({
+                    reason: 'Display name includes Discord server invite link.',
+                });
+            }
+
+            const joinChannel = await this.client.guilds.find('id', this.client.configs.guildId).channels.find('name', this.client.configs.channels.joinTeam);
             const rulesChannel = await this.client.guilds.find('id', this.client.configs.guildId).channels.find('name', 'regles-rules');
             const greeting = `**Welcome to Pokémon GO Montréal**, ${member
             }! Please make sure to read the rules in ${rulesChannel}! `
@@ -19,9 +25,10 @@ module.exports = class {
             + `**Bienvenue à Pokémon GO Montréal**, ${member
             }! S'il vous plaît assurez-vous de lire les règlements dans ${rulesChannel}! `
             + 'Définissez votre équipe ici en tapant soit `!team mystic`, `!team instinct`, ou `!team valor`.';
-            await channel.send(greeting);
+            await joinChannel.send(greeting);
         } catch (e) {
             console.error(e);
+            await this.client.logger.logError(`${process.env.name}.${this.name}: ${e.message}`);
         }
     }
 };
