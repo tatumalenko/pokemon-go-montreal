@@ -98,4 +98,3 @@ Object.prototype.toString = function () {
 
     return str;
 };
-
