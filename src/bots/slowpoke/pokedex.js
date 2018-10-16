@@ -8,17 +8,17 @@ db.tc = require('../../../data/typeChart.json');
 
 class Pokemon {
     constructor(ctx) {
-        if (!ctx.name) throw 'Pokemon.constructor: ctx.name is undefined';
-        if (!isPokemonName(ctx.name)) throw 'Pokemon.constructor: ctx.name is not a valid name';
+        if (!ctx.name) throw new Error('Pokemon.constructor: ctx.name is undefined');
+        if (!isPokemonName(ctx.name)) throw new Error('Pokemon.constructor: ctx.name is not a valid name');
 
         const pkmn = search(db.pkmn, 'name', ctx.name);
         this.name = pkmn.name;
         this.dex = pkmn.dex;
         this.types = [];
         pkmn.types.forEach(type => this.types.push(type.name));
-        this.level = (ctx.level || ctx.level == 0) ? ctx.level : 40; // Assume max Pokemon level
+        this.level = (ctx.level || Number(ctx.level) === 0) ? ctx.level : 40; // Assume max Pokemon level
         this.cpm = this.calcCpm(this.level);
-        ctx.iv ? this.iv = ctx.iv : this.iv = {
+        this.iv = ctx.iv ? ctx.iv : {
             atk: 15,
             def: 15,
             sta: 15,
@@ -36,9 +36,9 @@ class Pokemon {
         };
 
         // By giving ctx.cp = 0, suggests that cp will be iterated for cpComboStr (checked in statInfo)?
-        this.cp = (ctx.cp || ctx.cp == 0) ? ctx.cp : this.calcCp(); // If undefined and not = 0, calcCp()
+        this.cp = (ctx.cp || Number(ctx.cp) === 0) ? ctx.cp : this.calcCp(); // If undefined and not = 0, calcCp()
 
-        this.level = (ctx.level && ctx.level != 0) ? ctx.level : this.calcLevel(); // If undefined and not = 0, calcLevel()
+        this.level = (ctx.level && Number(ctx.level) !== 0) ? ctx.level : this.calcLevel(); // If undefined and not = 0, calcLevel()
         this.cpm = this.cpm ? this.cpm : this.calcCpm(this.level);
 
         this.stats.effective = {
@@ -49,7 +49,7 @@ class Pokemon {
         this.hp = Math.floor(this.stats.effective.sta);
 
         // By giving ctx.cp = 0, suggests that cp will be iterated for cpComboStr (checked in statInfo)?
-        this.cp = (ctx.cp || ctx.cp == 0) ? ctx.cp : this.calcCp(); // If undefined and not = 0, calcCp()
+        this.cp = (ctx.cp || Number(ctx.cp) === 0) ? ctx.cp : this.calcCp(); // If undefined and not = 0, calcCp()
         this.level = this.level ? this.level : 40;
 
         this.moves = {
@@ -112,7 +112,7 @@ class Pokemon {
     }
 
     calcCpm(level) {
-        const cpm = function (lv) {
+        const cpm = (lv) => {
             const a = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.3752356, 0.39956728, 0.4225, 0.44310755, 0.4627984, 0.48168495, 0.49985844, 0.51739395, 0.5343543, 0.5507927, 0.5667545, 0.5822789, 0.5974, 0.6121573, 0.6265671, 0.64065295, 0.65443563, 0.667934, 0.6811649, 0.69414365, 0.7068842, 0.7193991, 0.7317, 0.7377695, 0.74378943, 0.74976104, 0.7556855, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.784637, 0.7903];
             return a[lv - 1];
         };
@@ -142,7 +142,7 @@ class Pokemon {
     }
 
     calcCp() {
-        return 1 / 10 * this.stats.effective.atk * this.stats.effective.def ** 0.5 * this.stats.effective.sta ** 0.5;
+        return 1 / 10 * this.stats.effective.atk * (this.stats.effective.def ** 0.5) * (this.stats.effective.sta ** 0.5);
     }
 
     calcDpe(move) {
@@ -231,8 +231,8 @@ class Pokemon {
 
 class Move {
     constructor(ctx) {
-        if (!ctx.name) throw 'Move.constructor: ctx.name is undefined';
-        if (!isMoveName(ctx.name)) throw 'Move.constructor: ctx.name is not a valid name';
+        if (!ctx.name) throw new Error('Move.constructor: ctx.name is undefined');
+        if (!isMoveName(ctx.name)) throw new Error('Move.constructor: ctx.name is not a valid name');
 
         let mv;
 
