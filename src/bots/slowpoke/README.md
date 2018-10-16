@@ -12,8 +12,8 @@ Slowpoke can be used for various purposes, here are just a few:
 
 ## Examples
 ### IV Prediction (`!pd <Pokemon> cp <#> level <#>`): 
-<img alt="Slowpoke IV Prediction" src="../../../assets/media/slowpoke-iv-prediction-1.png" width="300">
+<img alt="Slowpoke IV Prediction" src="../../../assets/media/img/slowpoke-iv-prediction-1.png" width="300">
 
 ### CP Prediction (`!pd <Pokemon> level <#>`):
-<img alt="Slowpoke CP Prediction" src="../../../assets/media/slowpoke-cp-prediction-1.png" width="300">
+<img alt="Slowpoke CP Prediction" src="../../../assets/media/img/slowpoke-cp-prediction-1.png" width="300">
 
