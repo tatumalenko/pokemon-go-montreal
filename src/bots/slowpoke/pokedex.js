@@ -2,9 +2,9 @@
 // level is implicitly taken care of (assumes 20), cp is set to 0 to be handled in Pkmn constructor
 
 const db = {};
-db.pkmn = require('../../../../../data/pokemon.json');
-db.move = require('../../../../../data/move.json');
-db.tc = require('../data/typechart.json');
+db.pkmn = require('../../../data/pokemon.json');
+db.move = require('../../../data/move.json');
+db.tc = require('../../../data/typeChart.json');
 
 class Pokemon {
     constructor(ctx) {
@@ -123,16 +123,16 @@ class Pokemon {
     }
 
     calcLevel() {
-        const cpm =            (10 * this.cp / (
-                (this.stats.base.atk + this.iv.atk)
+        const cpm = (10 * this.cp / (
+            (this.stats.base.atk + this.iv.atk)
                 * (this.stats.base.def + this.iv.def) ** 0.5
                 * (this.stats.base.sta + this.iv.sta) ** 0.5)) ** 0.5;
 
         let guess;
-        let deltas = [];
+        const deltas = [];
 
-            
-let lvs = [];
+
+        const lvs = [];
         for (let i = 1; i < 40; i += 0.5) {
             guess = this.calcCpm(i);
             lvs.push(i);
