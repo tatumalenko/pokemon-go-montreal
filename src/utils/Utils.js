@@ -1,8 +1,8 @@
+const Diacritics = require('diacritic');
 const { pokemonListEnglish } = require('../../data/pokemonListEnglish.json');
 const { pokemonListFrench } = require('../../data/pokemonListFrench.json');
 const { neighbourhoodList } = require('../../data/neighbourhoodList.json');
 const raidChannelList = require('../../data/raidChannelList.json');
-const Diacritics = require('diacritic');
 
 class Utils {
     constructor() {
