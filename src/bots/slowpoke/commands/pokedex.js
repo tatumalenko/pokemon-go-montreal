@@ -1,4 +1,4 @@
-const pd = require('../assets/modules/pokedex');
+const pd = require('../pokedex');
 const Utils = require('../../../utils/Utils');
 
 module.exports = class {
