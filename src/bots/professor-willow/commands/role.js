@@ -3,7 +3,7 @@ module.exports = class {
         Object.assign(this, {
             name: 'role',
             enabled: true,
-            runIn: ['role-management', '4200-st-laurent-raid-break'],
+            runIn: ['role-management', '4200-st-laurent-raid-break', '💥beldum-high-iv-reports💥'],
             cooldown: 0,
             aliases: ['roles'],
             description: '',
