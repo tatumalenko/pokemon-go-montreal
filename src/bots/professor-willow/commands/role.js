@@ -3,7 +3,7 @@ module.exports = class {
         Object.assign(this, {
             name: 'role',
             enabled: true,
-            runIn: ['role-management', '4200-st-laurent-raid-break', '👻gengar-high-iv-reports👻'],
+            runIn: ['role-management', '4200-st-laurent-raid-break', 502678237302882304],
             cooldown: 0,
             aliases: ['roles'],
             description: '',
@@ -13,6 +13,7 @@ module.exports = class {
     async run(msg, { prefix, cmd, args }) {
         try {
             // Temp fix to prevent removal of capitalization of params passed by default
+            // eslint-disable-next-line
             const { prefix, cmd, args } = this.utils.parseMessageForCommand(msg, false);
 
             const roleToEditName = args[1];
