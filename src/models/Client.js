@@ -134,6 +134,7 @@ class Client extends Discord.Client {
                     if (this.commands[command].runIn.length !== 0) { // `command.runIn = []`?
                         if (!this.commands[command].runIn.includes(msg.channel.name)
                         && !this.commands[command].runIn.includes(msg.channel.type)
+                        && !this.monitors[command].runIn.includes(msg.channel.id)
                         && !this.commands[command].runIn.includes('all') // `command.runIn[i] == 'all'`
                         ) { return; }
                     } else { // Check `client.runIn` values to make sure bot can run in these channels
