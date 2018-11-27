@@ -50,8 +50,7 @@ class Client extends Discord.Client {
                 const paths = dirContents.map(content => path.join(appDirName, content));
                 const that = {};
 
-                const dirPaths = paths.filter(p =>
-                    fs.statSync(p).isDirectory() && this.configs.moduleDirNames.includes(path.basename(p)));
+                const dirPaths = paths.filter(p => fs.statSync(p).isDirectory() && this.configs.moduleDirNames.includes(path.basename(p)));
 
                 dirPaths.forEach((dirPath) => {
                     const dirName = path.basename(dirPath);
@@ -97,9 +96,9 @@ class Client extends Discord.Client {
                 this[moduleDirName] = that[moduleDirName];
             });
 
-            this.logger.logInfo('\n-----------------------------------------------------------------\n' +
-                `${this.user.tag}, Ready to serve ${this.guilds.size} guilds and ${this.users.size} users\n` +
-                '-----------------------------------------------------------------');
+            this.logger.logInfo('\n-----------------------------------------------------------------\n'
+                + `${this.user.tag}, Ready to serve ${this.guilds.size} guilds and ${this.users.size} users\n`
+                + '-----------------------------------------------------------------');
         } catch (err) {
             this.logger.logError(err);
         }
@@ -164,6 +163,7 @@ class Client extends Discord.Client {
                 if (this.monitors[monitor].runIn.length !== 0) {
                     if (this.monitors[monitor].runIn.includes(msg.channel.name)
                     || this.monitors[monitor].runIn.includes(msg.channel.type)
+                    || this.monitors[monitor].runIn.includes(msg.channel.id)
                     || this.monitors[monitor].runIn.includes('all')) {
                         // Pass `client` into `monitor` instance as property
                         this.monitors[monitor].client = this;
