@@ -5,7 +5,7 @@ module.exports = class {
             enabled: true,
             runIn: ['role-management', '4200-st-laurent-raid-break', '502678237302882304'],
             cooldown: 0,
-            aliases: ['roles'],
+            aliases: ['roles', 'rôle', 'rôles'],
             description: '',
         });
     }
