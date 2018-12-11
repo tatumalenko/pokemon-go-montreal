@@ -2,8 +2,8 @@
 // level is implicitly taken care of (assumes 20), cp is set to 0 to be handled in Pkmn constructor
 
 const db = {};
-db.pkmn = require('../../../../lib/pokemongo-json-pokedex/output/pokemon.json');
-db.move = require('../../../../lib/pokemongo-json-pokedex/output/move.json');
+db.pkmn = require('../data/pokemon.json');
+db.move = require('../data/move.json');
 db.tc = require('../data/typechart.json');
 
 class Pokemon {
@@ -123,15 +123,16 @@ class Pokemon {
     }
 
     calcLevel() {
-        const cpm =
-            (10 * this.cp / (
-                (this.stats.base.atk + this.iv.atk) *
-                (this.stats.base.def + this.iv.def) ** 0.5 *
-                (this.stats.base.sta + this.iv.sta) ** 0.5)) ** 0.5;
+        const cpm =            (10 * this.cp / (
+                (this.stats.base.atk + this.iv.atk)
+                * (this.stats.base.def + this.iv.def) ** 0.5
+                * (this.stats.base.sta + this.iv.sta) ** 0.5)) ** 0.5;
 
         let guess;
-        let deltas = [],
-            lvs = [];
+        let deltas = [];
+
+            
+let lvs = [];
         for (let i = 1; i < 40; i += 0.5) {
             guess = this.calcCpm(i);
             lvs.push(i);
@@ -305,18 +306,18 @@ function pokemonInfo(pokemon) {
             url: `https://pkmref.com/images/set_1/${pokemon.dex}.png`,
         },
 
-        description: `__**CP: ${Math.floor(pokemon.cp)} | LV: ${pokemon.level} | IV: ${pokemon.iv.percent}**__\n\n` +
-                `__**TYPE**__ \n\`▶︎\` ${typeStr(pokemon)}\n\n${
-                    weakAgainstStr}${strongAgainstStr}\n\n` +
-                `${statStr}\n\n`, //+
+        description: `__**CP: ${Math.floor(pokemon.cp)} | LV: ${pokemon.level} | IV: ${pokemon.iv.percent}**__\n\n`
+                + `__**TYPE**__ \n\`▶︎\` ${typeStr(pokemon)}\n\n${
+                    weakAgainstStr}${strongAgainstStr}\n\n`
+                + `${statStr}\n\n`, //+
     // '__**FAST MOVES**__ \n' + movesStr.fast + '\n\n' +
     // '__**CHARGE MOVES**__ \n' + movesStr.charge + '\n\n' //+
     // '__**MOVESET RATINGS**__ \n' + movesetStr(pokemon) + '\n\n'
     },
     {
         color: typeColor(pokemon),
-        description: `__**FAST MOVES**__ \n${movesStr.fast}\n\n` +
-                `__**CHARGE MOVES**__ \n${movesStr.charge}\n\n`,
+        description: `__**FAST MOVES**__ \n${movesStr.fast}\n\n`
+                + `__**CHARGE MOVES**__ \n${movesStr.charge}\n\n`,
     },
     {
         color: typeColor(pokemon),
@@ -333,12 +334,12 @@ function moveInfo(move) {
     return {
         title: move.name,
         url: `https://db.pokemongohub.net/moves/${move.type.toLowerCase()}`,
-        description: `**${move.kind} Move**\n` +
-            `**Type**: ${typeCode(move)}${move.type}\n` +
-            '**Power**: ' + `\`${move.power}\`\n` +
-            '**Energy**: ' + `\`${move.energy}\`\n` +
-            '**Duration** (sec): ' + `\`${move.time / 1000}\`\n` +
-            '**Approx. DPS**: ' + `\`${(move.power / move.time * 1000).toFixed(1)}\`\n${
+        description: `**${move.kind} Move**\n`
+            + `**Type**: ${typeCode(move)}${move.type}\n`
+            + '**Power**: ' + `\`${move.power}\`\n`
+            + '**Energy**: ' + `\`${move.energy}\`\n`
+            + '**Duration** (sec): ' + `\`${move.time / 1000}\`\n`
+            + '**Approx. DPS**: ' + `\`${(move.power / move.time * 1000).toFixed(1)}\`\n${
             epsStr
         }*Note: Approx. DPS is actually power per second*\n`,
         color: typeColor(move),
@@ -365,9 +366,9 @@ function statInfo(pokemon) {
     const embed = {
         title: `#${pokemon.dex} ${pokemon.name.toUpperCase()}`,
         url: `https://db.pokemongohub.net/pokemon/${pokemon.dex}`,
-        description: `**CP: ${Math.floor(pokemon.cp)} | LV: ${pokemon.level} | IV: ${pokemon.iv.percent}**\n` +
-            `**Type**: ${typeStr(pokemon)}\n` +
-            `\`${statComboStr}\``,
+        description: `**CP: ${Math.floor(pokemon.cp)} | LV: ${pokemon.level} | IV: ${pokemon.iv.percent}**\n`
+            + `**Type**: ${typeStr(pokemon)}\n`
+            + `\`${statComboStr}\``,
         color: typeColor(pokemon),
         thumbnail: {
             url: `https://pkmref.com/images/set_1/${pokemon.dex}.png`,
@@ -403,9 +404,9 @@ function statInfo2(ctx) {
     const embed = {
         title: `#${pokemon.dex} ${pokemon.name.toUpperCase()}`,
         url: `https://db.pokemongohub.net/pokemon/${pokemon.dex}`,
-        description: `**CP: ${Math.floor(pokemon.cp)} | LV: ${pokemon.level} | IV: ${pokemon.iv.percent}**\n` +
-            `**Type**: ${typeStr(pokemon)}\n` +
-            `\`${statComboStr}\``,
+        description: `**CP: ${Math.floor(pokemon.cp)} | LV: ${pokemon.level} | IV: ${pokemon.iv.percent}**\n`
+            + `**Type**: ${typeStr(pokemon)}\n`
+            + `\`${statComboStr}\``,
         color: typeColor(pokemon),
         thumbnail: {
             url: `https://pkmref.com/images/set_1/${pokemon.dex}.png`,
@@ -716,8 +717,8 @@ function cpComboStr(pokemon) {
     const stats = cpGuess(pokemon);
     let str = '';
     if (stats.length > 0) {
-        str = 'Possible CP Combinations:\n' +
-            'AT|DE|ST CP   IV\n';
+        str = 'Possible CP Combinations:\n'
+            + 'AT|DE|ST CP   IV\n';
         const tempStr = '';
         const tempStr2 = '';
         for (let i = 0; i < stats.length; i++) {
