@@ -8,6 +8,7 @@ assets/db/database.db
 src/bots/Meowth/logs
 src/bots/Meowth/config.json
 **/*.icloud
+pogomontreal-1544923458445-7cdf9d4403e0.json
 
 **/*app.*.js
 venv

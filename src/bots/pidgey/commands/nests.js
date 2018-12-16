@@ -53,9 +53,8 @@ module.exports = class {
 
         msg.react('✅');
 
-        let description =
-            '**Nids répertoriés par des joueurs sur [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n' +
-            '**Nests reported by players on [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n';
+        let description = '**Nids répertoriés par des joueurs sur [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n'
+            + '**Nests reported by players on [TheSilphRoad](<https://thesilphroad.com/atlas#10.8/45.5389/-73.6532>)**\n';
 
         nests.forEach((nest) => {
             description += `\t:arrow_forward: ${nest.location.neighbourhood}: [Google Link](<${nest.location.gmapsUrl}>)\n`;
@@ -120,7 +119,7 @@ module.exports = class {
             pokemonNameEn = this.client.utils.getEnglishName(input);
             pokedexNumber = pokemonListEn.indexOf(pokemonNameEn) + 1;
         } else {
-            pokedexNumber = input;
+            pokedexNumber = await this.client.pidgeySpreadsheetRepo.getPokedexNumber(input);
             pokemonNameEn = pokemonListEn[pokedexNumber - 1];
         }
 
