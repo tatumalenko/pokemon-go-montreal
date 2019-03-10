@@ -70,20 +70,27 @@ module.exports = class {
         const nestsByPokemon = [];
 
         // Building a list of nest grouped by pokemon.
-        allNests.forEach((nest) => {
+        await allNests.forEach((nest) => {
             if (typeof nestsByPokemon[nest.pokedexNumber] === 'undefined') {
                 nestsByPokemon[nest.pokedexNumber] = [];
             }
             nestsByPokemon[nest.pokedexNumber].push(nest);
         });
 
-        // TODO: Find a way to show the information.
         let description = '';
-        await nestsByPokemon.forEach(async (nests, pokedexNumber) => {
+        let number = 0;
+        // Async foreach: https://codeburst.io/javascript-async-await-with-foreach-b6ba62bbf404
+        console.log("shiny!");
+        await this.client.utils.asyncForEach(nestsByPokemon, async (nests, pokedexNumber) => {
+            if (!nests) {
+                return;
+            }
             const pokedexEntry = await this.getPokedexEntry(pokedexNumber);
 
             description += `${pokedexEntry.nameEn}: ${nests.length} Nests.\n`;
-
+            console.log('desc:' + pokedexEntry);
+            number++;
+            console.log(number + ',' + nestsByPokemon.length);
             // nests.forEach((nest) => {
             //     description += `${nest.location.neighbourhood}: [Google Link](<${nest.location.gmapsUrl}>)\n`;
             // });
