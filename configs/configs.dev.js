@@ -63,7 +63,7 @@ module.exports = {
         consumer_secret: process.env.CONSUMER_SECRET,
         access_token_key: process.env.ACCESS_TOKEN_KEY,
         access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-        userIds: ['2839430431', '783281708137324549', '4840958511', '849344094681870336', '816666530318524416'],
+        userIds: ['2839430431', '783281708137324549', '4840958511', '849344094681870336', '816666530318524416', '953082578478788608'],
     },
     'self-bot': {
         clientId: process.env.CLIENT_ID,
