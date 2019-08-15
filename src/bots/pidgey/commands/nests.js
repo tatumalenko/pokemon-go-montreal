@@ -182,13 +182,13 @@ module.exports = class {
         const pokedexNumber = parseInt(pokedexEntry.number, 10);
         if (this.client.configs.pidgey.noNest.mythical.includes(pokedexNumber)) {
             message = 'This is a mythical Pokémon, they don\'t appear in nests.\n';
-            message = 'Les Pokémon Mythique n\'appaissent pas dans les nests!';
+            message += 'Les Pokémon Mythique n\'appaissent pas dans les nests!';
         } else if (this.client.configs.pidgey.noNest.legendaries.includes(pokedexNumber)) {
             message = 'This is a legendary Pokémon, they don\'t appear in nests.\n';
-            message = 'Les Pokémon légendaires n\'apparaissent pas dans les nests!';
+            message += 'Les Pokémon légendaires n\'apparaissent pas dans les nests!';
         } else if (this.client.configs.pidgey.noNest.ditto.includes(pokedexNumber)) {
             message = 'This is a Ditto. Ditto doesn\'t nest. Ditto hides as other Pokémon. Keep on catching trainer!\n';
-            message = 'Voici Ditto. Ditto n\'apparait pas dans les nests. Ditto se déguise en d\'autes Pokémon. Continue à tout attraper dresseur!';
+            message += 'Voici Ditto. Ditto n\'apparait pas dans les nests. Ditto se déguise en d\'autes Pokémon. Continue à tout attraper dresseur!';
         } else {
             return true;
         }
