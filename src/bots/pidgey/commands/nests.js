@@ -31,10 +31,12 @@ module.exports = class {
     async getSinglePokemonNest(userInput, msg) {
         const pokedexEntry = await this.getPokedexEntry(userInput);
 
+        // The provided Pokémon is not valid, probably because of a typo
         if (!await this.assertValidPokemon(pokedexEntry, userInput, msg.channel)) {
             return;
         }
 
+        // The provided Pokémon cannot be found in nests.
         if (!await this.assertPossibleNest(pokedexEntry, msg)) {
             return;
         }
@@ -135,9 +137,10 @@ module.exports = class {
         return new PokedexEntry({ number: pokedexNumber, nameFr: pokemonNameFr, nameEn: pokemonNameEn });
     }
 
-    async createNestEmbed(pokedexEntry, text) {
+    async createNestEmbed(pokedexEntry, text, color = 0x0099ff) {
         return {
             embed: {
+                color,
                 title: `${pokedexEntry.nameEn}/${pokedexEntry.nameFr} #${pokedexEntry.number}`,
                 description: text,
                 thumbnail: {
@@ -176,16 +179,22 @@ module.exports = class {
 
     async assertPossibleNest(pokedexEntry, msg) {
         let message = '';
-        if (this.client.configs.pidgey.noNest.mythical.includes(pokedexEntry.number)) {
-            message = 'This is a mythical Pokémon, they don\'t appear in nests.';
-        } else if (this.client.configs.pidgey.noNest.legendaries.includes(pokedexEntry.number)) {
-            message = 'This is a legendary Pokémon, they don\'t appear in nests.';
+        const pokedexNumber = parseInt(pokedexEntry.number, 10);
+        if (this.client.configs.pidgey.noNest.mythical.includes(pokedexNumber)) {
+            message = 'This is a mythical Pokémon, they don\'t appear in nests.\n';
+            message = 'Les Pokémon Mythique n\'appaissent pas dans les nests!';
+        } else if (this.client.configs.pidgey.noNest.legendaries.includes(pokedexNumber)) {
+            message = 'This is a legendary Pokémon, they don\'t appear in nests.\n';
+            message = 'Les Pokémon légendaires n\'apparaissent pas dans les nests!';
+        } else if (this.client.configs.pidgey.noNest.ditto.includes(pokedexNumber)) {
+            message = 'This is a Ditto. Ditto doesn\'t nest. Ditto hides as other Pokémon. Keep on catching trainer!\n';
+            message = 'Voici Ditto. Ditto n\'apparait pas dans les nests. Ditto se déguise en d\'autes Pokémon. Continue à tout attraper dresseur!';
         } else {
             return true;
         }
 
         msg.react('❌');
-        const embed = await this.createNestEmbed(pokedexEntry, message);
+        const embed = await this.createNestEmbed(pokedexEntry, message, 0xff0000);
         msg.channel.send(embed);
         return false;
     }
