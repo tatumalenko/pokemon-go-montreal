@@ -45,6 +45,12 @@ module.exports = class {
                 return;
             }
 
+            if (['admin', 'mod', 'mega-bot', 'bot'].some(forbiddenRoleName => forbiddenRoleName === roleToEdit.name)
+                && !msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')) {
+                await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                return;
+            }
+
             switch (args[0].toLowerCase()) {
                 case 'add':
                     await roleMember.addRole(roleToEdit);
