@@ -3,7 +3,7 @@ module.exports = class {
         Object.assign(this, {
             name: 'role',
             enabled: true,
-            runIn: ['role-management', '4200-st-laurent-raid-break', '502678237302882304'],
+            runIn: ['role-management', '4200-st-laurent-raid-break', '502678237302882304', 'test-zone'],
             cooldown: 0,
             aliases: ['roles', 'rôle', 'rôles'],
             description: '',
@@ -42,6 +42,13 @@ module.exports = class {
             if (!msg.member.roles.some(role => role.name === 'admin' || role.name === 'mod' || role.name === 'mega-bot')
                     && msg.member.id !== roleMember.id) {
                 await msg.channel.send('You do not have permission for this command! You n\'avez pas la permissions d\'utiliser cette commande!');
+                return;
+            }
+
+            const allowedRoleNames = ['iv0-', 'iv98+', 'lvl1', 'rare', 'unown', 'gible', 'bidoof', 'rocket'];
+            if (msg.channel.name === '💥high-iv-alerts💥'
+                && !allowedRoleNames.some(allowedRoleName => roleToEdit.name === allowedRoleName)) {
+                await msg.channel.send(`💥Not a valid role name.💥\nTry one of ${allowedRoleNames.join(', ')}`);
                 return;
             }
 
