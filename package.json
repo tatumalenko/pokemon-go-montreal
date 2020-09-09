@@ -20,7 +20,7 @@
     "googleapis": "^27.0.0",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.8",
-    "mongoose": "^4.13.17",
+    "mongoose": "^5.7.5",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "togeojson": "^0.16.0",
